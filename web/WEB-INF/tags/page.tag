@@ -1,0 +1,180 @@
+<%-- 
+    Document   : page
+    Created on : Apr 28, 2018, 10:07:28 PM
+    Author     : renannelsen
+--%>
+
+<%@tag description="Página Padrão" pageEncoding="UTF-8"%>
+
+<%-- The list of normal or fragment attributes can be specified here: --%>
+<%@attribute name="title" required="false"%>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>${title}</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <script src="js/jquery-3.2.1.slim.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/extras.js"></script>
+    </head>
+    <body>
+        <!-- header -->
+        <nav class="navbar sticky-top bg-light">
+            <div class="row no-gutters w-100">
+              <div class="col">
+                <div class="d-block d-lg-none toggler">
+                  <a class="btn" tabindex="0" role="button">
+                    <i class="toggler-menu material-icons">menu</i><i class="toggler-clear material-icons d-none">clear</i>
+                  </a>
+                </div>
+              </div>
+              <div class="col-4 col-sm-3 text-center">
+                <a class="navbar-brand" href="#"><div style="width:100px; height:40px; background-color:#ddd;">APPP</div></a>
+              </div>
+              <div class="col">
+                <div class="d-block d-sm-block">
+                  <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                      <a class="nav-link btn" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<div class='popup-box'><div class='header'>notificações <span class='badge badge-secondary'>1</span></div><div class='body'>
+
+                        <div class='list-group list-group-flush'>
+                          <a href='#' class='list-group-item list-group-item-action active'>
+                            <p class='mb-1'>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                            <small>Donec id elit non mi porta.</small>
+                          </a>
+                          <a href='#' class='list-group-item list-group-item-action'>
+                            <p class='mb-1'>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                            <small>Donec id elit non mi porta.</small>
+                          </a>
+                          <a href='#' class='list-group-item list-group-item-action'>
+                            <p class='mb-1'>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                            <small>Donec id elit non mi porta.</small>
+                          </a>
+                          <a href='#' class='list-group-item list-group-item-action'>
+                            <p class='mb-1'>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                            <small>Donec id elit non mi porta.</small>
+                          </a>
+                          <a href='#' class='list-group-item list-group-item-action'>
+                            <p class='mb-1'>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                            <small>Donec id elit non mi porta.</small>
+                          </a>
+                          <a href='#' class='list-group-item list-group-item-action'>
+                            <p class='mb-1'>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                            <small>Donec id elit non mi porta.</small>
+                          </a>
+                        </div>
+
+                      </div><div class='footer'><a class='btn btn-light btn-block' href='#' role='button'>ver todas as notificações</a></div></div>"><i class="material-icons red">notifications</i></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link btn" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<div class='popup-box'><div class='header'>Renan Nelsen<br /><small>administrador</small></div><div class='body'>
+
+                        <ul class='nav flex-column'>
+                          <li class='nav-item'>
+                            <a class='nav-link' href='#'>minha conta</a>
+                          </li>
+                          <li class='nav-item'>
+                            <a class='nav-link' href='#'>configurações</a>
+                          </li>
+                        </ul>
+
+                      </div><div class='footer'><a class='btn btn-light btn-block' href='#' role='button'>sair</a></div></div>"><i class="material-icons">account_circle</i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+        </nav>
+        
+        <!-- sidebar -->
+        <div class="d-flex flex-nowrap">
+            <div class="sidebar d-none d-lg-block bg-light">
+
+            <form>
+              <div class="form-group search-box">
+                <input type="text" class="form-control" id="search" placeholder="busca rápida">
+              </div>
+            </form>
+
+            <ul class="nav flex-column">
+              <li class="header">menu</li>
+              <li class="nav-item">
+                <a class="nav-link" tabindex="0" data-toggle="collapse" href="#menuDashboard" role="button" aria-expanded="false" aria-controls="menuDashboard"><i class="material-icons">dashboard</i> <span class="align-top">elementum</span> <div class="float-right caret"><i class="material-icons">arrow_drop_down</i></div></a>
+                <div class="collapse show" id="menuDashboard">
+                  <ul class="nav flex-column">
+                    <li class="nav-sub-item">
+                      <a class="nav-link active" href="#"><i class="material-icons">keyboard_arrow_right</i> <span class="align-top">lorem</span></a>
+                    </li>
+                    <li class="nav-sub-item">
+                      <a class="nav-link" href="#"><i class="material-icons">keyboard_arrow_right</i> <span class="align-top">lorem</span></a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="material-icons">translate</i> <span class="align-top">lorem</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" tabindex="0" data-toggle="collapse" href="#menuApps" role="button" aria-expanded="false" aria-controls="menuApps"><i class="material-icons">apps</i> <span class="align-top">adipiscing</span> <div class="float-right caret closed"><i class="material-icons">arrow_drop_down</i></div></a>
+                <div class="collapse" id="menuApps">
+                  <ul class="nav flex-column">
+                    <li class="nav-sub-item">
+                      <a class="nav-link" href="#"><i class="material-icons">keyboard_arrow_right</i> <span class="align-top">lorem</span></a>
+                    </li>
+                    <li class="nav-sub-item">
+                      <a class="nav-link" href="#"><i class="material-icons">keyboard_arrow_right</i> <span class="align-top">lorem</span></a>
+                    </li>
+                    <li class="nav-sub-item">
+                      <a class="nav-link" href="#"><i class="material-icons">keyboard_arrow_right</i> <span class="align-top">lorem</span></a>
+                    </li>
+                    <li class="nav-sub-item">
+                      <a class="nav-link" href="#"><i class="material-icons">keyboard_arrow_right</i> <span class="align-top">lorem</span></a>
+                    </li>
+                    <li class="nav-sub-item">
+                      <a class="nav-link" href="#"><i class="material-icons">keyboard_arrow_right</i> <span class="align-top">lorem</span></a>
+                    </li>
+                    <li class="nav-sub-item">
+                      <a class="nav-link" href="#"><i class="material-icons">keyboard_arrow_right</i> <span class="align-top">lorem</span></a>
+                    </li>
+                    <li class="nav-sub-item">
+                      <a class="nav-link" href="#"><i class="material-icons">keyboard_arrow_right</i> <span class="align-top">lorem</span></a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="material-icons">fingerprint</i> <span class="align-top">parturient</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="material-icons">bug_report</i> <span class="align-top">montes</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="material-icons">extension</i> <span class="align-top">nascetur</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="material-icons">motorcycle</i> <span class="align-top">ridiculus</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="material-icons">pregnant_woman</i> <span class="align-top">posuere</span></a>
+              </li>
+              <li class="header">menu</li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="material-icons">local_laundry_service</i> <span class="align-top">consectetur</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="material-icons">local_pizza</i> <span class="align-top">lobortis</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="material-icons">train</i> <span class="align-top">condimentum</span></a>
+              </li>
+            </ul>
+        </div>
+            
+        <!-- main -->    
+        <jsp:doBody/>
+    </body>
+</html>
