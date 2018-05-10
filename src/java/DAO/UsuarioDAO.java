@@ -38,7 +38,7 @@ public class UsuarioDAO {
             if (rs.next()) {
                 Usuario u = new Usuario();
                 u.setNome(rs.getString("login"));
-                u.setIdUsuario(rs.getInt("senha"));
+                u.setSenha(rs.getString("senha"));
                 return u;
             }
             else {
