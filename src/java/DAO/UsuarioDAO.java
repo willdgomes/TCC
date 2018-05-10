@@ -61,4 +61,32 @@ public class UsuarioDAO {
         }
     }
     
+    public void inserirUsuario (Usuario u){
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(insereUsuario);
+            stmt.setString(1, u.getLogin());
+            stmt.setString(2, u.getNome());
+            stmt.setString(3, u.getSenha());
+            stmt.executeUpdate();   
+        }
+        catch (SQLException ex) {
+            throw new RuntimeException("Erro ao cadastrar usuario" + ex.getMessage());
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+    }
+    
 }
