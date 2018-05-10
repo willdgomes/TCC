@@ -94,23 +94,30 @@
         <div class="d-flex flex-nowrap">
             <div class="sidebar d-none d-lg-block bg-light">
 
-            <form>
-              <div class="form-group search-box">
-                <input type="text" class="form-control" id="search" placeholder="busca rápida">
-              </div>
-            </form>
-
             <ul class="nav flex-column">
               <li class="header">menu</li>
               <li class="nav-item">
-                <a class="nav-link" tabindex="0" data-toggle="collapse" href="#menuDashboard" role="button" aria-expanded="false" aria-controls="menuDashboard"><i class="material-icons">dashboard</i> <span class="align-top">elementum</span> <div class="float-right caret"><i class="material-icons">arrow_drop_down</i></div></a>
+                <a class="nav-link" tabindex="0" data-toggle="collapse" href="#menuDashboard" role="button" aria-expanded="false" aria-controls="menuDashboard"><i class="material-icons">content_paste</i> <span class="align-top">Gerenciar</span> <div class="float-right caret"><i class="material-icons">arrow_drop_down</i></div></a>
                 <div class="collapse show" id="menuDashboard">
                   <ul class="nav flex-column">
                     <li class="nav-sub-item">
-                      <a class="nav-link active" href="#"><i class="material-icons">keyboard_arrow_right</i> <span class="align-top">lorem</span></a>
+                      <a class="nav-link active" href="#"><i class="material-icons">face</i> <span class="align-top">Pacientes</span></a>
                     </li>
                     <li class="nav-sub-item">
-                      <a class="nav-link" href="#"><i class="material-icons">keyboard_arrow_right</i> <span class="align-top">lorem</span></a>
+                      <a class="nav-link" href="#"><i class="material-icons">local_pharmacy</i> <span class="align-top">Medicamentos</span></a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" tabindex="0" data-toggle="collapse" href="#menuDashboard" role="button" aria-expanded="false" aria-controls="menuDashboard"><i class="material-icons">content_paste</i> <span class="align-top">Estoque</span> <div class="float-right caret"><i class="material-icons">arrow_drop_down</i></div></a>
+                <div class="collapse show" id="menuDashboard">
+                  <ul class="nav flex-column">
+                    <li class="nav-sub-item">
+                      <a class="nav-link active" href="#"><i class="material-icons">face</i> <span class="align-top">Dispensar Medicamento</span></a>
+                    </li>
+                    <li class="nav-sub-item">
+                      <a class="nav-link" href="#"><i class="material-icons">local_pharmacy</i> <span class="align-top">Inserir Medicamento</span></a>
                     </li>
                   </ul>
                 </div>
@@ -147,10 +154,10 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><i class="material-icons">fingerprint</i> <span class="align-top">parturient</span></a>
+                <a class="nav-link" href="#"><i class="material-icons">fingerprint</i> <span class="align-top">Gerenciar Paciantes</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><i class="material-icons">bug_report</i> <span class="align-top">montes</span></a>
+                <a class="nav-link" href="#"><i class="material-icons">bug_report</i> <span class="align-top">Gerenciar Medicamentos</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#"><i class="material-icons">extension</i> <span class="align-top">nascetur</span></a>
@@ -160,16 +167,6 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#"><i class="material-icons">pregnant_woman</i> <span class="align-top">posuere</span></a>
-              </li>
-              <li class="header">menu</li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="material-icons">local_laundry_service</i> <span class="align-top">consectetur</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="material-icons">local_pizza</i> <span class="align-top">lobortis</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="material-icons">train</i> <span class="align-top">condimentum</span></a>
               </li>
             </ul>
         </div>

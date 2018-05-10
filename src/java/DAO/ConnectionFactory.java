@@ -13,10 +13,15 @@ import java.sql.SQLException;
  *
  * @author gomes
  */
-class ConnectionFactory {
+public class ConnectionFactory {
 
     public static Connection getConnection() throws SQLException{
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/Farmacia", "root", "root");
+        try{
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+        return DriverManager.getConnection("jdbc:mysql://localhost/Farmacia", "root", "root");
+        }catch(SQLException e){
+            throw new RuntimeException(e);
+        }
     }
     
 }
