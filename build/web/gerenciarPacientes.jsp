@@ -16,11 +16,12 @@
                     <h2 align="center">Gerenciamento de pacientes</h2>
                 </div>
                 <div class="panel-body m-3">
+                    <form action="GerenciarPacientesController" method="POST">
                     <div class="col-sm-12">
                         <form class="card border-info">
                             <div class="card-body p-5">
                             <div class="form-group">
-                                <input type="text" class="col-sm-10" placeholder="Pesquisar">    
+                                <input type="text" class="col-sm-10" placeholder="Pesquisar" name="pesquisa">    
                                 <button type="submit" class="btn col-sm-1"><i class="material-icons">search</i></button>
                             </div>     
                             </div>
@@ -65,6 +66,7 @@
                             </div>
                         </div>
                     </div>
+                    </form>
                 </div>
         </div>
         </div>
