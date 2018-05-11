@@ -15,9 +15,10 @@
                     <div class="panel-heading text-center">
                         <h2>Dispensar Medicamentos</h2>
                     </div>
-
+                    <div class="panel-body m-3">
+                    <div class="col-sm-12">
                     <div class="card border-info">
-                        <div class="card-body p-3">
+                        <div class="card-body p-5">
                             <table class="table table-hover table-responsive-sm">
                                 <thead>
                                     <tr>
@@ -59,12 +60,17 @@
                                     });
                                 });
                             </script>
+                            <div class="col-sm-1 offset-10 row">
                             <a>
                                 <button type="submit" class="btn offset-1 btn-primary">Dispensar</button>
                             </a>
+                            </div>
                         </div>
+                    </div>
+                    </div>
                     </div>
                 </div>
             </div>
-        </jsp:body>
-    </t:page>
+        </div>
+    </jsp:body>
+</t:page>

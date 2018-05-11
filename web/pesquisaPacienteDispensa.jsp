@@ -23,22 +23,28 @@
                                     <input type="text" class="col-sm-10" placeholder="Pesquisar">    
                                     <button type="submit" class="btn col-sm-1"><i class="material-icons">search</i></button>
                                 </div>
-                                <div class="card-body p-3">
-                                    nome do paciente da silva<br>
-                                    123.456.678-10<br>
-                                    19/06/2018<br>
+                                <div class="card-body p-3 ">
+                                    <div class="col-sm-12 row">
+                                        <div class="col-sm-4 offset-1">
+                                        nome do paciente da silva<br>
+                                        123.456.678-10<br>
+                                        19/06/2018<br>
+                                        </div>
+                                        <div class="col-md-4 offset-sm-1 form-group">
+                                            <label for="retirante" class="text-dark" >Retirante</label>
+                                            <select id="cbRemedios" class="form-control">
+                                                <option>Paciente</option>
+                                                <option>retirante1</option>
+                                                <option>retirante2</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1 offset-10 row">
+                                        <a href="dispensarMedicamentos.jsp">
+                                            <button type="submit" class="btn offset-1 btn-primary">Avançar</button>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="col-md-4 form-group">
-                                    <label for="retirante" >Retirante</label>
-                                    <select id="cbRemedios" class="form-control">
-                                        <option>Paciente</option>
-                                        <option>retirante1</option>
-                                        <option>retirante2</option>
-                                    </select>
-                                </div>
-                                <a href="dispensarMedicamentos.jsp">
-                                    <button type="submit" class="btn offset-1 btn-primary">Avançar</button>
-                                </a>
                             </div>
                         </form>
                     </div>
