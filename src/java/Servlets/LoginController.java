@@ -63,7 +63,7 @@ public class LoginController extends HttpServlet {
                 rd.include(request, response);
             }
             else {
-                request.setAttribute("msg", "Login e/ou senha incorreto(s)!");
+                request.setAttribute("msg", "Usuário e/ou senha incorreto(s)!");
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
                 rd.forward(request, response);
             }
