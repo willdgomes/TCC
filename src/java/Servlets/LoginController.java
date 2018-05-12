@@ -52,7 +52,7 @@ public class LoginController extends HttpServlet {
             String email = request.getParameter("usuario");
             String senha = request.getParameter("senha");
             UsuarioDAO usuarioDAO = new UsuarioDAO();
-            Usuario usuario = new Usuario();
+            Usuario usuario = new Usuario(0, "", "", "", "");
             usuario = usuarioDAO.lerUsuario(email, senha);
             if (usuario != null) {            
                 session = request.getSession();

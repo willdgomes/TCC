@@ -10,11 +10,20 @@ package Beans;
  * @author gomes
  */
 public class Usuario {
+    
     private int idUsuario;
     private String nome;
     private String email;
     private String login;
     private String senha;
+
+    public Usuario(int idUsuario, String nome, String email, String login, String senha) {
+        this.idUsuario = idUsuario;
+        this.nome = nome;
+        this.email = email;
+        this.login = login;
+        this.senha = senha;
+    }
     
     public String getEmail() {
         return email;
