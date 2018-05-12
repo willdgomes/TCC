@@ -11,17 +11,17 @@
     <jsp:body>
         <div class="main w-100">
         <div class="row">
-            <div class="panel panel-default col-sm">
+            <div class="panel panel-default col-sm pt-4">
                 <div class="panel-heading">
                     <h2 align="center">Dispensar Medicamentos</h2>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body pt-3">
                     <div class="col-sm-12">
-                        <form class="card border-light">
-                            <div class="card-body p-3">
+                        <form class="card border-info">
+                            <div class="card-body p-5">
                                 <div class="form-row" id="line1">
-                                    <div class="col-md-6 offset-1 form-group">
-                                        <label for="Medicamento" >Medicamento:</label>
+                                    <div class="col-md-6 form-group">
+                                        <label class="text-dark" for="Medicamento" >Medicamento:</label>
                                         <select id="cbRemedios" class="form-control">
                                             <option></option>
                                             <option>remedio1</option>
@@ -29,10 +29,10 @@
                                         </select>
                                     </div>
                                     <div class="col-md-2 offset-1 form-group">
-                                        <label for="Quantidade" >Quantidade:</label>
+                                        <label for="Quantidade"class="text-dark" >Quantidade:</label>
                                         <input type="number" class="form-control" id="cpfpaciente" placeholder="">
                                     </div>
-                                    <div class="col-md-2 offset-1 form-group">
+                                    <div class="col-md-1 offset-md-1 form-group">
                                         <script src="js/jquery-3.2.1.slim.min.js"></script>
                                         <script>
                                             $(document).ready(function(){
@@ -41,12 +41,12 @@
                                                 });
                                             });
                                             </script>
-                                            <button id="add1">+</button>
+                                                <button class="btn btn-sm btn-info mt-2" id="add1"><i class="material-icons">add</i></button>
                                     </div>
-                                </div><br>
+                                </div>
                                 
                                 <div class="form-row" id="line2" style="display:none">
-                                    <div class="col-md-6 offset-1 form-group">
+                                    <div class="col-md-6 form-group">
                                         <label for="Medicamento" >Medicamento:</label>
                                         <select id="cbRemedios" class="form-control">
                                            <option></option>
@@ -56,7 +56,7 @@
                                         <label for="Quantidade" >Quantidade:</label>
                                         <input type="number" class="form-control" id="cpfpaciente" placeholder="">
                                     </div>
-                                    <div class="col-md-2 offset-1 form-group">
+                                    <div class="col-md-1 offset-md-1 form-group">
                                         <script src="js/jquery-3.2.1.slim.min.js"></script>
                                         <script>
                                             $(document).ready(function(){
@@ -70,13 +70,13 @@
                                                 });
                                             });
                                             </script>
-                                            <button id="add2">+</button>
-                                            <button id="sub2">-</button>
+                                            <button class="btn btn-sm btn-info mt-2"  id="add2"><i class="material-icons">add</i></button>
+                                            <button class="btn btn-sm btn-info mt-2"  id="sub2"><i class="material-icons">-</i></button>
                                     </div>
-                                </div><br>
+                                </div>
                                 
                                 <div class="form-row" id="line3" style="display:none">
-                                    <div class="col-md-6 offset-1 form-group">
+                                    <div class="col-md-6 form-group">
                                         <label for="Medicamento" >Medicamento:</label>
                                         <select id="cbRemedios" class="form-control">
                                            <option></option>
@@ -86,7 +86,7 @@
                                         <label for="Quantidade" >Quantidade:</label>
                                         <input type="number" class="form-control" id="cpfpaciente" placeholder="">
                                     </div>
-                                    <div class="col-md-2 offset-1 form-group">
+                                    <div class="col-md-1 offset-1 form-group">
                                         <script src="js/jquery-3.2.1.slim.min.js"></script>
                                         <script>
                                             $(document).ready(function(){
@@ -99,13 +99,13 @@
                                                 });
                                             });
                                             </script>
-                                            <button id="add3">+</button>
-                                            <button id="sub3">-</button>
+                                            <button class="btn btn-sm btn-info mt-2" id="add3"><i class="material-icons">add</i></button>
+                                            <button class="btn btn-sm btn-info mt-2" id="sub3">-</button>
                                     </div>
-                                </div><br>
+                                </div>
                                 
                                 <div class="form-row" id="line4" style="display:none">
-                                    <div class="col-md-6 offset-1 form-group">
+                                    <div class="col-md-6 form-group">
                                         <label for="Medicamento" >Medicamento:</label>
                                         <select id="cbRemedios" class="form-control">
                                            <option></option>
@@ -115,7 +115,7 @@
                                         <label for="Quantidade" >Quantidade:</label>
                                         <input type="number" class="form-control" id="cpfpaciente" placeholder="">
                                     </div>
-                                    <div class="col-md-2 offset-1 form-group">
+                                    <div class="col-md-1 offset-1 form-group">
                                         <script src="js/jquery-3.2.1.slim.min.js"></script>
                                         <script>
                                             $(document).ready(function(){
@@ -128,13 +128,13 @@
                                                 });
                                             });
                                             </script>
-                                            <button id="add4">+</button>
-                                            <button id="sub4">-</button>
+                                            <button class="btn btn-sm btn-info mt-2" id="add4"><i class="material-icons">add</i></button>
+                                            <button class="btn btn-sm btn-info mt-2" id="sub4">-</button>
                                     </div>
-                                </div><br>
+                                </div>
                                 
                                 <div class="form-row" id="line5" style="display:none">
-                                    <div class="col-md-6 offset-1 form-group">
+                                    <div class="col-md-6 form-group">
                                         <label for="Medicamento" >Medicamento:</label>
                                         <select id="cbRemedios" class="form-control">
                                            <option></option>
@@ -144,7 +144,7 @@
                                         <label for="Quantidade" >Quantidade:</label>
                                         <input type="number" class="form-control" id="cpfpaciente" placeholder="">
                                     </div>
-                                    <div class="col-md-2 offset-1 form-group">
+                                    <div class="col-md-1 offset-1 form-group">
                                         <script src="js/jquery-3.2.1.slim.min.js"></script>
                                         <script>
                                             $(document).ready(function(){
@@ -157,13 +157,13 @@
                                                 });
                                             });
                                             </script>
-                                            <button id="add5">+</button>
-                                            <button id="sub5">-</button>
+                                            <button class="btn btn-sm btn-info mt-2" id="add5">+</button>
+                                            <button class="btn btn-sm btn-info mt-2" id="sub5">-</button>
                                     </div>
-                                </div><br>
+                                </div>
                                 
                                 <div class="form-row" id="line6" style="display:none">
-                                    <div class="col-md-6 offset-1 form-group">
+                                    <div class="col-md-6 form-group">
                                         <label for="Medicamento" >Medicamento:</label>
                                         <select id="cbRemedios" class="form-control">
                                            <option></option>
@@ -173,7 +173,7 @@
                                         <label for="Quantidade" >Quantidade:</label>
                                         <input type="number" class="form-control" id="cpfpaciente" placeholder="">
                                     </div>
-                                    <div class="col-md-2 offset-1 form-group">
+                                    <div class="col-md-1 offset-1 form-group">
                                         <script src="js/jquery-3.2.1.slim.min.js"></script>
                                         <script>
                                             $(document).ready(function(){
@@ -187,23 +187,25 @@
                                             });
                                             </script>
 <!--                                            <button id="add6">+</button>-->
-                                            <button id="sub6">-</button>
+                                            <button class="btn btn-sm btn-info mt-2" id="sub6">-</button>
                                     </div>
-                                </div><br>
+                                </div>
                                 
                                 <div class="form-row">
-                                    <div class="form-group col-md-3 offset-1">
-                                        <label for="dtnasc" class="text-dark">Data de nascimento:</label>
-                                        <input type="date" class="form-control" id="dtnascpaciente" required>
-                                    </div>
-                                    <div class="form-group col-md-3 offset-3">
+                                    <div class="form-group col-md-4">
                                         <label for="dtnasc" class="text-dark">CRM:</label>
                                         <input type="text" class="form-control" id="dtnascpaciente" required>
                                     </div>
+                                    <div class="form-group col-md-3 offset-3">
+                                        <label for="dtnasc" class="text-dark">Data de nascimento:</label>
+                                        <input type="date" class="form-control" id="dtnascpaciente" required>
+                                    </div>
                                 </div>
+                                <div class="row col-sm-1 offset-10">
                                 <a href="pesquisaPacienteDispensa.jsp">
                                     <button type="submit" class="btn offset-1 btn-primary">Avançar</button>
                                 </a>
+                                </div>
                             </div>
                         </form>
                     </div>

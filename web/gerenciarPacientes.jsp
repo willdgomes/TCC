@@ -36,6 +36,7 @@
                                     <th scope="col">First</th>
                                     <th scope="col">Last</th>
                                     <th scope="col">Handle</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -44,17 +45,20 @@
                                     <td>Mark</td>
                                     <td>Otto</td>
                                     <td>@mdo</td>
+                                    <td><button type="button"  class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">2</th>
                                     <td>Jacob</td>
                                     <td>Thornton</td>
                                     <td>@fat</td>
+                                    <td><button type="button"  class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">3</th>
                                     <td colspan="2">Larry the Bird</td>
                                     <td>@twitter</td>
+                                    <td><button type="button"  class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
                                 </tr>
                                 </tbody>
                                 </table>
