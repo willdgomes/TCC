@@ -21,7 +21,7 @@ public class UsuarioDAO {
     PreparedStatement stmt = null;
     PreparedStatement stmt2 = null;
     ResultSet rs = null; 
-    private String stmtBuscaUsuario = "select idUsuario, nome, login, nome, senha from Usuario where login = ? and senha = ?";
+    private String stmtBuscaUsuario = "select login, senha from usuarios where login = ? and senha = ?"; //"select idUsuario, nome, login, nome, senha from Usuario where login = ? and senha = ?";
     private String insereUsuario = "insert into Usuario (login, nome, senha) values (?, ?, ?)";
     private String deletarUsuario = "delete from usuario where idUsuario = ?";
     
@@ -36,7 +36,7 @@ public class UsuarioDAO {
             stmt.setString(2, senha);
             rs = stmt.executeQuery();   
             if (rs.next()) {
-                Usuario u = new Usuario(0, "", "", "", "");
+                Usuario u = new Usuario();
                 u.setNome(rs.getString("login"));
                 u.setSenha(rs.getString("senha"));
                 return u;

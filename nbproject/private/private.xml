@@ -5,9 +5,9 @@
         <group>
             <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Beans/Paciente.java</file>
             <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/DAO/UsuarioDAO.java</file>
-            <file>file:/home/gomes/NetBeansProjects/Farmacia/web/index.html</file>
             <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Beans/Usuario.java</file>
             <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Servlets/LoginController.java</file>
+            <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/DAO/PacienteDAO.java</file>
         </group>
     </open-files>
 </project-private>
