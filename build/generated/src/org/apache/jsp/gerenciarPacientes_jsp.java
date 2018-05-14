@@ -16,10 +16,20 @@ public final class gerenciarPacientes_jsp extends org.apache.jasper.runtime.Http
     _jspx_dependants.add("/WEB-INF/tags/page.tag");
   }
 
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_forEach_var_items;
+
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
   public java.util.List<String> getDependants() {
     return _jspx_dependants;
+  }
+
+  public void _jspInit() {
+    _jspx_tagPool_c_forEach_var_items = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+  }
+
+  public void _jspDestroy() {
+    _jspx_tagPool_c_forEach_var_items.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -46,6 +56,7 @@ public final class gerenciarPacientes_jsp extends org.apache.jasper.runtime.Http
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
@@ -81,6 +92,50 @@ public final class gerenciarPacientes_jsp extends org.apache.jasper.runtime.Http
     return false;
   }
 
+  private boolean _jspx_meth_c_forEach_0(javax.servlet.jsp.tagext.JspTag _jspx_parent, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:forEach
+    org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_0 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
+    _jspx_th_c_forEach_0.setPageContext(_jspx_page_context);
+    _jspx_th_c_forEach_0.setParent(new javax.servlet.jsp.tagext.TagAdapter((javax.servlet.jsp.tagext.SimpleTag) _jspx_parent));
+    _jspx_th_c_forEach_0.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pacientes}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_forEach_0.setVar("paciente");
+    int[] _jspx_push_body_count_c_forEach_0 = new int[] { 0 };
+    try {
+      int _jspx_eval_c_forEach_0 = _jspx_th_c_forEach_0.doStartTag();
+      if (_jspx_eval_c_forEach_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+        do {
+          out.write("\r\n");
+          out.write("                                                    <tr>\r\n");
+          out.write("                                                        <th scope=\"row\">3</th>\r\n");
+          out.write("                                                        <td colspan=\"2\">");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${paciente.nome}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("</td>\r\n");
+          out.write("                                                        <td>@twitter</td>\r\n");
+          out.write("                                                        <td><button type=\"submit\" name=\"editar\" class=\"btn btn-sm btn-link\"><i class=\"material-icons\">edit</i></button> </td>\r\n");
+          out.write("                                                    </tr>\r\n");
+          out.write("                                                ");
+          int evalDoAfterBody = _jspx_th_c_forEach_0.doAfterBody();
+          if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+            break;
+        } while (true);
+      }
+      if (_jspx_th_c_forEach_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+        throw new SkipPageException();
+      }
+    } catch (Throwable _jspx_exception) {
+      while (_jspx_push_body_count_c_forEach_0[0]-- > 0)
+        out = _jspx_page_context.popBody();
+      _jspx_th_c_forEach_0.doCatch(_jspx_exception);
+    } finally {
+      _jspx_th_c_forEach_0.doFinally();
+      _jspx_tagPool_c_forEach_var_items.reuse(_jspx_th_c_forEach_0);
+    }
+    return false;
+  }
+
   private class gerenciarPacientes_jspHelper
       extends org.apache.jasper.runtime.JspFragmentHelper
   {
@@ -97,67 +152,51 @@ public final class gerenciarPacientes_jsp extends org.apache.jasper.runtime.Http
     {
       out.write("\r\n");
       out.write("        <div class=\"main w-100\">\r\n");
-      out.write("        <div class=\"row\">\r\n");
-      out.write("            <div class=\"panel panel-default col-sm pt-4\">\r\n");
-      out.write("                <div class=\"panel-heading\">\r\n");
-      out.write("                    <h2 align=\"center\">Gerenciamento de pacientes</h2>\r\n");
-      out.write("                </div>\r\n");
-      out.write("                <div class=\"panel-body m-3\">\r\n");
-      out.write("                    <form action=\"GerenciarPacientesController\" method=\"POST\">\r\n");
-      out.write("                    <div class=\"col-sm-12\">\r\n");
-      out.write("                        <form class=\"card border-info\">\r\n");
-      out.write("                            <div class=\"card-body p-5\">\r\n");
-      out.write("                            <div class=\"form-group\">\r\n");
-      out.write("                                <input type=\"text\" class=\"col-sm-10\" placeholder=\"Pesquisar\" name=\"pesquisa\">    \r\n");
-      out.write("                                <button type=\"submit\" class=\"btn col-sm-1\"><i class=\"material-icons\">search</i></button>\r\n");
-      out.write("                            </div>     \r\n");
+      out.write("            <div class=\"row\">\r\n");
+      out.write("                <div class=\"panel panel-default col-sm pt-4\">\r\n");
+      out.write("                    <div class=\"panel-heading\">\r\n");
+      out.write("                        <h2 align=\"center\">Gerenciamento de pacientes</h2>\r\n");
+      out.write("                    </div>\r\n");
+      out.write("                    <div class=\"panel-body m-3\">\r\n");
+      out.write("                        <form action=\"GerenciarPacientesController\" method=\"POST\">\r\n");
+      out.write("                            <div class=\"col-sm-12\">\r\n");
+      out.write("                                <form class=\"card border-info\">\r\n");
+      out.write("                                    <div class=\"card-body p-5\">\r\n");
+      out.write("                                        <div class=\"form-group\">\r\n");
+      out.write("                                            <input type=\"text\" class=\"col-sm-10\" placeholder=\"Pesquisar\" name=\"pesquisa\">    \r\n");
+      out.write("                                            <button type=\"submit\" class=\"btn col-sm-1\"><i class=\"material-icons\">search</i></button>\r\n");
+      out.write("                                        </div>     \r\n");
+      out.write("                                    </div>\r\n");
+      out.write("                                </form>\r\n");
+      out.write("                            </div>\r\n");
+      out.write("                            <div class=\"col\">\r\n");
+      out.write("                                <div class=\"card border-info\">\r\n");
+      out.write("                                    <div class=\"card-body p-3\">\r\n");
+      out.write("                                        <table class=\"table table-hover table-responsive-sm\">\r\n");
+      out.write("                                            <thead>\r\n");
+      out.write("                                                <tr>\r\n");
+      out.write("                                                    <th scope=\"col\">#</th>\r\n");
+      out.write("                                                    <th scope=\"col\">Nome</th>\r\n");
+      out.write("                                                        <th scope=\"col\">Idade</th>\r\n");
+      out.write("                                                    <th scope=\"col\">Data Nascimento</th>\r\n");
+      out.write("                                                    <th scope=\"col\">Action</th>\r\n");
+      out.write("                                                </tr>\r\n");
+      out.write("                                            </thead>\r\n");
+      out.write("                                            <tbody>                                                \r\n");
+      out.write("                                                ");
+      if (_jspx_meth_c_forEach_0((javax.servlet.jsp.tagext.JspTag) _jspx_parent, _jspx_page_context))
+        return true;
+      out.write("\r\n");
+      out.write("                                            </tbody>\r\n");
+      out.write("                                        </table>\r\n");
+      out.write("                                    </div>\r\n");
+      out.write("                                </div>\r\n");
       out.write("                            </div>\r\n");
       out.write("                        </form>\r\n");
       out.write("                    </div>\r\n");
-      out.write("                    <div class=\"col\">\r\n");
-      out.write("                        <div class=\"card border-info\">\r\n");
-      out.write("                            <div class=\"card-body p-3\">\r\n");
-      out.write("                                <table class=\"table table-hover table-responsive-sm\">\r\n");
-      out.write("                                <thead>\r\n");
-      out.write("                                <tr>\r\n");
-      out.write("                                    <th scope=\"col\">#</th>\r\n");
-      out.write("                                    <th scope=\"col\">First</th>\r\n");
-      out.write("                                    <th scope=\"col\">Last</th>\r\n");
-      out.write("                                    <th scope=\"col\">Handle</th>\r\n");
-      out.write("                                    <th scope=\"col\">Action</th>\r\n");
-      out.write("                                </tr>\r\n");
-      out.write("                                </thead>\r\n");
-      out.write("                                <tbody>\r\n");
-      out.write("                                <tr>\r\n");
-      out.write("                                    <th scope=\"row\">1</th>\r\n");
-      out.write("                                    <td>Mark</td>\r\n");
-      out.write("                                    <td>Otto</td>\r\n");
-      out.write("                                    <td>@mdo</td>\r\n");
-      out.write("                                    <td><button type=\"button\"  class=\"btn btn-sm btn-link\"><i class=\"material-icons\">edit</i></button> </td>\r\n");
-      out.write("                                </tr>\r\n");
-      out.write("                                <tr>\r\n");
-      out.write("                                    <th scope=\"row\">2</th>\r\n");
-      out.write("                                    <td>Jacob</td>\r\n");
-      out.write("                                    <td>Thornton</td>\r\n");
-      out.write("                                    <td>@fat</td>\r\n");
-      out.write("                                    <td><button type=\"button\"  class=\"btn btn-sm btn-link\"><i class=\"material-icons\">edit</i></button> </td>\r\n");
-      out.write("                                </tr>\r\n");
-      out.write("                                <tr>\r\n");
-      out.write("                                    <th scope=\"row\">3</th>\r\n");
-      out.write("                                    <td colspan=\"2\">Larry the Bird</td>\r\n");
-      out.write("                                    <td>@twitter</td>\r\n");
-      out.write("                                    <td><button type=\"button\"  class=\"btn btn-sm btn-link\"><i class=\"material-icons\">edit</i></button> </td>\r\n");
-      out.write("                                </tr>\r\n");
-      out.write("                                </tbody>\r\n");
-      out.write("                                </table>\r\n");
-      out.write("                            </div>\r\n");
-      out.write("                        </div>\r\n");
-      out.write("                    </div>\r\n");
-      out.write("                    </form>\r\n");
       out.write("                </div>\r\n");
-      out.write("        </div>\r\n");
-      out.write("        </div>\r\n");
-      out.write("    ");
+      out.write("            </div>\r\n");
+      out.write("        ");
       return false;
     }
     public void invoke( java.io.Writer writer )

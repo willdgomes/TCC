@@ -25,6 +25,15 @@ public class Paciente {
     private String numEndereco;
     private String complemento;
     private String email;
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Paciente(String nome, String cpf, Date dataNascimento, String cep, String cidade, String estado, String bairro, String endereco, String numEndereco) {
         this.nome = nome;
