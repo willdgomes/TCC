@@ -45,7 +45,7 @@ public class LoginController extends HttpServlet {
         HttpSession session = request.getSession();
         if (session.getAttribute("usuario") != null) {
             session.invalidate();
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
         }
         else {
@@ -59,7 +59,7 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("usuario", usuario);
                 session.setMaxInactiveInterval(20*60);
                 RequestDispatcher rd = null;
-                rd = getServletContext().getRequestDispatcher("/gerenciarPacientes.jsp");
+                rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");
                 rd.include(request, response);
             }
             else {

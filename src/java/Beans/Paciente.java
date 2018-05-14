@@ -16,7 +16,7 @@ public class Paciente {
     private String nome;
     private String cpf;
     private Date dataNascimento;
-    private int telefone;
+    private String telefone;
     private String cep;
     private String cidade;
     private String estado;
@@ -62,11 +62,11 @@ public class Paciente {
         this.dataNascimento = dataNascimento;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 

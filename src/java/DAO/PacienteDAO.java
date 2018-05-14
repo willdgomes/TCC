@@ -19,7 +19,8 @@ import java.util.List;
  */
 public class PacienteDAO {
     
-    private final String stmtInserir = "INSERT INTO paciente (nome, sobrenome, telefone) VALUES(?,?,?)";
+    private final String stmtInserir = "INSERT INTO pacientes (cpfPaciente, nomePaciente, dnPaciente, telefone, "
+            + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
     private final String stmtBuscarClientes = "SELECT idCliente, nome, sobrenome, telefone FROM cliente";
     private final String stmtRemoverClientes = "DELETE FROM cliente WHERE idCliente = ?";
     private final String stmtAtualizarClientes = "UPDATE cliente SET nome = ?, sobrenome = ?, telefone = ? WHERE idCliente = ?";
@@ -31,7 +32,17 @@ public class PacienteDAO {
             con = ConnectionFactory.getConnection();
             stmt = con.prepareStatement(stmtInserir);
             stmt.setString(1, paciente.getNome());
-
+            stmt.setString(2, paciente.getCpf());
+            stmt.setDate(3, paciente.getDataNascimento());
+            stmt.setString(4, paciente.getTelefone());
+            stmt.setString(5, paciente.getCep());
+            stmt.setString(6, paciente.getCidade());
+            stmt.setString(7, paciente.getEstado());
+            stmt.setString(8, paciente.getBairro());
+            stmt.setString(9, paciente.getEndereco());
+            stmt.setString(10, paciente.getNumEndereco());
+            stmt.setString(11, paciente.getComplemento());
+            stmt.setString(12, paciente.getEmail());
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
