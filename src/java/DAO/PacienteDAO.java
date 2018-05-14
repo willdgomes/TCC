@@ -25,15 +25,15 @@ public class PacienteDAO {
     private final String stmtRemoverClientes = "DELETE FROM cliente WHERE idCliente = ?";
     private final String stmtAtualizarClientes = "UPDATE cliente SET nome = ?, sobrenome = ?, telefone = ? WHERE idCliente = ?";
     
-    public void inserirCliente(Paciente paciente) {
+    public void inserirPaciente(Paciente paciente) {
         Connection con = null;
         PreparedStatement stmt = null;
         try {
             con = ConnectionFactory.getConnection();
             stmt = con.prepareStatement(stmtInserir);
-            stmt.setString(1, paciente.getNome());
-            stmt.setString(2, paciente.getCpf());
-            stmt.setDate(3, paciente.getDataNascimento());
+            stmt.setString(1, paciente.getCpf());
+            stmt.setString(2, paciente.getNome());
+            stmt.setString(3, paciente.getDataNascimento());
             stmt.setString(4, paciente.getTelefone());
             stmt.setString(5, paciente.getCep());
             stmt.setString(6, paciente.getCidade());

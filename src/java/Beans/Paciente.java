@@ -15,7 +15,7 @@ public class Paciente {
     
     private String nome;
     private String cpf;
-    private Date dataNascimento;
+    private String dataNascimento; //string provisorio
     private String telefone;
     private String cep;
     private String cidade;
@@ -35,17 +35,17 @@ public class Paciente {
         this.id = id;
     }
 
-    public Paciente(String nome, String cpf, Date dataNascimento, String cep, String cidade, String estado, String bairro, String endereco, String numEndereco) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.dataNascimento = dataNascimento;
-        this.cep = cep;
-        this.cidade = cidade;
-        this.estado = estado;
-        this.bairro = bairro;
-        this.endereco = endereco;
-        this.numEndereco = numEndereco;
-    }
+//    public Paciente(String nome, String cpf, String dataNascimento, String cep, String cidade, String estado, String bairro, String endereco, String numEndereco) {
+//        this.nome = nome;
+//        this.cpf = cpf;
+//        this.dataNascimento = dataNascimento;
+//        this.cep = cep;
+//        this.cidade = cidade;
+//        this.estado = estado;
+//        this.bairro = bairro;
+//        this.endereco = endereco;
+//        this.numEndereco = numEndereco;
+//    }}
     
     public String getNome() {
         return nome;
@@ -63,11 +63,11 @@ public class Paciente {
         this.cpf = cpf;
     }
 
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
