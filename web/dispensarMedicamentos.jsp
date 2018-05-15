@@ -19,6 +19,7 @@
                     <div class="col-sm-12">
                     <div class="card border-info">
                         <div class="card-body p-5">
+                            <form action="DispensarMedicamentoController" method="POST">
                             <table class="table table-hover table-responsive-sm">
                                 <thead>
                                     <tr>
@@ -53,18 +54,12 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <script>
-                                $(document).ready(function(){
-                                    $("button").on("click", function(){
-                                        alert("Dispensa Efetuada com Sucesso!");
-                                    });
-                                });
-                            </script>
                             <div class="col-sm-1 offset-10 row">
                             <a>
                                 <button type="submit" class="btn offset-1 btn-primary">Dispensar</button>
                             </a>
                             </div>
+                            </form>
                         </div>
                     </div>
                     </div>
