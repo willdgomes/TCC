@@ -25,24 +25,24 @@ public class PacienteDAO {
     private final String stmtRemoverClientes = "DELETE FROM cliente WHERE idCliente = ?";
     private final String stmtAtualizarClientes = "UPDATE cliente SET nome = ?, sobrenome = ?, telefone = ? WHERE idCliente = ?";
     
-    public void inserirCliente(Paciente paciente) {
+    public void inserirPaciente(Paciente paciente) {
         Connection con = null;
         PreparedStatement stmt = null;
         try {
             con = ConnectionFactory.getConnection();
             stmt = con.prepareStatement(stmtInserir);
-            stmt.setString(1, paciente.getNome());
-            stmt.setString(2, paciente.getCpf());
-            stmt.setDate(3, paciente.getDataNascimento());
-            stmt.setString(4, paciente.getTelefone());
-            stmt.setString(5, paciente.getCep());
-            stmt.setString(6, paciente.getCidade());
-            stmt.setString(7, paciente.getEstado());
-            stmt.setString(8, paciente.getBairro());
-            stmt.setString(9, paciente.getEndereco());
-            stmt.setString(10, paciente.getNumEndereco());
-            stmt.setString(11, paciente.getComplemento());
-            stmt.setString(12, paciente.getEmail());
+            stmt.setString(1, "Maria");//paciente.getNome());
+            stmt.setString(2, "00000000000");//paciente.getCpf());
+            stmt.setString(3, "1980-11-09");//paciente.getDataNascimento());
+            stmt.setString(4, "4199596884");//paciente.getTelefone());
+            stmt.setString(5, "93493");//paciente.getCep());
+            stmt.setString(6, "sao paulo");//paciente.getCidade());
+            stmt.setString(7, "SP");//paciente.getEstado());
+            stmt.setString(8, "Bom Retiro");//paciente.getBairro());
+            stmt.setString(9, "avenida sp");//paciente.getEndereco());
+            stmt.setString(10, "23");//paciente.getNumEndereco());
+            stmt.setString(11, "sala 7");//paciente.getComplemento());
+            stmt.setString(12, "maria@gmail.com");//paciente.getEmail());
             stmt.executeUpdate();
 
         } catch (SQLException ex) {

@@ -15,7 +15,7 @@ public class Paciente {
     
     private String nome;
     private String cpf;
-    private Date dataNascimento;
+    private String dataNascimento; //string provisorio
     private String telefone;
     private String cep;
     private String cidade;
@@ -26,7 +26,7 @@ public class Paciente {
     private String complemento;
     private String email;
 
-    public Paciente(String nome, String cpf, Date dataNascimento, String cep, String cidade, String estado, String bairro, String endereco, String numEndereco) {
+    public Paciente(String nome, String cpf, String dataNascimento, String cep, String cidade, String estado, String bairro, String endereco, String numEndereco) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
@@ -36,6 +36,10 @@ public class Paciente {
         this.bairro = bairro;
         this.endereco = endereco;
         this.numEndereco = numEndereco;
+    }
+
+    public Paciente() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public String getNome() {
@@ -54,11 +58,11 @@ public class Paciente {
         this.cpf = cpf;
     }
 
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

@@ -5,13 +5,27 @@
  */
 package Servlets;
 
+import Beans.Paciente;
+import Beans.Usuario;
+import DAO.PacienteDAO;
+import DAO.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -31,19 +45,107 @@ public class PacienteController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet PacienteController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet PacienteController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        HttpSession session = request.getSession();
+        if (session.getAttribute("usuario") == null) {
+            request.setAttribute("msg", "Acesso negado!");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+            rd.forward(request, response);
         }
+        
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        Paciente paciente = new Paciente();
+        PacienteDAO pacienteDAO = new PacienteDAO();
+        pacienteDAO.inserirPaciente(paciente);
+        Client client = ClientBuilder.newClient();
+//        if (request.getParameter("tipo") != null) {
+//            if (request.getParameter("tipo").equals("busca")) {
+//                String nome = request.getParameter("buscaFuncionario");
+//                List<Funcionario> lista = new ArrayList<>();
+//                if (nome.equals("")) {
+//                    Response resp = client.target("http://localhost:21836/WSFinal/webresources/funcionarios").request(MediaType.APPLICATION_JSON).get();
+//                    lista = resp.readEntity(new GenericType<List<Funcionario>>() {
+//                    });
+//                } else {
+//                    Response resp = client.target("http://localhost:21836/WSFinal/webresources/funcionarios/nome/" + nome).request(MediaType.APPLICATION_JSON).get();
+//                    lista = resp.readEntity(new GenericType<List<Funcionario>>() {
+//                    });
+//                }
+//                request.setAttribute("lista", lista);
+//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/buscar_funcionarios.jsp");
+//                rd.forward(request, response);
+//            }
+//        }
+//        if (request.getParameter("tipo") != null) {
+//            if (request.getParameter("tipo").equals("cadastro")) {
+//                List<Empresa> lista = new ArrayList<>();
+//                lista = empresaDAO.buscarNomes();
+//                request.setAttribute("lista", lista);
+//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrar_funcionario.jsp");
+//                rd.forward(request, response);
+//            }
+//        }
+//        if (request.getParameter("tipo") != null) {
+//            if (request.getParameter("tipo").equals("cadastrar")) {
+//                usuario.setLogin(request.getParameter("login"));
+//                usuario.setNome(request.getParameter("nome"));
+//                usuario.setSenha(request.getParameter("senha"));
+//                usuarioDAO.inserirUsuario(usuario);
+//                endereco.setBairro(request.getParameter("bairro"));
+//                endereco.setCidade(request.getParameter("cidade"));
+//                endereco.setCep(request.getParameter("cep"));
+//                endereco.setRua(request.getParameter("rua"));
+//                endereco.setNumero(Integer.valueOf(request.getParameter("numero")));
+//                endereco.setUf(request.getParameter("uf"));
+//                funcionario.setNome(request.getParameter("nome"));
+//                funcionario.setCpf(request.getParameter("cpf"));
+//                funcionario.setEmailFuncionario(request.getParameter("email"));
+//                funcionario.setCelular(request.getParameter("celular"));
+//                funcionario.setIdEmpresa(Integer.valueOf(request.getParameter("idEmpresa")));
+//                funcionario.setEnderecoFuncionario(endereco);
+//                client.target("http://localhost:21836/WSFinal/webresources/funcionarios").request(MediaType.APPLICATION_JSON).post(Entity.json(funcionario));
+//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/PortalController");
+//                rd.forward(request, response);
+//            }
+//        }
+//        if (request.getParameter("tipo") == null) {
+//            if (request.getParameter("fun") != null) {
+//                List<Empresa> lista = new ArrayList<>();
+//                lista = empresaDAO.buscarNomes();
+//                funcionario = client.target("http://localhost:21836/WSFinal/webresources/funcionarios/" + request.getParameter("fun")).request(MediaType.APPLICATION_JSON).get(Funcionario.class);
+//                request.setAttribute("funcionario", funcionario);
+//                request.setAttribute("lista", lista);
+//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/alterar_funcionario.jsp");
+//                rd.forward(request, response);
+//            }
+//        }
+//        if (request.getParameter("tipo") != null) {
+//            if (request.getParameter("tipo").equals("alterar")) {
+//                endereco.setBairro(request.getParameter("bairro"));
+//                endereco.setCidade(request.getParameter("cidade"));
+//                endereco.setCep(request.getParameter("cep"));
+//                endereco.setRua(request.getParameter("rua"));
+//                endereco.setNumero(Integer.valueOf(request.getParameter("numero")));
+//                endereco.setUf(request.getParameter("uf"));
+//                funcionario.setIdFuncionario(Integer.valueOf(request.getParameter("id")));
+//                funcionario.setNome(request.getParameter("nome"));
+//                funcionario.setCpf(request.getParameter("cpf"));
+//                funcionario.setEmailFuncionario(request.getParameter("email"));
+//                funcionario.setCelular(request.getParameter("celular"));
+//                funcionario.setIdEmpresa(Integer.valueOf(request.getParameter("idEmpresa")));
+//                funcionario.setEnderecoFuncionario(endereco);
+//                client.target("http://localhost:21836/WSFinal/webresources/funcionarios/" + request.getParameter("id")).request(MediaType.APPLICATION_JSON).put(Entity.json(funcionario));
+//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/PortalController");
+//                rd.forward(request, response);
+//            }
+//        }
+//        if (request.getParameter("tipo") == null) {
+//            if (request.getParameter("func") != null) {
+//                usuarioDAO.deletarUsuario(Integer.valueOf(request.getParameter("func")));
+//                client.target("http://localhost:21836/WSFinal/webresources/funcionarios/" + request.getParameter("func")).request(MediaType.APPLICATION_JSON).delete();
+//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/PortalController");
+//                rd.forward(request, response);
+//            }
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
