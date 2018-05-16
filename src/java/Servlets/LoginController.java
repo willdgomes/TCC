@@ -59,7 +59,7 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("usuario", usuario);
                 session.setMaxInactiveInterval(20*60);
                 RequestDispatcher rd = null;
-                rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");
+                rd = getServletContext().getRequestDispatcher("/home.jsp");
                 rd.include(request, response);
             }
             else {
