@@ -123,9 +123,6 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><i class="material-icons">translate</i> <span class="align-top">lorem</span></a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" tabindex="0" data-toggle="collapse" href="#menuApps" role="button" aria-expanded="false" aria-controls="menuApps"><i class="material-icons">apps</i> <span class="align-top">adipiscing</span> <div class="float-right caret closed"><i class="material-icons">arrow_drop_down</i></div></a>
                 <div class="collapse" id="menuApps">
                   <ul class="nav flex-column">
@@ -152,21 +149,6 @@
                     </li>
                   </ul>
                 </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="material-icons">fingerprint</i> <span class="align-top">Gerenciar Paciantes</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="material-icons">bug_report</i> <span class="align-top">Gerenciar Medicamentos</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="material-icons">extension</i> <span class="align-top">nascetur</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="material-icons">motorcycle</i> <span class="align-top">ridiculus</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="material-icons">pregnant_woman</i> <span class="align-top">posuere</span></a>
               </li>
             </ul>
         </div>
