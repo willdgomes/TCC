@@ -31,8 +31,8 @@ public class PacienteDAO {
         try {
             con = ConnectionFactory.getConnection();
             stmt = con.prepareStatement(stmtInserir);
-            stmt.setString(1, paciente.getNome());
-            stmt.setString(2, paciente.getCpf());
+            stmt.setString(1, paciente.getCpf());
+            stmt.setString(2, paciente.getNome());
             stmt.setString(3, paciente.getDataNascimento());
             stmt.setString(4, paciente.getTelefone());
             stmt.setString(5, paciente.getCep());

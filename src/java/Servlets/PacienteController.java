@@ -45,35 +45,55 @@ public class PacienteController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nome = request.getParameter("nome");
-        String cpf = request.getParameter("cpf");
-        String dataNascimento = request.getParameter("dataNascimento");
-        String telefone = request.getParameter("telefone");
-        String email = request.getParameter("email");
-        String cep = request.getParameter("cep");
-        String cidade = request.getParameter("cidade");
-        String estado = request.getParameter("estado");
-        String bairro = request.getParameter("bairro");
-        String endereco = request.getParameter("endereco");
-        String numeroEndereco = request.getParameter("numeroEndereco");
-        String complemento = request.getParameter("complemento");
-        
-        Paciente paciente = new Paciente();
-        paciente.setNome(nome);
-        paciente.setCpf(cpf);
-        paciente.setDataNascimento(dataNascimento);
-        paciente.setTelefone(telefone);
-        paciente.setEmail(email);
-        paciente.setCep(cep);
-        paciente.setCidade(cidade);
-        paciente.setEstado(estado);
-        paciente.setBairro(bairro);
-        paciente.setEndereco(endereco);
-        paciente.setNumEndereco(numeroEndereco);
-        paciente.setComplemento(complemento);
-        
-        PacienteDAO pacienteDAO = new PacienteDAO();
-        pacienteDAO.inserirPaciente(paciente);
+        HttpSession session = request.getSession();
+        if (session.getAttribute("usuario") != null) {
+            session.invalidate();
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+            rd.include(request, response);
+        } else {
+            String nome = request.getParameter("nome");
+            String cpf = request.getParameter("cpf");
+            String dataNascimento = request.getParameter("dataNascimento");
+            String telefone = request.getParameter("telefone");
+            String email = request.getParameter("email");
+            String cep = request.getParameter("cep");
+            String cidade = request.getParameter("cidade");
+            String estado = request.getParameter("estado");
+            String bairro = request.getParameter("bairro");
+            String endereco = request.getParameter("endereco");
+            String numeroEndereco = request.getParameter("numeroEndereco");
+            String complemento = request.getParameter("complemento");
+
+            Paciente paciente = new Paciente();
+            paciente.setNome(nome);
+            paciente.setCpf(cpf);
+            paciente.setDataNascimento(dataNascimento);
+            paciente.setTelefone(telefone);
+            paciente.setEmail(email);
+            paciente.setCep(cep);
+            paciente.setCidade(cidade);
+            paciente.setEstado(estado);
+            paciente.setBairro(bairro);
+            paciente.setEndereco(endereco);
+            paciente.setNumEndereco(numeroEndereco);
+            paciente.setComplemento(complemento);
+
+            PacienteDAO pacienteDAO = new PacienteDAO();
+            pacienteDAO.inserirPaciente(paciente);
+//            if (paciente != null) {
+//                session = request.getSession();
+//                session.setAttribute("paciente", paciente);
+//                session.setMaxInactiveInterval(20 * 60);
+//                RequestDispatcher rd = null;
+//                rd = getServletContext().getRequestDispatcher("/cadastrarPaciente.jsp");
+//                rd.include(request, response);
+//            } else {
+//                request.setAttribute("msg", "Erro ao cadastrar o paciente!");
+//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+//                rd.forward(request, response);
+//            }
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
