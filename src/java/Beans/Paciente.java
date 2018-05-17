@@ -143,4 +143,23 @@ public class Paciente {
         this.email = email;
     }
 
+    public Paciente() {
+    }
+
+    public Paciente(Integer id,String nome, String cpf, Date dataNascimento, String telefone, String cep, String cidade, String estado, String bairro, String endereco, String numEndereco, String complemento, String email) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+        this.telefone = telefone;
+        this.cep = cep;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.bairro = bairro;
+        this.endereco = endereco;
+        this.numEndereco = numEndereco;
+        this.complemento = complemento;
+        this.email = email;
+    }
+
 }

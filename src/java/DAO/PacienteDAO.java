@@ -61,6 +61,47 @@ public class PacienteDAO {
             };
         }
     }
+      public List<Paciente> buscarTodosPacientes() {
+
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Paciente> listaPacientes = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtInserir);
+            rs = stmt.executeQuery();
+            listaPacientes = new ArrayList<Paciente>();
+            while (rs.next()) {
+                Paciente paciente = new Paciente(rs.getInt(0), rs.getString(2), rs.getString(3), rs.getDate(4),
+                        rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),
+                rs.getString(11),rs.getString(12),rs.getString(13));
+                listaPacientes.add(paciente);
+            }  
+        return listaPacientes;
+        }
+    catch(SQLException ex){
+            throw new RuntimeException("Erro ao listar os clientes no banco de dados. Origem=" + ex.getMessage());
+    }
+        finally{
+            try {
+            rs.close();
+        } catch (Exception ex) {
+            System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
+        };
+        try {
+            stmt.close();
+        } catch (Exception ex) {
+            System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+        };
+        try {
+            con.close();;
+        } catch (Exception ex) {
+            System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+        };
+    }
+
+    }
 
 //    public List<Cliente> buscarClientes() {
 //
@@ -187,5 +228,5 @@ public class PacienteDAO {
 //    
 //    }
 
-    
+         
 }

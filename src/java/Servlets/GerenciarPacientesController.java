@@ -6,6 +6,7 @@
 package Servlets;
 
 import Beans.Paciente;
+import DAO.PacienteDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -39,21 +40,10 @@ public class GerenciarPacientesController extends HttpServlet {
         if(pesquisa.isEmpty()){
         }
         List<Paciente> pacientes;
+          
         pacientes = new ArrayList<>();
-        
-        Paciente paciente = new Paciente("qeqweqw", "qweqwewqe",
-                new Date(1526261434788L), "qweqwewqe", "qweqwewqe", 
-                "qweqwewqe", "qweqwewqe", "qweqwewqe", "qweqweq");
-        Paciente paciente2 = new Paciente("zvxvzxcvz", "qweqwewqe",
-                new Date(1526261434788L), "qweqwewqe", "qweqwewqe", 
-                "qweqwewqe", "qweqwewqe", "qweqwewqe", "qweqweq");
-        Paciente paciente3 = new Paciente("dfsdfsdf", "qweqwewqe",
-                new Date(1526261434788L), "qweqwewqe", "qweqwewqe", 
-                "qweqwewqe", "qweqwewqe", "qweqwewqe", "qweqweq");
-        pacientes.add(paciente);
-        pacientes.add(paciente2);
-        pacientes.add(paciente3);
-        
+        PacienteDAO pacienteDAO = new PacienteDAO();
+        pacientes = pacienteDAO.buscarTodosPacientes();
         request.setAttribute("pacientes", pacientes);
         RequestDispatcher rd = request.getRequestDispatcher("/gerenciarPacientes.jsp");
         rd.forward(request, response);
