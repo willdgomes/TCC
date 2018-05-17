@@ -26,21 +26,17 @@ public class Paciente {
     private String complemento;
     private String email;
 
-    public Paciente(String nome, String cpf, String dataNascimento, String cep, String cidade, String estado, String bairro, String endereco, String numEndereco) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.dataNascimento = dataNascimento;
-        this.cep = cep;
-        this.cidade = cidade;
-        this.estado = estado;
-        this.bairro = bairro;
-        this.endereco = endereco;
-        this.numEndereco = numEndereco;
-    }
-
-    public Paciente() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    public Paciente(String nome, String cpf, String dataNascimento, String cep, String cidade, String estado, String bairro, String endereco, String numEndereco) {
+//        this.nome = nome;
+//        this.cpf = cpf;
+//        this.dataNascimento = dataNascimento;
+//        this.cep = cep;
+//        this.cidade = cidade;
+//        this.estado = estado;
+//        this.bairro = bairro;
+//        this.endereco = endereco;
+//        this.numEndereco = numEndereco;
+//    }}
     
     public String getNome() {
         return nome;

@@ -45,107 +45,35 @@ public class PacienteController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("usuario") == null) {
-            request.setAttribute("msg", "Acesso negado!");
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
-            rd.forward(request, response);
-        }
+        String nome = request.getParameter("nome");
+        String cpf = request.getParameter("cpf");
+        String dataNascimento = request.getParameter("dataNascimento");
+        String telefone = request.getParameter("telefone");
+        String email = request.getParameter("email");
+        String cep = request.getParameter("cep");
+        String cidade = request.getParameter("cidade");
+        String estado = request.getParameter("estado");
+        String bairro = request.getParameter("bairro");
+        String endereco = request.getParameter("endereco");
+        String numeroEndereco = request.getParameter("numeroEndereco");
+        String complemento = request.getParameter("complemento");
         
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
         Paciente paciente = new Paciente();
+        paciente.setNome(nome);
+        paciente.setCpf(cpf);
+        paciente.setDataNascimento(dataNascimento);
+        paciente.setTelefone(telefone);
+        paciente.setEmail(email);
+        paciente.setCep(cep);
+        paciente.setCidade(cidade);
+        paciente.setEstado(estado);
+        paciente.setBairro(bairro);
+        paciente.setEndereco(endereco);
+        paciente.setNumEndereco(numeroEndereco);
+        paciente.setComplemento(complemento);
+        
         PacienteDAO pacienteDAO = new PacienteDAO();
         pacienteDAO.inserirPaciente(paciente);
-        Client client = ClientBuilder.newClient();
-//        if (request.getParameter("tipo") != null) {
-//            if (request.getParameter("tipo").equals("busca")) {
-//                String nome = request.getParameter("buscaFuncionario");
-//                List<Funcionario> lista = new ArrayList<>();
-//                if (nome.equals("")) {
-//                    Response resp = client.target("http://localhost:21836/WSFinal/webresources/funcionarios").request(MediaType.APPLICATION_JSON).get();
-//                    lista = resp.readEntity(new GenericType<List<Funcionario>>() {
-//                    });
-//                } else {
-//                    Response resp = client.target("http://localhost:21836/WSFinal/webresources/funcionarios/nome/" + nome).request(MediaType.APPLICATION_JSON).get();
-//                    lista = resp.readEntity(new GenericType<List<Funcionario>>() {
-//                    });
-//                }
-//                request.setAttribute("lista", lista);
-//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/buscar_funcionarios.jsp");
-//                rd.forward(request, response);
-//            }
-//        }
-//        if (request.getParameter("tipo") != null) {
-//            if (request.getParameter("tipo").equals("cadastro")) {
-//                List<Empresa> lista = new ArrayList<>();
-//                lista = empresaDAO.buscarNomes();
-//                request.setAttribute("lista", lista);
-//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrar_funcionario.jsp");
-//                rd.forward(request, response);
-//            }
-//        }
-//        if (request.getParameter("tipo") != null) {
-//            if (request.getParameter("tipo").equals("cadastrar")) {
-//                usuario.setLogin(request.getParameter("login"));
-//                usuario.setNome(request.getParameter("nome"));
-//                usuario.setSenha(request.getParameter("senha"));
-//                usuarioDAO.inserirUsuario(usuario);
-//                endereco.setBairro(request.getParameter("bairro"));
-//                endereco.setCidade(request.getParameter("cidade"));
-//                endereco.setCep(request.getParameter("cep"));
-//                endereco.setRua(request.getParameter("rua"));
-//                endereco.setNumero(Integer.valueOf(request.getParameter("numero")));
-//                endereco.setUf(request.getParameter("uf"));
-//                funcionario.setNome(request.getParameter("nome"));
-//                funcionario.setCpf(request.getParameter("cpf"));
-//                funcionario.setEmailFuncionario(request.getParameter("email"));
-//                funcionario.setCelular(request.getParameter("celular"));
-//                funcionario.setIdEmpresa(Integer.valueOf(request.getParameter("idEmpresa")));
-//                funcionario.setEnderecoFuncionario(endereco);
-//                client.target("http://localhost:21836/WSFinal/webresources/funcionarios").request(MediaType.APPLICATION_JSON).post(Entity.json(funcionario));
-//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/PortalController");
-//                rd.forward(request, response);
-//            }
-//        }
-//        if (request.getParameter("tipo") == null) {
-//            if (request.getParameter("fun") != null) {
-//                List<Empresa> lista = new ArrayList<>();
-//                lista = empresaDAO.buscarNomes();
-//                funcionario = client.target("http://localhost:21836/WSFinal/webresources/funcionarios/" + request.getParameter("fun")).request(MediaType.APPLICATION_JSON).get(Funcionario.class);
-//                request.setAttribute("funcionario", funcionario);
-//                request.setAttribute("lista", lista);
-//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/alterar_funcionario.jsp");
-//                rd.forward(request, response);
-//            }
-//        }
-//        if (request.getParameter("tipo") != null) {
-//            if (request.getParameter("tipo").equals("alterar")) {
-//                endereco.setBairro(request.getParameter("bairro"));
-//                endereco.setCidade(request.getParameter("cidade"));
-//                endereco.setCep(request.getParameter("cep"));
-//                endereco.setRua(request.getParameter("rua"));
-//                endereco.setNumero(Integer.valueOf(request.getParameter("numero")));
-//                endereco.setUf(request.getParameter("uf"));
-//                funcionario.setIdFuncionario(Integer.valueOf(request.getParameter("id")));
-//                funcionario.setNome(request.getParameter("nome"));
-//                funcionario.setCpf(request.getParameter("cpf"));
-//                funcionario.setEmailFuncionario(request.getParameter("email"));
-//                funcionario.setCelular(request.getParameter("celular"));
-//                funcionario.setIdEmpresa(Integer.valueOf(request.getParameter("idEmpresa")));
-//                funcionario.setEnderecoFuncionario(endereco);
-//                client.target("http://localhost:21836/WSFinal/webresources/funcionarios/" + request.getParameter("id")).request(MediaType.APPLICATION_JSON).put(Entity.json(funcionario));
-//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/PortalController");
-//                rd.forward(request, response);
-//            }
-//        }
-//        if (request.getParameter("tipo") == null) {
-//            if (request.getParameter("func") != null) {
-//                usuarioDAO.deletarUsuario(Integer.valueOf(request.getParameter("func")));
-//                client.target("http://localhost:21836/WSFinal/webresources/funcionarios/" + request.getParameter("func")).request(MediaType.APPLICATION_JSON).delete();
-//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/PortalController");
-//                rd.forward(request, response);
-//            }
-//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
