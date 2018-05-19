@@ -12,7 +12,7 @@ import java.sql.Date;
  * @author gomes
  */
 public class Paciente {
-    
+
     private String nome;
     private String cpf;
     private String dataNascimento; //string provisorio
@@ -26,8 +26,8 @@ public class Paciente {
     private String complemento;
     private String email;
     private Integer id;
-    
-    //    public Paciente(String nome, String cpf, String dataNascimento, String cep, String cidade, String estado, String bairro, String endereco, String numEndereco) {
+
+//    public Paciente(String nome, String cpf, String dataNascimento, String cep, String cidade, String estado, String bairro, String endereco, String numEndereco) {
 //        this.nome = nome;
 //        this.cpf = cpf;
 //        this.dataNascimento = dataNascimento;
@@ -37,7 +37,7 @@ public class Paciente {
 //        this.bairro = bairro;
 //        this.endereco = endereco;
 //        this.numEndereco = numEndereco;
-//    }}
+//    }
 
     public Integer getId() {
         return id;
@@ -46,7 +46,7 @@ public class Paciente {
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -142,5 +142,5 @@ public class Paciente {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
 }
