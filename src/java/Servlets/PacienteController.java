@@ -11,6 +11,7 @@ import DAO.PacienteDAO;
 import DAO.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -53,7 +54,7 @@ public class PacienteController extends HttpServlet {
         } else {
             String nome = request.getParameter("nome");
             String cpf = request.getParameter("cpf");
-            String dataNascimento = request.getParameter("dataNascimento");
+           // Date dataNascimento = request.getParameter();
             String telefone = request.getParameter("telefone");
             String email = request.getParameter("email");
             String cep = request.getParameter("cep");
@@ -67,7 +68,7 @@ public class PacienteController extends HttpServlet {
             Paciente paciente = new Paciente();
             paciente.setNome(nome);
             paciente.setCpf(cpf);
-            paciente.setDataNascimento(dataNascimento);
+           // paciente.setDataNascimento(dataNascimento);
             paciente.setTelefone(telefone);
             paciente.setEmail(email);
             paciente.setCep(cep);
@@ -80,18 +81,18 @@ public class PacienteController extends HttpServlet {
 
             PacienteDAO pacienteDAO = new PacienteDAO();
             pacienteDAO.inserirPaciente(paciente);
-//            if (paciente != null) {
-//                session = request.getSession();
-//                session.setAttribute("paciente", paciente);
-//                session.setMaxInactiveInterval(20 * 60);
-//                RequestDispatcher rd = null;
-//                rd = getServletContext().getRequestDispatcher("/cadastrarPaciente.jsp");
-//                rd.include(request, response);
-//            } else {
-//                request.setAttribute("msg", "Erro ao cadastrar o paciente!");
-//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
-//                rd.forward(request, response);
-//            }
+            if (paciente != null) {
+                session = request.getSession();
+                session.setAttribute("paciente", paciente);
+                session.setMaxInactiveInterval(20 * 60);
+                RequestDispatcher rd = null;
+                rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");
+                rd.include(request, response);
+            } else {
+                request.setAttribute("msg", "Erro ao cadastrar o paciente!");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+                rd.forward(request, response);
+            }
         }
 
     }

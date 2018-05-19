@@ -33,7 +33,7 @@ public class PacienteDAO {
             stmt = con.prepareStatement(stmtInserir);
             stmt.setString(1, paciente.getCpf());
             stmt.setString(2, paciente.getNome());
-            stmt.setString(3, paciente.getDataNascimento());
+            stmt.setDate(3, paciente.getDataNascimento());
             stmt.setString(4, paciente.getTelefone());
             stmt.setString(5, paciente.getCep());
             stmt.setString(6, paciente.getCidade());

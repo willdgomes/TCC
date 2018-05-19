@@ -3,19 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Medicamento.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/MedicamentoDAO.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/GerenciarPacientesController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/LoginController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarPacientes.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Paciente.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/index.html</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/gerenciarPacientes.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/DispensarMedicamentoController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/PacienteController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/PacienteDAO.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Usuario.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/login.jsp</file>
+            <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Servlets/GerenciarPacientesController.java</file>
+            <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Beans/Paciente.java</file>
+            <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Servlets/PacienteController.java</file>
+            <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/DAO/PacienteDAO.java</file>
         </group>
     </open-files>
 </project-private>
