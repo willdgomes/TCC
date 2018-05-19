@@ -21,7 +21,8 @@ public class PacienteDAO {
     
     private final String stmtInserir = "INSERT INTO pacientes (cpfPaciente, nomePaciente, dnPaciente, telefone, "
             + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-    private final String stmtBuscarClientes = "SELECT idCliente, nome, sobrenome, telefone FROM cliente";
+    private final String stmtBuscarPacientess = "SELECT idPaciente, cpfPaciente, nomePaciente, dnPaciente, telefone, "
+            + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email FROM pacientes";
     private final String stmtRemoverClientes = "DELETE FROM cliente WHERE idCliente = ?";
     private final String stmtAtualizarClientes = "UPDATE cliente SET nome = ?, sobrenome = ?, telefone = ? WHERE idCliente = ?";
     
