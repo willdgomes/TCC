@@ -26,16 +26,8 @@ public class Paciente {
     private String complemento;
     private String email;
     private Integer id;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-//    public Paciente(String nome, String cpf, String dataNascimento, String cep, String cidade, String estado, String bairro, String endereco, String numEndereco) {
+    
+    //    public Paciente(String nome, String cpf, String dataNascimento, String cep, String cidade, String estado, String bairro, String endereco, String numEndereco) {
 //        this.nome = nome;
 //        this.cpf = cpf;
 //        this.dataNascimento = dataNascimento;
@@ -46,6 +38,14 @@ public class Paciente {
 //        this.endereco = endereco;
 //        this.numEndereco = numEndereco;
 //    }}
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
     
     public String getNome() {
         return nome;
