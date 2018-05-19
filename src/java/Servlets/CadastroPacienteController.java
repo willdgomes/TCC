@@ -33,7 +33,7 @@ import javax.ws.rs.core.Response;
  * @author gomes
  */
 @WebServlet(name = "PacienteController", urlPatterns = {"/PacienteController"})
-public class PacienteController extends HttpServlet {
+public class CadastroPacienteController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

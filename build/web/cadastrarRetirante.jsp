@@ -22,38 +22,38 @@
                                 <div class="form-row">
                                     <div class="form-group col">
                                         <label for="nome" class="text-dark">Nome:</label>
-                                        <input type="text" class="form-control" id="nomepaciente" required>
+                                        <input type="text" class="form-control" id="nomepaciente" required name="nomeRetirante">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-4" >
                                         <label for="cpf" class="text-dark">CPF:</label>
-                                        <input type="number" class="form-control" id="cpfpaciente" required>
+                                        <input type="number" class="form-control" id="cpfpaciente" required name="cpfRetirante">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="dtnasc" class="text-dark">Data de nascimento:</label>
-                                        <input type="date" class="form-control" id="dtnascpaciente" required>
+                                        <input type="date" class="form-control" id="dtnascpaciente" required name="dtNascimento">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="dtnasc" class="text-dark">Telefone:</label>
-                                        <input type="number" class="form-control" id="dtnascpaciente">
+                                        <input type="number" class="form-control" id="dtnascpaciente" name="telefone">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                      <div class="form-group col-md-8">
                                         <label for="email" class="text-dark">E-mail:</label>
-                                        <input type="text" class="form-control" id="emailpaciente">
+                                        <input type="text" class="form-control" id="emailpaciente" name="emailRetirante">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="parentesco" class="text-dark ">Parentesco:</label>
                                         <div class="col-md-12 row">
                                         <div class="dropdown">
-                                        <button class="btn dropdown-toggle " type="button" data-toggle="dropdown">Selecione</button>
-                                            <ul class="dropdown-menu">
-                                            <li><a href="#">Mãe</a></li>
-                                            <li><a href="#">Pai</a></li>
-                                            <li><a href="#">Amigo</a></li>
-                                            </ul>
+                                        <select id="cbRemedios" class="form-control">
+                                            <option></option>
+                                            <option>Pai</option>
+                                            <option>Mãe</option>
+                                            <option>Outro</option>
+                                        </select>
                                         </div>                    
                                         </div>
                                     </div>
