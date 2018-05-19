@@ -17,7 +17,7 @@
                 </div>
                 <div class="panel-body pt-3">
                     <div class="col-sm-12">
-                        <form class="card border-info">
+                        <form class="card border-info" action="CadastroRetiranteController" method="POST">
                             <div class="card-body p-5">
                                 <div class="form-row">
                                     <div class="form-group col">
@@ -48,7 +48,7 @@
                                         <label for="parentesco" class="text-dark ">Parentesco:</label>
                                         <div class="col-md-12 row">
                                         <div class="dropdown">
-                                        <select id="cbRemedios" class="form-control">
+                                        <select id="cbRemedios" class="form-control" name="parentesco">
                                             <option></option>
                                             <option>Pai</option>
                                             <option>Mãe</option>
@@ -61,7 +61,7 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label for="cep" class="text-dark">CEP:</label>
-                                        <input type="number" class="form-control" id="ceppaciente" required>
+                                        <input type="number" class="form-control" id="ceppaciente" required name="cepRetirante">
                                     </div>
                                     <div class="col-md-1">
                                         <button type="button" class="btn btn-sm mt-3"><i class="material-icons">search</i></button>
@@ -70,32 +70,32 @@
                                 <div class="form-row">                                   
                                     <div class="form-group col-md-4">
                                         <label for="cidade" class="text-dark">Cidade:</label>
-                                        <input type="text" class="form-control" id="cidadepaciente" required>
+                                        <input type="text" class="form-control" id="cidadepaciente" required name="cidadeRetirante">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="estado" class="text-dark">Estado:</label>
-                                        <input type="text" class="form-control" id="estadopaciente" required>
+                                        <input type="text" class="form-control" id="estadopaciente" required name="estadoRetirante">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="bairro" class="text-dark">Bairro:</label>
-                                        <input type="text" class="form-control" id="ceppaciente" required>
+                                        <input type="text" class="form-control" id="ceppaciente" required name="bairroRetirante">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                      <div class="form-group col-md-8">
                                         <label for="endereco" class="text-dark">Endereço:</label>
-                                        <input type="text" class="form-control" id="enderecopaciente" required>
+                                        <input type="text" class="form-control" id="enderecopaciente" required name="enderecoRetirante">
                                     </div>
                                     
                                     <div class="form-group col-md-4">
                                         <label for="numero" class="text-dark">Número:</label>
-                                        <input type="number" class="form-control" id="numeropaciente" required>
+                                        <input type="number" class="form-control" id="numeropaciente" required name="numeroEnderecoRetirante">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-8">
                                         <label for="numero" class="text-dark">Complemento:</label>
-                                        <input type="text" class="form-control" id="complemento">
+                                        <input type="text" class="form-control" id="complemento" name="complementoRetirante">
                                     </div>
                                 </div>
                                  <div class="form-row">

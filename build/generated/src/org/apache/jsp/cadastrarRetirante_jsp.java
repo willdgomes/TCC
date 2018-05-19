@@ -103,7 +103,7 @@ public final class cadastrarRetirante_jsp extends org.apache.jasper.runtime.Http
       out.write("                </div>\n");
       out.write("                <div class=\"panel-body pt-3\">\n");
       out.write("                    <div class=\"col-sm-12\">\n");
-      out.write("                        <form class=\"card border-info\">\n");
+      out.write("                        <form class=\"card border-info\" action=\"CadastroRetiranteController\" method=\"POST\">\n");
       out.write("                            <div class=\"card-body p-5\">\n");
       out.write("                                <div class=\"form-row\">\n");
       out.write("                                    <div class=\"form-group col\">\n");
@@ -134,12 +134,12 @@ public final class cadastrarRetirante_jsp extends org.apache.jasper.runtime.Http
       out.write("                                        <label for=\"parentesco\" class=\"text-dark \">Parentesco:</label>\n");
       out.write("                                        <div class=\"col-md-12 row\">\n");
       out.write("                                        <div class=\"dropdown\">\n");
-      out.write("                                        <button class=\"btn dropdown-toggle \" type=\"button\" data-toggle=\"dropdown\">Selecione</button>\n");
-      out.write("                                            <ul class=\"dropdown-menu\">\n");
-      out.write("                                            <li><a href=\"#\">Mãe</a></li>\n");
-      out.write("                                            <li><a href=\"#\">Pai</a></li>\n");
-      out.write("                                            <li><a href=\"#\">Amigo</a></li>\n");
-      out.write("                                            </ul>\n");
+      out.write("                                        <select id=\"cbRemedios\" class=\"form-control\" name=\"parentesco\">\n");
+      out.write("                                            <option></option>\n");
+      out.write("                                            <option>Pai</option>\n");
+      out.write("                                            <option>Mãe</option>\n");
+      out.write("                                            <option>Outro</option>\n");
+      out.write("                                        </select>\n");
       out.write("                                        </div>                    \n");
       out.write("                                        </div>\n");
       out.write("                                    </div>\n");
