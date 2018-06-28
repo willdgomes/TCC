@@ -35,7 +35,7 @@
                                             <input type="date" class="form-control" id="dtnascpaciente" required name="dataNascimento">
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label for="dtnasc" class="text-dark">Telefone:</label>
+                                            <label for="telefone" class="text-dark">Telefone:</label>
                                             <input type="number" class="form-control" id="dtnascpaciente" name="telefone">
                                         </div>
                                     </div>

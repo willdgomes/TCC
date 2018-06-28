@@ -121,7 +121,7 @@ public final class cadastrarPacientes_jsp extends org.apache.jasper.runtime.Http
       out.write("                                            <input type=\"date\" class=\"form-control\" id=\"dtnascpaciente\" required name=\"dataNascimento\">\n");
       out.write("                                        </div>\n");
       out.write("                                        <div class=\"form-group col-md-4\">\n");
-      out.write("                                            <label for=\"dtnasc\" class=\"text-dark\">Telefone:</label>\n");
+      out.write("                                            <label for=\"telefone\" class=\"text-dark\">Telefone:</label>\n");
       out.write("                                            <input type=\"number\" class=\"form-control\" id=\"dtnascpaciente\" name=\"telefone\">\n");
       out.write("                                        </div>\n");
       out.write("                                    </div>\n");

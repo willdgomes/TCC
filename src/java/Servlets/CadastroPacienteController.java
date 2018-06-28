@@ -54,7 +54,8 @@ public class CadastroPacienteController extends HttpServlet {
         } else {
             String nome = request.getParameter("nome");
             String cpf = request.getParameter("cpf");
-           // Date dataNascimento = request.getParameter();
+            String dt = request.getParameter("dataNascimento");
+            Date dataNascimento = request.getParameter("dataNascimento");
             String telefone = request.getParameter("telefone");
             String email = request.getParameter("email");
             String cep = request.getParameter("cep");
@@ -68,7 +69,7 @@ public class CadastroPacienteController extends HttpServlet {
             Paciente paciente = new Paciente();
             paciente.setNome(nome);
             paciente.setCpf(cpf);
-           // paciente.setDataNascimento(dataNascimento);
+            paciente.setDataNascimento(dataNascimento);
             paciente.setTelefone(telefone);
             paciente.setEmail(email);
             paciente.setCep(cep);
