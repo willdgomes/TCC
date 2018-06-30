@@ -55,7 +55,8 @@ public class CadastroPacienteController extends HttpServlet {
             String nome = request.getParameter("nome");
             String cpf = request.getParameter("cpf");
             String dt = request.getParameter("dataNascimento");
-            Date dataNascimento = request.getParameter("dataNascimento");
+            String stringData = request.getParameter("dataNascimento");
+            Date dataNascimento = Date.valueOf(stringData);
             String telefone = request.getParameter("telefone");
             String email = request.getParameter("email");
             String cep = request.getParameter("cep");
