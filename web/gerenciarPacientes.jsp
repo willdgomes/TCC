@@ -19,7 +19,7 @@
                     <div class="panel-body m-3">
                         <form >
                             <div class="col-sm-12">
-                                <form class="card border-info" action="GerenciarPacientesController" method="POST">
+                                <form class="card border-info" action="PacienteController" method="POST">
                                     <div class="card-body p-5">
                                         <div class="form-group">
                                             <input type="text" class="col-sm-10" placeholder="Pesquisar" required name="pesquisa">    
