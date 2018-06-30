@@ -22,7 +22,7 @@
                                 <form class="card border-info" action="GerenciarPacientesController" method="POST">
                                     <div class="card-body p-5">
                                         <div class="form-group">
-                                            <input type="text" class="col-sm-10" placeholder="Pesquisar" name="pesquisa">    
+                                            <input type="text" class="col-sm-10" placeholder="Pesquisar" required name="pesquisa">    
                                             <button type="submit" class="btn col-sm-1"><i class="material-icons">search</i></button>
                                         </div>     
                                     </div>
