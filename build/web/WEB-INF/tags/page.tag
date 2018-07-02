@@ -101,7 +101,7 @@
                 <div class="collapse show" id="menuDashboard">
                   <ul class="nav flex-column">
                     <li class="nav-sub-item">
-                      <a class="nav-link active" href="#"><i class="material-icons">face</i> <span class="align-top">Pacientes</span></a>
+                      <a class="nav-link active" href="gerenciarPacientes.jsp"><i class="material-icons">face</i> <span class="align-top">Pacientes</span></a>
                     </li>
                     <li class="nav-sub-item">
                       <a class="nav-link" href="#"><i class="material-icons">local_pharmacy</i> <span class="align-top">Medicamentos</span></a>
@@ -114,7 +114,7 @@
                 <div class="collapse show" id="menuDashboard">
                   <ul class="nav flex-column">
                     <li class="nav-sub-item">
-                      <a class="nav-link active" href="#"><i class="material-icons">face</i> <span class="align-top">Dispensar Medicamento</span></a>
+                      <a class="nav-link active" href="selecionarRemedioDispensa.jsp"><i class="material-icons">face</i> <span class="align-top">Dispensar Medicamento</span></a>
                     </li>
                     <li class="nav-sub-item">
                       <a class="nav-link" href="#"><i class="material-icons">local_pharmacy</i> <span class="align-top">Inserir Medicamento</span></a>
