@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/gomes/NetBeansProjects/Farmacia/web/gerenciarPacientes.jsp</file>
+            <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Servlets/GerenciarPacientesController.java</file>
             <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Beans/Paciente.java</file>
-            <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Servlets/CadastroPacienteController.java</file>
+            <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Servlets/PacienteController.java</file>
             <file>file:/home/gomes/NetBeansProjects/Farmacia/web/cadastrarPacientes.jsp</file>
             <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/DAO/PacienteDAO.java</file>
         </group>
