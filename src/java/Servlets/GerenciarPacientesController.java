@@ -53,7 +53,7 @@ public class GerenciarPacientesController extends HttpServlet {
                 session.setAttribute("usuario", usuario);
                 session.setMaxInactiveInterval(20*60);
                 RequestDispatcher rd = null;
-                rd = getServletContext().getRequestDispatcher("/home.jsp");
+                rd = getServletContext().getRequestDispatcher("/gerenciarPacientes.jsp");
                 rd.include(request, response);
             }
             else {

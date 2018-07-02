@@ -83,9 +83,10 @@ public class PacienteController extends HttpServlet {
 
             PacienteDAO pacienteDAO = new PacienteDAO();
             pacienteDAO.inserirPaciente(paciente);
+            Usuario usuario = new Usuario();
             if (paciente != null) {
                 session = request.getSession();
-                session.setAttribute("paciente", paciente);
+                session.setAttribute("usuario", usuario);
                 session.setMaxInactiveInterval(20 * 60);
                 RequestDispatcher rd = null;
                 rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");
