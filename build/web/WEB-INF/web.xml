@@ -4,17 +4,9 @@
         <servlet-name>teste</servlet-name>
         <servlet-class>Servlets.teste</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>GerenciarPacientesController</servlet-name>
-        <servlet-class>Servlets.GerenciarPacientesController</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>teste</servlet-name>
         <url-pattern>/teste</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GerenciarPacientesController</servlet-name>
-        <url-pattern>/GerenciarPacientesController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
