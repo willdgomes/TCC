@@ -164,7 +164,7 @@ public final class gerenciarPacientes_jsp extends org.apache.jasper.runtime.Http
       out.write("                    <div class=\"panel-body m-3\">\n");
       out.write("                        <form >\n");
       out.write("                            <div class=\"col-sm-12\">\n");
-      out.write("                                <form class=\"card border-info\" action=\"PacienteController\" method=\"POST\">\n");
+      out.write("                                <form class=\"card border-info\" action=\"GerenciarPacientesController\" method=\"POST\">\n");
       out.write("                                    <div class=\"card-body p-5\">\n");
       out.write("                                        <div class=\"form-group\">\n");
       out.write("                                            <input type=\"text\" class=\"col-sm-10\" placeholder=\"Pesquisar\" required name=\"pesquisa\">    \n");
