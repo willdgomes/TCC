@@ -71,7 +71,7 @@
                       </div><div class='footer'><a class='btn btn-light btn-block' href='#' role='button'>ver todas as notificações</a></div></div>"><i class="material-icons red">notifications</i></a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link btn" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<div class='popup-box'><div class='header'>Renan Nelsen<br /><small>administrador</small></div><div class='body'>
+                      <a class="nav-link btn" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<div class='popup-box'><div class='header'>Admin<br /><small>administrador</small></div><div class='body'>
 
                         <ul class='nav flex-column'>
                           <li class='nav-item'>
