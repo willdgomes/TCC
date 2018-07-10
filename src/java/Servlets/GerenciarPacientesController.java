@@ -47,8 +47,9 @@ public class GerenciarPacientesController extends HttpServlet {
         else {
             String pesquisa = request.getParameter("pesquisa");
             
+            Paciente paciente = new Paciente();
             Usuario usuario = new Usuario();
-            if (usuario != null) {            
+            if (paciente != null) {            
                 session = request.getSession();
                 session.setAttribute("usuario", usuario);
                 session.setMaxInactiveInterval(20*60);
