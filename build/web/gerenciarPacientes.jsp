@@ -17,7 +17,6 @@
                         <h2 align="center">Gerenciamento de pacientes</h2>
                     </div>
                     <div class="panel-body m-3">
-                        <form >
                             <div class="col-sm-12">
                                 <form action="GerenciarPacientesController" method="POST" class="card border-info">
                                     <div class="card-body p-5">
@@ -58,7 +57,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
                     </div>
                 </div>
             </div>

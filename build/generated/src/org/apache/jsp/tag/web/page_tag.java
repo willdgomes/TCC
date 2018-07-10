@@ -126,7 +126,7 @@ public final class page_tag
       out.write("                      </div><div class='footer'><a class='btn btn-light btn-block' href='#' role='button'>ver todas as notificações</a></div></div>\"><i class=\"material-icons red\">notifications</i></a>\n");
       out.write("                    </li>\n");
       out.write("                    <li class=\"nav-item\">\n");
-      out.write("                      <a class=\"nav-link btn\" tabindex=\"0\" role=\"button\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content=\"<div class='popup-box'><div class='header'>Renan Nelsen<br /><small>administrador</small></div><div class='body'>\n");
+      out.write("                      <a class=\"nav-link btn\" tabindex=\"0\" role=\"button\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content=\"<div class='popup-box'><div class='header'>Admin<br /><small>administrador</small></div><div class='body'>\n");
       out.write("\n");
       out.write("                        <ul class='nav flex-column'>\n");
       out.write("                          <li class='nav-item'>\n");
@@ -169,7 +169,7 @@ public final class page_tag
       out.write("                <div class=\"collapse show\" id=\"menuDashboard\">\n");
       out.write("                  <ul class=\"nav flex-column\">\n");
       out.write("                    <li class=\"nav-sub-item\">\n");
-      out.write("                      <a class=\"nav-link active\" href=\"#\"><i class=\"material-icons\">face</i> <span class=\"align-top\">Dispensar Medicamento</span></a>\n");
+      out.write("                      <a class=\"nav-link active\" href=\"selecionarRemedioDispensa.jsp\"><i class=\"material-icons\">face</i> <span class=\"align-top\">Dispensar Medicamento</span></a>\n");
       out.write("                    </li>\n");
       out.write("                    <li class=\"nav-sub-item\">\n");
       out.write("                      <a class=\"nav-link\" href=\"#\"><i class=\"material-icons\">local_pharmacy</i> <span class=\"align-top\">Inserir Medicamento</span></a>\n");
