@@ -206,7 +206,7 @@ public class PacienteDAO {
         ResultSet rs = null;
         List<Paciente> listaPacientes = null;
         String stmtBuscarPacienteNome = "SELECT idPaciente, cpfPaciente, nomePaciente, dnPaciente, telefone, "
-            + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email FROM pacientes WHERE nomePaciente="+nome; 
+            + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email FROM pacientes WHERE nomePaciente = "+nome; 
         try{
             con = ConnectionFactory.getConnection();  
             
