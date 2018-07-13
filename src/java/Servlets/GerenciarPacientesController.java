@@ -39,7 +39,7 @@ public class GerenciarPacientesController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("usuario") != null) {
+        if (session.getAttribute("usuario") == null) {
             session.invalidate();
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
@@ -48,6 +48,8 @@ public class GerenciarPacientesController extends HttpServlet {
             String pesquisa = request.getParameter("pesquisa");
             
             Paciente paciente = new Paciente();
+            PacienteDAO pacienteDAO = new PacienteDAO();
+            pacienteDAO.buscarClientesParam(pesquisa);
             Usuario usuario = new Usuario();
             if (paciente != null) {            
                 session = request.getSession();

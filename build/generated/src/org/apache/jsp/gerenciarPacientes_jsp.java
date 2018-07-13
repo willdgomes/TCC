@@ -162,9 +162,8 @@ public final class gerenciarPacientes_jsp extends org.apache.jasper.runtime.Http
       out.write("                        <h2 align=\"center\">Gerenciamento de pacientes</h2>\n");
       out.write("                    </div>\n");
       out.write("                    <div class=\"panel-body m-3\">\n");
-      out.write("                        <form >\n");
       out.write("                            <div class=\"col-sm-12\">\n");
-      out.write("                                <form action=\"PacienteController\" method=\"POST\" class=\"card border-info\">\n");
+      out.write("                                <form action=\"GerenciarPacientesController\" method=\"POST\" class=\"card border-info\">\n");
       out.write("                                    <div class=\"card-body p-5\">\n");
       out.write("                                        <div class=\"form-group\">\n");
       out.write("                                            <input type=\"text\" class=\"col-sm-10\" placeholder=\"Pesquisar\" required name=\"pesquisa\">    \n");
@@ -196,7 +195,6 @@ public final class gerenciarPacientes_jsp extends org.apache.jasper.runtime.Http
       out.write("                                    </div>\n");
       out.write("                                </div>\n");
       out.write("                            </div>\n");
-      out.write("                        </form>\n");
       out.write("                    </div>\n");
       out.write("                </div>\n");
       out.write("            </div>\n");
