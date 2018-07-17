@@ -216,15 +216,14 @@ public class PacienteDAO {
             listaPacientes = new ArrayList<Paciente>();
             while (rs.next()) {
                 Paciente p = new Paciente();
-//                f.setNome(rs.getString("nome"));
-//                f.setSobreNome(rs.getString("sobreNome"));
-//                f.setCpf(rs.getString("cpf"));
+                p.setNome(rs.getString("nomePaciente"));
+                p.setCpf(rs.getString("cpfPaciente"));
 //                f.setRg(rs.getString("rg"));
 //                f.setTelefone(rs.getString("telefone"));
 //                f.setCargo(rs.getString("cargo"));
 //                f.setNivel(rs.getInt("nivel"));
 //                f.setDepartamento(rs.getString("Departamento"));
-//                listaPacientes.add(f);
+                listaPacientes.add(p);
             }  
         return listaPacientes;            
         }catch(SQLException ex){
