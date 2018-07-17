@@ -200,22 +200,31 @@ public class PacienteDAO {
 //        }
 //    }
 
-    public List<Paciente> buscarClientesParam(String nome) {
+    public List<Paciente> buscarPacientesParam(/*String parametro, */String pesquisa) {
+       // Departamento departamento = new Departamento();
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         List<Paciente> listaPacientes = null;
-        String stmtBuscarPacienteNome = "SELECT idPaciente, cpfPaciente, nomePaciente, dnPaciente, telefone, "
-            + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email FROM pacientes WHERE nomePaciente = "+nome; 
+        String stmtBuscarPacientesParam = "SELECT idPaciente, cpfPaciente, nomePaciente, dnPaciente, telefone, "
+            + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email FROM pacientes WHERE nomePaciente LIKE ?"; 
         try{
             con = ConnectionFactory.getConnection();  
-            
-            stmt = con.prepareStatement(stmtBuscarPacienteNome);
+            stmt = con.prepareStatement(stmtBuscarPacientesParam); 
+            stmt.setString(1,'%'+pesquisa+'%');
             rs = stmt.executeQuery();
             listaPacientes = new ArrayList<Paciente>();
             while (rs.next()) {
-                Paciente paciente = new Paciente();
-                listaPacientes.add(paciente);
+                Paciente p = new Paciente();
+//                f.setNome(rs.getString("nome"));
+//                f.setSobreNome(rs.getString("sobreNome"));
+//                f.setCpf(rs.getString("cpf"));
+//                f.setRg(rs.getString("rg"));
+//                f.setTelefone(rs.getString("telefone"));
+//                f.setCargo(rs.getString("cargo"));
+//                f.setNivel(rs.getInt("nivel"));
+//                f.setDepartamento(rs.getString("Departamento"));
+//                listaPacientes.add(f);
             }  
         return listaPacientes;            
         }catch(SQLException ex){

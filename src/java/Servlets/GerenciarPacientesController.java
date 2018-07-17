@@ -49,7 +49,7 @@ public class GerenciarPacientesController extends HttpServlet {
             
             Paciente paciente = new Paciente();
             PacienteDAO pacienteDAO = new PacienteDAO();
-            pacienteDAO.buscarClientesParam(pesquisa);
+            pacienteDAO.buscarPacientesParam(pesquisa);
             Usuario usuario = new Usuario();
             if (paciente != null) {            
                 session = request.getSession();
