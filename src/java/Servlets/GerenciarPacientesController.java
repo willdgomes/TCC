@@ -12,6 +12,7 @@ import DAO.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,7 +50,7 @@ public class GerenciarPacientesController extends HttpServlet {
             
             Paciente paciente = new Paciente();
             PacienteDAO pacienteDAO = new PacienteDAO();
-            pacienteDAO.buscarPacientesParam(pesquisa);
+            List<Paciente> pacienteList = pacienteDAO.buscarPacientesParam(pesquisa);
             Usuario usuario = new Usuario();
             if (paciente != null) {            
                 session = request.getSession();
