@@ -8,7 +8,10 @@ package DAO;
 import Beans.Medicamento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,7 +20,7 @@ import java.sql.SQLException;
 public class MedicamentoDAO {
       private final String stmtInserir = "INSERT INTO pacientes (cpfPaciente, nomePaciente, dnPaciente, telefone, "
             + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-    private final String stmtBuscarClientes = "SELECT idCliente, nome, sobrenome, telefone FROM cliente";
+    private final String stmtListarMedicamentos = "select nomePaciente from pacientes";
     private final String stmtRemoverClientes = "DELETE FROM cliente WHERE idCliente = ?";
     private final String stmtAtualizarClientes = "UPDATE cliente SET nome = ?, sobrenome = ?, telefone = ? WHERE idCliente = ?";
     
@@ -49,45 +52,46 @@ public class MedicamentoDAO {
         }
     }
 
-//    public List<Medicamento> buscarMedicamento() {
-//
-//        Connection con = null;
-//        PreparedStatement stmt = null;
-//        ResultSet rs = null;
-//        List<Cliente> listaClientes = null;
-//        try {
-//            con = ConnectionFactory.getConnection();
-//            stmt = con.prepareStatement(stmtBuscarClientes);
-//            rs = stmt.executeQuery();
-//            listaClientes = new ArrayList<Cliente>();
-//            while (rs.next()) {
-//                Cliente cliente = new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
-//                listaClientes.add(cliente);
-//            }  
-//        return listaClientes;
-//        }
-//    catch(SQLException ex){
-//            throw new RuntimeException("Erro ao listar os clientes no banco de dados. Origem=" + ex.getMessage());
-//    }
-//        finally{
-//            try {
-//            rs.close();
-//        } catch (Exception ex) {
-//            System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
-//        };
-//        try {
-//            stmt.close();
-//        } catch (Exception ex) {
-//            System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
-//        };
-//        try {
-//            con.close();;
-//        } catch (Exception ex) {
-//            System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
-//        };
-//    }
-//
-//}
+    public List<Medicamento> listarMedicamentos() {
+
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Medicamento> listaMedicamentos = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtListarMedicamentos);
+            rs = stmt.executeQuery();
+            listaMedicamentos = new ArrayList<Medicamento>();
+            while (rs.next()) {
+                Medicamento medicamento = new Medicamento();
+                medicamento.setNome("teste");
+                listaMedicamentos.add(medicamento);
+            }  
+        return listaMedicamentos;
+        }
+    catch(SQLException ex){
+            throw new RuntimeException("Erro ao listar os clientes no banco de dados. Origem=" + ex.getMessage());
+    }
+        finally{
+            try {
+            rs.close();
+        } catch (Exception ex) {
+            System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
+        };
+        try {
+            stmt.close();
+        } catch (Exception ex) {
+            System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+        };
+        try {
+            con.close();;
+        } catch (Exception ex) {
+            System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+        };
+    }
+
+}
 
 //    public void removerCliente(Cliente cliente) {
 //        Connection con = null;
@@ -145,25 +149,24 @@ public class MedicamentoDAO {
 //            };
 //        }
 //    }
-//
-//    public List<Cliente> buscarClientesParam(String parametro, String colunaPesquisa) {
+
+//    public List<Medicamento> buscarMedicamentoNome(String nomeRemedio) {
 //        Connection con = null;
 //        PreparedStatement stmt = null;
 //        ResultSet rs = null;
-//        List<Cliente> listaClientes = null;
-//        String stmtBuscarClientesParam = "SELECT idCliente, nome, sobrenome, telefone FROM cliente WHERE " + colunaPesquisa + " LIKE ?"; 
+//        List<Medicamento> listaMedicamentos = null;
+//        String stmtBuscarMedicamento = "select nomePaciente from pacientes"; 
 //        try{
 //            con = ConnectionFactory.getConnection();  
 //            
-//            stmt = con.prepareStatement(stmtBuscarClientesParam); 
-//            stmt.setString(1,'%'+parametro+'%');
+//            stmt = con.prepareStatement(stmtBuscarMedicamento);
 //            rs = stmt.executeQuery();
-//            listaClientes = new ArrayList<Cliente>();
+//            listaMedicamentos = new ArrayList<Medicamento>();
 //            while (rs.next()) {
-//                Cliente cliente = new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
-//                listaClientes.add(cliente);
+//                Medicamento medicamento = new Medicamento();
+//                listaMedicamentos.add(medicamento);
 //            }  
-//        return listaClientes;            
+//        return listaMedicamentos;            
 //        }catch(SQLException ex){
 //            throw new RuntimeException("Erro ao listar os clientes no banco de dados. Origem="+ex.getMessage());            
 //        }finally{

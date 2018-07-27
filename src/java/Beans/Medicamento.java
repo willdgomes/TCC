@@ -12,7 +12,7 @@ import java.sql.Date;
  * @author Eu
  */
 public class Medicamento {
-     private String nome;
+    private String nome;
     private String lote;
     private Date dataVencimento;
     private String descricao;
@@ -23,6 +23,9 @@ public class Medicamento {
         this.lote = lote;
         this.dataVencimento = dataVencimento;
         this.descricao = descricao;
+    }
+
+    public Medicamento() {
     }
 
     public String getNome() {

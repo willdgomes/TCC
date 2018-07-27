@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import DAO.MedicamentoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -43,6 +44,8 @@ public class DispensarMedicamentoController extends HttpServlet {
             out.println("<h1>Servlet MedicamentoController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
+            MedicamentoDAO medDAO = new MedicamentoDAO();
+            medDAO.listarMedicamentos();
         }
     }
 

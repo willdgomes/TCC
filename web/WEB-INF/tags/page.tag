@@ -104,7 +104,7 @@
                       <a class="nav-link active" href="gerenciarPacientes.jsp"><i class="material-icons">face</i> <span class="align-top">Pacientes</span></a>
                     </li>
                     <li class="nav-sub-item">
-                      <a class="nav-link" href="#"><i class="material-icons">local_pharmacy</i> <span class="align-top">Medicamentos</span></a>
+                      <a class="nav-link" href="selecionarRemedioDispensa.jsp"><i class="material-icons">local_pharmacy</i> <span class="align-top">Medicamentos</span></a>
                     </li>
                   </ul>
                 </div>
