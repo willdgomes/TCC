@@ -11,7 +11,9 @@ import DAO.PacienteDAO;
 import DAO.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -54,9 +56,16 @@ public class PacienteController extends HttpServlet {
         } else {
             String nome = request.getParameter("nome");
             String cpf = request.getParameter("cpf");
-            String dt = request.getParameter("dataNascimento");
+            
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             String stringData = request.getParameter("dataNascimento");
-            Date dataNascimento = Date.valueOf(stringData);
+            java.util.Date dataNascimento = null;
+            try{
+                dataNascimento = format.parse(stringData);
+            }catch(ParseException e){
+                e.printStackTrace();
+            }
+            
             String telefone = request.getParameter("telefone");
             String email = request.getParameter("email");
             String cep = request.getParameter("cep");
@@ -70,7 +79,8 @@ public class PacienteController extends HttpServlet {
             Paciente paciente = new Paciente();
             paciente.setNome(nome);
             paciente.setCpf(cpf);
-            paciente.setDataNascimento(dataNascimento);
+            java.sql.Date dtNascimento = new java.sql.Date(dataNascimento.getTime());
+            paciente.setDataNascimento(dtNascimento);
             paciente.setTelefone(telefone);
             paciente.setEmail(email);
             paciente.setCep(cep);

@@ -53,3 +53,12 @@ CREATE TABLE `usuarios` (
   `senha` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1
+
+CREATE TABLE `medicamentos` (
+  `idMedicamento` int(11) NOT NULL AUTO_INCREMENT,
+  `nomeMedicamento` varchar(255) NOT NULL,
+  `loteMedicamento` varchar(100) NOT NULL,
+  `dataVencimento` date NOT NULL,
+  `descricao` varchar(255) NOT NULL,
+  PRIMARY KEY (`idMedicamento`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1

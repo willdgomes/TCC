@@ -5,9 +5,13 @@
  */
 package Servlets;
 
+import Beans.Medicamento;
 import DAO.MedicamentoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,8 +48,20 @@ public class DispensarMedicamentoController extends HttpServlet {
             out.println("<h1>Servlet MedicamentoController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
+            
+            //----
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            String stringData = "25/12/2019";
+            java.util.Date dataVencimento = null;
+            try{
+                dataVencimento = format.parse(stringData);
+            }catch(ParseException e){
+                e.printStackTrace();
+            }
+            Medicamento med = new Medicamento("nome remedio", "lote lote", (Date) dataVencimento, "remedio");
             MedicamentoDAO medDAO = new MedicamentoDAO();
-            medDAO.listarMedicamentos();
+            medDAO.inserirMedicamento(med);
+            //----
         }
     }
 

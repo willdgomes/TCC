@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ import java.util.List;
 public class MedicamentoDAO {
       private final String stmtInserir = "INSERT INTO pacientes (cpfPaciente, nomePaciente, dnPaciente, telefone, "
             + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-    private final String stmtListarMedicamentos = "select nomePaciente from pacientes";
+    private final String stmtListarMedicamentos = "SELECT idMedicamento, nomeMedicamento, loteMedicamento, dataVencimento, descricao From medicamentos";
     private final String stmtRemoverClientes = "DELETE FROM cliente WHERE idCliente = ?";
     private final String stmtAtualizarClientes = "UPDATE cliente SET nome = ?, sobrenome = ?, telefone = ? WHERE idCliente = ?";
     
@@ -71,7 +72,7 @@ public class MedicamentoDAO {
         return listaMedicamentos;
         }
     catch(SQLException ex){
-            throw new RuntimeException("Erro ao listar os clientes no banco de dados. Origem=" + ex.getMessage());
+            throw new RuntimeException("Erro ao listar os medicamentos no banco de dados. Origem=" + ex.getMessage());
     }
         finally{
             try {
