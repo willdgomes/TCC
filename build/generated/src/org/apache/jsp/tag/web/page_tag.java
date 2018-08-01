@@ -159,7 +159,7 @@ public final class page_tag
       out.write("                      <a class=\"nav-link active\" href=\"gerenciarPacientes.jsp\"><i class=\"material-icons\">face</i> <span class=\"align-top\">Pacientes</span></a>\n");
       out.write("                    </li>\n");
       out.write("                    <li class=\"nav-sub-item\">\n");
-      out.write("                      <a class=\"nav-link\" href=\"#\"><i class=\"material-icons\">local_pharmacy</i> <span class=\"align-top\">Medicamentos</span></a>\n");
+      out.write("                      <a class=\"nav-link\" href=\"selecionarRemedioDispensa.jsp\"><i class=\"material-icons\">local_pharmacy</i> <span class=\"align-top\">Medicamentos</span></a>\n");
       out.write("                    </li>\n");
       out.write("                  </ul>\n");
       out.write("                </div>\n");

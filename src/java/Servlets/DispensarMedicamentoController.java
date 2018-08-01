@@ -9,7 +9,7 @@ import Beans.Medicamento;
 import DAO.MedicamentoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
@@ -54,11 +54,11 @@ public class DispensarMedicamentoController extends HttpServlet {
             String stringData = "25/12/2019";
             java.util.Date dataVencimento = null;
             try{
-                dataVencimento = format.parse(stringData);
+                dataVencimento = (Date) format.parse(stringData);
             }catch(ParseException e){
                 e.printStackTrace();
             }
-            Medicamento med = new Medicamento("nome remedio", "lote lote", (Date) dataVencimento, "remedio");
+            Medicamento med = new Medicamento("nome remedio", "lote lote", (java.sql.Date) dataVencimento, "remedio");
             MedicamentoDAO medDAO = new MedicamentoDAO();
             medDAO.inserirMedicamento(med);
             //----
