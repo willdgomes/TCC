@@ -79,8 +79,8 @@ public class PacienteController extends HttpServlet {
             Paciente paciente = new Paciente();
             paciente.setNome(nome);
             paciente.setCpf(cpf);
-           // java.sql.Date dtNascimento = new java.sql.Date(dataNascimento.getTime());
-           // paciente.setDataNascimento(dtNascimento);
+//            java.sql.Date dtNascimento = new java.sql.Date(dataNascimento.getTime());
+//            paciente.setDataNascimento(dtNascimento);
             paciente.setTelefone(telefone);
             paciente.setEmail(email);
             paciente.setCep(cep);
