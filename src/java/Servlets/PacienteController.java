@@ -57,14 +57,14 @@ public class PacienteController extends HttpServlet {
             String nome = request.getParameter("nome");
             String cpf = request.getParameter("cpf");
             
-//            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-//            String stringData = request.getParameter("dataNascimento");
-//            java.util.Date dataNascimento = null;
-//            try{
-//                dataNascimento = format.parse(stringData);
-//            }catch(ParseException e){
-//                e.printStackTrace();
-//            }
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            String stringData = request.getParameter("dataNascimento");
+            java.util.Date dataNascimento = null;
+            try{
+                dataNascimento = format.parse(stringData);
+            }catch(ParseException e){
+                e.printStackTrace();
+            }
             
             String telefone = request.getParameter("telefone");
             String email = request.getParameter("email");
@@ -79,8 +79,8 @@ public class PacienteController extends HttpServlet {
             Paciente paciente = new Paciente();
             paciente.setNome(nome);
             paciente.setCpf(cpf);
-//            java.sql.Date dtNascimento = new java.sql.Date(dataNascimento.getTime());
-//            paciente.setDataNascimento(dtNascimento);
+            java.sql.Date dtNascimento = new java.sql.Date(dataNascimento.getTime());
+            paciente.setDataNascimento(dtNascimento);
             paciente.setTelefone(telefone);
             paciente.setEmail(email);
             paciente.setCep(cep);
