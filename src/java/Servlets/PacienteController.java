@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -57,8 +56,9 @@ public class PacienteController extends HttpServlet {
             String nome = request.getParameter("nome");
             String cpf = request.getParameter("cpf");
             
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
             String stringData = request.getParameter("dataNascimento");
+            stringData = stringData.replaceAll("-", "/");
             java.util.Date dataNascimento = null;
             try{
                 dataNascimento = format.parse(stringData);

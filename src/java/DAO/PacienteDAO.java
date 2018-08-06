@@ -47,7 +47,7 @@ public class PacienteDAO {
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
-            throw new RuntimeException("Erro ao inserir um cliente no banco de dados. Origem=" + ex.getMessage());
+            throw new RuntimeException("Erro ao inserir um paciente no banco de dados. Origem=" + ex.getMessage());
         } finally {
             try {
                 stmt.close();

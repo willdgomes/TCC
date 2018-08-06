@@ -54,7 +54,7 @@ public class DispensarMedicamentoController extends HttpServlet {
             String stringData = "25/12/2019";
             java.util.Date dataVencimento = null;
             try{
-                dataVencimento = (Date) format.parse(stringData);
+                dataVencimento = format.parse(stringData);
             }catch(ParseException e){
                 e.printStackTrace();
             }

@@ -5,8 +5,6 @@
         <group>
             <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Servlets/DispensarMedicamentoController.java</file>
             <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/DAO/MedicamentoDAO.java</file>
-            <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Servlets/PacienteController.java</file>
-            <file>file:/home/gomes/NetBeansProjects/Farmacia/web/cadastrarPacientes.jsp</file>
             <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Beans/Medicamento.java</file>
         </group>
     </open-files>
