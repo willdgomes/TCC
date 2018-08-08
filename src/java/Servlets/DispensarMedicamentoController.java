@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,7 +52,7 @@ public class DispensarMedicamentoController extends HttpServlet {
             
             //----
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-            String stringData = "25/12/2019";
+            String stringData = "2019-12-25";
             java.util.Date dataVencimento = null;
             try{
                 dataVencimento = format.parse(stringData);
@@ -60,7 +61,7 @@ public class DispensarMedicamentoController extends HttpServlet {
             }
             Medicamento med = new Medicamento("nome remedio", "lote lote", (java.sql.Date) dataVencimento, "remedio");
             MedicamentoDAO medDAO = new MedicamentoDAO();
-            medDAO.inserirMedicamento(med);
+            medDAO.listarMedicamentos();
             //----
         }
     }

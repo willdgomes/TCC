@@ -66,7 +66,7 @@ public class MedicamentoDAO {
             listaMedicamentos = new ArrayList<Medicamento>();
             while (rs.next()) {
                 Medicamento medicamento = new Medicamento();
-                medicamento.setNome("teste");
+                medicamento.setNome(rs.getString("nomeMedicamento"));
                 listaMedicamentos.add(medicamento);
             }  
         return listaMedicamentos;
