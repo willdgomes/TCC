@@ -51,17 +51,19 @@ public class DispensarMedicamentoController extends HttpServlet {
             out.println("</html>");
             
             //----
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-            String stringData = "2019-12-25";
-            java.util.Date dataVencimento = null;
-            try{
-                dataVencimento = format.parse(stringData);
-            }catch(ParseException e){
-                e.printStackTrace();
-            }
-            Medicamento med = new Medicamento("nome remedio", "lote lote", (java.sql.Date) dataVencimento, "remedio");
-            MedicamentoDAO medDAO = new MedicamentoDAO();
-            medDAO.listarMedicamentos();
+//            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+//            String stringData = "2019/12/25";
+//            java.util.Date dataVencimento = null;
+//            try{
+//                dataVencimento = format.parse(stringData);
+//            }catch(ParseException e){
+//                e.printStackTrace();
+//            }
+//            
+//            java.sql.Date sqlDataVencimento = (java.sql.Date) dataVencimento;
+//            Medicamento med = new Medicamento("nome remedio", "lote lote", sqlDataVencimento, "remedio");
+//            MedicamentoDAO medDAO = new MedicamentoDAO();
+//            medDAO.inserirMedicamento(med);
             //----
         }
     }
