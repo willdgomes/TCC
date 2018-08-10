@@ -22,7 +22,7 @@ public class MedicamentoDAO {
       private final String stmtInserir = "INSERT INTO medicamentos (nomeMedicamento, loteMedicamento, dataVencimento, descricao)"
               + "VALUES (?, ?, ?, ?)";
     private final String stmtListarMedicamentos = "SELECT idMedicamento, nomeMedicamento, loteMedicamento, dataVencimento, descricao From medicamentos";
-    private final String stmtRemoverClientes = "DELETE FROM cliente WHERE idCliente = ?";
+    private final String stmtRemoverMedicamentos = "DELETE FROM medicamentos WHERE idMedicamento = ?";
     private final String stmtAtualizarClientes = "UPDATE cliente SET nome = ?, sobrenome = ?, telefone = ? WHERE idCliente = ?";
     
     public void inserirMedicamento(Medicamento med) {
@@ -65,7 +65,11 @@ public class MedicamentoDAO {
             listaMedicamentos = new ArrayList<Medicamento>();
             while (rs.next()) {
                 Medicamento medicamento = new Medicamento();
+                medicamento.setId(rs.getInt("idMedicamento"));
                 medicamento.setNome(rs.getString("nomeMedicamento"));
+                medicamento.setLote(rs.getString("loteMedicamento"));
+                medicamento.setDataVencimento(rs.getDate("dataVencimento"));
+                medicamento.setDescricao(rs.getString("descricao"));
                 listaMedicamentos.add(medicamento);
             }  
         return listaMedicamentos;
@@ -93,33 +97,33 @@ public class MedicamentoDAO {
 
 }
 
-//    public void removerCliente(Cliente cliente) {
-//        Connection con = null;
-//        PreparedStatement stmt = null;
-//        try {
-//            con = ConnectionFactory.getConnection();
-//            stmt = con.prepareStatement(stmtRemoverClientes);
-//            stmt.setInt(1, cliente.getIdCliente());
-//            stmt.executeUpdate();
-//        }
-//        catch(SQLException ex){
-//            throw new RuntimeException("Erro ao excluir o cliente no banco de dados. Origem=" + ex.getMessage());
-//        }
-//        finally{
-//            try {
-//                stmt.close();
-//            } catch (Exception ex) {
-//                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
-//            };
-//            try {
-//                con.close();;
-//            } catch (Exception ex) {
-//                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
-//            };
-//        }
-//            
-//    }
-//
+    public void removerMedicamento(Medicamento medicamento) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtRemoverMedicamentos);
+            stmt.setInt(1, medicamento.getId());
+            stmt.executeUpdate();
+        }
+        catch(SQLException ex){
+            throw new RuntimeException("Erro ao excluir o medicamento no banco de dados. Origem=" + ex.getMessage());
+        }
+        finally{
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+            
+    }
+
 //    public void atualizarCliente(Cliente cliente) {
 //        Connection con = null;
 //        PreparedStatement stmt = null;
