@@ -24,6 +24,14 @@ public class Medicamento {
         this.dataVencimento = dataVencimento;
         this.descricao = descricao;
     }
+    
+    public Medicamento(int id, String nome, String lote, Date dataVencimento, String descricao) {
+        this.id = id;
+        this.nome = nome;
+        this.lote = lote;
+        this.dataVencimento = dataVencimento;
+        this.descricao = descricao;
+    }
 
     public Medicamento() {
     }

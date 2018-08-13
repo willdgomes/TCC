@@ -62,10 +62,9 @@ public class DispensarMedicamentoController extends HttpServlet {
             }
             
             java.sql.Date sqlDataVencimento = new java.sql.Date(dataVencimento.getTime());
-            Medicamento med = new Medicamento("nome remedio3", "lote lote3", sqlDataVencimento, "remedio3");
+            Medicamento med = new Medicamento(3, "nome remedio2", "lote lote2", sqlDataVencimento, "remedio2");
             MedicamentoDAO medDAO = new MedicamentoDAO();
-            med.setId(2);
-            medDAO.removerMedicamento(med);
+            medDAO.atualizarMedicamento(med);
             //----
         }
     }

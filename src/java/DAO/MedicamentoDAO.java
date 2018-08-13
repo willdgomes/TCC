@@ -23,7 +23,7 @@ public class MedicamentoDAO {
               + "VALUES (?, ?, ?, ?)";
     private final String stmtListarMedicamentos = "SELECT idMedicamento, nomeMedicamento, loteMedicamento, dataVencimento, descricao From medicamentos";
     private final String stmtRemoverMedicamentos = "DELETE FROM medicamentos WHERE idMedicamento = ?";
-    private final String stmtAtualizarClientes = "UPDATE cliente SET nome = ?, sobrenome = ?, telefone = ? WHERE idCliente = ?";
+    private final String stmtAtualizarMedicamentos = "UPDATE medicamentos SET nomeMedicamento = ?, loteMedicamento = ?, dataVencimento = ?, descricao = ? WHERE idMedicamento = ?";
     
     public void inserirMedicamento(Medicamento med) {
         Connection con = null;
@@ -124,35 +124,36 @@ public class MedicamentoDAO {
             
     }
 
-//    public void atualizarCliente(Cliente cliente) {
-//        Connection con = null;
-//        PreparedStatement stmt = null;
-//        try{
-//            con = ConnectionFactory.getConnection();
-//            stmt = con.prepareStatement(stmtAtualizarClientes);
-//            stmt.setString(1, cliente.getNome());
-//            stmt.setString(2, cliente.getSobrenome());
-//            stmt.setString(3, cliente.getTelefone());
-//            stmt.setInt(4, cliente.getIdCliente());
-//            stmt.executeUpdate();
-//            
-//        }
-//        catch(SQLException ex){
-//            throw new RuntimeException("Erro ao atualizar o cliente no banco de dados. Origem=" + ex.getMessage());
-//        }
-//        finally{
-//            try {
-//                stmt.close();
-//            } catch (Exception ex) {
-//                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
-//            };
-//            try {
-//                con.close();;
-//            } catch (Exception ex) {
-//                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
-//            };
-//        }
-//    }
+    public void atualizarMedicamento(Medicamento medicamento) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try{
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtAtualizarMedicamentos);
+            stmt.setString(1, medicamento.getNome());
+            stmt.setString(2, medicamento.getLote());
+            stmt.setDate(3, medicamento.getDataVencimento());
+            stmt.setString(4, medicamento.getDescricao());
+            stmt.setInt(5, medicamento.getId());
+            stmt.executeUpdate();
+            
+        }
+        catch(SQLException ex){
+            throw new RuntimeException("Erro ao atualizar o medicamento no banco de dados. Origem=" + ex.getMessage());
+        }
+        finally{
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+    }
 
 //    public List<Medicamento> buscarMedicamentoNome(String nomeRemedio) {
 //        Connection con = null;
