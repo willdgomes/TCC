@@ -1,0 +1,12 @@
+trata-se de um sistema de controle e distribuição de medicamentos para portadores de alzaimher.
+Os medicamentos sao mantidos, organizados e distribuidos pelo usuario do sistema(atendente na farmacia).
+
+Os pacientes devem apresentar e manter atualizadas as receitas dos medicamentos para 
+fazer a retirada dos medicamentos. Os medicamentos também podem ser retirados por terceiros(retirantes) autorizados pelo paciente.
+
+Ao receber medicamentos pelo fornecedor, o usuario do sistema deve dar entrada dos medicamentos no sistema, e ao entregar
+o medicamento para um paciente, o medicamento deve ser subtraído do estoque.
+
+O sistema terá um usuario administrador que terá acesso total ao sistema, inclusive cadastrar outros usuarios.
+O usuario do sistema terá acesso a todas as informações de estoque, necessidade de reposição e etc na home do sistema,
+através de gráficos e números.
