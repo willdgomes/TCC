@@ -57,8 +57,9 @@ CREATE TABLE `usuarios` (
 CREATE TABLE `medicamentos` (
   `idMedicamento` int(11) NOT NULL AUTO_INCREMENT,
   `nomeMedicamento` varchar(255) NOT NULL,
-  `loteMedicamento` varchar(100) NOT NULL,
-  `dataVencimento` date NOT NULL,
   `descricao` varchar(255) NOT NULL,
+  `nomeFabricante` varchar(255) NOT NULL,
+  `composicao` varchar(45) NOT NULL,
+  `dosagem` double NOT NULL,
   PRIMARY KEY (`idMedicamento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
