@@ -19,24 +19,41 @@
                     <div class="col-sm-12">
                         <form class="card border-info">
                             <div class="card-body p-5">
-                                <div class="form-group">
-                                    <input type="text" class="col-sm-10" placeholder="Pesquisar">    
-                                    <button type="submit" class="btn col-sm-1"><i class="material-icons">search</i></button>
-                                </div>
                                 <div class="card-body p-3 ">
-                                    <div class="col-sm-12 row">
-                                        <div class="col-sm-4 offset-1">
-                                        nome do paciente da silva<br>
-                                        123.456.678-10<br>
-                                        19/06/2018<br>
+                                    <div class="col form-row">
+                                        <div class="form-group col">
+                                            <label for="retirante" class="text-dark" >Paciente</label>
+                                            <select id="cbRemedios" class="form-control">
+                                                <option>Fulano</option>
+                                                <option>Ciclano</option>
+                                                <option>Beltrano</option>
+                                            </select>
                                         </div>
-                                        <div class="col-md-4 offset-sm-1 form-group">
+                                    </div>
+                                    <div class="col form-row">
+                                        <div class="form-group col-md-4">
+                                                <label for="cpf" class="text-dark row" >CPF:</label>
+                                                <label for="infoCpf" class="row text-left">097.579.629-10</label>
+                                        </div>
+                                    </div>
+                                    <div class="col form-row">
+                                        <div class="form-group col-md-6">
                                             <label for="retirante" class="text-dark" >Retirante</label>
                                             <select id="cbRemedios" class="form-control">
                                                 <option>Paciente</option>
                                                 <option>retirante1</option>
                                                 <option>retirante2</option>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="crm" class="text-dark row" >CRM:</label>
+                                            <input type="number" class="form-control" id="crmMedico" name="crm">
+                                        </div>
+                                         <div class="form-group col-md-8">
+                                            <label for="crm" class="text-dark row" >Nome do médico:</label>
+                                            <input type="nomeMedico" class="form-control" id="nomeMedico" name="crm">
                                         </div>
                                     </div>
                                     <div class="col-sm-1 offset-10 row">
