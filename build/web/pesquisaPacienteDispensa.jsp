@@ -45,17 +45,7 @@
                                                 <option>retirante2</option>
                                             </select>
                                         </div>
-                                    </div>
-                                    <div class="col form-row">
-                                        <div class="form-group col-md-4">
-                                            <label for="crm" class="text-dark row" >CRM:</label>
-                                            <input type="number" class="form-control" id="crmMedico" name="crm">
-                                        </div>
-                                         <div class="form-group col-md-8">
-                                            <label for="crm" class="text-dark row" >Nome do médico:</label>
-                                            <input type="nomeMedico" class="form-control" id="nomeMedico" name="crm">
-                                        </div>
-                                    </div>
+                                    </div>                                    
                                     <div class="col-sm-1 offset-10 row">
                                         <a href="dispensarMedicamentos.jsp">
                                             <button type="submit" class="btn offset-1 btn-primary">Avançar</button>

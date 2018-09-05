@@ -29,7 +29,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-2 offset-1 form-group">
-                                        <label for="Quantidade"class="text-dark" >Quantidade:</label>
+                                        <label for="Quantidade"class="text-dark" >Quantidade:(Caixa)</label>
                                         <input type="number" class="form-control" id="cpfpaciente" placeholder="">
                                     </div>
                                     <div class="col-md-1 offset-md-1 form-group">
@@ -47,13 +47,13 @@
                                 
                                 <div class="form-row" id="line2" style="display:none">
                                     <div class="col-md-6 form-group">
-                                        <label for="Medicamento" >Medicamento:</label>
+                                        <label for="Medicamento" class="text-dark">Medicamento:</label>
                                         <select id="cbRemedios" class="form-control">
                                            <option></option>
                                         </select>
                                     </div>
                                     <div class="col-md-2 offset-1 form-group">
-                                        <label for="Quantidade" >Quantidade:</label>
+                                        <label for="Quantidade" class="text-dark">Quantidade: (Caixa)</label>
                                         <input type="number" class="form-control" id="cpfpaciente" placeholder="">
                                     </div>
                                     <div class="col-md-1 offset-md-1 form-group">
@@ -77,13 +77,13 @@
                                 
                                 <div class="form-row" id="line3" style="display:none">
                                     <div class="col-md-6 form-group">
-                                        <label for="Medicamento" >Medicamento:</label>
+                                        <label for="Medicamento" class="text-dark" >Medicamento:</label>
                                         <select id="cbRemedios" class="form-control">
                                            <option></option>
                                         </select>
                                     </div>
                                     <div class="col-md-2 offset-1 form-group">
-                                        <label for="Quantidade" >Quantidade:</label>
+                                        <label for="Quantidade" class="text-dark">Quantidade: (Caixa)</label>
                                         <input type="number" class="form-control" id="cpfpaciente" placeholder="">
                                     </div>
                                     <div class="col-md-1 offset-1 form-group">
@@ -106,13 +106,13 @@
                                 
                                 <div class="form-row" id="line4" style="display:none">
                                     <div class="col-md-6 form-group">
-                                        <label for="Medicamento" >Medicamento:</label>
+                                        <label for="Medicamento" class="text-dark">Medicamento:</label>
                                         <select id="cbRemedios" class="form-control">
                                            <option></option>
                                         </select>
                                     </div>
                                     <div class="col-md-2 offset-1 form-group">
-                                        <label for="Quantidade" >Quantidade:</label>
+                                        <label for="Quantidade" class="text-dark">Quantidade: (Caixa)</label>
                                         <input type="number" class="form-control" id="cpfpaciente" placeholder="">
                                     </div>
                                     <div class="col-md-1 offset-1 form-group">
@@ -135,13 +135,13 @@
                                 
                                 <div class="form-row" id="line5" style="display:none">
                                     <div class="col-md-6 form-group">
-                                        <label for="Medicamento" >Medicamento:</label>
+                                        <label for="Medicamento" class="text-dark">Medicamento:</label>
                                         <select id="cbRemedios" class="form-control">
                                            <option></option>
                                         </select>
                                     </div>
                                     <div class="col-md-2 offset-1 form-group">
-                                        <label for="Quantidade" >Quantidade:</label>
+                                        <label for="Quantidade" class="text-dark">Quantidade: (Caixa)</label>
                                         <input type="number" class="form-control" id="cpfpaciente" placeholder="">
                                     </div>
                                     <div class="col-md-1 offset-1 form-group">
@@ -164,14 +164,14 @@
                                 
                                 <div class="form-row" id="line6" style="display:none">
                                     <div class="col-md-6 form-group">
-                                        <label for="Medicamento" >Medicamento:</label>
+                                        <label for="Medicamento" class="text-dark">Medicamento:</label>
                                         <select id="cbRemedios" class="form-control">
                                            <option></option>
                                         </select>
                                     </div>
                                     <div class="col-md-2 offset-1 form-group">
-                                        <label for="Quantidade" >Quantidade:</label>
-                                        <input type="number" class="form-control" id="cpfpaciente" placeholder="">
+                                        <label for="Quantidade" class="text-dark">Quantidade:(Caixa)</label>
+                                        <input type="number" class="form-control" id="cpfpaciente">
                                     </div>
                                     <div class="col-md-1 offset-1 form-group">
                                         <script src="js/jquery-3.2.1.slim.min.js"></script>
@@ -190,15 +190,20 @@
                                             <button class="btn btn-sm btn-info mt-2" id="sub6">-</button>
                                     </div>
                                 </div>
-                                
+                                <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="crm" class="text-dark row" >CRM:</label>
+                                            <input type="number" class="form-control" id="crmMedico" name="crm">
+                                        </div>
+                                         <div class="form-group col-md-8">
+                                            <label for="crm" class="text-dark row" >Nome do médico:</label>
+                                            <input type="nomeMedico" class="form-control" id="nomeMedico" name="crm">
+                                        </div>
+                                    </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
-                                        <label for="dtnasc" class="text-dark">CRM:</label>
-                                        <input type="text" class="form-control" id="dtnascpaciente" required>
-                                    </div>
-                                    <div class="form-group col-md-3 offset-3">
-                                        <label for="dtnasc" class="text-dark">Data de nascimento:</label>
-                                        <input type="date" class="form-control" id="dtnascpaciente" required>
+                                        <label for="dtReceita" class="text-dark">Data da receita:</label>
+                                        <input type="date" class="form-control" id="dtReceita" required>
                                     </div>
                                 </div>
                                 <div class="row col-sm-1 offset-10">
