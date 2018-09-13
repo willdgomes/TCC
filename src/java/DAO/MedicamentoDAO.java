@@ -19,11 +19,11 @@ import java.util.List;
  * @author Eu
  */
 public class MedicamentoDAO {
-      private final String stmtInserir = "INSERT INTO medicamentos (nomeMedicamento, loteMedicamento, dataVencimento, descricao)"
-              + "VALUES (?, ?, ?, ?)";
-    private final String stmtListarMedicamentos = "SELECT idMedicamento, nomeMedicamento, loteMedicamento, dataVencimento, descricao From medicamentos";
+    private final String stmtInserir = "INSERT INTO medicamentos (nomeMedicamento, descricao, nomeFabricante, composicao, dosagem)"
+              + "VALUES (?, ?, ?, ?, ?)";
+    private final String stmtListarMedicamentos = "SELECT idMedicamento, nomeMedicamento, descricao, nomeFabricante, composicao, dosagem from medicamentos";
     private final String stmtRemoverMedicamentos = "DELETE FROM medicamentos WHERE idMedicamento = ?";
-    private final String stmtAtualizarMedicamentos = "UPDATE medicamentos SET nomeMedicamento = ?, loteMedicamento = ?, dataVencimento = ?, descricao = ? WHERE idMedicamento = ?";
+    private final String stmtAtualizarMedicamentos = "UPDATE medicamentos SET nomeMedicamento = ?, descricao = ?, nomeFabricante = ?, composicao = ?, dosagem = ? WHERE idMedicamento = ?";
     
     public void inserirMedicamento(Medicamento med) {
         Connection con = null;
@@ -32,9 +32,10 @@ public class MedicamentoDAO {
             con = ConnectionFactory.getConnection();
             stmt = con.prepareStatement(stmtInserir);
             stmt.setString(1, med.getNome());
-            stmt.setString(2, med.getLote());
-            stmt.setDate(3, med.getDataVencimento());
-            stmt.setString(4, med.getDescricao());
+            stmt.setString(2, med.getDescricao());
+            stmt.setString(3, med.getNomeFabricante());
+            stmt.setString(4, med.getComposicao());
+            stmt.setDouble(5, med.getDosagem());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao inserir um medicamento no banco de dados. Origem=" + ex.getMessage());
@@ -67,9 +68,10 @@ public class MedicamentoDAO {
                 Medicamento medicamento = new Medicamento();
                 medicamento.setId(rs.getInt("idMedicamento"));
                 medicamento.setNome(rs.getString("nomeMedicamento"));
-                medicamento.setLote(rs.getString("loteMedicamento"));
-                medicamento.setDataVencimento(rs.getDate("dataVencimento"));
                 medicamento.setDescricao(rs.getString("descricao"));
+                medicamento.setNomeFabricante(rs.getString("nomeFabricante"));
+                medicamento.setComposicao(rs.getString("composicao"));
+                medicamento.setDosagem(rs.getDouble("dosagem"));
                 listaMedicamentos.add(medicamento);
             }  
         return listaMedicamentos;
@@ -131,10 +133,10 @@ public class MedicamentoDAO {
             con = ConnectionFactory.getConnection();
             stmt = con.prepareStatement(stmtAtualizarMedicamentos);
             stmt.setString(1, medicamento.getNome());
-            stmt.setString(2, medicamento.getLote());
-            stmt.setDate(3, medicamento.getDataVencimento());
-            stmt.setString(4, medicamento.getDescricao());
-            stmt.setInt(5, medicamento.getId());
+            stmt.setString(2, medicamento.getDescricao());
+            stmt.setString(3, medicamento.getNomeFabricante());
+            stmt.setString(4, medicamento.getComposicao());
+            stmt.setDouble(5, medicamento.getDosagem());
             stmt.executeUpdate();
             
         }
