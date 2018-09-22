@@ -6,8 +6,10 @@
 package Servlets;
 
 
+import Beans.Retirante;
 import Beans.Usuario;
 import DAO.PacienteDAO;
+import DAO.RetiranteDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -70,22 +72,23 @@ public class CadastroRetiranteController extends HttpServlet {
             String complemento = request.getParameter("complementoRetirante");
 
             Retirante retirante = new Retirante();
-            retirante.set
-            paciente.setCpf(cpf);
+            retirante.setNomeRetirante(nome);
+            retirante.setCpfRetirante(cpf);
             java.sql.Date dtNascimento = new java.sql.Date(dataNascimento.getTime());
-            paciente.setDataNascimento(dtNascimento);
-            paciente.setTelefone(telefone);
-            paciente.setEmail(email);
-            paciente.setCep(cep);
-            paciente.setCidade(cidade);
-            paciente.setEstado(estado);
-            paciente.setBairro(bairro);
-            paciente.setEndereco(endereco);
-            paciente.setNumEndereco(numeroEndereco);
-            paciente.setComplemento(complemento);
+            retirante.setDnRetirante(dtNascimento);
+            retirante.setTelefone(telefone);
+            retirante.setEmail(email);
+            retirante.setVincolo(parentesco);
+            retirante.setCep(cep);
+            retirante.setCidade(cidade);
+            retirante.setEstado(estado);
+            retirante.setBairro(bairro);
+            retirante.setEndereco(endereco);
+            retirante.setNumEndereco(numeroEndereco);
+            retirante.setComplemento(complemento);
 
-            PacienteDAO pacienteDAO = new PacienteDAO();
-            pacienteDAO.inserirPaciente(paciente);
+            RetiranteDAO retiranteDAO = new RetiranteDAO();
+            retiranteDAO.inserirPaciente(retirante);
             Usuario usuario = new Usuario();
             usuario = (Usuario)session.getAttribute("usuario");
             if (usuario != null) {
