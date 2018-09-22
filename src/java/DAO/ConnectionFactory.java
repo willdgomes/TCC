@@ -19,6 +19,7 @@ public class ConnectionFactory {
         try{
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
         return DriverManager.getConnection("jdbc:mysql://localhost/Farmacia", "root", "root");
+        //return DriverManager.getConnection("jdbc da isa");
         }catch(SQLException e){
             throw new RuntimeException(e);
         }
