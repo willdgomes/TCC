@@ -5,10 +5,13 @@
         <group>
             <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarMedicamento.jsp</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/pesquisaPacienteDispensa.jsp</file>
+            <file>file:/C:/Users/Eu/Documents/TCC/nbproject/private/private.properties</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/GerenciarPacientesController.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/gerenciarRetirantes.jsp</file>
+            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/CadastroUsuarioController.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarPacientes.jsp</file>
             <file>file:/C:/Users/Eu/Documents/TCC/nbproject/private/private.xml</file>
+            <file>file:/C:/Users/Eu/Documents/TCC/nbproject/project.properties</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/gerenciarPacientes.jsp</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/DispensarMedicamentoController.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/PacienteController.java</file>

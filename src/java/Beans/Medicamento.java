@@ -12,33 +12,12 @@ import java.sql.Date;
  * @author Eu
  */
 public class Medicamento {
-    private String nome;
-    private String lote;
-    private Date dataVencimento;
-    private String descricao;
     private int id;
-    
-    public Medicamento(String nome, String lote, Date dataVencimento, String descricao) {
-        this.nome = nome;
-        this.lote = lote;
-        this.dataVencimento = dataVencimento;
-        this.descricao = descricao;
-    }
-    
-    public Medicamento(int id, String nome, String lote, Date dataVencimento, String descricao) {
-        this.id = id;
-        this.nome = nome;
-        this.lote = lote;
-        this.dataVencimento = dataVencimento;
-        this.descricao = descricao;
-    }
-
-    public Medicamento() {
-    }
-
-    public String getNome() {
-        return nome;
-    }
+    private String nome;
+    private String descricao;
+    private String nomeFabricante;
+    private String composicao;
+    private Double dosagem;
 
     public int getId() {
         return id;
@@ -48,24 +27,12 @@ public class Medicamento {
         this.id = id;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getLote() {
-        return lote;
-    }
-
-    public void setLote(String lote) {
-        this.lote = lote;
-    }
-
-    public Date getDataVencimento() {
-        return dataVencimento;
-    }
-
-    public void setDataVencimento(Date dataVencimento) {
-        this.dataVencimento = dataVencimento;
     }
 
     public String getDescricao() {
@@ -74,5 +41,29 @@ public class Medicamento {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public String getNomeFabricante() {
+        return nomeFabricante;
+    }
+
+    public void setNomeFabricante(String nomeFabricante) {
+        this.nomeFabricante = nomeFabricante;
+    }
+
+    public String getComposicao() {
+        return composicao;
+    }
+
+    public void setComposicao(String composicao) {
+        this.composicao = composicao;
+    }
+
+    public Double getDosagem() {
+        return dosagem;
+    }
+
+    public void setDosagem(Double dosagem) {
+        this.dosagem = dosagem;
     }
 }
