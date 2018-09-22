@@ -97,11 +97,14 @@
             <ul class="nav flex-column">
               <li class="header">menu</li>
               <li class="nav-item">
-                <a class="nav-link" tabindex="0" data-toggle="collapse" href="#menuDashboard" role="button" aria-expanded="false" aria-controls="menuDashboard"><i class="material-icons">content_paste</i> <span class="align-top">Gerenciar</span> <div class="float-right caret"><i class="material-icons">arrow_drop_down</i></div></a>
+                <a class="nav-link" tabindex="0" data-toggle="collapse" href="#menuDashboard" role="button" aria-expanded="false" aria-controls="menuDashboard"><i class="material-icons">content_paste</i> <span class="align-top">Cadastrar</span> <div class="float-right caret"><i class="material-icons">arrow_drop_down</i></div></a>
                 <div class="collapse show" id="menuDashboard">
                   <ul class="nav flex-column">
                     <li class="nav-sub-item">
                       <a class="nav-link active" href="gerenciarPacientes.jsp"><i class="material-icons">face</i> <span class="align-top">Pacientes</span></a>
+                    </li>
+                    <li class="nav-sub-item">
+                      <a class="nav-link active" href="gerenciarPacientes.jsp"><i class="material-icons">group</i> <span class="align-top">Retirantes</span></a>
                     </li>
                     <li class="nav-sub-item">
                       <a class="nav-link" href="selecionarRemedioDispensa.jsp"><i class="material-icons">local_pharmacy</i> <span class="align-top">Medicamentos</span></a>
