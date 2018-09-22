@@ -3,24 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarMedicamento.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/pesquisaPacienteDispensa.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/nbproject/private/private.properties</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/GerenciarPacientesController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/gerenciarRetirantes.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/CadastroUsuarioController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarPacientes.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/nbproject/private/private.xml</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/nbproject/project.properties</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/gerenciarPacientes.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/DispensarMedicamentoController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/PacienteController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarRetirante.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/historicoRetirada.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarUsuario.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/gerenciarMedicamentos.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/inserirMedicamento.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/selecionarRemedioDispensa.jsp</file>
+            <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Servlets/DispensarMedicamentoController.java</file>
+            <file>file:/home/gomes/NetBeansProjects/Farmacia/web/WEB-INF/tags/page.tag</file>
         </group>
     </open-files>
 </project-private>
