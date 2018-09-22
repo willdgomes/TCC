@@ -22,7 +22,7 @@
                                     <div class="card-body p-5">
                                         <div class="form-group">
                                             <input type="text" class="col-sm-10" placeholder="Pesquisar" required name="pesquisa">    
-                                            <button type="submit" class="btn col-sm-1"><i class="material-icons">search</i></button>
+                                            <button type="submit" class="btn col-sm-1" data-toggle="tooltip" data-placement="bottom" title="Pesquisar paciente"><i class="material-icons">search</i></button>
                                         </div>     
                                     </div>
                                 </form>
