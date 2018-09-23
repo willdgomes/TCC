@@ -19,8 +19,8 @@ import java.util.List;
  * @author Eu
  */
 public class MedicamentoDAO {
-    private final String stmtInserir = "INSERT INTO medicamentos (nomeMedicamento, descricao, nomeFabricante, composicao, dosagem)"
-              + "VALUES (?, ?, ?, ?, ?)";
+    private final String stmtInserir = "INSERT INTO medicamentos (nomeMedicamento, descricao, nomeFabricante, composicao, dosagem, medida)"
+              + "VALUES (?, ?, ?, ?, ?, ?)";
     private final String stmtListarMedicamentos = "SELECT idMedicamento, nomeMedicamento, descricao, nomeFabricante, composicao, dosagem from medicamentos";
     private final String stmtRemoverMedicamentos = "DELETE FROM medicamentos WHERE idMedicamento = ?";
     private final String stmtAtualizarMedicamentos = "UPDATE medicamentos SET nomeMedicamento = ?, descricao = ?, nomeFabricante = ?, composicao = ?, dosagem = ? WHERE idMedicamento = ?";
@@ -36,6 +36,7 @@ public class MedicamentoDAO {
             stmt.setString(3, med.getNomeFabricante());
             stmt.setString(4, med.getComposicao());
             stmt.setDouble(5, med.getDosagem());
+            stmt.setString(6, med.getMedida());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao inserir um medicamento no banco de dados. Origem=" + ex.getMessage());

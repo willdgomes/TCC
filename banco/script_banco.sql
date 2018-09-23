@@ -42,6 +42,7 @@ CREATE TABLE `medicamentos` (
   `nomeFabricante` varchar(255) NOT NULL,
   `composicao` varchar(45) NOT NULL,
   `dosagem` double NOT NULL,
+  `medida` varchar(45) NOT NULL,
   PRIMARY KEY (`idMedicamento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
