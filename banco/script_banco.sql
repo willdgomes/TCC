@@ -111,6 +111,7 @@ CREATE TABLE `usuarios` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `nomeUsuario` varchar(255) NOT NULL,
   `emailUsuario` varchar(255) NOT NULL,
+  `dataNascimento` Date NOT NULL,
   `login` varchar(50) NOT NULL,
   `senha` varchar(255) NOT NULL,
   `perfil` varchar(100) NOT NULL,
