@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="col-4 col-sm-3 text-center">
-                    <a class="navbar-brand" href="#"><div style="width:100px; height:40px; background-color:#ddd;">APPP</div></a>
+                    <a class="navbar-brand" href="#"><div style="width:100px; height:40px;">Sistema Gerenciador de Medicamentos - APPP</div></a>
                 </div>
                 <div class="col">
                     <div class="d-block d-sm-block">
