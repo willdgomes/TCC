@@ -45,7 +45,10 @@ public class CadastroUsuarioController extends HttpServlet {
             rd.forward(request, response);
         } else {
             String nome = request.getParameter("nome");
-
+            String email = request.getParameter("email");
+            String login = request.getParameter("login");
+            String perfil = request.getParameter("perfil");
+            
             SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
             String stringData = request.getParameter("dataNascimento");
             stringData = stringData.replaceAll("-", "/");
@@ -55,16 +58,15 @@ public class CadastroUsuarioController extends HttpServlet {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
-            String telefone = request.getParameter("telefone");
-            String email = request.getParameter("email");
-            String parentesco = request.getParameter("perfil");
-
+            java.sql.Date dtNascimento = new java.sql.Date(dataNascimento.getTime());            
+            
             Usuario usuario = new Usuario();
             usuario.setNome(nome);
-            
-//            java.sql.Date dtNascimento = new java.sql.Date(dataNascimento.getTime());
-//            retirante.setDnRetirante(dtNascimento);
+            usuario.setEmail(email);
+            usuario.setLogin(login);
+            usuario.setSenha("1234");
+            usuario.setPerfil(perfil);
+            usuario.setDataNascimento(dataNascimento);
 
             UsuarioDAO usuarioDAO = new UsuarioDAO();
             usuarioDAO.inserirUsuario(usuario);

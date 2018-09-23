@@ -5,18 +5,21 @@
  */
 package Beans;
 
+import java.util.Date;
+
 /**
  *
  * @author gomes
  */
 public class Usuario {
-    
+
     private int idUsuario;
     private String nome;
     private String email;
     private String login;
     private String senha;
     private String perfil;
+    private Date dataNascimento;
     
     public Usuario(){
         
@@ -76,5 +79,13 @@ public class Usuario {
 
     public void setPerfil(String perfil) {
         this.perfil = perfil;
+    }
+    
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 }
