@@ -32,21 +32,21 @@
                                     <div class="card-body p-3">
                                         <table class="table table-hover table-responsive-sm">
                                             <thead>
-                                                <tr>
-                                                    <th scope="col">#</th>
+                                                <tr>                                                    
                                                     <th scope="col">Nome</th>
-                                                        <th scope="col">Idade</th>
+                                                    <th scope="col">CPF</th>
                                                     <th scope="col">Data Nascimento</th>
-                                                    <th scope="col">Action</th>
+                                                    <th scope="col">Ação</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>                                                
+                                            <tbody> 
+                                                <td colspan="2">${mensagem}</td>
                                                 <c:forEach items="${pacientes}" var="paciente">
                                                 <form action="cadastrarPaciente" method="POST">
                                                     <tr>
-                                                        <th scope="row">3</th>
                                                         <td colspan="2">${paciente.nome}</td>
-                                                        <td>@twitter</td>
+                                                        <td>${paciente.cpf}</td>
+                                                        <td>${paciente.dataNascimento}</td>
                                                         <td><button type="submit" name="editar" class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
                                                         <input type="hidden" value="${paciente.id}">
                                                     </tr>

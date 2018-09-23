@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -216,13 +218,22 @@ public class PacienteDAO {
             listaPacientes = new ArrayList<Paciente>();
             while (rs.next()) {
                 Paciente p = new Paciente();
+                p.setId(Integer.parseInt(rs.getString("idPaciente")));
                 p.setNome(rs.getString("nomePaciente"));
                 p.setCpf(rs.getString("cpfPaciente"));
-//                f.setRg(rs.getString("rg"));
-//                f.setTelefone(rs.getString("telefone"));
-//                f.setCargo(rs.getString("cargo"));
-//                f.setNivel(rs.getInt("nivel"));
-//                f.setDepartamento(rs.getString("Departamento"));
+                String stringData = rs.getString("dnPaciente");  
+                stringData = stringData.replaceAll("-", "/");
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                java.util.Date dt = null;
+                java.sql.Date dt2 = null;
+               try{
+                 dt = format.parse(stringData);
+                 dt2 = new java.sql.Date(dt.getTime());
+               }
+               catch(Exception ex){
+                 System.out.println("Erro na data");
+               }
+                p.setDataNascimento(dt2);
                 listaPacientes.add(p);
             }  
         return listaPacientes;            

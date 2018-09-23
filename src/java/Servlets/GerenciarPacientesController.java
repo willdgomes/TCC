@@ -51,12 +51,12 @@ public class GerenciarPacientesController extends HttpServlet {
             Paciente paciente = new Paciente();
             PacienteDAO pacienteDAO = new PacienteDAO();
             List<Paciente> pacienteList = pacienteDAO.buscarPacientesParam(pesquisa);
-            Usuario usuario = new Usuario();
-            if (paciente != null) {            
-                session = request.getSession();
-                session.setAttribute("usuario", usuario);
-                session.setMaxInactiveInterval(20*60);
+            if (session != null) {            
                 RequestDispatcher rd = null;
+                if(pacienteList.size() > 0)
+                    request.setAttribute("pacientes", pacienteList);
+                else
+                    request.setAttribute("mensagem", "Paciente não cadastrado no sistema");
                 rd = getServletContext().getRequestDispatcher("/gerenciarPacientes.jsp");
                 rd.include(request, response);
             }
