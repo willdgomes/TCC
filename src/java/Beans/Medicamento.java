@@ -12,12 +12,14 @@ import java.sql.Date;
  * @author Eu
  */
 public class Medicamento {
+
     private int id;
     private String nome;
     private String descricao;
     private String nomeFabricante;
     private String composicao;
     private Double dosagem;
+    private String medida;
 
     public int getId() {
         return id;
@@ -65,5 +67,13 @@ public class Medicamento {
 
     public void setDosagem(Double dosagem) {
         this.dosagem = dosagem;
+    }
+    
+    public String getMedida() {
+        return medida;
+    }
+
+    public void setMedida(String medida) {
+        this.medida = medida;
     }
 }

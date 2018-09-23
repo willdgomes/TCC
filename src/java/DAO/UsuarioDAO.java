@@ -8,6 +8,7 @@ package DAO;
 import Beans.Usuario;
 import DAO.ConnectionFactory;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +23,7 @@ public class UsuarioDAO {
     PreparedStatement stmt2 = null;
     ResultSet rs = null; 
     private String stmtBuscaUsuario = "select login, senha from usuarios where login = ? and senha = ?"; //"select idUsuario, nome, login, nome, senha from Usuario where login = ? and senha = ?";
-    private String insereUsuario = "insert into Usuario (login, nome, senha) values (?, ?, ?)";
+    private String insereUsuario = "insert into usuarios (nomeUsuario, emailUsuario, login, senha, perfil, dataNascimento) values (?, ?, ?, ?, ?, ?)";
     private String deletarUsuario = "delete from usuario where idUsuario = ?";
     
     public Usuario lerUsuario (String login, String senha){
@@ -68,9 +69,12 @@ public class UsuarioDAO {
         try {
             con = ConnectionFactory.getConnection();
             stmt = con.prepareStatement(insereUsuario);
-            stmt.setString(1, u.getLogin());
-            stmt.setString(2, u.getNome());
-            stmt.setString(3, u.getSenha());
+            stmt.setString(1, u.getNome());
+            stmt.setString(2, u.getEmail());
+            stmt.setString(3, u.getLogin());
+            stmt.setString(4, u.getSenha());
+            stmt.setString(5, u.getPerfil());
+            stmt.setDate(6, (Date) u.getDataNascimento());
             stmt.executeUpdate();   
         }
         catch (SQLException ex) {

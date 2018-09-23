@@ -6,6 +6,8 @@
 package Servlets;
 
 import Beans.Medicamento;
+import Beans.Usuario;
+import DAO.MedicamentoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -48,38 +50,30 @@ public class CadastroMedicamentoController extends HttpServlet {
             String medida = request.getParameter("medida");
             String descricao = request.getParameter("descricao");
 
-            Medicamento retirante = new Medicamento();
-//            retirante.setNomeRetirante(nome);
-//            retirante.setCpfRetirante(cpf);
-//            java.sql.Date dtNascimento = new java.sql.Date(dataNascimento.getTime());
-//            retirante.setDnRetirante(dtNascimento);
-//            retirante.setTelefone(telefone);
-//            retirante.setEmail(email);
-//            retirante.setVincolo(parentesco);
-//            retirante.setCep(cep);
-//            retirante.setCidade(cidade);
-//            retirante.setEstado(estado);
-//            retirante.setBairro(bairro);
-//            retirante.setEndereco(endereco);
-//            retirante.setNumEndereco(numeroEndereco);
-//            retirante.setComplemento(complemento);
-//
-//            RetiranteDAO retiranteDAO = new RetiranteDAO();
-//            retiranteDAO.inserirPaciente(retirante);
-//            Usuario usuario = new Usuario();
-//            usuario = (Usuario)session.getAttribute("usuario");
-//            if (usuario != null) {
-//                session = request.getSession();
-//                session.setAttribute("usuario", usuario);
-//                session.setMaxInactiveInterval(20 * 60);
-//                RequestDispatcher rd = null;
-//                rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");
-//                rd.include(request, response);
-//            } else {
-//                request.setAttribute("msg", "Erro ao cadastrar o paciente!");
-//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
-//                rd.forward(request, response);
-//            }
+            Medicamento medicamento = new Medicamento();
+            medicamento.setNome(nome);
+            medicamento.setNomeFabricante(fabricante);
+            medicamento.setComposicao(composicao);
+            medicamento.setDosagem(Double.parseDouble(dosagem));
+            medicamento.setMedida(medida);
+            medicamento.setDescricao(descricao);
+
+            MedicamentoDAO medicamentoDAO = new MedicamentoDAO();
+            medicamentoDAO.inserirMedicamento(medicamento);
+            Usuario usuario = new Usuario();
+            usuario = (Usuario)session.getAttribute("usuario");
+            if (usuario != null) {
+                session = request.getSession();
+                session.setAttribute("usuario", usuario);
+                session.setMaxInactiveInterval(20 * 60);
+                RequestDispatcher rd = null;
+                rd = getServletContext().getRequestDispatcher("/cadastrarMedicamento.jsp");
+                rd.include(request, response);
+            } else {
+                request.setAttribute("msg", "Erro ao cadastrar o paciente!");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+                rd.forward(request, response);
+            }
         }
     }
 

@@ -42,6 +42,7 @@ CREATE TABLE `medicamentos` (
   `nomeFabricante` varchar(255) NOT NULL,
   `composicao` varchar(45) NOT NULL,
   `dosagem` double NOT NULL,
+  `medida` varchar(45) NOT NULL,
   PRIMARY KEY (`idMedicamento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
@@ -110,7 +111,9 @@ CREATE TABLE `usuarios` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `nomeUsuario` varchar(255) NOT NULL,
   `emailUsuario` varchar(255) NOT NULL,
+  `dataNascimento` Date NOT NULL,
   `login` varchar(50) NOT NULL,
   `senha` varchar(255) NOT NULL,
+  `perfil` varchar(100) NOT NULL,
   PRIMARY KEY (`idUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
