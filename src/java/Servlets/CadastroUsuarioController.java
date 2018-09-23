@@ -5,13 +5,18 @@
  */
 package Servlets;
 
+import Beans.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,19 +35,62 @@ public class CadastroUsuarioController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CadastroUsuarioController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CadastroUsuarioController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            throws ServletException, IOException, ParseException {
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            RequestDispatcher rd = request.
+                    getRequestDispatcher("/index.html");
+            request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema!");
+            rd.forward(request, response);
+        } else {
+            String nome = request.getParameter("nome");
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+            String stringData = request.getParameter("dataNascimento");
+            stringData = stringData.replaceAll("-", "/");
+            java.util.Date dataNascimento = null;
+            try {
+                dataNascimento = format.parse(stringData);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            String telefone = request.getParameter("telefone");
+            String email = request.getParameter("email");
+            String parentesco = request.getParameter("perfil");
+
+            Usuario usuario = new Usuario();
+            usuario.setNome(nome);
+            usuario.se
+            java.sql.Date dtNascimento = new java.sql.Date(dataNascimento.getTime());
+            retirante.setDnRetirante(dtNascimento);
+            retirante.setTelefone(telefone);
+            retirante.setEmail(email);
+            retirante.setVincolo(parentesco);
+            retirante.setCep(cep);
+            retirante.setCidade(cidade);
+            retirante.setEstado(estado);
+            retirante.setBairro(bairro);
+            retirante.setEndereco(endereco);
+            retirante.setNumEndereco(numeroEndereco);
+            retirante.setComplemento(complemento);
+
+            RetiranteDAO retiranteDAO = new RetiranteDAO();
+            retiranteDAO.inserirPaciente(retirante);
+            Usuario usuario = new Usuario();
+            usuario = (Usuario)session.getAttribute("usuario");
+            if (usuario != null) {
+                session = request.getSession();
+                session.setAttribute("usuario", usuario);
+                session.setMaxInactiveInterval(20 * 60);
+                RequestDispatcher rd = null;
+                rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");
+                rd.include(request, response);
+            } else {
+                request.setAttribute("msg", "Erro ao cadastrar o paciente!");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+                rd.forward(request, response);
+            }
         }
     }
 

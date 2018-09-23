@@ -88,7 +88,7 @@ public final class page_tag
       out.write("                    </div>\n");
       out.write("                </div>\n");
       out.write("                <div class=\"col-4 col-sm-3 text-center\">\n");
-      out.write("                    <a class=\"navbar-brand\" href=\"#\"><div style=\"width:100px; height:40px; background-color:#ddd;\">APPP</div></a>\n");
+      out.write("                    <a class=\"navbar-brand\" href=\"#\"><div style=\"width:100px; height:40px;\">Sistema Gerenciador de Medicamentos - APPP</div></a>\n");
       out.write("                </div>\n");
       out.write("                <div class=\"col\">\n");
       out.write("                    <div class=\"d-block d-sm-block\">\n");

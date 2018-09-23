@@ -113,5 +113,6 @@ CREATE TABLE `usuarios` (
   `emailUsuario` varchar(255) NOT NULL,
   `login` varchar(50) NOT NULL,
   `senha` varchar(255) NOT NULL,
+  `perfil` varchar(100) NOT NULL,
   PRIMARY KEY (`idUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
