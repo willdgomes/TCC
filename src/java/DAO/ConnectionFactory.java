@@ -18,8 +18,8 @@ public class ConnectionFactory {
     public static Connection getConnection() throws SQLException{
         try{
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            //return DriverManager.getConnection("jdbc:mysql://localhost/farmacia", "root", "root");
-        return DriverManager.getConnection("jdbc:mysql://localhost/farmacia?useSSL=false&useTimezone=true&serverTimezone=UTC", "root", "123456@abc");
+            //return DriverManager.getConnection("jdbc:mysql://localhost/farmacia?useSSL=false&useTimezone=true&serverTimezone=UTC", "root", "123456@abc");
+            return DriverManager.getConnection("jdbc:mysql://localhost/Farmacia", "root", "root");
         }catch(SQLException e){
             throw new RuntimeException(e);
         }

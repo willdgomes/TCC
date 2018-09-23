@@ -43,13 +43,8 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("usuario") != null) {
-            session.invalidate();
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
-            rd.include(request, response);
-        }
-        else {
-            String login = request.getParameter("usuario");
+        
+        String login = request.getParameter("usuario");
             String senha = request.getParameter("senha");
             UsuarioDAO usuarioDAO = new UsuarioDAO();
             Usuario usuario = new Usuario();
@@ -68,7 +63,6 @@ public class LoginController extends HttpServlet {
                 rd.forward(request, response);
             }
         }
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

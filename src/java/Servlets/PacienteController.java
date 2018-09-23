@@ -47,25 +47,26 @@ public class PacienteController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("usuario") != null) {
-            session.invalidate();
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
-            rd.include(request, response);
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            RequestDispatcher rd = request.
+                    getRequestDispatcher("/index.html");
+            request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema!");
+            rd.forward(request, response);
         } else {
             String nome = request.getParameter("nome");
             String cpf = request.getParameter("cpf");
-            
+
             SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
             String stringData = request.getParameter("dataNascimento");
             stringData = stringData.replaceAll("-", "/");
             java.util.Date dataNascimento = null;
-            try{
+            try {
                 dataNascimento = format.parse(stringData);
-            }catch(ParseException e){
+            } catch (ParseException e) {
                 e.printStackTrace();
             }
-            
+
             String telefone = request.getParameter("telefone");
             String email = request.getParameter("email");
             String cep = request.getParameter("cep");
@@ -94,7 +95,8 @@ public class PacienteController extends HttpServlet {
             PacienteDAO pacienteDAO = new PacienteDAO();
             pacienteDAO.inserirPaciente(paciente);
             Usuario usuario = new Usuario();
-            if (paciente != null) {
+            usuario = (Usuario)session.getAttribute("usuario");
+            if (usuario != null) {
                 session = request.getSession();
                 session.setAttribute("usuario", usuario);
                 session.setMaxInactiveInterval(20 * 60);
