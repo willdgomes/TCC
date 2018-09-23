@@ -18,7 +18,7 @@
                     </div>
                     <div class="panel-body pt-3">
                         <div class="col-sm-12">
-                            <form action="" method="POST" class="card border-info">
+                            <form action="CadastroMedicamentoController" method="POST" class="card border-info">
                                 <div class="card-body p-5">
                                     <div class="form-row">
                                         <div class="form-group col">
