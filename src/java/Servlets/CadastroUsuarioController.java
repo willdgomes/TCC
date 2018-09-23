@@ -6,6 +6,7 @@
 package Servlets;
 
 import Beans.Usuario;
+import DAO.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -35,7 +36,7 @@ public class CadastroUsuarioController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
+            throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         if (session == null) {
             RequestDispatcher rd = request.
@@ -61,33 +62,23 @@ public class CadastroUsuarioController extends HttpServlet {
 
             Usuario usuario = new Usuario();
             usuario.setNome(nome);
-            usuario.se
-            java.sql.Date dtNascimento = new java.sql.Date(dataNascimento.getTime());
-            retirante.setDnRetirante(dtNascimento);
-            retirante.setTelefone(telefone);
-            retirante.setEmail(email);
-            retirante.setVincolo(parentesco);
-            retirante.setCep(cep);
-            retirante.setCidade(cidade);
-            retirante.setEstado(estado);
-            retirante.setBairro(bairro);
-            retirante.setEndereco(endereco);
-            retirante.setNumEndereco(numeroEndereco);
-            retirante.setComplemento(complemento);
+            
+//            java.sql.Date dtNascimento = new java.sql.Date(dataNascimento.getTime());
+//            retirante.setDnRetirante(dtNascimento);
 
-            RetiranteDAO retiranteDAO = new RetiranteDAO();
-            retiranteDAO.inserirPaciente(retirante);
-            Usuario usuario = new Usuario();
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            usuarioDAO.inserirUsuario(usuario);
+            Usuario usuarioSession = new Usuario();
             usuario = (Usuario)session.getAttribute("usuario");
-            if (usuario != null) {
+            if (usuarioSession != null) {
                 session = request.getSession();
-                session.setAttribute("usuario", usuario);
+                session.setAttribute("usuario", usuarioSession);
                 session.setMaxInactiveInterval(20 * 60);
                 RequestDispatcher rd = null;
-                rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");
+                rd = getServletContext().getRequestDispatcher("/cadastrarUsuario.jsp");
                 rd.include(request, response);
             } else {
-                request.setAttribute("msg", "Erro ao cadastrar o paciente!");
+                request.setAttribute("msg", "Erro ao cadastrar o usuario!");
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
                 rd.forward(request, response);
             }
