@@ -95,7 +95,7 @@ public class PacienteController extends HttpServlet {
             PacienteDAO pacienteDAO = new PacienteDAO();
             pacienteDAO.inserirPaciente(paciente);
             Usuario usuario = new Usuario();
-            usuario = (Usuario)session.getAttribute("usuario");
+            usuario = (Usuario) session.getAttribute("usuario");
             if (usuario != null) {
                 session = request.getSession();
                 session.setAttribute("usuario", usuario);

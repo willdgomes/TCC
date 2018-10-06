@@ -51,8 +51,13 @@
                                             <input type="number" class="form-control" id="ceppaciente" required name="cep">
                                         </div>
                                         <div class="col-md-1">
-                                            <button type="button" class="btn btn-sm mt-3"><i class="material-icons">search</i></button>
+                                            <button type="button" class="btn btn-sm mt-3" onclick="myFunction()"><i class="material-icons">search</i></button>
                                         </div>
+                                        <script>
+                                            function myFunction() {
+                                                document.location.href = "/Farmacia/BuscaEnderecoPorCep";
+                                            }
+                                        </script>
                                     </div>
                                     <div class="form-row">                                   
                                         <div class="form-group col-md-4">
