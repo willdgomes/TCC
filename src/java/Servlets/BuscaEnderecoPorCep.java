@@ -5,11 +5,14 @@
  */
 package Servlets;
 
+import Beans.Endereco;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import javax.servlet.RequestDispatcher;
@@ -49,6 +52,9 @@ public class BuscaEnderecoPorCep extends HttpServlet {
             String cep = "83045630";//request.getParameter("cep");
             String urlViaCep = "https://viacep.com.br/ws/" + cep + "/json/";
             Gson gson = new Gson();
+            Endereco  endereco = new Endereco();
+            Type enderecoType = new TypeToken<Endereco>(){}.getType();
+            
 
             URL obj = new URL(urlViaCep);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -71,10 +77,11 @@ public class BuscaEnderecoPorCep extends HttpServlet {
             while ((inputLine = in.readLine()) != null) {
                 resp.append(inputLine);
             }
+            //gson.fromJson(resp, enderecoType);
             in.close();
 //
-//            //print result
-//            System.out.println(response.toString());
+            //print result
+            System.out.println(resp.toString());
 
         }
     }
