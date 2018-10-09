@@ -43,19 +43,18 @@ public class BuscaEnderecoPorCep extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        if (session != null) {
+        if (session == null) {
             RequestDispatcher rd = request.
                     getRequestDispatcher("/index.html");
             request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema!");
             rd.forward(request, response);
         } else {
+            String jsonStr = null;
             String cep = "83045630";//request.getParameter("cep");
             String urlViaCep = "https://viacep.com.br/ws/" + cep + "/json/";
             Gson gson = new Gson();
             Endereco  endereco = new Endereco();
             Type enderecoType = new TypeToken<Endereco>(){}.getType();
-            
-
             URL obj = new URL(urlViaCep);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -81,7 +80,9 @@ public class BuscaEnderecoPorCep extends HttpServlet {
             in.close();
 //
             //print result
-            System.out.println(resp.toString());
+            jsonStr = resp.toString();
+            endereco = gson.fromJson(jsonStr, enderecoType);
+            endereco=endereco;
 
         }
     }
