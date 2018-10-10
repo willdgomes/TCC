@@ -76,14 +76,18 @@ public class BuscaEnderecoPorCep extends HttpServlet {
             while ((inputLine = in.readLine()) != null) {
                 resp.append(inputLine);
             }
-            //gson.fromJson(resp, enderecoType);
+            
             in.close();
 //
             //print result
             jsonStr = resp.toString();
             endereco = gson.fromJson(jsonStr, enderecoType);
             endereco=endereco;
-
+            request.setAttribute("endereco", endereco);
+            RequestDispatcher rd = null;
+            rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");
+            rd.include(request, response);
+            
         }
     }
 

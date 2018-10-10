@@ -48,7 +48,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="cep" class="text-dark">CEP:</label>
-                                            <input type="number" class="form-control" id="ceppaciente" required name="cep">
+                                            <input type="number" class="form-control" id="ceppaciente" required name="cep" value="${endereco.cep}">
                                         </div>
                                         <div class="col-md-1">
                                             <button type="button" class="btn btn-sm mt-3" onclick="myFunction()"><i class="material-icons">search</i></button>
@@ -62,21 +62,21 @@
                                     <div class="form-row">                                   
                                         <div class="form-group col-md-4">
                                             <label for="cidade" class="text-dark">Cidade:</label>
-                                            <input type="text" class="form-control" id="cidadepaciente" required name="cidade">
+                                            <input type="text" class="form-control" id="cidadepaciente" required name="cidade" value="${endereco.localidade}">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="estado" class="text-dark">Estado:</label>
-                                            <input type="text" class="form-control" id="estadopaciente" required name="estado">
+                                            <input type="text" class="form-control" id="estadopaciente" required name="estado" value="${endereco.uf}">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="bairro" class="text-dark">Bairro:</label>
-                                            <input type="text" class="form-control" id="ceppaciente" required name="bairro">
+                                            <input type="text" class="form-control" id="ceppaciente" required name="bairro" value="${endereco.bairro}">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-8">
                                             <label for="endereco" class="text-dark">Endereço:</label>
-                                            <input type="text" class="form-control" id="enderecopaciente" required name="endereco">
+                                            <input type="text" class="form-control" id="enderecopaciente" required name="endereco" value="${endereco.logradouro}">
                                         </div>
 
                                         <div class="form-group col-md-4">
