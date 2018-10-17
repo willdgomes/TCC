@@ -5,10 +5,15 @@
  */
 package DAO;
 
+import Beans.Paciente;
 import Beans.Retirante;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -56,5 +61,49 @@ public class RetiranteDAO {
             };
         }
     }
+  
+       public List<Paciente> buscarRetirantesParam(/*String parametro, */String pesquisa) {
+       // Departamento departamento = new Departamento();
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Paciente> listaRetirantes = null;
+        String stmtBuscarRetirantesParam = "SELECT idRetirante, cpfRetirante, nomeRetirante, dnRetirante, telefone, "
+            + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email, vincolo FROM retirantes WHERE nomePaciente LIKE ?"; 
+        try{
+            con = ConnectionFactory.getConnection();  
+            stmt = con.prepareStatement(stmtBuscarRetirantesParam); 
+            stmt.setString(1,'%'+pesquisa+'%');
+            rs = stmt.executeQuery();
+            listaRetirantes = new ArrayList<Paciente>();
+            while (rs.next()) {
+                Paciente p = new Paciente();
+                p.setId(Integer.parseInt(rs.getString("idRetirante")));
+                p.setNome(rs.getString("nomeRetirante"));
+                p.setCpf(rs.getString("cpfRetirannte"));
+                String stringData = rs.getString("dnRetirannte");  
+                stringData = stringData.replaceAll("-", "/");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                java.util.Date dt = null;
+                java.sql.Date dt2 = null;
+               try{
+                 dt = format.parse(stringData);
+                 dt2 = new java.sql.Date(dt.getTime());
+               }
+               catch(Exception ex){
+                 System.out.println("Erro na data");
+               }
+                p.setDataNascimento(dt2);
+                listaRetirantes.add(p);
+            }  
+        return listaRetirantes;            
+        }catch(SQLException ex){
+            throw new RuntimeException("Erro ao listar os retirantes no banco de dados. Origem="+ex.getMessage());            
+        }finally{
+            try{rs.close();}catch(Exception ex){System.out.println("Erro ao fechar rs. Ex="+ex.getMessage());};
+            try{stmt.close();}catch(Exception ex){System.out.println("Erro ao fechar stmt. Ex="+ex.getMessage());};
+            try{con.close();;}catch(Exception ex){System.out.println("Erro ao fechar conexão. Ex="+ex.getMessage());};                
+        }
     
+    }
 }

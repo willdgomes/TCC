@@ -26,7 +26,7 @@ public class Paciente {
     private String complemento;
     private String email;
     private Integer id;
-
+    
 //    public Paciente(String nome, String cpf, String dataNascimento, String cep, String cidade, String estado, String bairro, String endereco, String numEndereco) {
 //        this.nome = nome;
 //        this.cpf = cpf;
@@ -142,7 +142,7 @@ public class Paciente {
     public void setEmail(String email) {
         this.email = email;
     }
-
+     
     public Paciente() {
     }
 

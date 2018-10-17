@@ -6,12 +6,10 @@
 package Servlets;
 
 import Beans.Paciente;
-import Beans.Usuario;
 import DAO.PacienteDAO;
-import DAO.UsuarioDAO;
+import DAO.RetiranteDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,10 +21,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author gomes
+ * @author Eu
  */
-@WebServlet(name = "GerenciarPacientesController", urlPatterns = {"/GerenciarPacientesController"})
-public class GerenciarPacientesController extends HttpServlet {
+@WebServlet(name = "GerenciarRetirantesController", urlPatterns = {"/GerenciarRetirantesController"})
+public class GerenciarRetirantesController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,8 +37,8 @@ public class GerenciarPacientesController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");        
-        HttpSession session = request.getSession();
+        response.setContentType("text/html;charset=UTF-8");
+      HttpSession session = request.getSession();
         if (session.getAttribute("usuario") == null) {
             session.invalidate();
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
@@ -48,14 +46,16 @@ public class GerenciarPacientesController extends HttpServlet {
         }
         else {
             String pesquisa = request.getParameter("pesquisa");
-            PacienteDAO pacienteDAO = new PacienteDAO();
-            List<Paciente> pacienteList = pacienteDAO.buscarPacientesParam(pesquisa);
+            
+            //Paciente paciente = new Paciente();
+            RetiranteDAO retiranteDAO = new RetiranteDAO();
+            List<Paciente> pacienteList = retiranteDAO.buscarRetirantesParam(pesquisa);
             if (session != null) {            
                 RequestDispatcher rd = null;
                 if(pacienteList.size() > 0)
-                    request.setAttribute("pacientes", pacienteList);
+                    request.setAttribute("retirantes", pacienteList);
                 else
-                    request.setAttribute("mensagem", "Paciente não cadastrado no sistema");
+                    request.setAttribute("mensagem", "Retirante não cadastrado no sistema");
                 rd = getServletContext().getRequestDispatcher("/gerenciarPacientes.jsp");
                 rd.include(request, response);
             }
