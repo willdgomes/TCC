@@ -22,7 +22,8 @@ public class UsuarioDAO {
     PreparedStatement stmt = null;
     PreparedStatement stmt2 = null;
     ResultSet rs = null; 
-    private String stmtBuscaUsuario = "select login, senha from usuarios where login = ? and senha = ?"; //"select idUsuario, nome, login, nome, senha from Usuario where login = ? and senha = ?";
+    private String stmtBuscaUsuario = "select idUsuario, nomeUsuario, emailUsuario, login,"
+            + "senha, perfil, dataNascimento from usuarios where login = ? and senha = ?"; //"select idUsuario, nome, login, nome, senha from Usuario where login = ? and senha = ?";
     private String insereUsuario = "insert into usuarios (nomeUsuario, emailUsuario, login, senha, perfil, dataNascimento) values (?, ?, ?, ?, ?, ?)";
     private String deletarUsuario = "delete from usuario where idUsuario = ?";
     
@@ -38,8 +39,13 @@ public class UsuarioDAO {
             rs = stmt.executeQuery();   
             if (rs.next()) {
                 Usuario u = new Usuario();
-                u.setNome(rs.getString("login"));
+                u.setIdUsuario(rs.getInt("idUsuario"));
+                u.setNome(rs.getString("nomeUsuario"));
+                u.setEmail(rs.getString("emailUsuario"));
+                u.setLogin(rs.getString("login"));
                 u.setSenha(rs.getString("senha"));
+                u.setPerfil(rs.getString("perfil"));
+                u.setDataNascimento(rs.getDate("dataNascimento"));
                 return u;
             }
             else {
