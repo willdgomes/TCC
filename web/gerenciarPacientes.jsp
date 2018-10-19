@@ -44,10 +44,10 @@
                                                 <c:forEach items="${pacientes}" var="paciente">
                                                 <form action="cadastrarPaciente" method="POST">
                                                     <tr>
-                                                        <td colspan="2">${paciente.nome}</td>
-                                                        <td>${paciente.cpf}</td>
-                                                        <td>${paciente.dataNascimento}</td>
-                                                        <td><button type="submit" name="editar" class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
+                                                        <td scope="col">${paciente.nome}</td>
+                                                        <td scope="col">${paciente.cpf}</td>
+                                                        <td scope="col">${paciente.dataNascimento}</td>
+                                                        <td scope="col"><button type="submit" name="editar" class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
                                                         <input type="hidden" value="${paciente.id}">
                                                     </tr>
                                                 </form>

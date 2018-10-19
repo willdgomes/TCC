@@ -223,7 +223,7 @@ public class PacienteDAO {
                 p.setCpf(rs.getString("cpfPaciente"));
                 String stringData = rs.getString("dnPaciente");  
                 stringData = stringData.replaceAll("-", "/");
-                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
                 java.util.Date dt = null;
                 java.sql.Date dt2 = null;
                try{

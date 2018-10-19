@@ -19,39 +19,30 @@
                     <div class="col-sm-12">
                         <div class="card border-info">
                             <div class="card-body p-5">
-                                <table class="table table-hover table-responsive-sm">
-                                <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td><button type="button"  class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                    <td><button type="button"  class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td colspan="2">Larry the Bird</td>
-                                    <td>@twitter</td>
-                                    <td><button type="button"  class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
-                                </tr>
-                                </tbody>
-                                </table>
+                               <table class="table table-hover table-responsive-sm">
+                                            <thead>
+                                                <tr>                                                    
+                                                    <th scope="col">Nome</th>
+                                                    <th scope="col">CPF</th>
+                                                    <th scope="col">Paciente</th>
+                                                    <th scope="col">Ação</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody> 
+                                                <td colspan="2">${mensagem}</td>
+                                                <c:forEach items="${retirantes}" var="paciente">
+                                                <form action="cadastrarPaciente" method="POST">
+                                                    <tr>
+                                                        <td scope="col">${retirante.nome}</td>
+                                                        <td scope="col">${retirante.cpf}</td>
+                                                        <td scope="col">${retirante.paciente}</td>
+                                                        <td scope="col"><button type="submit" name="editar" class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
+                                                        <input type="hidden" value="${retirante.id}">
+                                                    </tr>
+                                                </form>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
                                 <div class="col-sm-1 offset-10 row">
                                      <button type="button" class="btn btn-primary">Adicionar</button>
                                 </div>

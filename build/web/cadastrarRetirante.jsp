@@ -44,7 +44,23 @@
                                         <label for="email" class="text-dark">E-mail:</label>
                                         <input type="text" class="form-control" id="emailpaciente" name="emailRetirante">
                                     </div>
-                                    <div class="form-group col-md-4">
+                                </div>
+                                <div class="form-row">
+                                     <div class="form-group col-md-8">                                
+                                <div class="form-group col-md-6">
+                                        <label for="parentesco" class="text-dark ">Paciente</label>
+                                        <div class="col-md-12 row">
+                                        <div class="dropdown">
+                                        <select id="cbRemedios" class="form-control" name="parentesco">
+                                            <option></option>
+                                            <option>Pai</option>
+                                            <option>Mãe</option>
+                                            <option>Outro</option>
+                                        </select>
+                                        </div>                    
+                                        </div>
+                                    </div>
+                                         <div class="form-group col-md-4">
                                         <label for="parentesco" class="text-dark ">Parentesco:</label>
                                         <div class="col-md-12 row">
                                         <div class="dropdown">
@@ -57,7 +73,9 @@
                                         </div>                    
                                         </div>
                                     </div>
+                                     </div>
                                 </div>
+                                
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label for="cep" class="text-dark">CEP:</label>

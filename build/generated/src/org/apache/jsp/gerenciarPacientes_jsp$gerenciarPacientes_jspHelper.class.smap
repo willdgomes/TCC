@@ -1,0 +1,19 @@
+SMAP
+gerenciarPacientes_jsp.java
+JSP
+*S JSP
+*F
++ 0 gerenciarPacientes.jsp
+gerenciarPacientes.jsp
+*L
+12,31:162
+43:193,3
+44:196
+44:100,11
+45,2:111
+47,3:113,3
+50:122
+51:123,3
+52,3:126
+54,10:199
+*E
