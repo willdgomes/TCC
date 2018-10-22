@@ -124,7 +124,7 @@
                                     <a class="nav-link" href="gerenciarRetirantes.jsp"><i class="material-icons">group</i> <span class="align-top">Retirantes</span></a>
                                 </li>
                                 <li class="nav-sub-item">
-                                    <a class="nav-link" href="selecionarRemedioDispensa.jsp"><i class="material-icons">local_pharmacy</i> <span class="align-top">Medicamentos</span></a>
+                                    <a class="nav-link" href="gerenciarMedicamentos.jsp"><i class="material-icons">local_pharmacy</i> <span class="align-top">Medicamentos</span></a>
                                 </li>
                             </ul>
                         </div>
