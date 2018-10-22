@@ -13,11 +13,13 @@ import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,35 +39,12 @@ public class DispensarMedicamentoController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet MedicamentoController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet MedicamentoController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-            
-            //----
-            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-            String stringData = "2019-12-27";
-            stringData = stringData.replaceAll("-", "/");
-            java.util.Date dataVencimento = null;
-            try{
-                dataVencimento = format.parse(stringData);
-            }catch(ParseException e){
-                e.printStackTrace();
-            }
-            
-            java.sql.Date sqlDataVencimento = new java.sql.Date(dataVencimento.getTime());
-            //Medicamento med = new Medicamento(3, "nome remedio2", "lote lote2", sqlDataVencimento, "remedio2");
-            MedicamentoDAO medDAO = new MedicamentoDAO();
-           // medDAO.atualizarMedicamento(med);
-            //----
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            RequestDispatcher rd = request.
+                    getRequestDispatcher("/index.html");
+            request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema!");
+            rd.forward(request, response);
         }
     }
 
