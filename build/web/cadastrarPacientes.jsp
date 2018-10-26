@@ -10,10 +10,7 @@
     <jsp:attribute name="title">Farmácia APPP</jsp:attribute>
     <jsp:body>
 
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-            crossorigin="anonymous"></script> 
-<!--            <script src="js/jquery-3.2.1.min.js"></script> carregar jquery local-->
+        <script src="js/jquery-3.2.1.min.js"></script>
         <div class="main w-100">
             <div class="row">
                 <div class="panel panel-default col-sm pt-4">
