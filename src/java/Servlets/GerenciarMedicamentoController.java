@@ -5,14 +5,8 @@
  */
 package Servlets;
 
-import Beans.Medicamento;
-import DAO.MedicamentoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,10 +17,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Eu
+ * @author gomes
  */
-@WebServlet(name = "MedicamentoController", urlPatterns = {"/MedicamentoController"})
-public class DispensarMedicamentoController extends HttpServlet {
+@WebServlet(name = "GerenciarMedicamentoController", urlPatterns = {"/GerenciarMedicamentoController"})
+public class GerenciarMedicamentoController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,6 +39,8 @@ public class DispensarMedicamentoController extends HttpServlet {
                     getRequestDispatcher("/index.html");
             request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema!");
             rd.forward(request, response);
+        }else{
+            
         }
     }
 

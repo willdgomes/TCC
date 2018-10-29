@@ -22,7 +22,7 @@
                                     <div class="form-row" id="line1">
                                         <div class="col-md-6 form-group">
                                             <label class="text-dark" for="Medicamento" >Medicamento:</label> 
-                                            <c:forEach items="${medicamentos}" var="paciente">
+                                            <c:forEach items="${medicamentos}" var="medicamento">
                                                 <select id="cbRemedios" class="form-control">
                                                     <option>${medicamentos.nome}</option>
                                                 </select>
