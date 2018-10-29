@@ -214,7 +214,7 @@
                                         </div>
                                     </div>
                                     <div class="row col-sm-1 offset-10">
-                                        <a href="pesquisaPacienteDispensa.jsp">
+                                        <a href="/pesquisaPacienteDispensa.jsp">
                                             <button type="submit" class="btn offset-1 btn-primary">Avançar</button>
                                         </a>
                                     </div>
