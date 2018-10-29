@@ -30,10 +30,10 @@ public class GerenciarMedicamentoController extends HttpServlet {
     
     public void init(ServletConfig config) throws ServletException{
         MedicamentosFacade medicamentosFacade = new MedicamentosFacade();
-        List<Medicamento> medList = new ArrayList<Medicamento>();
-        medList = medicamentosFacade.listarMedicamentos();
+        List<Medicamento> medicamentos = new ArrayList<Medicamento>();
+        medicamentos = medicamentosFacade.listarMedicamentos();
         ServletContext medContext = config.getServletContext();
-        medContext.setAttribute("medList" , medList);
+        medContext.setAttribute("medicamentos" , medicamentos);
     }
 
     /**
