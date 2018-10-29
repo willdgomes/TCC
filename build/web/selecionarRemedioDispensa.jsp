@@ -22,9 +22,9 @@
                                     <div class="form-row" id="line1">
                                         <div class="col-md-6 form-group">
                                             <label class="text-dark" for="Medicamento" >Medicamento:</label> 
-                                            <c:forEach items="${medicamentos}" var="medicamento">
+                                            <c:forEach items="${medList}" var="medicamento">
                                                 <select id="cbRemedios" class="form-control">
-                                                    <option>${medicamentos.nome}</option>
+                                                    <option>${applicationScope.medList.nome}</option>
                                                 </select>
                                             </c:forEach>
                                         </div>

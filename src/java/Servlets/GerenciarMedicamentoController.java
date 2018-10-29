@@ -5,9 +5,15 @@
  */
 package Servlets;
 
+import Beans.Medicamento;
+import Facade.MedicamentosFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,8 +25,16 @@ import javax.servlet.http.HttpSession;
  *
  * @author gomes
  */
-@WebServlet(name = "GerenciarMedicamentoController", urlPatterns = {"/GerenciarMedicamentoController"})
+@WebServlet(name = "GerenciarMedicamentoController", urlPatterns = {"/GerenciarMedicamentoController"}, loadOnStartup=1)
 public class GerenciarMedicamentoController extends HttpServlet {
+    
+    public void init(ServletConfig config) throws ServletException{
+        MedicamentosFacade medicamentosFacade = new MedicamentosFacade();
+        List<Medicamento> medList = new ArrayList<Medicamento>();
+        medList = medicamentosFacade.listarMedicamentos();
+        ServletContext medContext = config.getServletContext();
+        medContext.setAttribute("medList" , medList);
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

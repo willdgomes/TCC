@@ -6,6 +6,7 @@
 package Facade;
 
 import Beans.Medicamento;
+import DAO.MedicamentoDAO;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,5 +15,11 @@ import java.util.List;
  * @author gomes
  */
 public class MedicamentosFacade {
+    MedicamentoDAO medDAO = new MedicamentoDAO();
     static List<Medicamento> listaMedicamentos = new ArrayList<Medicamento>();
+    
+    public List<Medicamento> listarMedicamentos(){
+        listaMedicamentos = medDAO.listarMedicamentos();
+        return listaMedicamentos;
+    }
 }
