@@ -126,7 +126,11 @@ public final class page_tag
       out.write("                                   </div><div class='footer'><a class='btn btn-light btn-block' href='#' role='button'>ver todas as notificações</a></div></div>\"><i class=\"material-icons red\">notifications</i></a>\r\n");
       out.write("                            </li>\r\n");
       out.write("                            <li class=\"nav-item\">\r\n");
-      out.write("                                <a class=\"nav-link btn\" tabindex=\"0\" role=\"button\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content=\"<div class='popup-box'><div class='header'>Admin<br /><small>administrador</small></div><div class='body'>\r\n");
+      out.write("                                <a class=\"nav-link btn\" tabindex=\"0\" role=\"button\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content=\"<div class='popup-box'><div class='header'>");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${usuario.nome}", java.lang.String.class, (PageContext)this.getJspContext(), null));
+      out.write("<br /><small>");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${usuario.perfil}", java.lang.String.class, (PageContext)this.getJspContext(), null));
+      out.write("</small></div><div class='body'>\r\n");
       out.write("\r\n");
       out.write("                                   <ul class='nav flex-column'>\r\n");
       out.write("                                   <li class='nav-item'>\r\n");
@@ -137,7 +141,7 @@ public final class page_tag
       out.write("                                   </li>\r\n");
       out.write("                                   </ul>\r\n");
       out.write("\r\n");
-      out.write("                                   </div><div class='footer'><a class='btn btn-light btn-block' href='#' role='button'>sair</a></div></div>\"><i class=\"material-icons\">account_circle</i></a>\r\n");
+      out.write("                                   </div><div class='footer'><a class='btn btn-light btn-block' href='Logout' role='button'>sair</a></div></div>\"><i class=\"material-icons\">account_circle</i></a>\r\n");
       out.write("                            </li>\r\n");
       out.write("                        </ul>\r\n");
       out.write("                    </div>\r\n");

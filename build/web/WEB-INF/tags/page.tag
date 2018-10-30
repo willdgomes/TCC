@@ -124,7 +124,7 @@
                                     <a class="nav-link" href="gerenciarRetirantes.jsp"><i class="material-icons">group</i> <span class="align-top">Retirantes</span></a>
                                 </li>
                                 <li class="nav-sub-item">
-                                    <a class="nav-link" href="selecionarRemedioDispensa.jsp"><i class="material-icons">local_pharmacy</i> <span class="align-top">Medicamentos</span></a>
+                                    <a class="nav-link" href="gerenciarMedicamentos.jsp"><i class="material-icons">local_pharmacy</i> <span class="align-top">Medicamentos</span></a>
                                 </li>
                             </ul>
                         </div>
@@ -134,10 +134,10 @@
                         <div class="collapse show" id="menuEstoque">
                             <ul class="nav flex-column">
                                 <li class="nav-sub-item">
-                                    <a class="nav-link" href="selecionarRemedioDispensa.jsp"><i class="material-icons">indeterminate_check_box</i> <span class="align-top">Dispensar Medicamento</span></a>
+                                    <a class="nav-link" href="dispensarMedicamentos.jsp"><i class="material-icons">indeterminate_check_box</i> <span class="align-top">Dispensar Medicamento</span></a>
                                 </li>
                                 <li class="nav-sub-item">
-                                    <a class="nav-link" href="#"><i class="material-icons">add_box</i> <span class="align-top">Inserir Medicamento</span></a>
+                                    <a class="nav-link" href="inserirMedicamento.jsp"><i class="material-icons">add_box</i> <span class="align-top">Inserir Medicamento</span></a>
                                 </li>
                             </ul>
                         </div>
