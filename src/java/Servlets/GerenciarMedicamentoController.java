@@ -5,31 +5,36 @@
  */
 package Servlets;
 
-import Beans.Endereco;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.io.BufferedReader;
+import Beans.Medicamento;
+import Facade.MedicamentosFacade;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import static javax.ws.rs.core.HttpHeaders.USER_AGENT;
 
 /**
  *
  * @author gomes
  */
-@WebServlet(name = "BuscaEnderecoPorCep", urlPatterns = {"/BuscaEnderecoPorCep"})
-public class BuscaEnderecoPorCep extends HttpServlet {
+@WebServlet(name = "GerenciarMedicamentoController", urlPatterns = {"/GerenciarMedicamentoController"}, loadOnStartup=1)
+public class GerenciarMedicamentoController extends HttpServlet {
+    
+    public void init(ServletConfig config) throws ServletException{
+        MedicamentosFacade medicamentosFacade = new MedicamentosFacade();
+        List<Medicamento> medicamentos = new ArrayList<Medicamento>();
+        medicamentos = medicamentosFacade.listarMedicamentos();
+        ServletContext medContext = config.getServletContext();
+        medContext.setAttribute("medicamentos" , medicamentos);
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,45 +53,7 @@ public class BuscaEnderecoPorCep extends HttpServlet {
                     getRequestDispatcher("/index.html");
             request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema!");
             rd.forward(request, response);
-        } else {
-            String jsonStr = null;
-            String cep = "83045630";//request.getParameter("cep");
-            String urlViaCep = "https://viacep.com.br/ws/" + cep + "/json/";
-            Gson gson = new Gson();
-            Endereco  endereco = new Endereco();
-            Type enderecoType = new TypeToken<Endereco>(){}.getType();
-            URL obj = new URL(urlViaCep);
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
-            // optional default is GET
-            con.setRequestMethod("GET");
-
-            //add request header
-            con.setRequestProperty("User-Agent", USER_AGENT);
-
-            int responseCode = con.getResponseCode();
-            System.out.println("\nSending 'GET' request to URL : " + urlViaCep);
-            System.out.println("Response Code : " + responseCode);
-
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuilder resp = new StringBuilder();
-
-            while ((inputLine = in.readLine()) != null) {
-                resp.append(inputLine);
-            }
-            
-            in.close();
-//
-            //print result
-            jsonStr = resp.toString();
-            endereco = gson.fromJson(jsonStr, enderecoType);
-            endereco=endereco;
-            request.setAttribute("endereco", endereco);
-            RequestDispatcher rd = null;
-            rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");
-            rd.include(request, response);
+        }else{
             
         }
     }

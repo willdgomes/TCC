@@ -95,7 +95,6 @@
             <div class="sidebar d-none d-lg-block bg-light">
 
                 <ul class="nav flex-column">
-                    <li class="header">menu</li>
 
                     <li class="nav-item">
                         <a class="nav-link" tabindex="0" data-toggle="collapse" href="#menuCadastro" role="button" aria-expanded="false" aria-controls="menuDashboard"><strong><i class="material-icons">content_paste</i> <span class="align-top">Cadastrar</span><div class="float-right caret"><i class="material-icons">arrow_drop_down</i></div></strong></a>
