@@ -7,6 +7,7 @@
 
 <!DOCTYPE html>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:page>
     <jsp:attribute name="title">Farmácia APPP</jsp:attribute>
@@ -25,10 +26,12 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="medicamento" class="text-dark" >Medicamento:</label>
-                                            <select id="cbMedicamento" class="form-control">
-                                                <option>Med1</option>
-                                                <option>Med2</option>
-                                                <option>med3</option>
+                                            <select id="cbRemedios" class="form-control">
+                                                <c:forEach items="${applicationScope.medicamentos}" var="medicamento">
+
+                                                    <option>${medicamento.nome}</option>
+
+                                                </c:forEach>
                                             </select>
                                         </div>
                                         <div class="col-md-2 offset-1 form-group">
