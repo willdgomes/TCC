@@ -18,12 +18,12 @@
                     </div>
                     <div class="panel-body pt-3">
                         <div class="col-sm-12">
-                            <form class="card border-info">
+                            <form class="card border-info" action="DispensaController" method="POST">
                                 <div class="card-body p-5">
                                     <div class="form-row" id="line1">
                                         <div class="col-md-6 form-group">
                                             <label class="text-dark" for="Medicamento" >Medicamento:</label> 
-                                            <select id="cbRemedios" class="form-control">
+                                            <select id="cbRemedios" class="form-control" required name="nomeMedicamento">
                                                 <c:forEach items="${applicationScope.medicamentos}" var="medicamento">
 
                                                     <option>${medicamento.nome}</option>
@@ -33,7 +33,7 @@
                                         </div>
                                         <div class="col-md-2 offset-1 form-group">
                                             <label for="Quantidade"class="text-dark" >Quantidade:(Caixa)</label>
-                                            <input type="number" class="form-control" id="cpfpaciente" placeholder="">
+                                            <input type="number" class="form-control" id="cpfpaciente" placeholder="" required name="quantidadeMedicamento">
                                         </div>
                                         <div class="col-md-1 offset-md-1 form-group">
                                             <script src="js/jquery-3.2.1.slim.min.js"></script>
@@ -200,23 +200,21 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="crm" class="text-dark row" >CRM:</label>
-                                            <input type="number" class="form-control" id="crmMedico" name="crm">
+                                            <input type="number" class="form-control" id="crmMedico" name="crm" required name="crmMedico">
                                         </div>
                                         <div class="form-group col-md-8">
                                             <label for="crm" class="text-dark row" >Nome do médico:</label>
-                                            <input type="nomeMedico" class="form-control" id="nomeMedico" name="crm">
+                                            <input type="nomeMedico" class="form-control" id="nomeMedico" required name="medicoNome">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="dtReceita" class="text-dark">Data da receita:</label>
-                                            <input type="date" class="form-control" id="dtReceita" required>
+                                            <input type="date" class="form-control" id="dtReceita" required name="dataReceita">
                                         </div>
                                     </div>
                                     <div class="row col-sm-1 offset-10">
-                                        <a href="/pesquisaPacienteDispensa.jsp">
                                             <button type="submit" class="btn offset-1 btn-primary">Avançar</button>
-                                        </a>
                                     </div>
                                 </div>
                             </form>
