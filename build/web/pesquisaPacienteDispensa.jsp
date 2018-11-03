@@ -23,7 +23,7 @@
                                     <div class="col form-row">
                                         <div class="form-group col">
                                             <label for="retirante" class="text-dark" >Paciente</label>
-                                            <select id="cbRemedios" class="form-control">
+                                            <select id="cbRemedios" class="form-control" required name="nomePaci">
                                                 <option>Fulano</option>
                                                 <option>Ciclano</option>
                                                 <option>Beltrano</option>
@@ -33,13 +33,13 @@
                                     <div class="col form-row">
                                         <div class="form-group col-md-4">
                                                 <label for="cpf" class="text-dark row" >CPF:</label>
-                                                <label for="infoCpf" class="row text-left">097.579.629-10</label>
+                                                <label for="infoCpf" class="row text-left" required name="cpfPaciente">097.579.629-10</label>
                                         </div>
                                     </div>
                                     <div class="col form-row">
                                         <div class="form-group col-md-6">
                                             <label for="retirante" class="text-dark" >Retirante</label>
-                                            <select id="cbRemedios" class="form-control">
+                                            <select id="cbRemedios" class="form-control" required name="nomeRetirante">
                                                 <option>Paciente</option>
                                                 <option>retirante1</option>
                                                 <option>retirante2</option>

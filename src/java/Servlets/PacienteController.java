@@ -9,6 +9,7 @@ import Beans.Paciente;
 import Beans.Usuario;
 import DAO.PacienteDAO;
 import DAO.UsuarioDAO;
+import Facade.PacientesFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -47,69 +48,142 @@ public class PacienteController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String action = request.getParameter("action");
         HttpSession session = request.getSession(false);
-        if (session == null) {
-            RequestDispatcher rd = request.
-                    getRequestDispatcher("/index.html");
-            request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema!");
-            rd.forward(request, response);
+        if (session.getAttribute("usuario") == null) {
+            session.invalidate();
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+            rd.include(request, response);
         } else {
-            String nome = request.getParameter("nome");
-            String cpf = request.getParameter("cpf");
+            if (action.equals("cadastrarPaciente")) {
+                String nome = request.getParameter("nome");
+                String cpf = request.getParameter("cpf");
 
-            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-            String stringData = request.getParameter("dataNascimento");
-            stringData = stringData.replaceAll("-", "/");
-            java.util.Date dataNascimento = null;
-            try {
-                dataNascimento = format.parse(stringData);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                String stringData = request.getParameter("dataNascimento");
+                stringData = stringData.replaceAll("-", "/");
+                java.util.Date dataNascimento = null;
+                try {
+                    dataNascimento = format.parse(stringData);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
-            String telefone = request.getParameter("telefone");
-            String email = request.getParameter("email");
-            String cep = request.getParameter("cep");
-            String cidade = request.getParameter("cidade");
-            String estado = request.getParameter("estado");
-            String bairro = request.getParameter("bairro");
-            String endereco = request.getParameter("endereco");
-            String numeroEndereco = request.getParameter("numeroEndereco");
-            String complemento = request.getParameter("complemento");
+                String telefone = request.getParameter("telefone");
+                String email = request.getParameter("email");
+                String cep = request.getParameter("cep");
+                String cidade = request.getParameter("cidade");
+                String estado = request.getParameter("estado");
+                String bairro = request.getParameter("bairro");
+                String endereco = request.getParameter("endereco");
+                String numeroEndereco = request.getParameter("numeroEndereco");
+                String complemento = request.getParameter("complemento");
 
-            Paciente paciente = new Paciente();
-            paciente.setNome(nome);
-            paciente.setCpf(cpf);
-            java.sql.Date dtNascimento = new java.sql.Date(dataNascimento.getTime());
-            paciente.setDataNascimento(dtNascimento);
-            paciente.setTelefone(telefone);
-            paciente.setEmail(email);
-            paciente.setCep(cep);
-            paciente.setCidade(cidade);
-            paciente.setEstado(estado);
-            paciente.setBairro(bairro);
-            paciente.setEndereco(endereco);
-            paciente.setNumEndereco(numeroEndereco);
-            paciente.setComplemento(complemento);
+                Paciente paciente = new Paciente();
+                paciente.setNome(nome);
+                paciente.setCpf(cpf);
+                java.sql.Date dtNascimento = new java.sql.Date(dataNascimento.getTime());
+                paciente.setDataNascimento(dtNascimento);
+                paciente.setTelefone(telefone);
+                paciente.setEmail(email);
+                paciente.setCep(cep);
+                paciente.setCidade(cidade);
+                paciente.setEstado(estado);
+                paciente.setBairro(bairro);
+                paciente.setEndereco(endereco);
+                paciente.setNumEndereco(numeroEndereco);
+                paciente.setComplemento(complemento);
 
-            PacienteDAO pacienteDAO = new PacienteDAO();
-            pacienteDAO.inserirPaciente(paciente);
-            Usuario usuario = new Usuario();
-            usuario = (Usuario) session.getAttribute("usuario");
-            if (usuario != null) {
-                session = request.getSession();
-                session.setAttribute("usuario", usuario);
-                session.setMaxInactiveInterval(20 * 60);
+                PacientesFacade.inserir(paciente);
+
                 RequestDispatcher rd = null;
                 rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");
                 rd.include(request, response);
-            } else {
-                request.setAttribute("msg", "Erro ao cadastrar o paciente!");
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
-                rd.forward(request, response);
+            } else if (action.equals("pesquisaParam")) {
+                
+                String pesquisa = request.getParameter("pesquisa");
+                PacienteDAO pacienteDAO = new PacienteDAO();
+                List<Paciente> pacienteList = pacienteDAO.buscarPacientesParam(pesquisa);
+                if (session != null) {
+                    RequestDispatcher rd = null;
+                    if (pacienteList.size() > 0) {
+                        request.setAttribute("pacientes", pacienteList);
+                    } else {
+                        request.setAttribute("mensagem", "Paciente não cadastrado no sistema");
+                    }
+                    rd = getServletContext().getRequestDispatcher("/gerenciarPacientes.jsp");
+                    rd.include(request, response);
+                } else {
+                    request.setAttribute("msg", "Usuário e/ou senha incorreto(s)!");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+                    rd.forward(request, response);
+                }
+            } else if (action.equals("")) {
+
             }
         }
 
+//        if (session == null) {
+//            RequestDispatcher rd = request.
+//                    getRequestDispatcher("/index.html");
+//            request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema!");
+//            rd.forward(request, response);
+//        } else {
+//            String nome = request.getParameter("nome");
+//            String cpf = request.getParameter("cpf");
+//
+//            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+//            String stringData = request.getParameter("dataNascimento");
+//            stringData = stringData.replaceAll("-", "/");
+//            java.util.Date dataNascimento = null;
+//            try {
+//                dataNascimento = format.parse(stringData);
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//
+//            String telefone = request.getParameter("telefone");
+//            String email = request.getParameter("email");
+//            String cep = request.getParameter("cep");
+//            String cidade = request.getParameter("cidade");
+//            String estado = request.getParameter("estado");
+//            String bairro = request.getParameter("bairro");
+//            String endereco = request.getParameter("endereco");
+//            String numeroEndereco = request.getParameter("numeroEndereco");
+//            String complemento = request.getParameter("complemento");
+//
+//            Paciente paciente = new Paciente();
+//            paciente.setNome(nome);
+//            paciente.setCpf(cpf);
+//            java.sql.Date dtNascimento = new java.sql.Date(dataNascimento.getTime());
+//            paciente.setDataNascimento(dtNascimento);
+//            paciente.setTelefone(telefone);
+//            paciente.setEmail(email);
+//            paciente.setCep(cep);
+//            paciente.setCidade(cidade);
+//            paciente.setEstado(estado);
+//            paciente.setBairro(bairro);
+//            paciente.setEndereco(endereco);
+//            paciente.setNumEndereco(numeroEndereco);
+//            paciente.setComplemento(complemento);
+//
+//            PacienteDAO pacienteDAO = new PacienteDAO();
+//            pacienteDAO.inserirPaciente(paciente);
+//            Usuario usuario = new Usuario();
+//            usuario = (Usuario) session.getAttribute("usuario");
+//            if (usuario != null) {
+//                session = request.getSession();
+//                session.setAttribute("usuario", usuario);
+//                session.setMaxInactiveInterval(20 * 60);
+//                RequestDispatcher rd = null;
+//                rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");
+//                rd.include(request, response);
+//            } else {
+//                request.setAttribute("msg", "Erro ao cadastrar o paciente!");
+//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+//                rd.forward(request, response);
+//            }
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

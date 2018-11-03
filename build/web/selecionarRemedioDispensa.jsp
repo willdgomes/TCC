@@ -18,7 +18,7 @@
                     </div>
                     <div class="panel-body pt-3">
                         <div class="col-sm-12">
-                            <form class="card border-info" action="DispensaController" method="POST">
+                            <form class="card border-info" action="DispensaController?action=selecionaMedicamento" method="POST">
                                 <div class="card-body p-5">
                                     <div class="form-row" id="line1">
                                         <div class="col-md-6 form-group">
@@ -200,7 +200,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="crm" class="text-dark row" >CRM:</label>
-                                            <input type="number" class="form-control" id="crmMedico" name="crm" required name="crmMedico">
+                                            <input type="number" class="form-control" id="crmMedico" required name="medicoCrm">
                                         </div>
                                         <div class="form-group col-md-8">
                                             <label for="crm" class="text-dark row" >Nome do médico:</label>

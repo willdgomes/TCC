@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import Beans.Dispensa;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -33,16 +34,26 @@ public class DispensaController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        Dispensa dispensa = new Dispensa();
         HttpSession session = request.getSession(false);
+        String action = request.getParameter("action");
         if (session == null) {
             RequestDispatcher rd = request.
                     getRequestDispatcher("/index.html");
             request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema!");
             rd.forward(request, response);
-        }else{
-            String nomeMedicamento = request.getParameter("nomeMedicamento");
-            String quantidadeMedicamento = request.getParameter("quantidadeMedicamento");
-            
+        } else {
+            if (action.equals("selecionaMedicamento")) {
+                String nomeMedicamento = request.getParameter("nomeMedicamento");
+                String quantidadeMedicamento = request.getParameter("quantidadeMedicamento");
+                String crmMedico = request.getParameter("medicoCrm");
+                String nomeMedico = request.getParameter("medicoNome");
+                String dataReceita = request.getParameter("dataReceita");
+                dispensa.setQuantidade(Integer.parseInt(quantidadeMedicamento));
+            }else if(false){
+                
+            }
         }
     }
 

@@ -19,7 +19,7 @@
                     </div>
                     <div class="panel-body pt-3">
                         <div class="col-sm-12">
-                            <form action="PacienteController" method="POST" class="card border-info">
+                            <form action="PacienteController?action=cadastrarPaciente" method="POST" class="card border-info">
                                 <div class="card-body p-5">
                                     <div class="form-row">
                                         <div class="form-group col">

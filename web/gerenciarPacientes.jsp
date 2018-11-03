@@ -18,7 +18,7 @@
                     </div>
                     <div class="panel-body m-3">
                             <div class="col-sm-12">
-                                <form action="GerenciarPacientesController" method="POST" class="card border-info">
+                                <form action="PacienteController?action=pesquisaParam" method="POST" class="card border-info">
                                     <div class="card-body p-5">
                                         <div class="form-group">
                                             <input type="text" class="col-sm-10" placeholder="Pesquisar" required name="pesquisa">    

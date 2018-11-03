@@ -27,6 +27,8 @@ public class PacienteDAO {
             + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email FROM pacientes";
     private final String stmtRemoverClientes = "DELETE FROM cliente WHERE idCliente = ?";
     private final String stmtAtualizarClientes = "UPDATE cliente SET nome = ?, sobrenome = ?, telefone = ? WHERE idCliente = ?";
+    private final String stmtBuscarPacientesParam = "SELECT idPaciente, cpfPaciente, nomePaciente, dnPaciente, telefone, "
+            + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email FROM pacientes WHERE nomePaciente LIKE ?";
     
     public void inserirPaciente(Paciente paciente) {
         Connection con = null;
@@ -202,14 +204,11 @@ public class PacienteDAO {
 //        }
 //    }
 
-    public List<Paciente> buscarPacientesParam(/*String parametro, */String pesquisa) {
-       // Departamento departamento = new Departamento();
+    public List<Paciente> buscarPacientesParam(String pesquisa) {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        List<Paciente> listaPacientes = null;
-        String stmtBuscarPacientesParam = "SELECT idPaciente, cpfPaciente, nomePaciente, dnPaciente, telefone, "
-            + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email FROM pacientes WHERE nomePaciente LIKE ?"; 
+        List<Paciente> listaPacientes = null; 
         try{
             con = ConnectionFactory.getConnection();  
             stmt = con.prepareStatement(stmtBuscarPacientesParam); 
