@@ -25,14 +25,14 @@ CREATE TABLE `dispensas_medicamentos` (
   CONSTRAINT `FK_Medicamento_dis` FOREIGN KEY (`idMedicamento`) REFERENCES `medicamentos` (`idMedicamento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
-CREATE TABLE `estoque` (
+CREATE TABLE `lote` (
   `lote` varchar(45) NOT NULL,
   `idMedicamento` int(11) NOT NULL,
   `quantidade` int(11) NOT NULL,
   `dataVencimento` date NOT NULL,
   PRIMARY KEY (`lote`),
   KEY `idMedicamento` (`idMedicamento`),
-  CONSTRAINT `estoque_ibfk_1` FOREIGN KEY (`idMedicamento`) REFERENCES `medicamentos` (`idMedicamento`)
+  CONSTRAINT `lote_ibfk_1` FOREIGN KEY (`idMedicamento`) REFERENCES `medicamentos` (`idMedicamento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
 CREATE TABLE `medicamentos` (
