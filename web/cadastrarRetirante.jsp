@@ -136,7 +136,7 @@
                 $("#enderecoretirante").val("");
                 $("#bairroretirante").val("");
                 $("#cidaderetirante").val("");
-                $("#estadoretirante").val
+                $("#estadoretirante").val("");
             }
 
             //Quando o campo cep perde o foco.
