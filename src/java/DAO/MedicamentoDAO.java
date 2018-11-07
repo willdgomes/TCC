@@ -25,7 +25,7 @@ public class MedicamentoDAO {
     private final String stmtListarMedicamentos = "SELECT idMedicamento, nomeMedicamento, descricao, nomeFabricante, composicao, dosagem from medicamentos";
     private final String stmtRemoverMedicamentos = "DELETE FROM medicamentos WHERE idMedicamento = ?";
     private final String stmtAtualizarMedicamentos = "UPDATE medicamentos SET nomeMedicamento = ?, descricao = ?, nomeFabricante = ?, composicao = ?, dosagem = ? WHERE idMedicamento = ?";
-    private final String stmtBuscarMedicamentoPorNome = "";
+    private final String stmtBuscarMedicamentoPorNome = "SELECT idMedicamento, nomeMedicamento, descricao, nomeFabricante, composicao, dosagem, medida FROM medicamentos";
 
     public void inserirMedicamento(Medicamento med) {
         Connection con = null;
@@ -172,7 +172,7 @@ public class MedicamentoDAO {
             medicamento.setDosagem(rs.getDouble("dosagem"));
             return medicamento;
         } catch (SQLException ex) {
-            throw new RuntimeException("Erro ao listar os clientes no banco de dados. Origem=" + ex.getMessage());
+            throw new RuntimeException("Erro ao buscar medicamento no banco de dados. Origem=" + ex.getMessage());
         } finally {
             try {
                 rs.close();

@@ -5,10 +5,17 @@
  */
 package Facade;
 
+import Beans.Lote;
+import DAO.LoteDAO;
+
 /**
  *
  * @author gomes
  */
 public class LotesFacade {
+    private static final LoteDAO loteDAO = new LoteDAO();
     
+    public static void inserir(Lote lote) {
+        loteDAO.inserirLote(lote);
+    }
 }

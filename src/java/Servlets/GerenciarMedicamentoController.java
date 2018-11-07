@@ -10,6 +10,7 @@ import Beans.Medicamento;
 import Beans.Paciente;
 import DAO.MedicamentoDAO;
 import DAO.PacienteDAO;
+import Facade.LotesFacade;
 import Facade.MedicamentosFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -70,6 +71,7 @@ public class GerenciarMedicamentoController extends HttpServlet {
                 Date dataVencimentoLote = new Date();
                 medicamento = medFacade.pegarMedicamentoPorNome(nomeMedicamento);
                 Lote lote = new Lote(Integer.parseInt(numeroLote), medicamento, Integer.parseInt(qtde), dataVencimentoLote);
+                LotesFacade.inserir(lote);
             }
 //            String pesquisa = request.getParameter("pesquisa");
 //            MedicamentoDAO medicamentoDAO = new MedicamentoDAO();
