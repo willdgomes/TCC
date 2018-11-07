@@ -158,31 +158,31 @@ public class MedicamentoDAO {
         }
     }
 
-//    public List<Medicamento> buscarMedicamentoNome(String nomeRemedio) {
-//        Connection con = null;
-//        PreparedStatement stmt = null;
-//        ResultSet rs = null;
-//        List<Medicamento> listaMedicamentos = null;
-//        String stmtBuscarMedicamento = "select nomePaciente from pacientes"; 
-//        try{
-//            con = ConnectionFactory.getConnection();  
-//            
-//            stmt = con.prepareStatement(stmtBuscarMedicamento);
-//            rs = stmt.executeQuery();
-//            listaMedicamentos = new ArrayList<Medicamento>();
-//            while (rs.next()) {
-//                Medicamento medicamento = new Medicamento();
-//                listaMedicamentos.add(medicamento);
-//            }  
-//        return listaMedicamentos;            
-//        }catch(SQLException ex){
-//            throw new RuntimeException("Erro ao listar os clientes no banco de dados. Origem="+ex.getMessage());            
-//        }finally{
-//            try{rs.close();}catch(Exception ex){System.out.println("Erro ao fechar rs. Ex="+ex.getMessage());};
-//            try{stmt.close();}catch(Exception ex){System.out.println("Erro ao fechar stmt. Ex="+ex.getMessage());};
-//            try{con.close();;}catch(Exception ex){System.out.println("Erro ao fechar conexão. Ex="+ex.getMessage());};                
-//        }
-//    
-//    }
+    public List<Medicamento> buscarMedicamentoNome(String nomeRemedio) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Medicamento> listaMedicamentos = null;
+        String stmtBuscarMedicamento = "select nomePaciente from pacientes"; 
+        try{
+            con = ConnectionFactory.getConnection();  
+            
+            stmt = con.prepareStatement(stmtBuscarMedicamento);
+            rs = stmt.executeQuery();
+            listaMedicamentos = new ArrayList<Medicamento>();
+            while (rs.next()) {
+                Medicamento medicamento = new Medicamento();
+                listaMedicamentos.add(medicamento);
+            }  
+        return listaMedicamentos;            
+        }catch(SQLException ex){
+            throw new RuntimeException("Erro ao listar os clientes no banco de dados. Origem="+ex.getMessage());            
+        }finally{
+            try{rs.close();}catch(Exception ex){System.out.println("Erro ao fechar rs. Ex="+ex.getMessage());};
+            try{stmt.close();}catch(Exception ex){System.out.println("Erro ao fechar stmt. Ex="+ex.getMessage());};
+            try{con.close();;}catch(Exception ex){System.out.println("Erro ao fechar conexão. Ex="+ex.getMessage());};                
+        }
+    
+    }
 
 }

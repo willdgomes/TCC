@@ -41,9 +41,9 @@
                                                     <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>                                                
+                                            <tbody>               
                                                 <c:forEach items="${medicamentos}" var="paciente">
-                                                <form action="cadastrarPaciente" method="POST">
+                                                <form action="cadastrar/edicamento" method="POST">
                                                     <tr>
                                                         <th scope="row">3</th>
                                                         <td colspan="2">${medicamento.nome}</td>

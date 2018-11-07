@@ -26,6 +26,7 @@ public class Retirante {
     private String numEndereco;
     private String complemento;
     private String email;
+    private String paciente;
     private String vincolo;
 
     public Integer getIdRetirante() {
@@ -34,6 +35,14 @@ public class Retirante {
 
     public void setIdRetirante(Integer idRetirante) {
         this.idRetirante = idRetirante;
+    }
+    
+     public String getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(String paciente) {
+        this.paciente = paciente;
     }
 
     public String getNomeRetirante() {

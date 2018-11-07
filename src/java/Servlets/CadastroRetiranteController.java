@@ -62,6 +62,7 @@ public class CadastroRetiranteController extends HttpServlet {
 
             String telefone = request.getParameter("telefone");
             String email = request.getParameter("emailRetirante");
+            String paciente = request.getParameter("paciente");
             String parentesco = request.getParameter("parentesco");
             String cep = request.getParameter("cepRetirante");
             String cidade = request.getParameter("cidadeRetirante");

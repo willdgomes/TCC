@@ -6,6 +6,9 @@
 package Servlets;
 
 import Beans.Medicamento;
+import Beans.Paciente;
+import DAO.MedicamentoDAO;
+import DAO.PacienteDAO;
 import Facade.MedicamentosFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -47,14 +50,31 @@ public class GerenciarMedicamentoController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
-        if (session == null) {
-            RequestDispatcher rd = request.
-                    getRequestDispatcher("/index.html");
-            request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema!");
-            rd.forward(request, response);
-        }else{
-            
+        response.setContentType("text/html;charset=UTF-8");        
+        HttpSession session = request.getSession();
+        if (session.getAttribute("usuario") == null) {
+            session.invalidate();
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+            rd.include(request, response);
+        }
+        else {
+            String pesquisa = request.getParameter("pesquisa");
+            MedicamentoDAO medicamentoDAO = new MedicamentoDAO();
+            List<Medicamento> medicamentoList = medicamentoDAO.buscarMedicamentoNome(pesquisa);
+            if (session != null) {            
+                RequestDispatcher rd = null;
+                if(medicamentoList.size() > 0)
+                    request.setAttribute("medicamentos", medicamentoList);
+                else
+                    request.setAttribute("mensagem", "Medicamento não cadastrado no sistema");
+                rd = getServletContext().getRequestDispatcher("/gerenciarMedicamento.jsp");
+                rd.include(request, response);
+            }
+            else {
+                request.setAttribute("msg", "Usuário e/ou senha incorreto(s)!");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+                rd.forward(request, response);
+            }
         }
     }
 
