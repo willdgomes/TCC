@@ -18,6 +18,42 @@
                     </div>
                     <div class="panel-body pt-3">
                         <div class="col-sm-12">
+                              <form class="card border-info">
+                            <div class="card-body p-5">
+                                <div class="card-body p-3 ">
+                                    <div class="col form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="retirante" class="text-dark" >Paciente</label>
+                                            <select id="cbRemedios" class="form-control" required name="nomePaci">
+                                                <option>Fulano</option>
+                                                <option>Ciclano</option>
+                                                <option>Beltrano</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4  offset-md-1">
+                                                <label for="cpf" class="text-dark row" >CPF:</label>
+                                                <label for="infoCpf" class="row text-left" required name="cpfPaciente">097.579.629-10</label>
+                                        </div>
+                                    </div>
+                                    <div class="col form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="retirante" class="text-dark" >Retirante</label>
+                                            <select id="cbRemedios" class="form-control" required name="nomeRetirante">
+                                                <option>Paciente</option>
+                                                <option>retirante1</option>
+                                                <option>retirante2</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4  offset-md-1">
+                                                <label for="cpf" class="text-dark row" >CPF:</label>
+                                                <label for="infoCpf" class="row text-left" required name="cpfPaciente">097.579.629-10</label>
+                                        </div>
+                                    </div>                                                                        
+                                </div>
+                            </div>
+                        </form>
+                        </div>
+                        <div class="col-sm-12">
                             <form class="card border-info" action="DispensaController?action=selecionaMedicamento" method="POST">
                                 <div class="card-body p-5">
                                     <div class="form-row" id="line1">
@@ -215,7 +251,7 @@
                                     </div>
                                     <div class="row col-sm-1 offset-10">
                                             <button type="submit" class="btn offset-1 btn-primary">Avançar</button>
-                                    </div>
+                                </div>
                                 </div>
                             </form>
                         </div>
