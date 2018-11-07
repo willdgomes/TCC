@@ -14,6 +14,7 @@ import Facade.MedicamentosFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -63,12 +64,12 @@ public class GerenciarMedicamentoController extends HttpServlet {
             if(action.equals("insereMedicamento")){
                 MedicamentosFacade medFacade = new MedicamentosFacade();
                 Medicamento medicamento = new Medicamento();
-                Lote lote = new Lote();
                 String nomeMedicamento = request.getParameter("nomeMed");
                 String qtde = request.getParameter("qtdeCaixa");
                 String numeroLote = request.getParameter("NumeroLote");
+                Date dataVencimentoLote = new Date();
                 medicamento = medFacade.pegarMedicamentoPorNome(nomeMedicamento);
-                
+                Lote lote = new Lote(Integer.parseInt(numeroLote), medicamento, Integer.parseInt(qtde), dataVencimentoLote);
             }
 //            String pesquisa = request.getParameter("pesquisa");
 //            MedicamentoDAO medicamentoDAO = new MedicamentoDAO();
