@@ -17,9 +17,14 @@ import java.util.List;
 public class MedicamentosFacade {
     MedicamentoDAO medDAO = new MedicamentoDAO();
     static List<Medicamento> listaMedicamentos = new ArrayList<Medicamento>();
+    static Medicamento med = new Medicamento();
     
     public List<Medicamento> listarMedicamentos(){
         listaMedicamentos = medDAO.listarMedicamentos();
         return listaMedicamentos;
+    }
+    
+    public Medicamento pegarMedicamentoPorNome(String nomeMedicamento){
+        return medDAO.buscarMedicamentoNome(nomeMedicamento);
     }
 }
