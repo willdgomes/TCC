@@ -192,7 +192,7 @@ public final class page_tag
       out.write("                        <div class=\"collapse show\" id=\"menuEstoque\">\r\n");
       out.write("                            <ul class=\"nav flex-column\">\r\n");
       out.write("                                <li class=\"nav-sub-item\">\r\n");
-      out.write("                                    <a class=\"nav-link\" href=\"selecionarRemedioDispensa.jsp\"><i class=\"material-icons\">indeterminate_check_box</i> <span class=\"align-top\">Dispensar Medicamento</span></a>\r\n");
+      out.write("                                    <a class=\"nav-link\" href=\"dispensarMedicamento.jsp\"><i class=\"material-icons\">indeterminate_check_box</i> <span class=\"align-top\">Dispensar Medicamento</span></a>\r\n");
       out.write("                                </li>\r\n");
       out.write("                                <li class=\"nav-sub-item\">\r\n");
       out.write("                                    <a class=\"nav-link\" href=\"inserirMedicamento.jsp\"><i class=\"material-icons\">add_box</i> <span class=\"align-top\">Inserir Medicamento</span></a>\r\n");

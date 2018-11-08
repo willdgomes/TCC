@@ -6,10 +6,12 @@
 package DAO;
 
 import Beans.Medicamento;
+import Beans.Paciente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +27,7 @@ public class MedicamentoDAO {
     private final String stmtListarMedicamentos = "SELECT idMedicamento, nomeMedicamento, descricao, nomeFabricante, composicao, dosagem from medicamentos";
     private final String stmtRemoverMedicamentos = "DELETE FROM medicamentos WHERE idMedicamento = ?";
     private final String stmtAtualizarMedicamentos = "UPDATE medicamentos SET nomeMedicamento = ?, descricao = ?, nomeFabricante = ?, composicao = ?, dosagem = ? WHERE idMedicamento = ?";
-    private final String stmtBuscarMedicamentoPorNome = "SELECT idMedicamento, nomeMedicamento, descricao, nomeFabricante, composicao, dosagem, medida FROM medicamentos";
+    private final String stmtBuscarMedicamentoPorNome = "SELECT idMedicamento, nomeMedicamento, descricao, nomeFabricante, composicao, dosagem, medida FROM medicamentos WHERE nomeMedicamento LIKE ?";
 
     public void inserirMedicamento(Medicamento med) {
         Connection con = null;
@@ -154,23 +156,29 @@ public class MedicamentoDAO {
         }
     }
 
-    public Medicamento buscarMedicamentoNome(String nomeRemedio) {
+    public List<Medicamento> buscarMedicamentoNome(String nomeRemedio) {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Medicamento medicamento = new Medicamento();
+        List<Medicamento> listaMedicamentos = new ArrayList<Medicamento>();
         try {
-            con = ConnectionFactory.getConnection();
-
-            stmt = con.prepareStatement(stmtBuscarMedicamentoPorNome);
+           con = ConnectionFactory.getConnection();  
+            stmt = con.prepareStatement(stmtBuscarMedicamentoPorNome); 
+            stmt.setString(1,'%'+nomeRemedio+'%');
             rs = stmt.executeQuery();
-            medicamento.setId(rs.getInt("idMedicamento"));
-            medicamento.setNome(rs.getString("nomeMedicamento"));
-            medicamento.setDescricao(rs.getString("descricao"));
-            medicamento.setNomeFabricante(rs.getString("nomeFabricante"));
-            medicamento.setComposicao(rs.getString("composicao"));
-            medicamento.setDosagem(rs.getDouble("dosagem"));
-            return medicamento;
+            listaMedicamentos = new ArrayList<Medicamento>();
+            while (rs.next()) {
+                Medicamento p = new Medicamento();
+                p.setId(Integer.parseInt(rs.getString("idMedicamento")));
+                p.setNome(rs.getString("nomeMedicamento"));
+                p.setNomeFabricante(rs.getString("nomeFabricante"));
+                p.setComposicao(rs.getString("composicao"));
+                p.setDescricao(rs.getString("descricao"));
+                p.setDosagem(Double.parseDouble(rs.getString("dosagem")));
+                p.setMedida(rs.getString("medida"));
+                listaMedicamentos.add(p);
+            }  
+        return listaMedicamentos;            
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao buscar medicamento no banco de dados. Origem=" + ex.getMessage());
         } finally {
@@ -190,7 +198,7 @@ public class MedicamentoDAO {
                 System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
             };
         }
-
+        
     }
 
 }

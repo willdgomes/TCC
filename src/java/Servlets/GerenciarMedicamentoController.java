@@ -31,15 +31,15 @@ import javax.servlet.http.HttpSession;
  *
  * @author gomes
  */
-@WebServlet(name = "GerenciarMedicamentoController", urlPatterns = {"/GerenciarMedicamentoController"}, loadOnStartup=1)
+@WebServlet(name = "GerenciarMedicamentoController", urlPatterns = {"/GerenciarMedicamentoController"}, loadOnStartup = 1)
 public class GerenciarMedicamentoController extends HttpServlet {
-    
-    public void init(ServletConfig config) throws ServletException{
+
+    public void init(ServletConfig config) throws ServletException {
         MedicamentosFacade medicamentosFacade = new MedicamentosFacade();
         List<Medicamento> medicamentos = new ArrayList<Medicamento>();
         medicamentos = medicamentosFacade.listarMedicamentos();
         ServletContext medContext = config.getServletContext();
-        medContext.setAttribute("medicamentos" , medicamentos);
+        medContext.setAttribute("medicamentos", medicamentos);
     }
 
     /**
@@ -53,16 +53,15 @@ public class GerenciarMedicamentoController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");        
+        response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         String action = request.getParameter("action");
         if (session.getAttribute("usuario") == null) {
             session.invalidate();
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
-        }
-        else {
-            if(action.equals("insereMedicamento")){
+        } else {
+            if (action.equals("insereMedicamento")) {
                 MedicamentosFacade medFacade = new MedicamentosFacade();
                 Medicamento medicamento = new Medicamento();
                 String nomeMedicamento = request.getParameter("nomeMed");
@@ -73,23 +72,24 @@ public class GerenciarMedicamentoController extends HttpServlet {
                 Lote lote = new Lote(Integer.parseInt(numeroLote), medicamento, Integer.parseInt(qtde), dataVencimentoLote);
                 LotesFacade.inserir(lote);
             }
-//            String pesquisa = request.getParameter("pesquisa");
-//            MedicamentoDAO medicamentoDAO = new MedicamentoDAO();
-//            List<Medicamento> medicamentoList = medicamentoDAO.buscarMedicamentoNome(pesquisa);
-//            if (session != null) {            
-//                RequestDispatcher rd = null;
-//                if(medicamentoList.size() > 0)
-//                    request.setAttribute("medicamentos", medicamentoList);
-//                else
-//                    request.setAttribute("mensagem", "Medicamento não cadastrado no sistema");
-//                rd = getServletContext().getRequestDispatcher("/gerenciarMedicamento.jsp");
-//                rd.include(request, response);
-//            }
-//            else {
-//                request.setAttribute("msg", "Usuário e/ou senha incorreto(s)!");
-//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
-//                rd.forward(request, response);
-//            }
+            if (action.equals("pesquisarMedicamento")) {
+                MedicamentoDAO medicamentoDAO = new MedicamentoDAO();
+                List<Medicamento> medicamentoList = medicamentoDAO.buscarMedicamentoNome(request.getParameter("pesquisa"));
+                if (session != null) {
+                    RequestDispatcher rd = null;
+                    if (medicamentoList.size() > 0) {
+                        request.setAttribute("medicamentos", medicamentoList);
+                    } else {
+                        request.setAttribute("mensagem", "Medicamento não cadastrado no sistema");
+                    }
+                    rd = getServletContext().getRequestDispatcher("/gerenciarMedicamentos.jsp");
+                    rd.include(request, response);
+                } else {
+                    request.setAttribute("msg", "Usuário e/ou senha incorreto(s)!");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+                    rd.forward(request, response);
+                }
+            }
         }
     }
 
