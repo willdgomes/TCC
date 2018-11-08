@@ -62,6 +62,9 @@ public class GerenciarMedicamentoController extends HttpServlet {
             rd.include(request, response);
         } else {
             if (action.equals("insereMedicamentoLote")) {
+                
+                //busca medicamento para inserir lote no estoque
+                
                 MedicamentosFacade medFacade = new MedicamentosFacade();
                 Medicamento medicamento = new Medicamento();
                 String nomeMedicamento = request.getParameter("nomeMed");
@@ -69,12 +72,12 @@ public class GerenciarMedicamentoController extends HttpServlet {
                 String numeroLote = request.getParameter("NumeroLote");
                 Date dataVencimentoLote = new Date();
                 medicamento = medFacade.pegarMedicamentoPorNome(nomeMedicamento);
-                Lote lote = new Lote(Integer.parseInt(numeroLote), medicamento, Integer.parseInt(qtde), dataVencimentoLote);
+                Lote lote = new Lote(6, medicamento, Integer.parseInt(qtde), dataVencimentoLote);
                 LotesFacade.inserir(lote);
             }
             else if (action.equals("pesquisarMedicamento")) {
                 MedicamentoDAO medicamentoDAO = new MedicamentoDAO();
-                List<Medicamento> medicamentoList = medicamentoDAO.buscarMedicamentoNome(request.getParameter("pesquisa"));
+                List<Medicamento> medicamentoList = medicamentoDAO.buscarMedicamentosParam(request.getParameter("pesquisa"));
                 if (session != null) {
                     RequestDispatcher rd = null;
                     if (medicamentoList.size() > 0) {

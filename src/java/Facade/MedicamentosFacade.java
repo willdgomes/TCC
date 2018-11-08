@@ -25,6 +25,6 @@ public class MedicamentosFacade {
     }
     
     public Medicamento pegarMedicamentoPorNome(String nomeMedicamento){
-        return medDAO.buscarMedicamentoNome(nomeMedicamento);
+        return medDAO.buscarMedicamentoNomeInsere(nomeMedicamento);
     }
 }

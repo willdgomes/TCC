@@ -27,7 +27,8 @@ public class MedicamentoDAO {
     private final String stmtListarMedicamentos = "SELECT idMedicamento, nomeMedicamento, descricao, nomeFabricante, composicao, dosagem from medicamentos";
     private final String stmtRemoverMedicamentos = "DELETE FROM medicamentos WHERE idMedicamento = ?";
     private final String stmtAtualizarMedicamentos = "UPDATE medicamentos SET nomeMedicamento = ?, descricao = ?, nomeFabricante = ?, composicao = ?, dosagem = ? WHERE idMedicamento = ?";
-    private final String stmtBuscarMedicamentoPorNome = "SELECT idMedicamento, nomeMedicamento, descricao, nomeFabricante, composicao, dosagem, medida FROM medicamentos WHERE nomeMedicamento LIKE ?";
+    private final String stmtBuscarMedicamentosParam = "SELECT idMedicamento, nomeMedicamento, descricao, nomeFabricante, composicao, dosagem, medida FROM medicamentos WHERE nomeMedicamento LIKE ?";
+    private final String stmtBuscarMedicamentoPorNome = "SELECT idMedicamento, nomeMedicamento, descricao, nomeFabricante, composicao, dosagem, medida FROM medicamentos WHERE nomeMedicamento=?";
 
     public void inserirMedicamento(Medicamento med) {
         Connection con = null;
@@ -156,15 +157,15 @@ public class MedicamentoDAO {
         }
     }
 
-    public List<Medicamento> buscarMedicamentoNome(String nomeRemedio) {
+    public List<Medicamento> buscarMedicamentosParam(String nomeRemedio) {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         List<Medicamento> listaMedicamentos = new ArrayList<Medicamento>();
         try {
-           con = ConnectionFactory.getConnection();  
-            stmt = con.prepareStatement(stmtBuscarMedicamentoPorNome); 
-            stmt.setString(1,'%'+nomeRemedio+'%');
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtBuscarMedicamentosParam);
+            stmt.setString(1, '%' + nomeRemedio + '%');
             rs = stmt.executeQuery();
             listaMedicamentos = new ArrayList<Medicamento>();
             while (rs.next()) {
@@ -177,8 +178,8 @@ public class MedicamentoDAO {
                 p.setDosagem(Double.parseDouble(rs.getString("dosagem")));
                 p.setMedida(rs.getString("medida"));
                 listaMedicamentos.add(p);
-            }  
-        return listaMedicamentos;            
+            }
+            return listaMedicamentos;
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao buscar medicamento no banco de dados. Origem=" + ex.getMessage());
         } finally {
@@ -198,7 +199,49 @@ public class MedicamentoDAO {
                 System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
             };
         }
-        
+
+    }
+
+    public Medicamento buscarMedicamentoNomeInsere(String nomeRemedio) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Medicamento medicamento = new Medicamento();
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtBuscarMedicamentoPorNome);
+            stmt.setString(1, nomeRemedio);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                medicamento.setId(Integer.parseInt(rs.getString("idMedicamento")));
+                medicamento.setNome(rs.getString("nomeMedicamento"));
+                medicamento.setNomeFabricante(rs.getString("nomeFabricante"));
+                medicamento.setComposicao(rs.getString("composicao"));
+                medicamento.setDescricao(rs.getString("descricao"));
+                medicamento.setDosagem(Double.parseDouble(rs.getString("dosagem")));
+                medicamento.setMedida(rs.getString("medida"));
+            }
+            return medicamento;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar medicamento no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
+            };
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+
     }
 
 }
