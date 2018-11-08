@@ -5,14 +5,17 @@
  */
 package Servlets;
 
+import Beans.Lote;
 import Beans.Medicamento;
 import Beans.Paciente;
 import DAO.MedicamentoDAO;
 import DAO.PacienteDAO;
+import Facade.LotesFacade;
 import Facade.MedicamentosFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -52,29 +55,41 @@ public class GerenciarMedicamentoController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");        
         HttpSession session = request.getSession();
+        String action = request.getParameter("action");
         if (session.getAttribute("usuario") == null) {
             session.invalidate();
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
         }
         else {
-            String pesquisa = request.getParameter("pesquisa");
-            MedicamentoDAO medicamentoDAO = new MedicamentoDAO();
-            List<Medicamento> medicamentoList = medicamentoDAO.buscarMedicamentoNome(pesquisa);
-            if (session != null) {            
-                RequestDispatcher rd = null;
-                if(medicamentoList.size() > 0)
-                    request.setAttribute("medicamentos", medicamentoList);
-                else
-                    request.setAttribute("mensagem", "Medicamento não cadastrado no sistema");
-                rd = getServletContext().getRequestDispatcher("/gerenciarMedicamento.jsp");
-                rd.include(request, response);
+            if(action.equals("insereMedicamento")){
+                MedicamentosFacade medFacade = new MedicamentosFacade();
+                Medicamento medicamento = new Medicamento();
+                String nomeMedicamento = request.getParameter("nomeMed");
+                String qtde = request.getParameter("qtdeCaixa");
+                String numeroLote = request.getParameter("NumeroLote");
+                Date dataVencimentoLote = new Date();
+                medicamento = medFacade.pegarMedicamentoPorNome(nomeMedicamento);
+                Lote lote = new Lote(Integer.parseInt(numeroLote), medicamento, Integer.parseInt(qtde), dataVencimentoLote);
+                LotesFacade.inserir(lote);
             }
-            else {
-                request.setAttribute("msg", "Usuário e/ou senha incorreto(s)!");
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
-                rd.forward(request, response);
-            }
+//            String pesquisa = request.getParameter("pesquisa");
+//            MedicamentoDAO medicamentoDAO = new MedicamentoDAO();
+//            List<Medicamento> medicamentoList = medicamentoDAO.buscarMedicamentoNome(pesquisa);
+//            if (session != null) {            
+//                RequestDispatcher rd = null;
+//                if(medicamentoList.size() > 0)
+//                    request.setAttribute("medicamentos", medicamentoList);
+//                else
+//                    request.setAttribute("mensagem", "Medicamento não cadastrado no sistema");
+//                rd = getServletContext().getRequestDispatcher("/gerenciarMedicamento.jsp");
+//                rd.include(request, response);
+//            }
+//            else {
+//                request.setAttribute("msg", "Usuário e/ou senha incorreto(s)!");
+//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+//                rd.forward(request, response);
+//            }
         }
     }
 

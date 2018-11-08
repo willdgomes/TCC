@@ -13,42 +13,42 @@
     <jsp:attribute name="title">Farmácia APPP</jsp:attribute>
     <jsp:body>
         <div class="main w-100">
-        <div class="row">
-            <div class="panel panel-default col-sm pt-4">
-                <div class="panel-heading text-center">
-                    <h2>Inserir Medicamentos</h2>
-                </div>
-                <div class="panel-body m-3">
-                    <div class="col-sm-12">
-                        <form class="card border-info">
-                            <div class="card-body p-5">
-                                
+            <div class="row">
+                <div class="panel panel-default col-sm pt-4">
+                    <div class="panel-heading text-center">
+                        <h2>Inserir Medicamentos</h2>
+                    </div>
+                    <div class="panel-body m-3">
+                        <div class="col-sm-12">
+                            <form action="GerenciarMedicamentoController?action=insereMedicamento" method="POST" class="card border-info">
+                                <div class="card-body p-5">
+
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="medicamento" class="text-dark" >Medicamento:</label>
-                                            <select id="cbRemedios" class="form-control">
+                                            <select id="cbRemedios" class="form-control" required name="nomeMed">
                                                 <c:forEach items="${applicationScope.medicamentos}" var="medicamento">
-
                                                     <option>${medicamento.nome}</option>
-
                                                 </c:forEach>
                                             </select>
                                         </div>
                                         <div class="col-md-2 offset-1 form-group">
                                             <label for="Quantidade"class="text-dark" >Quantidade:(Caixa)</label>
-                                            <input type="number" class="form-control" id="cpfpaciente" placeholder="">
+                                            <input type="number" class="form-control" id="cpfpaciente" placeholder="" required name="qtdeCaixa">
+                                        </div>
+                                        <div class="col-md-2 offset-1 form-group">
+                                            <label for="Lote"class="text-dark" >Lote:</label>
+                                            <input type="number" class="form-control" id="loteMedicamento" placeholder="" required name="numeroLote">
                                         </div>
                                     </div>
-                                <div class="row col-sm-1 offset-10">
-                                <a href="pesquisaPacienteDispensa.jsp">
-                                    <button type="submit" class="btn offset-1 btn-primary">Salvar</button>
-                                </a>
+                                    <div class="row col-sm-1 offset-10">
+                                        <button type="submit" class="btn offset-1 btn-primary">Salvar</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </jsp:body>
-</t:page>
+        </jsp:body>
+    </t:page>

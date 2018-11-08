@@ -5,13 +5,14 @@
  */
 package Beans;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author gomes
  */
-public class Dispensa {
+public class Dispensa implements Serializable {
     
     private Integer id;
     private Integer quantidade;
