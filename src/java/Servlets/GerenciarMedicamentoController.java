@@ -72,7 +72,7 @@ public class GerenciarMedicamentoController extends HttpServlet {
                 String numeroLote = request.getParameter("NumeroLote");
                 Date dataVencimentoLote = new Date();
                 medicamento = medFacade.pegarMedicamentoPorNome(nomeMedicamento);
-                Lote lote = new Lote(6, medicamento, Integer.parseInt(qtde), dataVencimentoLote);
+                Lote lote = new Lote(Integer.parseInt(numeroLote), medicamento, Integer.parseInt(qtde), dataVencimentoLote);
                 LotesFacade.inserir(lote);
             }
             else if (action.equals("pesquisarMedicamento")) {
