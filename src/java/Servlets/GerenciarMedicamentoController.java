@@ -82,11 +82,10 @@ public class GerenciarMedicamentoController extends HttpServlet {
                     System.out.println("Data no formato errado");
                     e.printStackTrace();
                 }
-                
                 java.sql.Date dataVencimentoLote = new java.sql.Date(data.getTime());
                 
                 medicamento = medFacade.pegarMedicamentoPorNome(nomeMedicamento);
-                Lote lote = new Lote(1, medicamento, 8, dataVencimentoLote);
+                Lote lote = new Lote(Integer.parseInt(numeroLote), medicamento, Integer.parseInt(qtde), dataVencimentoLote);
                 LotesFacade.inserir(lote);
             }
             else if (action.equals("pesquisarMedicamento")) {
