@@ -14,6 +14,8 @@ import Facade.LotesFacade;
 import Facade.MedicamentosFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -70,7 +72,19 @@ public class GerenciarMedicamentoController extends HttpServlet {
                 String nomeMedicamento = request.getParameter("nomeMed");
                 String qtde = request.getParameter("qtdeCaixa");
                 String numeroLote = request.getParameter("NumeroLote");
-                Date dataVencimentoLote = new Date();
+                
+                String dtVenc = "08/03/2012";   //request.getParameter("dataVencimento");
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                Date data = null;
+                try {
+                    data = format.parse(dtVenc);
+                } catch (ParseException e) {
+                    System.out.println("Data no formato errado");
+                    e.printStackTrace();
+                }
+                
+                java.sql.Date dataVencimentoLote = new java.sql.Date(data.getTime());
+                
                 medicamento = medFacade.pegarMedicamentoPorNome(nomeMedicamento);
                 Lote lote = new Lote(1, medicamento, 8, dataVencimentoLote);
                 LotesFacade.inserir(lote);
