@@ -20,7 +20,6 @@
                         <div class="col-sm-12">
                               <form class="card border-info">
                             <div class="card-body p-5">
-                                <div class="card-body p-3 ">
                                     <div class="col form-row">
                                         <div class="form-group col-md-6">
                                             <label for="retirante" class="text-dark" >Paciente</label>
@@ -48,8 +47,7 @@
                                                 <label for="cpf" class="text-dark row" >CPF:</label>
                                                 <label for="infoCpf" class="row text-left" required name="cpfPaciente">097.579.629-10</label>
                                         </div>
-                                    </div>                                                                        
-                                </div>
+                                    </div>  
                             </div>
                         </form>
                         </div>

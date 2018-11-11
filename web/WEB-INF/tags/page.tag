@@ -109,6 +109,9 @@
                                 <li class="nav-sub-item">
                                     <a class="nav-link" href="cadastrarMedicamento.jsp"><i class="material-icons">library_add</i> <span class="align-top">Medicamentos</span></a>
                                 </li>
+                                 <li class="nav-sub-item">
+                                    <a class="nav-link" href="cadastrarUsuario.jsp"><i class="material-icons">library_add</i> <span class="align-top">Usuario</span></a>
+                                </li>
                             </ul>
                         </div>
                     </li>
