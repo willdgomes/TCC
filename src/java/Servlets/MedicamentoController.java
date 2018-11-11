@@ -73,7 +73,8 @@ public class MedicamentoController extends HttpServlet {
                 String numeroLote = request.getParameter("numeroLote");
 
                 String dtVenc = request.getParameter("vencimentoLote");
-                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                dtVenc = dtVenc.replaceAll("-", "/");
                 Date data = null;
                 try {
                     data = format.parse(dtVenc);
