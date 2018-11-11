@@ -33,8 +33,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author gomes
  */
-@WebServlet(name = "GerenciarMedicamentoController", urlPatterns = {"/GerenciarMedicamentoController"}, loadOnStartup = 1)
-public class GerenciarMedicamentoController extends HttpServlet {
+@WebServlet(name = "MedicamentoController", urlPatterns = {"/MedicamentoController"}, loadOnStartup = 1)
+public class MedicamentoController extends HttpServlet {
 
     public void init(ServletConfig config) throws ServletException {
         MedicamentosFacade medicamentosFacade = new MedicamentosFacade();
@@ -72,13 +72,12 @@ public class GerenciarMedicamentoController extends HttpServlet {
                 String qtde = request.getParameter("qtdeCaixa");
                 String numeroLote = request.getParameter("numeroLote");
 
-                String dtVenc = "08/03/2012";   //request.getParameter("vencimentoLote");
+                String dtVenc = request.getParameter("vencimentoLote");
                 SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                 Date data = null;
                 try {
                     data = format.parse(dtVenc);
                 } catch (ParseException e) {
-                    System.out.println("Data no formato errado");
                     e.printStackTrace();
                 }
                 java.sql.Date dataVencimentoLote = new java.sql.Date(data.getTime());
