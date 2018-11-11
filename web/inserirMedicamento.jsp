@@ -24,7 +24,7 @@
                                 <div class="card-body p-5">
 
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-8">
                                             <label for="medicamento" class="text-dark" >Medicamento:</label>
                                             <select id="cbRemedios" class="form-control" required name="nomeMed">
                                                 <c:forEach items="${applicationScope.medicamentos}" var="medicamento">
@@ -32,13 +32,19 @@
                                                 </c:forEach>
                                             </select>
                                         </div>
-                                        <div class="col-md-2 offset-1 form-group">
+                                    </div>
+                                     <div class="form-row">
+                                         <div class="col-md-2 form-group">
                                             <label for="Quantidade"class="text-dark" >Quantidade:(Caixa)</label>
                                             <input type="number" class="form-control" id="cpfpaciente" placeholder="" required name="qtdeCaixa">
                                         </div>
                                         <div class="col-md-2 offset-1 form-group">
                                             <label for="Lote"class="text-dark" >Lote:</label>
                                             <input type="number" class="form-control" id="loteMedicamento" placeholder="" required name="numeroLote">
+                                        </div>
+                                           <div class="col-md-2 offset-1 form-group">
+                                            <label for="Lote"class="text-dark" >Data vencimento:</label>
+                                            <input type="date" class="form-control" id="vencimentoLote" placeholder="" required name="vencimentoLote">
                                         </div>
                                     </div>
                                     <div class="row col-sm-1 offset-10">

@@ -42,12 +42,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody>               
-                                                <c:forEach items="${medicamentos}" var="paciente">
-                                                <form action="cadastrar/edicamento" method="POST">
+                                                <c:forEach items="${medicamentos}" var="medicamento">
+                                                <form action="GerenciarMedicamentoController?editarMedicamento" method="POST">
                                                     <tr>
                                                         <th scope="row">3</th>
                                                         <td colspan="2">${medicamento.nome}</td>
-                                                        <td colspan="2">${medicamento.fabricante}</td>
+                                                        <td colspan="2">${medicamento.nomeFabricante}</td>
                                                         <td colspan="2">${medicamento.composicao}</td>
                                                         <td colspan="2">${medicamento.dosagem}</td>
                                                         <td><button type="submit" name="editar" class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
