@@ -6,6 +6,8 @@
 package DAO;
 
 import Beans.Lote;
+import Beans.Medicamento;
+import Facade.MedicamentosFacade;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -19,7 +21,8 @@ import java.sql.SQLException;
 public class LoteDAO {
     private final String stmtInserir = "INSERT INTO lote (lote, idMedicamento, quantidade, dataVencimento)"
             + "VALUES (?, ?, ?, ?)";
-    private final String stmtBuscarLotePorNumero = "SELECT * FROM lote";
+    private final String stmtBuscarLotePorNumero = "SELECT lote, idMedicamento, quantidade, dataVencimento FROM lote WHERE lote = ?";
+    private final String stmtAtualizarLote = "UPDATE lote SET quantidade = ? WHERE lote = ?";
     
     public void inserirLote(Lote lote) {
         Connection con = null;
@@ -48,7 +51,33 @@ public class LoteDAO {
         }
     }
     
-    public Lote buscarMedicamentoNomeInsere(Integer nLote) {
+    public void atualizarLote(Lote lote) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtAtualizarLote);
+            stmt.setInt(1, lote.getQtde());
+            stmt.setInt(2, lote.getId());
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao atualizar o lote no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+    }
+    
+    public Lote buscarLotePorNumero(Integer nLote) {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -58,12 +87,20 @@ public class LoteDAO {
             stmt = con.prepareStatement(stmtBuscarLotePorNumero);
             stmt.setInt(1, nLote);
             rs = stmt.executeQuery();
+            MedicamentosFacade medFacade = new MedicamentosFacade();
+            Medicamento medicamento = new Medicamento();
             if (rs.next()) {
-                lote.setId(0);
+                medicamento = medFacade.pegarMedicamentoPorId(rs.getInt("idMedicamento"));
+                lote.setId(Integer.parseInt(rs.getString("lote")));
+                lote.setMedicamento(medicamento);
+                lote.setQtde(rs.getInt("quantidade"));
+                lote.setDataVencimento(rs.getDate("dataVencimento"));
+                return lote;
+            }else{
+                return null;
             }
-            return lote;
         } catch (SQLException ex) {
-            throw new RuntimeException("Erro ao buscar medicamento no banco de dados. Origem=" + ex.getMessage());
+            throw new RuntimeException("Erro ao buscar lote no banco de dados. Origem=" + ex.getMessage());
         } finally {
             try {
                 rs.close();
@@ -81,6 +118,5 @@ public class LoteDAO {
                 System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
             };
         }
-
     }
 }

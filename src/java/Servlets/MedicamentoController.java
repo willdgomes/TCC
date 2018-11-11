@@ -33,8 +33,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author gomes
  */
-@WebServlet(name = "GerenciarMedicamentoController", urlPatterns = {"/GerenciarMedicamentoController"}, loadOnStartup = 1)
-public class GerenciarMedicamentoController extends HttpServlet {
+@WebServlet(name = "MedicamentoController", urlPatterns = {"/MedicamentoController"}, loadOnStartup = 1)
+public class MedicamentoController extends HttpServlet {
 
     public void init(ServletConfig config) throws ServletException {
         MedicamentosFacade medicamentosFacade = new MedicamentosFacade();
@@ -64,31 +64,33 @@ public class GerenciarMedicamentoController extends HttpServlet {
             rd.include(request, response);
         } else {
             if (action.equals("insereMedicamentoLote")) {
-                
+
                 //busca medicamento para inserir lote no estoque
-                
                 MedicamentosFacade medFacade = new MedicamentosFacade();
                 Medicamento medicamento = new Medicamento();
                 String nomeMedicamento = request.getParameter("nomeMed");
                 String qtde = request.getParameter("qtdeCaixa");
-                String numeroLote = request.getParameter("NumeroLote");
-                
-                String dtVenc = "08/03/2012";   //request.getParameter("dataVencimento");
+                String numeroLote = request.getParameter("numeroLote");
+
+                String dtVenc = request.getParameter("vencimentoLote");
                 SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                 Date data = null;
                 try {
                     data = format.parse(dtVenc);
                 } catch (ParseException e) {
-                    System.out.println("Data no formato errado");
                     e.printStackTrace();
                 }
                 java.sql.Date dataVencimentoLote = new java.sql.Date(data.getTime());
-                
-                medicamento = medFacade.pegarMedicamentoPorNome(nomeMedicamento);
-                Lote lote = new Lote(Integer.parseInt(numeroLote), medicamento, Integer.parseInt(qtde), dataVencimentoLote);
-                LotesFacade.inserir(lote);
-            }
-            else if (action.equals("pesquisarMedicamento")) {
+                Lote lote = LotesFacade.pegarLotePorNumero(Integer.parseInt(numeroLote));
+                if (lote==null) {
+                    medicamento = medFacade.pegarMedicamentoPorNome(nomeMedicamento);
+                    lote = new Lote(Integer.parseInt(numeroLote), medicamento, Integer.parseInt(qtde), dataVencimentoLote);
+                    LotesFacade.inserir(lote);
+                }else{
+                    lote.setQtde(lote.getQtde()+Integer.parseInt(qtde));
+                    LotesFacade.atualizarLote(lote);
+                }
+            } else if (action.equals("pesquisarMedicamento")) {
                 MedicamentoDAO medicamentoDAO = new MedicamentoDAO();
                 List<Medicamento> medicamentoList = medicamentoDAO.buscarMedicamentosParam(request.getParameter("pesquisa"));
                 if (session != null) {

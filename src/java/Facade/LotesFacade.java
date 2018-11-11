@@ -18,4 +18,12 @@ public class LotesFacade {
     public static void inserir(Lote lote) {
         loteDAO.inserirLote(lote);
     }
+    
+    public static void atualizarLote(Lote lote) {
+        loteDAO.atualizarLote(lote);
+    }
+    
+    public static Lote pegarLotePorNumero(Integer numeroLote){
+        return loteDAO.buscarLotePorNumero(numeroLote);
+    }
 }

@@ -29,7 +29,8 @@ public class MedicamentoDAO {
     private final String stmtAtualizarMedicamentos = "UPDATE medicamentos SET nomeMedicamento = ?, descricao = ?, nomeFabricante = ?, composicao = ?, dosagem = ? WHERE idMedicamento = ?";
     private final String stmtBuscarMedicamentosParam = "SELECT idMedicamento, nomeMedicamento, descricao, nomeFabricante, composicao, dosagem, medida FROM medicamentos WHERE nomeMedicamento LIKE ?";
     private final String stmtBuscarMedicamentoPorNome = "SELECT idMedicamento, nomeMedicamento, descricao, nomeFabricante, composicao, dosagem, medida FROM medicamentos WHERE nomeMedicamento=?";
-
+    private final String stmtBuscarMedicamentoId = "SELECT idMedicamento, nomeMedicamento, descricao, nomeFabricante, composicao, dosagem, medida FROM medicamentos WHERE idMedicamento=?";
+    
     public void inserirMedicamento(Medicamento med) {
         Connection con = null;
         PreparedStatement stmt = null;
@@ -211,6 +212,48 @@ public class MedicamentoDAO {
             con = ConnectionFactory.getConnection();
             stmt = con.prepareStatement(stmtBuscarMedicamentoPorNome);
             stmt.setString(1, nomeRemedio);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                medicamento.setId(Integer.parseInt(rs.getString("idMedicamento")));
+                medicamento.setNome(rs.getString("nomeMedicamento"));
+                medicamento.setNomeFabricante(rs.getString("nomeFabricante"));
+                medicamento.setComposicao(rs.getString("composicao"));
+                medicamento.setDescricao(rs.getString("descricao"));
+                medicamento.setDosagem(Double.parseDouble(rs.getString("dosagem")));
+                medicamento.setMedida(rs.getString("medida"));
+            }
+            return medicamento;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar medicamento no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
+            };
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+
+    }
+    
+    public Medicamento buscarMedicamentoId(int idMedicamento) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Medicamento medicamento = new Medicamento();
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtBuscarMedicamentoId);
+            stmt.setInt(1, idMedicamento);
             rs = stmt.executeQuery();
             if (rs.next()) {
                 medicamento.setId(Integer.parseInt(rs.getString("idMedicamento")));
