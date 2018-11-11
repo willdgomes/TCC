@@ -18,7 +18,7 @@
                     </div>
                     <div class="panel-body m-3">
                             <div class="col-sm-12">
-                                <form action="GerenciarMedicamentoController?action=pesquisarMedicamento" method="POST" class="card border-info">
+                                <form action="MedicamentoController?action=pesquisarMedicamento" method="POST" class="card border-info">
                                     <div class="card-body p-5">
                                         <div class="form-group">
                                             <input type="text" class="col-sm-10" placeholder="Pesquisar" required name="pesquisa">    
@@ -33,9 +33,8 @@
                                         <table class="table table-hover table-responsive-sm">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">#</th>
                                                     <th scope="col">Nome</th>
-                                                        <th scope="col">Fabricante</th>
+                                                    <th scope="col">Fabricante</th>
                                                     <th scope="col">Coposição</th>
                                                     <th scope="col">Dosagem</th>
                                                     <th scope="col">Action</th>
@@ -43,13 +42,12 @@
                                             </thead>
                                             <tbody>               
                                                 <c:forEach items="${medicamentos}" var="medicamento">
-                                                <form action="GerenciarMedicamentoController?editarMedicamento" method="POST">
+                                                <form action="MedicamentoController?editarMedicamento" method="POST">
                                                     <tr>
-                                                        <th scope="row">3</th>
-                                                        <td colspan="2">${medicamento.nome}</td>
-                                                        <td colspan="2">${medicamento.nomeFabricante}</td>
-                                                        <td colspan="2">${medicamento.composicao}</td>
-                                                        <td colspan="2">${medicamento.dosagem}</td>
+                                                        <td colspan="col">${medicamento.nome}</td>
+                                                        <td colspan="col">${medicamento.nomeFabricante}</td>
+                                                        <td colspan="col">${medicamento.composicao}</td>
+                                                        <td colspan="col">${medicamento.dosagem}</td>
                                                         <td><button type="submit" name="editar" class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
                                                         <input type="hidden" value="${medicamento.id}">
                                                     </tr>
