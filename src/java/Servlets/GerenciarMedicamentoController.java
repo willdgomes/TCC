@@ -71,9 +71,9 @@ public class GerenciarMedicamentoController extends HttpServlet {
                 Medicamento medicamento = new Medicamento();
                 String nomeMedicamento = request.getParameter("nomeMed");
                 String qtde = request.getParameter("qtdeCaixa");
-                String numeroLote = request.getParameter("NumeroLote");
+                String numeroLote = request.getParameter("numeroLote");
                 
-                String dtVenc = "08/03/2012";   //request.getParameter("dataVencimento");
+                String dtVenc = "08/03/2012";   //request.getParameter("vencimentoLote");
                 SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                 Date data = null;
                 try {
