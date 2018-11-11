@@ -52,11 +52,12 @@
                                             <label for="parentesco" class="text-dark ">Paciente</label>
                                             <div class="col-md-12 row">
                                                 <div class="dropdown">
-                                                    <select id="cbPaciente" class="form-control" name="paciente">
-                                                        <option></option>
-                                                        <option>Fulano da silva santos sauro</option>
-                                                        <option>eu fro aaa</option>
-                                                        <option>Lilian renata de spuza campos ferreira</option>
+                                                    <select id="cbPaciente" class="form-control" required name="paciente">
+                                                        <c:forEach items="${applicationScope.perfil}" var="paciente">
+
+                                                            <option>${paciente.nome}</option>
+
+                                                        </c:forEach>
                                                     </select>
                                                 </div>                    
                                             </div>

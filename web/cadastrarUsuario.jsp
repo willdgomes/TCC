@@ -46,9 +46,13 @@
                                         </div>
                                     </div>                                    
                                     <div class="form-row">
-                                        <div class="form-group col-md-8">
+                                        <div class="form-group col-md-5">
                                             <label for="perfil" class="text-dark">Perfil:</label>
-                                            <input type="text" class="form-control" id="perfilUsuario" name="perfil">
+                                           <select id="cbPerfil" class="form-control" required name="perfilUsuario">
+                                                   <option></option>
+                                                        <option>Administrador</option>
+                                                        <option>Usuario</option>                                                        
+                                            </select>
                                         </div>
                                     </div>                                    
                                     <div class="form-row">

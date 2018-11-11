@@ -22,7 +22,6 @@
                         <div class="col-sm-12">
                             <form action="GerenciarMedicamentoController?action=insereMedicamentoLote" method="POST" class="card border-info">
                                 <div class="card-body p-5">
-
                                     <div class="form-row">
                                         <div class="form-group col-md-8">
                                             <label for="medicamento" class="text-dark" >Medicamento:</label>
