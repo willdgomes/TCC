@@ -1,37 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-<<<<<<< HEAD
-            <file>file:/home/gomes/NetBeansProjects/Farmacia/web/inserirMedicamento.jsp</file>
-            <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Servlets/PacienteController.java</file>
-            <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Servlets/MedicamentoController.java</file>
-=======
-            <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarMedicamento.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Medicamento.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarReceita.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/pesquisaPacienteDispensa.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/MedicamentoDAO.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/gerenciarRetirantes.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/GerenciarPacientesController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/dispensarMedicamentos.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Retirante.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarPacientes.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/CadastroMedicamentoController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/dispensarMedicamento.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/gerenciarPacientes.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/ConnectionFactory.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarRetirante.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarUsuario.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/GerenciarMedicamentoController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/PacienteController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Facade/MedicamentosFacade.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/banco/script_banco.sql</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/gerenciarMedicamentos.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/inserirMedicamento.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/WEB-INF/tags/page.tag</file>
->>>>>>> eda8be1d966c518fe785ffb868784bdd51f6d5ec
-        </group>
-    </open-files>
 </project-private>
