@@ -5,13 +5,18 @@
  */
 package Servlets;
 
+import Beans.Retirante;
 import Beans.Paciente;
 import DAO.PacienteDAO;
 import DAO.RetiranteDAO;
+import Facade.RetirantesFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +30,13 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "GerenciarRetirantesController", urlPatterns = {"/GerenciarRetirantesController"})
 public class GerenciarRetirantesController extends HttpServlet {
-
+public void init(ServletConfig config) throws ServletException {
+        RetirantesFacade retirantesFacade = new RetirantesFacade();
+        List<Retirante> retirante = new ArrayList<Retirante>();
+        retirante = retirantesFacade.listaRetirantes();
+        ServletContext medContext = config.getServletContext();
+        medContext.setAttribute("medicamentos", retirante);
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

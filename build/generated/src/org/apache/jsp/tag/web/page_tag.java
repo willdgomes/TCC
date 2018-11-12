@@ -163,6 +163,9 @@ public final class page_tag
       out.write("                                    <a class=\"nav-link\" href=\"cadastrarPacientes.jsp\"><i class=\"material-icons\">person_add</i> <span class=\"align-top\">Pacientes</span></a>\r\n");
       out.write("                                </li>\r\n");
       out.write("                                <li class=\"nav-sub-item\">\r\n");
+      out.write("                                    <a class=\"nav-link\" href=\"cadastrarReceita.jsp\"><i class=\"material-icons\">receipt</i> <span class=\"align-top\">Receita Médica</span></a>\r\n");
+      out.write("                                </li>\r\n");
+      out.write("                                <li class=\"nav-sub-item\">\r\n");
       out.write("                                    <a class=\"nav-link\" href=\"cadastrarRetirante.jsp\"><i class=\"material-icons\">group_add</i> <span class=\"align-top\">Retirantes</span></a>\r\n");
       out.write("                                </li>\r\n");
       out.write("                                <li class=\"nav-sub-item\">\r\n");

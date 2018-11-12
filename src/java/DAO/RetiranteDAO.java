@@ -24,7 +24,7 @@ public class RetiranteDAO {
     private final String stmtInserir = "INSERT INTO retirantes (cpfRetirante, nomeRetirante, dnRetirante, telefone, "
             + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email, vincolo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
     
-    
+    private final String stmtListarRetirantes="SELECT idMedicamento, cpfRetirante,nomeRetirante, dnRetirante, telefone, cep, cidade, estado,bairro, endereco, numEndereco, complemento, email, vincolo from medicamentos";
     public void inserirPaciente(Retirante retirante) {
         Connection con = null;
         PreparedStatement stmt = null;
@@ -62,7 +62,7 @@ public class RetiranteDAO {
         }
     }
   
-       public List<Paciente> buscarRetirantesParam(/*String parametro, */String pesquisa) {
+    public List<Paciente> buscarRetirantesParam(/*String parametro, */String pesquisa) {
        // Departamento departamento = new Departamento();
         Connection con = null;
         PreparedStatement stmt = null;
@@ -105,5 +105,50 @@ public class RetiranteDAO {
             try{con.close();;}catch(Exception ex){System.out.println("Erro ao fechar conexão. Ex="+ex.getMessage());};                
         }
     
+    }
+    
+        public List<Retirante> listarRetirantes() {
+
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Retirante> listaRetirantes = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtListarRetirantes);
+            rs = stmt.executeQuery();
+            listaRetirantes = new ArrayList<Retirante>();
+            while (rs.next()) {
+                Retirante retirante = new Retirante();
+                retirante.setIdRetirante(rs.getInt("idRetirante"));
+                retirante.setNomeRetirante(rs.getString("nomeRetirante"));
+                retirante.setCpfRetirante("cpf");
+                retirante.setEmail(rs.getString("email"));
+                retirante.setCep(rs.getString("cep"));
+                retirante.setCidade(rs.getString("cidade"));
+                retirante.setEmail(rs.getString("estado"));
+                listaRetirantes.add(retirante);
+            }
+            return listaRetirantes;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao listar os retirantes no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
+            };
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+
     }
 }

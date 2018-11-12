@@ -16,6 +16,16 @@
                     <h2 align="center">Gerenciamento de retirantes</h2>
                 </div>
                 <div class="panel-body m-3">
+                      <div class="col-sm-12">
+                                <form action="RetiranteController?action=pesquisaParam" method="POST" class="card border-info">
+                                    <div class="card-body p-5">
+                                        <div class="form-group">
+                                            <input type="text" class="col-sm-10" placeholder="Pesquisar" required name="pesquisa">    
+                                            <button type="submit" class="btn col-sm-1" data-toggle="tooltip" data-placement="bottom" title="Pesquisar retirante"><i class="material-icons">search</i></button>
+                                        </div>     
+                                    </div>
+                                </form>
+                            </div>
                     <div class="col-sm-12">
                         <div class="card border-info">
                             <div class="card-body p-5">
