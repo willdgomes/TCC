@@ -20,7 +20,7 @@
                     <div class="panel-body pt-3">
                         <div class="col-sm-12">
                             <div class="col-sm-12">
-                                <form  action="DispensaController?action=cadastrareceita" method="POST">
+                                <form  action="ReceitasController?action=cadastrarReceita" method="POST">
                                     <div class="card border-info p-5">
                                         <div class="form-row">
                                         <div class="form-group col-md-8">
