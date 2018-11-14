@@ -41,8 +41,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>               
+                                                <td colspan="2">${mensagem}</td>
                                                 <c:forEach items="${medicamentos}" var="medicamento">
-                                                <form action="MedicamentoController?editarMedicamento" method="POST">
+                                                <form action="editarMedicamento" method="POST">
                                                     <tr>
                                                         <td colspan="col">${medicamento.nome}</td>
                                                         <td colspan="col">${medicamento.nomeFabricante}</td>

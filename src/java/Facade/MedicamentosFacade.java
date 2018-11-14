@@ -31,4 +31,8 @@ public class MedicamentosFacade {
     public Medicamento pegarMedicamentoPorId(int idMedicamento){
         return medDAO.buscarMedicamentoId(idMedicamento);
     }
+    
+    public List<Medicamento> buscarMedicamento(String pesquisa){
+        return medDAO.buscarMedicamentosParam(pesquisa);
+    }
 }

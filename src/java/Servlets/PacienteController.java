@@ -17,6 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +38,14 @@ import javax.ws.rs.core.Response;
  */
 @WebServlet(name = "PacienteController", urlPatterns = {"/PacienteController"})
 public class PacienteController extends HttpServlet {
-
+    
+    public void init(ServletConfig config) throws ServletException {
+        PacientesFacade pacientesFacade = new PacientesFacade();
+        List<Paciente> pacientes = new ArrayList<Paciente>();
+        pacientes = pacientesFacade.buscarTodos();
+        ServletContext pacContext = config.getServletContext();
+        pacContext.setAttribute("pacientes", pacientes);
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -102,17 +111,16 @@ public class PacienteController extends HttpServlet {
             } else if (action.equals("pesquisaParam")) {
                 
                 String pesquisa = request.getParameter("pesquisa");
-                PacienteDAO pacienteDAO = new PacienteDAO();
-                List<Paciente> pacienteList = pacienteDAO.buscarPacientesParam(pesquisa);
+                 PacientesFacade pacientesFacade = new PacientesFacade();
+                List<Paciente> pacienteList = pacientesFacade.buscaPacientesParam(pesquisa);
                 if (session != null) {
                     RequestDispatcher rd = null;
-                    if (pacienteList.size() > 0) {
-                        request.setAttribute("pacientes", pacienteList);
-                    } else {
+                    request.setAttribute("pacientes", pacienteList);
+                    if (pacienteList.size() == 0) {
                         request.setAttribute("mensagem", "Paciente não cadastrado no sistema");
                     }
-                    rd = getServletContext().getRequestDispatcher("/gerenciarPacientes.jsp");
-                    rd.include(request, response);
+                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarPacientes.jsp");
+                     requestDispatcher.forward(request, response);
                 } else {
                     request.setAttribute("msg", "Usuário e/ou senha incorreto(s)!");
                     RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");

@@ -23,7 +23,7 @@ public class PacienteDAO {
     
     private final String stmtInserir = "INSERT INTO pacientes (cpfPaciente, nomePaciente, dnPaciente, telefone, "
             + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-    private final String stmtBuscarPacientess = "SELECT idPaciente, cpfPaciente, nomePaciente, dnPaciente, telefone, "
+    private final String stmtBuscarPacientes = "SELECT idPaciente, cpfPaciente, nomePaciente, dnPaciente, telefone, "
             + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email FROM pacientes";
     private final String stmtRemoverClientes = "DELETE FROM cliente WHERE idCliente = ?";
     private final String stmtAtualizarClientes = "UPDATE cliente SET nome = ?, sobrenome = ?, telefone = ? WHERE idCliente = ?";
@@ -73,14 +73,28 @@ public class PacienteDAO {
         List<Paciente> listaPacientes = null;
         try {
             con = ConnectionFactory.getConnection();
-            stmt = con.prepareStatement(stmtInserir);
+            stmt = con.prepareStatement(stmtBuscarPacientes);
             rs = stmt.executeQuery();
             listaPacientes = new ArrayList<Paciente>();
             while (rs.next()) {
-                Paciente paciente = new Paciente(rs.getInt(0), rs.getString(2), rs.getString(3), rs.getDate(4),
-                        rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),
-                rs.getString(11),rs.getString(12),rs.getString(13));
-                listaPacientes.add(paciente);
+                 Paciente p = new Paciente();
+                p.setId(Integer.parseInt(rs.getString("idPaciente")));
+                p.setNome(rs.getString("nomePaciente"));
+                p.setCpf(rs.getString("cpfPaciente"));
+                String stringData = rs.getString("dnPaciente");  
+                stringData = stringData.replaceAll("-", "/");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                java.util.Date dt = null;
+                java.sql.Date dt2 = null;
+               try{
+                 dt = format.parse(stringData);
+                 dt2 = new java.sql.Date(dt.getTime());
+               }
+               catch(Exception ex){
+                 System.out.println("Erro na data");
+               }
+                p.setDataNascimento(dt2);
+                listaPacientes.add(p);
             }  
         return listaPacientes;
         }

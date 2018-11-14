@@ -25,7 +25,7 @@ public class RetirantesFacade {
         return listaRetirantes;
     }
     
-    public List<Paciente> buscarMedicamentoNome(String nomeRetirante){
+    public List<Retirante> buscarMedicamentoNome(String nomeRetirante){
         return retDAO.buscarRetirantesParam(nomeRetirante);
     }
     

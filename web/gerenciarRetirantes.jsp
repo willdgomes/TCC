@@ -17,7 +17,7 @@
                 </div>
                 <div class="panel-body m-3">
                       <div class="col-sm-12">
-                                <form action="RetiranteController?action=pesquisaParam" method="POST" class="card border-info">
+                                <form action="GerenciarRetirantesController" method="POST" class="card border-info">
                                     <div class="card-body p-5">
                                         <div class="form-group">
                                             <input type="text" class="col-sm-10" placeholder="Pesquisar" required name="pesquisa">    
@@ -40,14 +40,13 @@
                                             </thead>
                                             <tbody> 
                                                 <td colspan="2">${mensagem}</td>
-                                                <c:forEach items="${retirantes}" var="paciente">
-                                                <form action="cadastrarPaciente" method="POST">
+                                                <c:forEach items="${retirantes}" var="retirante">
+                                                <form action="editarRetirante" method="POST">
                                                     <tr>
-                                                        <td scope="col">${retirante.nome}</td>
-                                                        <td scope="col">${retirante.cpf}</td>
-                                                        <td scope="col">${retirante.paciente}</td>
+                                                        <td scope="col">${retirante.nomeRetirante}</td>
+                                                        <td scope="col">${retirante.cpfRetirante}</td>
                                                         <td scope="col"><button type="submit" name="editar" class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
-                                                        <input type="hidden" value="${retirante.id}">
+                                                        <input type="hidden" value="${retirante.idRetirante}">
                                                     </tr>
                                                 </form>
                                                 </c:forEach>

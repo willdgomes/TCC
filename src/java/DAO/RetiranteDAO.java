@@ -23,8 +23,9 @@ public class RetiranteDAO {
     
     private final String stmtInserir = "INSERT INTO retirantes (cpfRetirante, nomeRetirante, dnRetirante, telefone, "
             + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email, vincolo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    
-    private final String stmtListarRetirantes="SELECT idMedicamento, cpfRetirante,nomeRetirante, dnRetirante, telefone, cep, cidade, estado,bairro, endereco, numEndereco, complemento, email, vincolo from medicamentos";
+     String stmtBuscarRetirantesParam = "SELECT idRetirante, cpfRetirante, nomeRetirante, dnRetirante, telefone, "
+            + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email, vincolo FROM retirantes WHERE nomeRetirante LIKE ?"; 
+    private final String stmtListarRetirantes="SELECT idRetirante, cpfRetirante,nomeRetirante, dnRetirante, telefone, cep, cidade, estado,bairro, endereco, numEndereco, complemento, email, vincolo from retirantes";
     public void inserirPaciente(Retirante retirante) {
         Connection con = null;
         PreparedStatement stmt = null;
@@ -62,26 +63,34 @@ public class RetiranteDAO {
         }
     }
   
-    public List<Paciente> buscarRetirantesParam(/*String parametro, */String pesquisa) {
+    public List<Retirante> buscarRetirantesParam(/*String parametro, */String pesquisa) {
        // Departamento departamento = new Departamento();
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        List<Paciente> listaRetirantes = null;
-        String stmtBuscarRetirantesParam = "SELECT idRetirante, cpfRetirante, nomeRetirante, dnRetirante, telefone, "
-            + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email, vincolo FROM retirantes WHERE nomePaciente LIKE ?"; 
+        List<Retirante> listaRetirantes = null;
         try{
             con = ConnectionFactory.getConnection();  
             stmt = con.prepareStatement(stmtBuscarRetirantesParam); 
             stmt.setString(1,'%'+pesquisa+'%');
             rs = stmt.executeQuery();
-            listaRetirantes = new ArrayList<Paciente>();
+            listaRetirantes = new ArrayList<Retirante>();
             while (rs.next()) {
-                Paciente p = new Paciente();
-                p.setId(Integer.parseInt(rs.getString("idRetirante")));
-                p.setNome(rs.getString("nomeRetirante"));
-                p.setCpf(rs.getString("cpfRetirannte"));
-                String stringData = rs.getString("dnRetirannte");  
+                Retirante p = new Retirante();
+                p.setIdRetirante(Integer.parseInt(rs.getString("idRetirante")));
+                p.setNomeRetirante(rs.getString("nomeRetirante"));
+                p.setCpfRetirante(rs.getString("cpfRetirante"));
+                p.setEmail(rs.getString("cpfRetirante"));
+                p.setTelefone(rs.getString("telefone"));
+                p.setCep(rs.getString("cep"));
+                p.setCidade(rs.getString("cidade"));
+                p.setBairro(rs.getString("bairro"));
+                p.setEndereco(rs.getString("endereco"));
+                p.setNumEndereco(rs.getString("numEndereco"));
+                p.setComplemento(rs.getString("complemento"));
+                p.setVincolo(rs.getString("vincolo"));
+                p.setEmail(rs.getString("email"));
+                String stringData = rs.getString("dnRetirante");  
                 stringData = stringData.replaceAll("-", "/");
                 SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
                 java.util.Date dt = null;
@@ -93,7 +102,7 @@ public class RetiranteDAO {
                catch(Exception ex){
                  System.out.println("Erro na data");
                }
-                p.setDataNascimento(dt2);
+                p.setDnRetirante(dt2);
                 listaRetirantes.add(p);
             }  
         return listaRetirantes;            
@@ -122,7 +131,7 @@ public class RetiranteDAO {
                 Retirante retirante = new Retirante();
                 retirante.setIdRetirante(rs.getInt("idRetirante"));
                 retirante.setNomeRetirante(rs.getString("nomeRetirante"));
-                retirante.setCpfRetirante("cpf");
+                retirante.setCpfRetirante("cpfRetirante");
                 retirante.setEmail(rs.getString("email"));
                 retirante.setCep(rs.getString("cep"));
                 retirante.setCidade(rs.getString("cidade"));

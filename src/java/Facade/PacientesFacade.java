@@ -43,5 +43,5 @@ public class PacientesFacade {
     public static int validar(Paciente p) {
         return 0;
     }
-    
+
 }

@@ -92,17 +92,18 @@ public class MedicamentoController extends HttpServlet {
                     LotesFacade.atualizarLote(lote);
                 }
             } else if (action.equals("pesquisarMedicamento")) {
-                MedicamentoDAO medicamentoDAO = new MedicamentoDAO();
-                List<Medicamento> medicamentoList = medicamentoDAO.buscarMedicamentosParam(request.getParameter("pesquisa"));
+                String pesquisa = request.getParameter("pesquisa");
+                MedicamentosFacade medicamentosFacade = new MedicamentosFacade();
+                List<Medicamento> medicamentoList =  medicamentosFacade.buscarMedicamento(pesquisa);
                 if (session != null) {
                     RequestDispatcher rd = null;
-                    if (medicamentoList.size() > 0) {
-                        request.setAttribute("medicamentos", medicamentoList);
-                    } else {
+                    request.setAttribute("medicamentos", medicamentoList);
+                    if (medicamentoList.size() == 0) {
                         request.setAttribute("mensagem", "Medicamento não cadastrado no sistema");
                     }
-                    rd = getServletContext().getRequestDispatcher("/gerenciarMedicamentos.jsp");
-                    rd.include(request, response);
+                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarMedicamentos.jsp");
+                     requestDispatcher.forward(request, response);
+                  
                 } else {
                     request.setAttribute("msg", "Usuário e/ou senha incorreto(s)!");
                     RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");

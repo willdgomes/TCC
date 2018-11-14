@@ -6,7 +6,6 @@
 package Servlets;
 
 import Beans.Retirante;
-import Beans.Paciente;
 import DAO.PacienteDAO;
 import DAO.RetiranteDAO;
 import Facade.RetirantesFacade;
@@ -30,12 +29,12 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "GerenciarRetirantesController", urlPatterns = {"/GerenciarRetirantesController"})
 public class GerenciarRetirantesController extends HttpServlet {
-public void init(ServletConfig config) throws ServletException {
+    public void init(ServletConfig config) throws ServletException {
         RetirantesFacade retirantesFacade = new RetirantesFacade();
         List<Retirante> retirante = new ArrayList<Retirante>();
         retirante = retirantesFacade.listaRetirantes();
         ServletContext medContext = config.getServletContext();
-        medContext.setAttribute("medicamentos", retirante);
+        medContext.setAttribute("retirantes", retirante);
     }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -57,18 +56,16 @@ public void init(ServletConfig config) throws ServletException {
         }
         else {
             String pesquisa = request.getParameter("pesquisa");
-            
-            //Paciente paciente = new Paciente();
-            RetiranteDAO retiranteDAO = new RetiranteDAO();
-            List<Paciente> pacienteList = retiranteDAO.buscarRetirantesParam(pesquisa);
+            RetirantesFacade retirantesFacade = new RetirantesFacade();  
+            List<Retirante> retiranteList = retirantesFacade.buscarMedicamentoNome(pesquisa);
             if (session != null) {            
                 RequestDispatcher rd = null;
-                if(pacienteList.size() > 0)
-                    request.setAttribute("retirantes", pacienteList);
+                if(retiranteList.size() > 0)
+                    request.setAttribute("retirantes", retiranteList);
                 else
                     request.setAttribute("mensagem", "Retirante não cadastrado no sistema");
-                rd = getServletContext().getRequestDispatcher("/gerenciarPacientes.jsp");
-                rd.include(request, response);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarRetirantes.jsp");
+                requestDispatcher.forward(request, response);
             }
             else {
                 request.setAttribute("msg", "Usuário e/ou senha incorreto(s)!");
