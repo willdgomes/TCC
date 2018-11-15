@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:page>
     <jsp:attribute name="title">Farmácia APPP</jsp:attribute>
@@ -23,42 +24,42 @@
                                 <form  action="ReceitasController?action=cadastrarReceita" method="POST">
                                     <div class="card border-info p-5">
                                         <div class="form-row">
-                                        <div class="form-group col-md-8">
-                                            <label for="paciente" class="text-dark ">Paciente:</label>
-                                            <div class="row">
-                                                <div class="dropdown col-md-12  ">
-                                                    <select id="cbPaciente" class="form-control" name="paciente">
-                                                        <option></option>
-                                                        <option>Fulano da silva santos sauro</option>
-                                                        <option>eu fro aaa</option>
-                                                        <option>Ana claudia de souza campos ferreira banah silva</option>
-                                                    </select>
-                                                </div>                    
+                                            <div class="form-group col-md-8">
+                                                <label for="paciente" class="text-dark ">Paciente:</label>
+                                                <div class="row">
+                                                    <div class="dropdown col-md-12  ">
+                                                        <select id="cbPaciente" class="form-control" required name="nomePaci">
+                                                            <option></option>
+                                                            <c:forEach items="${applicationScope.pacientes}" var="paciente">
+                                                                <option>${paciente.nome}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>                    
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="cpfPaciente" class="text-dark ">CPF:</label>
+                                                <div class="col-md-5 row">
+                                                    <div class="dropdown">
+                                                        <label for="cpdPaciente" class="text-dark row" value="${paciente.cpf}" name="cpfPaciReceita"></label>
+                                                    </div>                    
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="cpfPaciente" class="text-dark ">CPF:</label>
-                                            <div class="col-md-5 row">
-                                                <div class="dropdown">
-                                                    <label for="cpdPaciente" class="text-dark row" >09757962910</label>
-                                                </div>                    
-                                            </div>
-                                        </div>
-                                    </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-8">
                                                 <label for="nomeMedico" class="text-dark row" >Nome do médico:</label>
-                                                <input type="nomeMedico" class="form-control" id="nomeMedico" name="medicoNome">
+                                                <input type="nomeMedico" class="form-control" id="nomeMedico" name="medicoNomeReceita">
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="crm" class="text-dark row" >CRM:</label>
-                                                <input type="number" class="form-control" id="crmMedico" name="medicoCrm">
+                                                <input type="number" class="form-control" id="crmMedico" name="medicoCrmReceita">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-4">
                                                 <label for="dtReceita" class="text-dark">Data da receita:</label>
-                                                <input type="date" class="form-control" id="dtReceita" name="dataReceita">
+                                                <input type="date" class="form-control" id="dtReceita" name="dataVencimentoReceita">
                                             </div>
                                         </div>
                                     </div>
@@ -66,7 +67,8 @@
                                         <div class="form-row" id="line1">
                                             <div class="col-md-6 form-group">
                                                 <label class="text-dark" for="Medicamento" >Medicamento:</label> 
-                                                <select id="cbRemedios" class="form-control" required name="nomeMedicamento">
+                                                <select id="cbRemedios" class="form-control" required name="nomeMedicamentoReceita">
+                                                    <option></option>
                                                     <c:forEach items="${applicationScope.medicamentos}" var="medicamento">
                                                         <option>${medicamento.nome}</option>
                                                     </c:forEach>
@@ -74,7 +76,7 @@
                                             </div>
                                             <div class="col-md-2 offset-1 form-group">
                                                 <label for="Quantidade"class="text-dark" >Quantidade:(Caixa)</label>
-                                                <input type="number" class="form-control" id="cpfpaciente" placeholder="" required name="quantidadeMedicamento">
+                                                <input type="number" class="form-control" id="cpfpaciente" placeholder="" required name="quantidadeMedicamentoReceita">
                                             </div>
                                             <div class="col-md-1 offset-md-1 form-group">
                                                 <script src="js/jquery-3.2.1.slim.min.js"></script>
@@ -100,7 +102,7 @@
                                                             <td scope="col">${medicamento.dosagem}</td>
                                                             <td scope="col">${medicamento.quantidade}</td>
                                                             <td scope="col"><button type="delete" name="excluir" class="btn btn-sm btn-link"><i class="material-icons">delete</i></button> </td>
-                                                        <input type="hidden" value="${medicamento.id}">
+                                                            <input type="hidden" value="${medicamento.id}">
                                                         </tr>
                                                     </form>
                                                 </c:forEach>

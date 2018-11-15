@@ -36,7 +36,7 @@ import javax.ws.rs.core.Response;
  *
  * @author gomes
  */
-@WebServlet(name = "PacienteController", urlPatterns = {"/PacienteController"}, loadOnStartup = 1)
+@WebServlet(name = "PacienteController", urlPatterns = {"/PacienteController"}, loadOnStartup = 2)
 public class PacienteController extends HttpServlet {
 
     public void init(ServletConfig config) throws ServletException {
@@ -57,6 +57,7 @@ public class PacienteController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         HttpSession session = request.getSession(false);
         if (session.getAttribute("usuario") == null) {
