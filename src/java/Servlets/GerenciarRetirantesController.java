@@ -27,7 +27,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Eu
  */
-@WebServlet(name = "GerenciarRetirantesController", urlPatterns = {"/GerenciarRetirantesController"})
+@WebServlet(name = "GerenciarRetirantesController", urlPatterns = {"/GerenciarRetirantesController"}, loadOnStartup = 1)
 public class GerenciarRetirantesController extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         RetirantesFacade retirantesFacade = new RetirantesFacade();

@@ -36,9 +36,9 @@ import javax.ws.rs.core.Response;
  *
  * @author gomes
  */
-@WebServlet(name = "PacienteController", urlPatterns = {"/PacienteController"})
+@WebServlet(name = "PacienteController", urlPatterns = {"/PacienteController"}, loadOnStartup = 1)
 public class PacienteController extends HttpServlet {
-    
+
     public void init(ServletConfig config) throws ServletException {
         PacientesFacade pacientesFacade = new PacientesFacade();
         List<Paciente> pacientes = new ArrayList<Paciente>();
@@ -109,9 +109,8 @@ public class PacienteController extends HttpServlet {
                 rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");
                 rd.include(request, response);
             } else if (action.equals("pesquisaParam")) {
-                
                 String pesquisa = request.getParameter("pesquisa");
-                 PacientesFacade pacientesFacade = new PacientesFacade();
+                PacientesFacade pacientesFacade = new PacientesFacade();
                 List<Paciente> pacienteList = pacientesFacade.buscaPacientesParam(pesquisa);
                 if (session != null) {
                     RequestDispatcher rd = null;
@@ -119,8 +118,8 @@ public class PacienteController extends HttpServlet {
                     if (pacienteList.size() == 0) {
                         request.setAttribute("mensagem", "Paciente não cadastrado no sistema");
                     }
-                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarPacientes.jsp");
-                     requestDispatcher.forward(request, response);
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarPacientes.jsp");
+                    requestDispatcher.forward(request, response);
                 } else {
                     request.setAttribute("msg", "Usuário e/ou senha incorreto(s)!");
                     RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
