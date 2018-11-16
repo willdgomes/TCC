@@ -26,6 +26,7 @@
                                         <div class="form-group col-md-8">
                                             <label for="medicamento" class="text-dark" >Medicamento:</label>
                                             <select id="cbRemedios" class="form-control" required name="nomeMed">
+                                                <option></option>
                                                 <c:forEach items="${applicationScope.medicamentos}" var="medicamento">
                                                     <option>${medicamento.nome}</option>
                                                 </c:forEach>

@@ -43,7 +43,7 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         HttpSession session = request.getSession();
-
+        response.setContentType("text/html;charset=UTF-8");
         String login = request.getParameter("usuario");
         String senha = request.getParameter("senha");
         UsuarioDAO usuarioDAO = new UsuarioDAO();

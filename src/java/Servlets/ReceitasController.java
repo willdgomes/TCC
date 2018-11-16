@@ -42,7 +42,7 @@ public class ReceitasController extends HttpServlet {
             rd.include(request, response);
         } else {
             if (action.equals("cadastrarReceita")) {
-                
+                String teste = "";
             }
         }
     }

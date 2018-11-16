@@ -5,10 +5,18 @@
  */
 package Facade;
 
+import Beans.Receita;
+import DAO.ReceitaDAO;
+
 /**
  *
  * @author gomes
  */
 public class ReceitasFacade {
     
+    private static final ReceitaDAO receitaDAO = new ReceitaDAO();
+ 
+    public static void listarMedicamentos(Receita receita){
+        receitaDAO.inserirMedicamento(receita);
+    }
 }
