@@ -21,11 +21,11 @@ public class PacientesFacade {
     }
 
     public static void alterar(Paciente p) {
-        
+        pacienteDAO.alterarPaciente(p);
     }
 
-    public static Paciente buscar(int id) {
-        return null;
+    public static Paciente buscarId(String id) {
+        return pacienteDAO.buscarPacientesId(id);
     }
 
     public static List<Paciente> buscarTodos() {

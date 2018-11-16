@@ -42,13 +42,13 @@
                                             <tbody> 
                                                 <td colspan="2">${mensagem}</td>
                                                 <c:forEach items="${pacientes}" var="paciente">
-                                                <form action="cadastrarPaciente" method="POST">
+                                                    <form action="PacienteController?action=editar" method="POST">
                                                     <tr>
                                                         <td scope="col">${paciente.nome}</td>
                                                         <td scope="col">${paciente.cpf}</td>
                                                         <td scope="col">${paciente.dataNascimento}</td>
                                                         <td scope="col"><button type="submit" name="editar" class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
-                                                        <input type="hidden" value="${paciente.id}">
+                                                    <input type="hidden" value="${paciente.id}" required name="idPaciente">
                                                     </tr>
                                                 </form>
                                                 </c:forEach>

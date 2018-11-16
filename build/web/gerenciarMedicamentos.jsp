@@ -43,14 +43,14 @@
                                             <tbody>               
                                                 <td colspan="2">${mensagem}</td>
                                                 <c:forEach items="${medicamentos}" var="medicamento">
-                                                <form action="editarMedicamento" method="POST">
+                                                <form action="MedicamentoController?action=editar" method="POST">
                                                     <tr>
                                                         <td colspan="col">${medicamento.nome}</td>
                                                         <td colspan="col">${medicamento.nomeFabricante}</td>
                                                         <td colspan="col">${medicamento.composicao}</td>
                                                         <td colspan="col">${medicamento.dosagem}</td>
                                                         <td><button type="submit" name="editar" class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
-                                                        <input type="hidden" value="${medicamento.id}">
+                                                        <input type="hidden" value="${medicamento.id}" name="idMedicamento">
                                                     </tr>
                                                 </form>
                                                 </c:forEach>

@@ -83,34 +83,70 @@ public class MedicamentoController extends HttpServlet {
                 }
                 java.sql.Date dataVencimentoLote = new java.sql.Date(data.getTime());
                 Lote lote = LotesFacade.pegarLotePorNumero(Integer.parseInt(numeroLote));
-                if (lote==null) {
+                if (lote == null) {
                     medicamento = medFacade.pegarMedicamentoPorNome(nomeMedicamento);
                     lote = new Lote(Integer.parseInt(numeroLote), medicamento, Integer.parseInt(qtde), dataVencimentoLote);
                     LotesFacade.inserir(lote);
-                }else{
-                    lote.setQtde(lote.getQtde()+Integer.parseInt(qtde));
+                } else {
+                    lote.setQtde(lote.getQtde() + Integer.parseInt(qtde));
                     LotesFacade.atualizarLote(lote);
                 }
             } else if (action.equals("pesquisarMedicamento")) {
                 String pesquisa = request.getParameter("pesquisa");
                 MedicamentosFacade medicamentosFacade = new MedicamentosFacade();
-                List<Medicamento> medicamentoList =  medicamentosFacade.buscarMedicamento(pesquisa);
+                List<Medicamento> medicamentoList = medicamentosFacade.buscarMedicamento(pesquisa);
                 if (session != null) {
                     RequestDispatcher rd = null;
                     request.setAttribute("medicamentos", medicamentoList);
                     if (medicamentoList.size() == 0) {
                         request.setAttribute("mensagem", "Medicamento não cadastrado no sistema");
                     }
-                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarMedicamentos.jsp");
-                     requestDispatcher.forward(request, response);
-                  
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarMedicamentos.jsp");
+                    requestDispatcher.forward(request, response);
+
                 } else {
                     request.setAttribute("msg", "Usuário e/ou senha incorreto(s)!");
                     RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
                     rd.forward(request, response);
                 }
+            } else if (action.equals("editar")) {
+
+                String id = request.getParameter("idMedicamento");
+                MedicamentosFacade medicamentosFacade = new MedicamentosFacade();
+                Medicamento medicamento = medicamentosFacade.pegarMedicamentoPorId(Integer.parseInt(id));
+                request.setAttribute("medicamento", medicamento);
+                RequestDispatcher rd = null;
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/editarMedicamento.jsp");
+                requestDispatcher.forward(request, response);
+            } else if (action.equals("editarMedicamento")) {
+                String id = request.getParameter("idMedicamento");
+                String nome = request.getParameter("nome");
+                String fabricante = request.getParameter("nomeFabricante");
+                String composicao = request.getParameter("composicao");
+                String dosagem = request.getParameter("dosagem");
+                String medida = request.getParameter("medida");
+                String descricao = request.getParameter("descricao");
+
+                Medicamento medicamento = new Medicamento();
+                medicamento.setNome(nome);
+                medicamento.setNomeFabricante(fabricante);
+                medicamento.setComposicao(composicao);
+                medicamento.setDosagem(Double.parseDouble(dosagem));
+                medicamento.setMedida(medida);
+                medicamento.setDescricao(descricao);
+
+                MedicamentosFacade medicamentosFacade = new MedicamentosFacade();
+                medicamentosFacade.alterar(medicamento);
+                atualizarMedicamentosLista(request);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarMedicamentos.jsp");
+                requestDispatcher.forward(request, response);
             }
         }
+    }
+
+    private void atualizarMedicamentosLista(HttpServletRequest request) {
+        ServletContext pacContext = request.getServletContext();
+        pacContext.setAttribute("medicamentos", MedicamentosFacade.listarMedicamentos());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

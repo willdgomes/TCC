@@ -15,11 +15,11 @@ import java.util.List;
  * @author gomes
  */
 public class MedicamentosFacade {
-    MedicamentoDAO medDAO = new MedicamentoDAO();
+   private static final MedicamentoDAO medDAO = new MedicamentoDAO();
     static List<Medicamento> listaMedicamentos = new ArrayList<Medicamento>();
     static Medicamento med = new Medicamento();
     
-    public List<Medicamento> listarMedicamentos(){
+    public static List<Medicamento> listarMedicamentos(){
         listaMedicamentos = medDAO.listarMedicamentos();
         return listaMedicamentos;
     }
@@ -34,5 +34,9 @@ public class MedicamentosFacade {
     
     public List<Medicamento> buscarMedicamento(String pesquisa){
         return medDAO.buscarMedicamentosParam(pesquisa);
+    }
+    
+      public static void alterar(Medicamento medicamento) {
+        medDAO.atualizarMedicamento(medicamento);
     }
 }

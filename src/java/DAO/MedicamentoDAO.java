@@ -140,6 +140,7 @@ public class MedicamentoDAO {
             stmt.setString(3, medicamento.getNomeFabricante());
             stmt.setString(4, medicamento.getComposicao());
             stmt.setDouble(5, medicamento.getDosagem());
+            stmt.setDouble(5, medicamento.getId());
             stmt.executeUpdate();
 
         } catch (SQLException ex) {

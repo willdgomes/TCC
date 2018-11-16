@@ -23,13 +23,15 @@ public class PacienteDAO {
     
     private final String stmtInserir = "INSERT INTO pacientes (cpfPaciente, nomePaciente, dnPaciente, telefone, "
             + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+    private final String stmtAlterar = "UPDATE pacientes SET cpfPaciente = ?, nomePaciente = ?,dnPaciente = ?, telefone = ?,"
+            +"cep = ?,cidade = ?,estado = ?,bairro = ?,endereco = ?,numEndereco = ?,complemento = ?,email = ? WHERE idPaciente = ?";
     private final String stmtBuscarPacientes = "SELECT idPaciente, cpfPaciente, nomePaciente, dnPaciente, telefone, "
             + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email FROM pacientes";
     private final String stmtRemoverClientes = "DELETE FROM cliente WHERE idCliente = ?";
-    private final String stmtAtualizarClientes = "UPDATE cliente SET nome = ?, sobrenome = ?, telefone = ? WHERE idCliente = ?";
     private final String stmtBuscarPacientesParam = "SELECT idPaciente, cpfPaciente, nomePaciente, dnPaciente, telefone, "
             + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email FROM pacientes WHERE nomePaciente LIKE ?";
-    
+    private final String stmtBuscarPacientesId = "SELECT idPaciente, cpfPaciente, nomePaciente, dnPaciente, telefone, "
+            + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email FROM pacientes WHERE idPaciente = ?";
     public void inserirPaciente(Paciente paciente) {
         Connection con = null;
         PreparedStatement stmt = null;
@@ -55,6 +57,43 @@ public class PacienteDAO {
         } finally {
             try {
                 stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+    }
+    
+    public void alterarPaciente (Paciente paciente){
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtAlterar);
+            stmt.setString(1, paciente.getCpf());
+            stmt.setString(2, paciente.getNome());
+            stmt.setDate(3, paciente.getDataNascimento());
+            stmt.setString(4, paciente.getTelefone());
+            stmt.setString(5, paciente.getCep());
+            stmt.setString(6, paciente.getCidade());
+            stmt.setString(7, paciente.getEstado());
+            stmt.setString(8, paciente.getBairro());
+            stmt.setString(9, paciente.getEndereco());
+            stmt.setString(10, paciente.getNumEndereco());
+            stmt.setString(11, paciente.getComplemento());
+            stmt.setString(12, paciente.getEmail());
+            stmt.setString(13, paciente.getId().toString());
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao alterar o paciente no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                    stmt.close();
             } catch (Exception ex) {
                 System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
             };
@@ -252,6 +291,51 @@ public class PacienteDAO {
         return listaPacientes;            
         }catch(SQLException ex){
             throw new RuntimeException("Erro ao listar os pacientes no banco de dados. Origem="+ex.getMessage());            
+        }finally{
+            try{rs.close();}catch(Exception ex){System.out.println("Erro ao fechar rs. Ex="+ex.getMessage());};
+            try{stmt.close();}catch(Exception ex){System.out.println("Erro ao fechar stmt. Ex="+ex.getMessage());};
+            try{con.close();;}catch(Exception ex){System.out.println("Erro ao fechar conexão. Ex="+ex.getMessage());};                
+        }
+    }
+         public Paciente buscarPacientesId(String pesquisa) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Paciente paciente = new Paciente();
+        try{
+            con = ConnectionFactory.getConnection();  
+            stmt = con.prepareStatement(stmtBuscarPacientesId); 
+            stmt.setString(1,pesquisa);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                paciente.setId(Integer.parseInt(rs.getString("idPaciente")));
+                paciente.setNome(rs.getString("nomePaciente"));
+                paciente.setCpf(rs.getString("cpfPaciente"));
+                paciente.setTelefone(rs.getString("telefone"));
+                paciente.setCep(rs.getString("cep"));
+                paciente.setCidade(rs.getString("cidade"));
+                paciente.setBairro(rs.getString("bairro"));
+                paciente.setEndereco(rs.getString("endereco"));
+                paciente.setNumEndereco(rs.getString("numEndereco"));
+                paciente.setComplemento(rs.getString("complemento")); 
+                paciente.setEmail(rs.getString("email"));
+                String stringData = rs.getString("dnPaciente");  
+                stringData = stringData.replaceAll("-", "/");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                java.util.Date dt = null;
+                java.sql.Date dt2 = null;
+               try{
+                 dt = format.parse(stringData);
+                 dt2 = new java.sql.Date(dt.getTime());
+               }
+               catch(Exception ex){
+                 System.out.println("Erro na data");
+               }
+                paciente.setDataNascimento(dt2);
+            }  
+        return paciente;            
+        }catch(SQLException ex){
+            throw new RuntimeException("Erro ao carregar paciente no banco de dados. Origem="+ex.getMessage());            
         }finally{
             try{rs.close();}catch(Exception ex){System.out.println("Erro ao fechar rs. Ex="+ex.getMessage());};
             try{stmt.close();}catch(Exception ex){System.out.println("Erro ao fechar stmt. Ex="+ex.getMessage());};
