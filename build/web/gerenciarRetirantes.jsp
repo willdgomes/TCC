@@ -18,7 +18,7 @@
                 </div>
                 <div class="panel-body m-3">
                       <div class="col-sm-12">
-                                <form action="GerenciarRetirantesController" method="POST" class="card border-info">
+                                <form action="RetiranteController?action=pesquisarRetirante" method="POST" class="card border-info">
                                     <div class="card-body p-5">
                                         <div class="form-group">
                                             <input type="text" class="col-sm-10" placeholder="Pesquisar" required name="pesquisa">    
@@ -42,7 +42,7 @@
                                             <tbody> 
                                                 <td colspan="2">${mensagem}</td>
                                                 <c:forEach items="${retirantes}" var="retirante">
-                                                <form action="editarRetirante" method="POST">
+                                                <form action="RetiranteController?action=editar" method="POST">
                                                     <tr>
                                                         <td scope="col">${retirante.nomeRetirante}</td>
                                                         <td scope="col">${retirante.cpfRetirante}</td>

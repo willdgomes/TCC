@@ -16,20 +16,28 @@ import java.util.List;
  * @author gomes
  */
 public class RetirantesFacade {
-    RetiranteDAO retDAO = new RetiranteDAO();
+    static RetiranteDAO retDAO = new RetiranteDAO();
     static List<Retirante> listaRetirantes = new ArrayList<Retirante>();
     static Retirante ret = new Retirante();
     
-    public List<Retirante> listaRetirantes(){
+    public static List<Retirante> listaRetirantes(){
         listaRetirantes = retDAO.listarRetirantes();
         return listaRetirantes;
     }
     
-    public List<Retirante> buscarMedicamentoNome(String nomeRetirante){
+    public static List<Retirante> buscarMedicamentoNome(String nomeRetirante){
         return retDAO.buscarRetirantesParam(nomeRetirante);
     }
     
-    public Retirante pegarMedicamentoPorId(int idMedicamento){
-        return null;//retDAO.buscarMedicamentoId(idMedicamento);
+    public static Retirante buscarMedicamentoPorId(String idRetirante){
+        return retDAO.buscarMedicamentoId(idRetirante);
+    }
+    
+    public static void cadastrarRetirante(Retirante retirante){
+        retDAO.inserirRetirante(retirante);
+    }
+    
+     public static void alterarRetirante(Retirante retirante){
+        retDAO.alterarRetirante(retirante);
     }
 }

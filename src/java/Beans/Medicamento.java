@@ -13,7 +13,7 @@ import java.sql.Date;
  */
 public class Medicamento {
 
-    private int id;
+    private Integer id;
     private String nome;
     private String descricao;
     private String nomeFabricante;
@@ -21,11 +21,11 @@ public class Medicamento {
     private Double dosagem;
     private String medida;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

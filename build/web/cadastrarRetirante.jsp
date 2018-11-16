@@ -19,7 +19,7 @@
                     </div>
                     <div class="panel-body pt-3">
                         <div class="col-sm-12">
-                            <form class="card border-info" action="CadastroRetiranteController" method="POST">
+                            <form class="card border-info" action="RetiranteController?action=cadastrarRetirante" method="POST">
                                 <div class="card-body p-5">
                                     <div class="form-row">
                                         <div class="form-group col">

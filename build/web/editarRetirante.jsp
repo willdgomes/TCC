@@ -15,11 +15,12 @@
             <div class="row">
                 <div class="panel panel-default col-sm pt-4">
                     <div class="panel-heading text-center">
-                        <h2>Cadastro de retirantes</h2>
+                        <h2>Editar retirantes</h2>
                     </div>
                     <div class="panel-body pt-3">
                         <div class="col-sm-12">
-                            <form class="card border-info" action="RetiranteController?action=cadastrarRetirante" method="POST">
+                            <c:forEach items="${retirante}" var="retirante">
+                            <form class="card border-info" action="RetiranteController?action=editarRetirante" method="POST">
                                 <div class="card-body p-5">
                                     <div class="form-row">
                                         <div class="form-group col">
@@ -122,6 +123,7 @@
                                     </div>
                                 </div>
                             </form>
+                                                            </c:forEach>
                         </div>
                     </div>
                 </div>

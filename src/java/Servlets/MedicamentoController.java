@@ -134,6 +134,7 @@ public class MedicamentoController extends HttpServlet {
                 medicamento.setDosagem(Double.parseDouble(dosagem));
                 medicamento.setMedida(medida);
                 medicamento.setDescricao(descricao);
+                medicamento.setId(Integer.parseInt(id));
 
                 MedicamentosFacade medicamentosFacade = new MedicamentosFacade();
                 medicamentosFacade.alterar(medicamento);

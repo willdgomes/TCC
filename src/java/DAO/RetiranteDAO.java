@@ -20,13 +20,18 @@ import java.util.List;
  * @author gomes
  */
 public class RetiranteDAO {
-    
+
     private final String stmtInserir = "INSERT INTO retirantes (cpfRetirante, nomeRetirante, dnRetirante, telefone, "
             + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email, vincolo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-     String stmtBuscarRetirantesParam = "SELECT idRetirante, cpfRetirante, nomeRetirante, dnRetirante, telefone, "
-            + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email, vincolo FROM retirantes WHERE nomeRetirante LIKE ?"; 
-    private final String stmtListarRetirantes="SELECT idRetirante, cpfRetirante,nomeRetirante, dnRetirante, telefone, cep, cidade, estado,bairro, endereco, numEndereco, complemento, email, vincolo from retirantes";
-    public void inserirPaciente(Retirante retirante) {
+    String stmtBuscarRetirantesParam = "SELECT idRetirante, cpfRetirante, nomeRetirante, dnRetirante, telefone, "
+            + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email, vincolo FROM retirantes WHERE nomeRetirante LIKE ?";
+    private final String stmtListarRetirantes = "SELECT idRetirante, cpfRetirante,nomeRetirante, dnRetirante, telefone, cep, cidade, estado,bairro, endereco, numEndereco, complemento, email, vincolo from retirantes";
+    String stmtBuscarRetirantesId = "SELECT cpfRetirante, nomeRetirante, dnRetirante, telefone, "
+            + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email, vincolo FROM retirantes WHERE idRetirante LIKE ?";
+    private final String stmtAlterar = "UPDATE retirantes SET cpfRetirante = ?, nomeRetirante = ?, dnRetirante = ?, telefone = ?, "
+            + "cep = ?, cidade = ?, estado = ?, bairro = ?, endereco = ?, numEndereco = ?, complemento = ?, email = ?, vincolo = ? WHERE idRetirante LIKE ?";
+    
+    public void inserirRetirante(Retirante retirante) {
         Connection con = null;
         PreparedStatement stmt = null;
         try {
@@ -37,7 +42,7 @@ public class RetiranteDAO {
             stmt.setDate(3, retirante.getDnRetirante());
             stmt.setString(4, retirante.getTelefone());
             stmt.setString(5, retirante.getCep());
-            stmt.setString(6,retirante.getCidade());
+            stmt.setString(6, retirante.getCidade());
             stmt.setString(7, retirante.getEstado());
             stmt.setString(8, retirante.getBairro());
             stmt.setString(9, retirante.getEndereco());
@@ -62,17 +67,17 @@ public class RetiranteDAO {
             };
         }
     }
-  
+
     public List<Retirante> buscarRetirantesParam(/*String parametro, */String pesquisa) {
-       // Departamento departamento = new Departamento();
+        // Departamento departamento = new Departamento();
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         List<Retirante> listaRetirantes = null;
-        try{
-            con = ConnectionFactory.getConnection();  
-            stmt = con.prepareStatement(stmtBuscarRetirantesParam); 
-            stmt.setString(1,'%'+pesquisa+'%');
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtBuscarRetirantesParam);
+            stmt.setString(1, '%' + pesquisa + '%');
             rs = stmt.executeQuery();
             listaRetirantes = new ArrayList<Retirante>();
             while (rs.next()) {
@@ -90,33 +95,44 @@ public class RetiranteDAO {
                 p.setComplemento(rs.getString("complemento"));
                 p.setVincolo(rs.getString("vincolo"));
                 p.setEmail(rs.getString("email"));
-                String stringData = rs.getString("dnRetirante");  
+                String stringData = rs.getString("dnRetirante");
                 stringData = stringData.replaceAll("-", "/");
                 SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
                 java.util.Date dt = null;
                 java.sql.Date dt2 = null;
-               try{
-                 dt = format.parse(stringData);
-                 dt2 = new java.sql.Date(dt.getTime());
-               }
-               catch(Exception ex){
-                 System.out.println("Erro na data");
-               }
+                try {
+                    dt = format.parse(stringData);
+                    dt2 = new java.sql.Date(dt.getTime());
+                } catch (Exception ex) {
+                    System.out.println("Erro na data");
+                }
                 p.setDnRetirante(dt2);
                 listaRetirantes.add(p);
-            }  
-        return listaRetirantes;            
-        }catch(SQLException ex){
-            throw new RuntimeException("Erro ao listar os retirantes no banco de dados. Origem="+ex.getMessage());            
-        }finally{
-            try{rs.close();}catch(Exception ex){System.out.println("Erro ao fechar rs. Ex="+ex.getMessage());};
-            try{stmt.close();}catch(Exception ex){System.out.println("Erro ao fechar stmt. Ex="+ex.getMessage());};
-            try{con.close();;}catch(Exception ex){System.out.println("Erro ao fechar conexão. Ex="+ex.getMessage());};                
+            }
+            return listaRetirantes;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao listar os retirantes no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
+            };
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
         }
-    
+
     }
-    
-        public List<Retirante> listarRetirantes() {
+
+    public List<Retirante> listarRetirantes() {
 
         Connection con = null;
         PreparedStatement stmt = null;
@@ -159,5 +175,102 @@ public class RetiranteDAO {
             };
         }
 
+    }
+
+    public Retirante buscarMedicamentoId(String id) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Retirante> listaRetirantes = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtBuscarRetirantesId);
+            stmt.setString(1, id);
+            rs = stmt.executeQuery();
+            Retirante retirante = new Retirante();
+            retirante.setIdRetirante(Integer.parseInt(rs.getString("idRetirante")));
+            retirante.setNomeRetirante(rs.getString("nomeRetirante"));
+            retirante.setCpfRetirante(rs.getString("cpfRetirante"));
+            retirante.setEmail(rs.getString("cpfRetirante"));
+            retirante.setTelefone(rs.getString("telefone"));
+            retirante.setCep(rs.getString("cep"));
+            retirante.setCidade(rs.getString("cidade"));
+            retirante.setBairro(rs.getString("bairro"));
+            retirante.setEndereco(rs.getString("endereco"));
+            retirante.setNumEndereco(rs.getString("numEndereco"));
+            retirante.setComplemento(rs.getString("complemento"));
+            retirante.setVincolo(rs.getString("vincolo"));
+            retirante.setEmail(rs.getString("email"));
+            String stringData = rs.getString("dnRetirante");
+            stringData = stringData.replaceAll("-", "/");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+            java.util.Date dt = null;
+            java.sql.Date dt2 = null;
+            try {
+                dt = format.parse(stringData);
+                dt2 = new java.sql.Date(dt.getTime());
+            } catch (Exception ex) {
+                System.out.println("Erro na data");
+            }
+            retirante.setDnRetirante(dt2);
+
+            return retirante;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao listar os retirantes no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
+            };
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+    }
+
+    public void alterarRetirante(Retirante retirante){
+     Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtAlterar);
+            stmt.setString(1, retirante.getCpfRetirante());
+            stmt.setString(2, retirante.getNomeRetirante());
+            stmt.setDate(3, retirante.getDnRetirante());
+            stmt.setString(4, retirante.getTelefone());
+            stmt.setString(5, retirante.getCep());
+            stmt.setString(6, retirante.getCidade());
+            stmt.setString(7, retirante.getEstado());
+            stmt.setString(8, retirante.getBairro());
+            stmt.setString(9, retirante.getEndereco());
+            stmt.setString(10, retirante.getNumEndereco());
+            stmt.setString(11, retirante.getComplemento());
+            stmt.setString(12, retirante.getEmail());
+            stmt.setString(13, retirante.getVincolo());
+            stmt.setString(14, retirante.getIdRetirante().toString());
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao inserir um retirante no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
     }
 }

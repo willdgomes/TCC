@@ -29,7 +29,7 @@
                                         </div>
                                          <div class="form-group col" >
                                             <label for="fabricante" class="text-dark">Fabricante:</label>
-                                            <input type="text" class="form-control" id="fabricante" value="${medicamento.nomeFabricante}" required name="fabricante">
+                                            <input type="text" class="form-control" id="nomeFabricante" value="${medicamento.nomeFabricante}" required name="nomeFabricante">
                                         </div>
                                     </div>
                                     <div class="form-row">

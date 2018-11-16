@@ -73,7 +73,7 @@ public class MedicamentoDAO {
             listaMedicamentos = new ArrayList<Medicamento>();
             while (rs.next()) {
                 Medicamento medicamento = new Medicamento();
-                medicamento.setId(rs.getInt("idMedicamento"));
+                medicamento.setId(Integer.parseInt(rs.getString("idMedicamento")));
                 medicamento.setNome(rs.getString("nomeMedicamento"));
                 medicamento.setDescricao(rs.getString("descricao"));
                 medicamento.setNomeFabricante(rs.getString("nomeFabricante"));
@@ -139,8 +139,8 @@ public class MedicamentoDAO {
             stmt.setString(2, medicamento.getDescricao());
             stmt.setString(3, medicamento.getNomeFabricante());
             stmt.setString(4, medicamento.getComposicao());
-            stmt.setDouble(5, medicamento.getDosagem());
-            stmt.setDouble(5, medicamento.getId());
+            stmt.setDouble(5, medicamento.getDosagem()); 
+            stmt.setString(6, medicamento.getId().toString());
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
