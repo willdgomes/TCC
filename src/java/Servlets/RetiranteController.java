@@ -68,20 +68,20 @@ public class RetiranteController extends HttpServlet {
                 
             } else if (action.equals("pesquisarRetirante")) {
                 String pesquisa = request.getParameter("pesquisa");
-                List<Retirante> retiranteList = RetirantesFacade.buscarRetirantesNome(pesquisa);
+//                List<Retirante> retiranteList = RetirantesFacade.buscarRetirantesNome(pesquisa);
                 RequestDispatcher rd = null;
-                if (retiranteList.size() > 0) {
-                    request.setAttribute("retirantes", retiranteList);
-                } else {
-                    request.setAttribute("mensagem", "Retirante não cadastrado no sistema");
-                }
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarRetirantes.jsp");
-                requestDispatcher.forward(request, response);
+//                if (retiranteList.size() > 0) {
+//                    request.setAttribute("retirantes", retiranteList);
+//                } else {
+//                    request.setAttribute("mensagem", "Retirante não cadastrado no sistema");
+//                }
+//                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarRetirantes.jsp");
+//                requestDispatcher.forward(request, response);
 
             } else if (action.equals("editar")) {
                  String id = request.getParameter("idRetirante");                
-                Retirante retirante = RetirantesFacade.buscarRetirantePorId(id);
-                request.setAttribute("retirante", retirante);
+              //  Retirante retirante = RetirantesFacade.buscarRetirantePorId(id);
+                //request.setAttribute("retirante", retirante);
                 RequestDispatcher rd = null;
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/editarRetirante.jsp");
                 requestDispatcher.forward(request, response);

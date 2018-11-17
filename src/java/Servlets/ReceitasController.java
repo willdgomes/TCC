@@ -7,6 +7,8 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,7 +44,19 @@ public class ReceitasController extends HttpServlet {
             rd.include(request, response);
         } else {
             if (action.equals("cadastrarReceita")) {
-                String teste = "";
+                String nomePaciente = request.getParameter("nomePaci");
+                String nomeMedico = request.getParameter("medicoNomeReceita");
+                String crmMedico = request.getParameter("medicoCrmReceita");
+                
+                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                String stringDataVencimento = request.getParameter("dataVencimentoReceita");
+                stringDataVencimento = stringDataVencimento.replaceAll("-", "/");
+                java.util.Date dataVencimento = null;
+                try {
+                    dataVencimento = format.parse(stringDataVencimento);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
