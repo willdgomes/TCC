@@ -25,11 +25,11 @@ public class RetirantesFacade {
         return listaRetirantes;
     }
     
-    public static List<Retirante> buscarMedicamentoNome(String nomeRetirante){
+    public static List<Retirante> buscarRetirantesNome(String nomeRetirante){
         return retDAO.buscarRetirantesParam(nomeRetirante);
     }
     
-    public static Retirante buscarMedicamentoPorId(String idRetirante){
+    public static Retirante buscarRetirantePorId(String idRetirante){
         return retDAO.buscarMedicamentoId(idRetirante);
     }
     

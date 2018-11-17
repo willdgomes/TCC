@@ -47,7 +47,7 @@
                                                         <td scope="col">${retirante.nomeRetirante}</td>
                                                         <td scope="col">${retirante.cpfRetirante}</td>
                                                         <td scope="col"><button type="submit" name="editar" class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
-                                                        <input type="hidden" value="${retirante.idRetirante}">
+                                                        <input type="hidden" value="${retirante.idRetirante}" name="idRetirante">
                                                     </tr>
                                                 </form>
                                                 </c:forEach>

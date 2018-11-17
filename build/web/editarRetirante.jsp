@@ -21,31 +21,32 @@
                         <div class="col-sm-12">
                             <c:forEach items="${retirante}" var="retirante">
                             <form class="card border-info" action="RetiranteController?action=editarRetirante" method="POST">
+                                <input type="hidden" value="${retirante.idRetirante}" required name="idRetirante">
                                 <div class="card-body p-5">
                                     <div class="form-row">
                                         <div class="form-group col">
                                             <label for="nome" class="text-dark">Nome:</label>
-                                            <input type="text" class="form-control" id="nomeretirante" required name="nomeRetirante">
+                                            <input type="text" class="form-control" id="nomeretirante" value="${retirante.nomeRetirante}" required name="nomeRetirante">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-4" >
                                             <label for="cpf" class="text-dark">CPF:</label>
-                                            <input type="number" class="form-control" id="cpfpaciente" required name="cpfRetirante">
+                                            <input type="number" class="form-control" id="cpfpaciente" value="${retirante.cpfRetirante}" required name="cpfRetirante">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="dtnasc" class="text-dark">Data de nascimento:</label>
-                                            <input type="date" class="form-control" id="dtnascpaciente" required name="dtNascimento">
+                                            <input type="date" class="form-control" id="dtnascpaciente" value="${retirante.dnRetirante}" required name="dtNascimento">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="dtnasc" class="text-dark">Telefone:</label>
-                                            <input type="number" class="form-control" id="dtnascpaciente" name="telefone">
+                                            <input type="number" class="form-control" id="telefone" value="${retirante.telefone}" name="telefone">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-8">
                                             <label for="email" class="text-dark">E-mail:</label>
-                                            <input type="text" class="form-control" id="emailpaciente" name="emailRetirante">
+                                            <input type="text" class="form-control" id="emailpaciente" value="${retirante.email}" name="emailRetirante">
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -80,7 +81,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="cep" class="text-dark">CEP:</label>
-                                            <input type="number" class="form-control" id="ceppaciente" required name="cepRetirante">
+                                            <input type="number" class="form-control" id="ceppaciente" required name="cepRetirante" value="${retirante.cep}">
                                         </div>
                                         <div class="col-md-1">
                                             <button type="button" class="btn btn-sm mt-3" onclick="$(document).ready(function ()"><i class="material-icons">search</i></button>
@@ -89,31 +90,31 @@
                                     <div class="form-row">                                   
                                         <div class="form-group col-md-4">
                                             <label for="cidade" class="text-dark">Cidade:</label>
-                                            <input type="text" class="form-control" id="cidadepaciente" required name="cidadeRetirante">
+                                            <input type="text" class="form-control" id="cidadepaciente" required name="cidadeRetirante" value="${retirante.cidade}">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="estado" class="text-dark">Estado:</label>
-                                            <input type="text" class="form-control" id="estadoretirante" required name="estadoRetirante">
+                                            <input type="text" class="form-control" id="estadoretirante" required name="estadoRetirante" value="${retirante.estado}">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="bairro" class="text-dark">Bairro:</label>
-                                            <input type="text" class="form-control" id="bairroretirante" required name="bairroRetirante">
+                                            <input type="text" class="form-control" id="bairroretirante" required name="bairroRetirante" value="${retirante.bairro}">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-8">
                                             <label for="endereco" class="text-dark">Endereço:</label>
-                                            <input type="text" class="form-control" id="enderecoretirante" required name="enderecoRetirante">
+                                            <input type="text" class="form-control" id="enderecoretirante" required name="enderecoRetirante" value="${retirante.endereco}">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="numero" class="text-dark">Número:</label>
-                                            <input type="number" class="form-control" id="numeroretirante" required name="numeroEnderecoRetirante">
+                                            <input type="number" class="form-control" id="numeroretirante" required name="numeroEnderecoRetirante" value="${retirante.numEndereco}">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-8">
                                             <label for="numero" class="text-dark">Complemento:</label>
-                                            <input type="text" class="form-control" id="complemento" name="complementoRetirante">
+                                            <input type="text" class="form-control" id="complemento" name="complementoRetirante" value="${retirante.complemento}">
                                         </div>
                                     </div>
                                     <div class="form-row">

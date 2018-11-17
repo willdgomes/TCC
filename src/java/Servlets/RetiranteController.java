@@ -31,7 +31,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Eu
  */
-@WebServlet(name = "RetiranteController", urlPatterns = {"/RetiranteController"})
+@WebServlet(name = "RetiranteController", urlPatterns = {"/RetiranteController"}, loadOnStartup = 3)
 public class RetiranteController extends HttpServlet {
  public void init(ServletConfig config) throws ServletException {
         RetirantesFacade retirantesFacade = new RetirantesFacade();
@@ -62,9 +62,9 @@ public class RetiranteController extends HttpServlet {
             if (action.equals("cadastrarRetirante")) {
 
                 RetirantesFacade.cadastrarRetirante(criaRetirante(request));
-                RequestDispatcher rd = null;
-                rd = getServletContext().getRequestDispatcher("/cadastrarRetirantes.jsp");
-                rd.forward(request, response);
+                atualizarRetirantesLista(request);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/cadastrarRetirante.jsp");
+                requestDispatcher.forward(request, response);
                 
             } else if (action.equals("pesquisarRetirante")) {
                 String pesquisa = request.getParameter("pesquisa");
@@ -85,7 +85,7 @@ public class RetiranteController extends HttpServlet {
                 RequestDispatcher rd = null;
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/editarRetirante.jsp");
                 requestDispatcher.forward(request, response);
-            } else if (action.equals("editarMedicamento")) {
+            } else if (action.equals("editarRetirante")) {
                 
                 RetirantesFacade.alterarRetirante(criaRetirante(request));
                 atualizarRetirantesLista(request);
@@ -103,10 +103,7 @@ public class RetiranteController extends HttpServlet {
         pacContext.setAttribute("retirantes", RetirantesFacade.listaRetirantes());
     }
     private Retirante criaRetirante(HttpServletRequest request) {
-        String id = new String();
-        if(!request.getParameter("idRetirante").isEmpty()){
-         id = request.getParameter("idRetirante");
-        }
+        String id = request.getParameter("idRetirante");
         String nome = request.getParameter("nomeRetirante");
         String cpf = request.getParameter("cpfRetirante");
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
@@ -146,7 +143,7 @@ public class RetiranteController extends HttpServlet {
         retirante.setEndereco(endereco);
         retirante.setNumEndereco(numeroEndereco);
         retirante.setComplemento(complemento);
-        if(!id.isEmpty())
+        if(id!= null)
             retirante.setIdRetirante(Integer.parseInt(id));
         return retirante;
     }

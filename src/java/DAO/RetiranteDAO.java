@@ -23,11 +23,11 @@ public class RetiranteDAO {
 
     private final String stmtInserir = "INSERT INTO retirantes (cpfRetirante, nomeRetirante, dnRetirante, telefone, "
             + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email, vincolo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    String stmtBuscarRetirantesParam = "SELECT idRetirante, cpfRetirante, nomeRetirante, dnRetirante, telefone, "
+    String stmtBuscarRetirantesParam = "SELECT cpfRetirante, nomeRetirante, dnRetirante, telefone, "
             + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email, vincolo FROM retirantes WHERE nomeRetirante LIKE ?";
     private final String stmtListarRetirantes = "SELECT idRetirante, cpfRetirante,nomeRetirante, dnRetirante, telefone, cep, cidade, estado,bairro, endereco, numEndereco, complemento, email, vincolo from retirantes";
     String stmtBuscarRetirantesId = "SELECT cpfRetirante, nomeRetirante, dnRetirante, telefone, "
-            + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email, vincolo FROM retirantes WHERE idRetirante LIKE ?";
+            + "cep, cidade, estado, bairro, endereco, numEndereco, complemento, email, vincolo FROM retirantes WHERE idRetirante = ?";
     private final String stmtAlterar = "UPDATE retirantes SET cpfRetirante = ?, nomeRetirante = ?, dnRetirante = ?, telefone = ?, "
             + "cep = ?, cidade = ?, estado = ?, bairro = ?, endereco = ?, numEndereco = ?, complemento = ?, email = ?, vincolo = ? WHERE idRetirante LIKE ?";
     
@@ -188,7 +188,8 @@ public class RetiranteDAO {
             stmt.setString(1, id);
             rs = stmt.executeQuery();
             Retirante retirante = new Retirante();
-            retirante.setIdRetirante(Integer.parseInt(rs.getString("idRetirante")));
+            while (rs.next()) {
+            retirante.setIdRetirante(Integer.parseInt(id));
             retirante.setNomeRetirante(rs.getString("nomeRetirante"));
             retirante.setCpfRetirante(rs.getString("cpfRetirante"));
             retirante.setEmail(rs.getString("cpfRetirante"));
@@ -213,7 +214,7 @@ public class RetiranteDAO {
                 System.out.println("Erro na data");
             }
             retirante.setDnRetirante(dt2);
-
+            }
             return retirante;
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao listar os retirantes no banco de dados. Origem=" + ex.getMessage());
