@@ -70,25 +70,24 @@
                                                 <select id="cbRemedios" class="form-control" required name="nomeMedicamentoReceita">
                                                     <option></option>
                                                     <c:forEach items="${applicationScope.medicamentos}" var="medicamento">
-                                                        <option>${medicamento.nome}</option>
+                                                        <option id="${medicamento.id}">${medicamento.nome}</option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
                                             <div class="col-md-2 offset-1 form-group">
                                                 <label for="Quantidade"class="text-dark" >Quantidade:(Caixa)</label>
-                                                <input type="number" class="form-control" id="cpfpaciente" placeholder="" required name="quantidadeMedicamentoReceita">
+                                                <input type="number" class="form-control" id="quantidade" placeholder="" required name="quantidadeMedicamentoReceita">
                                             </div>
                                             <div class="col-md-1 offset-md-1 form-group">
                                                 <script src="js/jquery-3.2.1.slim.min.js"></script>
-                                                <button class="btn btn-sm btn-info mt-2" id="add1"><i class="material-icons">add</i></button>
+                                                <button class="btn btn-sm btn-info mt-2" id="add1" onclick="addRow()"><i class="material-icons">add</i></button>
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <table class="table table-hover table-responsive-sm">
+                                            <table class="table table-hover table-responsive-sm" id="tabelaReceita">
                                                 <thead>
                                                     <tr>                                                    
                                                         <th scope="col">Medicamento</th>
-                                                        <th scope="col">Dosagem</th>
                                                         <th scope="col">Quantidade</th>
                                                         <th scope="col">Ação</th>
                                                     </tr>
@@ -98,11 +97,9 @@
                                                 <c:forEach items="${medicamentoList}" var="paciente">
                                                     <form action="cadastrarPaciente" method="POST">
                                                         <tr>
-                                                            <td scope="col">${medicamento.nome}</td>
-                                                            <td scope="col">${medicamento.dosagem}</td>
-                                                            <td scope="col">${medicamento.quantidade}</td>
-                                                            <td scope="col"><button type="delete" name="excluir" class="btn btn-sm btn-link"><i class="material-icons">delete</i></button> </td>
-                                                            <input type="hidden" value="${medicamento.id}">
+                                                            <td scope="col"></td>
+                                                            <td scope="col"></td>
+                                                            <td scope="col"></td>
                                                         </tr>
                                                     </form>
                                                 </c:forEach>
@@ -119,5 +116,69 @@
                     </div>
                 </div>
             </div>
+            <script type="text/javascript" >
+                function addRow() {
+                    var table = document.getElementById("tabelaReceita");
+                    var medicamento = document.getElementById("cbRemedios");
+                    var quantidade = document.getElementById("quantidade");
+                    var idLinha = medicamento.options[medicamento.selectedIndex].id;
+                    var rowCount = table.rows.length;
+                    var row = table.insertRow(rowCount);
+                    row.id = idLinha;
+                    var cell1 = row.insertCell(0);
+                    var element1 = document.createElement("output");
+                    element1.type = "text";
+                    element1.name = "nome";
+                    element1.id = idLinha;
+                    element1.value = medicamento.options[medicamento.selectedIndex].text;
+                    cell1.appendChild(element1);
+
+                    var cell2 = row.insertCell(1);
+                    var element2 = document.createElement("output");
+                    element2.type = "number";
+                    element2.name = "quantidade";
+                    element2.value = quantidade.value;
+                    element2.id = idLinha;
+                    cell2.appendChild(element2);
+                    
+                     var cell3 = row.insertCell(2);
+                    var element3 = document.createElement("button");
+                    element3.type = "delete";
+                    element3.name = "excluir";
+                    element3.setAttribute("class", "btn btn-sm btn-link");
+                    element3.setAttribute("onClick","deleteRow("+idLinha+")");
+                    var i = document.createElement("i");
+                    var texto = document.createTextNode("delete");
+                    i.appendChild(texto);
+                    i.setAttribute("class", "material-icons");
+                    element3.appendChild(i);
+                    element3.id = idLinha;
+                    cell3.appendChild(element3);
+
+
+                }
+
+                function deleteRow(linha) {
+                    try {
+                        var table = document.getElementById("tabelaReceita");
+                        var rowCount = table.rows.length;
+
+                        for (var i = 0; i < rowCount; i++) {
+                            var row = table.rows[i];
+                            if (row.id == linha) {
+                                table.deleteRow(i);
+                                rowCount--;
+                                i--;
+                                break;
+                            }
+
+
+                        }
+                    } catch (e) {
+                        alert(e);
+                    }
+                }
+
+            </script>
         </jsp:body>
     </t:page>
