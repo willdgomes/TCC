@@ -76,7 +76,7 @@
                                             </div>
                                             <div class="col-md-2 offset-1 form-group">
                                                 <label for="Quantidade"class="text-dark" >Quantidade:(Caixa)</label>
-                                                <input type="number" class="form-control" id="quantidade" placeholder="" required name="quantidadeMedicamentoReceita">
+                                                <input type="number" class="form-control" id="quantidade" placeholder="" name="quantidadeMedicamentoReceita">
                                             </div>
                                             <div class="col-md-1 offset-md-1 form-group">
                                                 <script src="js/jquery-3.2.1.slim.min.js"></script>
