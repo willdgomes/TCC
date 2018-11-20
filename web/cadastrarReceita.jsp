@@ -76,11 +76,11 @@
                                             </div>
                                             <div class="col-md-2 offset-1 form-group">
                                                 <label for="Quantidade"class="text-dark" >Quantidade:(Caixa)</label>
-                                                <input type="number" class="form-control" id="quantidade" placeholder="" required name="quantidadeMedicamentoReceita">
+                                                <input type="number" class="form-control" id="quantidade" placeholder="" name="quantidadeMedicamentoReceita">
                                             </div>
                                             <div class="col-md-1 offset-md-1 form-group">
                                                 <script src="js/jquery-3.2.1.slim.min.js"></script>
-                                                <button class="btn btn-sm btn-info mt-2" id="add1" onclick="addRow()"><i class="material-icons">add</i></button>
+                                                <button type="button" class="btn btn-sm btn-info mt-2" id="add1" onclick="addRow()"><i class="material-icons">add</i></button>
                                             </div>
                                         </div>
                                         <div class="form-row">
@@ -95,7 +95,7 @@
                                                 <tbody> 
                                                 <td colspan="2">${mensagem}</td>
                                                 <c:forEach items="${medicamentoList}" var="paciente">
-                                                    <form action="cadastrarPaciente" method="POST">
+                                                    <form action="" method="POST">
                                                         <tr>
                                                             <td scope="col"></td>
                                                             <td scope="col"></td>
