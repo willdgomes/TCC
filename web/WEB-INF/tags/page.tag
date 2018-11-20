@@ -152,7 +152,7 @@
                         <div class="collapse" id="menuApps">
                             <ul class="nav flex-column">
                                 <li class="nav-sub-item">
-                                    <a class="nav-link" href="#"><i class="material-icons">keyboard_arrow_right</i> <span class="align-top">lorem</span></a>
+                                    <a class="nav-link" href="RelatorioController"><i class="material-icons">add_box</i> <span class="align-top">Inserir Medicamento</span></a>
                                 </li>
                                 <li class="nav-sub-item">
                                     <a class="nav-link" href="#"><i class="material-icons">keyboard_arrow_right</i> <span class="align-top">lorem</span></a>

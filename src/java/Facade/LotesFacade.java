@@ -26,4 +26,8 @@ public class LotesFacade {
     public static Lote pegarLotePorNumero(Integer numeroLote){
         return loteDAO.buscarLotePorNumero(numeroLote);
     }
+    
+    public static Integer buscarQuantidade(String idMed){
+        return loteDAO.buscarQuantidadePorMedicamento(idMed);
+    }
 }

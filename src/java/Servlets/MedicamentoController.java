@@ -91,6 +91,10 @@ public class MedicamentoController extends HttpServlet {
                     lote.setQtde(lote.getQtde() + Integer.parseInt(qtde));
                     LotesFacade.atualizarLote(lote);
                 }
+                
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/inserirMedicamento.jsp");
+                requestDispatcher.forward(request, response);
+                
             } else if (action.equals("pesquisarMedicamento")) {
                 String pesquisa = request.getParameter("pesquisa");
                 MedicamentosFacade medicamentosFacade = new MedicamentosFacade();
