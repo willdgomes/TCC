@@ -5,30 +5,28 @@
  */
 package Servlets;
 
-import Beans.Usuario;
-import DAO.UsuarioDAO;
+import Beans.Medicamento;
+import Facade.LotesFacade;
+import Facade.MedicamentosFacade;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author gomes
+ * @author Eu
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
-public class LoginController extends HttpServlet {
+@WebServlet(name = "InicialController", urlPatterns = {"/InicialController"})
+public class InicialController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,29 +36,24 @@ public class LoginController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, ClassNotFoundException {
-        HttpSession session = request.getSession();
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String login = request.getParameter("usuario");
-        String senha = request.getParameter("senha");
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-        Usuario usuario = new Usuario();
-        usuario = usuarioDAO.lerUsuario(login, senha);
-        if (usuario != null) {
-            session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            session.setMaxInactiveInterval(20 * 60);
-            RequestDispatcher rd = null;
-            rd = getServletContext().getRequestDispatcher("/InicialController");
-            rd.forward(request, response);
-        } else {
-            request.setAttribute("msg", "Usuário e/ou senha incorreto(s)!");
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
-            rd.forward(request, response);
+          List<Medicamento> medicamentos = MedicamentosFacade.listarMedicamentos();
+        List<String> quantidade = new ArrayList<String>();
+        List<String> nomeMed = new ArrayList<String>();
+        for (Medicamento medicamento : medicamentos) {
+            nomeMed.add(medicamento.getNome());
+            Integer quant =LotesFacade.buscarQuantidade(medicamento.getId().toString()); 
+            quantidade.add(quant.toString());
         }
+        ServletContext medContext = request.getServletContext();
+        medContext.setAttribute("quantidadeJson",new Gson().toJson(quantidade.toArray()));
+        medContext.setAttribute("nomeMedJson",new Gson().toJson(nomeMed.toArray()));
+           RequestDispatcher rd = getServletContext().getRequestDispatcher("/home.jsp");
+            rd.forward(request, response);
+    
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -75,13 +68,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -95,13 +82,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

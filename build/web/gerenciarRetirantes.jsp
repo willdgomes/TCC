@@ -15,6 +15,7 @@
             <div class="panel panel-default col-sm pt-4">
                 <div class="panel-heading">
                     <h2 align="center">Gerenciamento de retirantes</h2>
+                    <a class="nav-link" href="RetiranteController?action=carregarCadastro"><i class="material-icons">group_add</i> <span class="align-top">Retirantes</span></a>
                 </div>
                 <div class="panel-body m-3">
                       <div class="col-sm-12">

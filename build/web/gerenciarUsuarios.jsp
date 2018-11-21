@@ -14,12 +14,12 @@
         <div class="row">
             <div class="panel panel-default col-sm pt-4">
                 <div class="panel-heading">
-                    <h2 align="center">Gerenciamento de retirantes</h2>
-                    <a class="nav-link" href="RetiranteController?action=carregarCadastro"><i class="material-icons">group_add</i> <span class="align-top">Retirantes</span></a>
+                    <h2 align="center">Gerenciamento de usuários</h2>
+                    <a class="nav-link" href="UsuarioController?action=carregarCadastro"><i class="material-icons">group_add</i> <span class="align-top">Retirantes</span></a>
                 </div>
                 <div class="panel-body m-3">
                       <div class="col-sm-12">
-                                <form action="RetiranteController?action=pesquisarRetirante" method="POST" class="card border-info">
+                                <form action="UsuarioController?action=pesquisarUsuario" method="POST" class="card border-info">
                                     <div class="card-body p-5">
                                         <div class="form-group">
                                             <input type="text" class="col-sm-10" placeholder="Pesquisar" required name="pesquisa">    
@@ -35,20 +35,21 @@
                                             <thead>
                                                 <tr>                                                    
                                                     <th scope="col">Nome</th>
-                                                    <th scope="col">CPF</th>
-                                                    <th scope="col">Paciente</th>
+                                                    <th scope="col">Email</th>
+                                                    <th scope="col">Perfil</th>
                                                     <th scope="col">Ação</th>
                                                 </tr>
                                             </thead>
                                             <tbody> 
                                                 <td colspan="2">${mensagem}</td>
-                                                <c:forEach items="${retirantes}" var="retirante">
-                                                <form action="RetiranteController?action=editar" method="POST">
+                                                <c:forEach items="${usuarios}" var="usuario">
+                                                <form action="UsuarioController?action=editar" method="POST">
                                                     <tr>
-                                                        <td scope="col">${retirante.nomeRetirante}</td>
-                                                        <td scope="col">${retirante.cpfRetirante}</td>
+                                                        <td scope="col">${retirante.nome}</td>
+                                                        <td scope="col">${retirante.email}</td>
+                                                        <td scope="col">${retirante.perfil}</td>
                                                         <td scope="col"><button type="submit" name="editar" class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
-                                                        <input type="hidden" value="${retirante.idRetirante}" name="idRetirante">
+                                                        <input type="hidden" value="${retirante.idUsuario}" name="idUsuario">
                                                     </tr>
                                                 </form>
                                                 </c:forEach>

@@ -17,7 +17,7 @@
                     </div>
                     <div class="panel-body pt-3">
                         <div class="col-sm-12">
-                            <form action="CadastroUsuarioController" method="POST" class="card border-info">
+                            <form action="UsuarioController?action=cadastrarUsuario" method="POST" class="card border-info">
                                 <div class="card-body p-5">
                                     <div class="form-row">
                                         <div class="form-group col">
@@ -27,8 +27,8 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-4" >
-                                            <label for="cpf" class="text-dark">CPF:</label>
-                                            <input type="number" class="form-control" id="cpfUsuario" required name="cpf">
+                                            <label for="usuario" class="text-dark">Usuário</label>
+                                            <input type="text" class="form-control" id="cpfUsuario" required name="usuario">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="dtnasc" class="text-dark">Data de nascimento:</label>

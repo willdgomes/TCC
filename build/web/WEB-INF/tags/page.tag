@@ -101,16 +101,13 @@
                         <div class="collapse show" id="menuCadastro">
                             <ul class="nav flex-column">
                                 <li class="nav-sub-item">
-                                    <a class="nav-link" href="cadastrarPacientes.jsp"><i class="material-icons">person_add</i> <span class="align-top">Pacientes</span></a>
-                                </li>
-                                <li class="nav-sub-item">
                                     <a class="nav-link" href="cadastrarReceita.jsp"><i class="material-icons">receipt</i> <span class="align-top">Receita Médica</span></a>
                                 </li>
                                 <li class="nav-sub-item">
-                                    <a class="nav-link" href="cadastrarRetirante.jsp"><i class="material-icons">group_add</i> <span class="align-top">Retirantes</span></a>
+                                    
                                 </li>
                                 <li class="nav-sub-item">
-                                    <a class="nav-link" href="cadastrarMedicamento.jsp"><i class="material-icons">library_add</i> <span class="align-top">Medicamentos</span></a>
+                                    
                                 </li>
                                  <li class="nav-sub-item">
                                     <a class="nav-link" href="cadastrarUsuario.jsp"><i class="material-icons">library_add</i> <span class="align-top">Usuario</span></a>

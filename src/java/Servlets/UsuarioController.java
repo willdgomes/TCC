@@ -7,6 +7,7 @@ package Servlets;
 
 import Beans.Usuario;
 import DAO.UsuarioDAO;
+import Facade.UsuariosFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -24,7 +25,7 @@ import javax.servlet.http.HttpSession;
  * @author gomes
  */
 @WebServlet(name = "CadastroUsuarioController", urlPatterns = {"/CadastroUsuarioController"})
-public class CadastroUsuarioController extends HttpServlet {
+public class UsuarioController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,53 +39,64 @@ public class CadastroUsuarioController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
+        String action = request.getParameter("action");
         if (session == null) {
             RequestDispatcher rd = request.
                     getRequestDispatcher("/index.html");
             request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema!");
             rd.forward(request, response);
         } else {
-            String nome = request.getParameter("nome");
-            String email = request.getParameter("email");
-            String login = request.getParameter("login");
-            String perfil = request.getParameter("perfil");
-            
-            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-            String stringData = request.getParameter("dataNascimento");
-            stringData = stringData.replaceAll("-", "/");
-            java.util.Date dataNascimento = null;
-            try {
-                dataNascimento = format.parse(stringData);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            java.sql.Date dtNascimento = new java.sql.Date(dataNascimento.getTime());            
-            
-            Usuario usuario = new Usuario();
-            usuario.setNome(nome);
-            usuario.setEmail(email);
-            usuario.setLogin(login);
-            usuario.setSenha("1234");
-            usuario.setPerfil(perfil);
-            usuario.setDataNascimento(dataNascimento);
-
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            usuarioDAO.inserirUsuario(usuario);
-            Usuario usuarioSession = new Usuario();
-            usuario = (Usuario)session.getAttribute("usuario");
-            if (usuarioSession != null) {
-                session = request.getSession();
-                session.setAttribute("usuario", usuarioSession);
-                session.setMaxInactiveInterval(20 * 60);
-                RequestDispatcher rd = null;
-                rd = getServletContext().getRequestDispatcher("/cadastrarUsuario.jsp");
-                rd.include(request, response);
-            } else {
-                request.setAttribute("msg", "Erro ao cadastrar o usuario!");
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
-                rd.forward(request, response);
+            if (action.equals("cadastrarUsuario")) {
+                
+                Usuario usuario= criaUsuario(request);
+                UsuariosFacade.cadastrar(usuario);
+                Usuario usuarioSession = new Usuario();
+                usuario = (Usuario)session.getAttribute("usuario");
+                if (usuarioSession != null) {
+                    session = request.getSession();
+                    session.setAttribute("usuario", usuarioSession);
+                    session.setMaxInactiveInterval(20 * 60);
+                    RequestDispatcher rd = null;
+                    rd = getServletContext().getRequestDispatcher("/cadastrarUsuario.jsp");
+                    rd.include(request, response);
+                } else {
+                    request.setAttribute("msg", "Erro ao cadastrar o usuario!");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+                    rd.forward(request, response);
+                }
             }
         }
+    }
+
+    private Usuario criaUsuario(HttpServletRequest request) {
+        String id = request.getParameter("idUsuario");
+        String nome = request.getParameter("nome");
+        String email = request.getParameter("email");
+        String login = request.getParameter("login");
+        String perfil = request.getParameter("perfil");
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        String stringData = request.getParameter("dataNascimento");
+        stringData = stringData.replaceAll("-", "/");
+        java.util.Date dataNascimento = null;
+        try {
+            dataNascimento = format.parse(stringData);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        java.sql.Date dtNascimento = new java.sql.Date(dataNascimento.getTime());
+
+        Usuario usuario = new Usuario();
+        usuario.setNome(nome);
+        usuario.setEmail(email);
+        usuario.setLogin(login);
+        usuario.setSenha("1234");
+        usuario.setPerfil(perfil);
+        usuario.setDataNascimento(dataNascimento);
+        if (id != null) {
+            usuario.setIdUsuario(Integer.parseInt(id));
+        }
+        return usuario;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

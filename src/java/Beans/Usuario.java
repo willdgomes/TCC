@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Usuario {
 
-    private int idUsuario;
+    private Integer idUsuario;
     private String nome;
     private String email;
     private String login;
@@ -25,7 +25,7 @@ public class Usuario {
         
     }
 
-    public Usuario(int idUsuario, String nome, String email, String login, String senha) {
+    public Usuario(Integer idUsuario, String nome, String email, String login, String senha) {
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.email = email;
@@ -41,11 +41,11 @@ public class Usuario {
         this.email = email;
     }
 
-    public int getIdUsuario() {
+    public Integer getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
+    public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
 

@@ -41,10 +41,9 @@ import javax.ws.rs.core.Response;
 @WebServlet(name = "PacienteController", urlPatterns = {"/PacienteController"}, loadOnStartup = 2)
 public class PacienteController extends HttpServlet {
 
-    public void init(ServletConfig config) throws ServletException {
-        PacientesFacade pacientesFacade = new PacientesFacade();
-        List<Paciente> pacientes = new ArrayList<Paciente>();
-        pacientes = pacientesFacade.buscarTodos();
+    public void init(ServletConfig config) throws ServletException {        
+        super.init(config);
+        List<Paciente> pacientes = PacientesFacade.buscarTodos();
         ServletContext pacContext = config.getServletContext();
         pacContext.setAttribute("pacientes", pacientes);
     }
@@ -68,6 +67,10 @@ public class PacienteController extends HttpServlet {
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
         } else {
+            if(action.equals("carregarCadastro")){
+                  RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");
+                    rd.forward(request, response);
+            }else
             if (action.equals("cadastrarPaciente")) {
                 String nome = request.getParameter("nome");
                 String cpf = request.getParameter("cpf");
@@ -108,7 +111,7 @@ public class PacienteController extends HttpServlet {
                 paciente.setComplemento(complemento);
 
                 PacientesFacade.inserir(paciente);
-
+                atualizarPacientesLista(request);
                 RequestDispatcher rd = null;
                 rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");
                 rd.include(request, response);

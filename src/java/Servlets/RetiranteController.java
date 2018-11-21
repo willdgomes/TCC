@@ -34,9 +34,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "RetiranteController", urlPatterns = {"/RetiranteController"}, loadOnStartup = 3)
 public class RetiranteController extends HttpServlet {
  public void init(ServletConfig config) throws ServletException {
-        RetirantesFacade retirantesFacade = new RetirantesFacade();
-        List<Retirante> retirante = new ArrayList<Retirante>();
-        retirante = retirantesFacade.listaRetirantes();
+        super.init(config);
+        List<Retirante> retirante = RetirantesFacade.listaRetirantes();
         ServletContext medContext = config.getServletContext();
         medContext.setAttribute("retirantes", retirante);
     }
@@ -59,6 +58,10 @@ public class RetiranteController extends HttpServlet {
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
         } else {
+            if(action.equals("carregarCadastro")){
+             RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarRetirante.jsp");
+            rd.forward(request, response);
+            }else
             if (action.equals("cadastrarRetirante")) {
 
                 RetirantesFacade.cadastrarRetirante(criaRetirante(request));
@@ -68,15 +71,15 @@ public class RetiranteController extends HttpServlet {
                 
             } else if (action.equals("pesquisarRetirante")) {
                 String pesquisa = request.getParameter("pesquisa");
-//                List<Retirante> retiranteList = RetirantesFacade.buscarRetirantesNome(pesquisa);
+                List<Retirante> retiranteList = RetirantesFacade.buscarRetirantesNome(pesquisa);
                 RequestDispatcher rd = null;
-//                if (retiranteList.size() > 0) {
-//                    request.setAttribute("retirantes", retiranteList);
-//                } else {
-//                    request.setAttribute("mensagem", "Retirante não cadastrado no sistema");
-//                }
-//                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarRetirantes.jsp");
-//                requestDispatcher.forward(request, response);
+                if (retiranteList.size() > 0) {
+                    request.setAttribute("retirantes", retiranteList);
+                } else {
+                    request.setAttribute("mensagem", "Retirante não cadastrado no sistema");
+                }
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarRetirantes.jsp");
+                requestDispatcher.forward(request, response);
 
             } else if (action.equals("editar")) {
                  String id = request.getParameter("idRetirante");                

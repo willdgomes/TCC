@@ -37,9 +37,8 @@ import javax.servlet.http.HttpSession;
 public class MedicamentoController extends HttpServlet {
 
     public void init(ServletConfig config) throws ServletException {
-        MedicamentosFacade medicamentosFacade = new MedicamentosFacade();
-        List<Medicamento> medicamentos = new ArrayList<Medicamento>();
-        medicamentos = medicamentosFacade.listarMedicamentos();
+        super.init(config);
+        List<Medicamento> medicamentos = MedicamentosFacade.listarMedicamentos();
         ServletContext medContext = config.getServletContext();
         medContext.setAttribute("medicamentos", medicamentos);
     }
@@ -63,7 +62,10 @@ public class MedicamentoController extends HttpServlet {
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
         } else {
-            if (action.equals("insereMedicamentoLote")) {
+            if (action.equals("carregarCadastro")) {
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarMedicamento.jsp");
+                rd.forward(request, response);
+            } else if (action.equals("insereMedicamentoLote")) {
 
                 //busca medicamento para inserir lote no estoque
                 MedicamentosFacade medFacade = new MedicamentosFacade();
@@ -91,10 +93,9 @@ public class MedicamentoController extends HttpServlet {
                     lote.setQtde(lote.getQtde() + Integer.parseInt(qtde));
                     LotesFacade.atualizarLote(lote);
                 }
-                
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/inserirMedicamento.jsp");
                 requestDispatcher.forward(request, response);
-                
+
             } else if (action.equals("pesquisarMedicamento")) {
                 String pesquisa = request.getParameter("pesquisa");
                 MedicamentosFacade medicamentosFacade = new MedicamentosFacade();

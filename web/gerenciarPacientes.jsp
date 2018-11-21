@@ -15,6 +15,7 @@
                 <div class="panel panel-default col-sm pt-4">
                     <div class="panel-heading">
                         <h2 align="center">Gerenciamento de pacientes</h2>
+                        <a href="PacienteController?action=carregarCadastro" class="align-right"><i class="material-icons">person_add</i> <span class="align-top pl-2">Pacientes</span></a>
                     </div>
                     <div class="panel-body m-3">
                         <div class="col-sm-12">
