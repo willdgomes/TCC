@@ -5,10 +5,12 @@
  */
 package Servlets;
 
+import Beans.Medicamento;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -57,6 +59,7 @@ public class ReceitasController extends HttpServlet {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+               // String[] listaMedicamento = request.getParameterValues("nome");
             }
         }
     }
