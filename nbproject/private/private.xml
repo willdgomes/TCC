@@ -2,23 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/InicialController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/home.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/UsuarioController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/UsuarioDAO.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/gerenciarRetirantes.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/RelatorioController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/RetiranteController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/gerenciarUsuarios.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/gerenciarPacientes.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/Logout.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/MedicamentoController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarUsuario.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/PacienteDAO.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Facade/UsuariosFacade.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Usuario.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/WEB-INF/tags/page.tag</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
