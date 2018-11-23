@@ -6,8 +6,13 @@
 package Servlets;
 
 import Beans.Medicamento;
+import Beans.Receita;
+import Facade.MedicamentosFacade;
+import Facade.PacientesFacade;
+import Facade.ReceitasFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,10 +55,9 @@ public class ReceitasController extends HttpServlet {
             rd.include(request, response);
         } else {
             if (action.equals("cadastrarReceita")) {
-                String nomePaciente = request.getParameter("nomePaci");
+                String idPaci = request.getParameter("idPaci");
                 String nomeMedico = request.getParameter("medicoNomeReceita");
                 String crmMedico = request.getParameter("medicoCrmReceita");
-                String[] nome = request.getParameterValues("nome");  
                 SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
                 String stringDataVencimento = request.getParameter("dataVencimentoReceita");
                 stringDataVencimento = stringDataVencimento.replaceAll("-", "/");
@@ -63,7 +67,17 @@ public class ReceitasController extends HttpServlet {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-               // String[] listaMedicamento = request.getParameterValues("nome");
+                java.sql.Date dtVencimento = new java.sql.Date(dataVencimento.getTime());
+                String[] listaMedicamento = request.getParameterValues("nome");
+                Receita receita = new Receita(PacientesFacade.buscarId(idPaci), nomeMedico, crmMedico, (java.sql.Date) dtVencimento);
+                ReceitasFacade.inserirReceita(receita);
+                List<Medicamento> listMed = new ArrayList<Medicamento>();
+                for(int i=0; i<listaMedicamento.length; i++){
+                    listMed.add(MedicamentosFacade.buscarMedicamentoPorNomeInserir(listaMedicamento[i]));
+                }
+                RequestDispatcher rd = null;
+                rd = getServletContext().getRequestDispatcher("/cadastrarReceita.jsp");
+                rd.include(request, response);
             }
         }
     }

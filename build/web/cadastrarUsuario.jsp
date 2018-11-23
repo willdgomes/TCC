@@ -51,7 +51,7 @@
                                            <select id="cbPerfil" class="form-control" required name="perfilUsuario">
                                                    <option></option>
                                                         <option>Administrador</option>
-                                                        <option>Usuario</option>                                                        
+                                                        <option>Usuário padrão</option>                                                        
                                             </select>
                                         </div>
                                     </div>                                    

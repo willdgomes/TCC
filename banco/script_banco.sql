@@ -74,10 +74,11 @@ CREATE TABLE `pacientes` (
 
 CREATE TABLE `receitas` (
   `idReceita` int(11) NOT NULL AUTO_INCREMENT,
-  `descricao` varchar(255) NOT NULL,
+  `nomeMedico` varchar(255) NOT NULL,
   `CRM` varchar(45) NOT NULL,
   `validadeReceita` date NOT NULL,
   PRIMARY KEY (`idReceita`)
+  CONSTRAINT `FK_Paciente` FOREIGN KEY (`idPaciente`) REFERENCES `paciente` (`idPaciente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
 CREATE TABLE `retirantes` (

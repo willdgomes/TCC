@@ -36,7 +36,11 @@ public class MedicamentosFacade {
         return medDAO.buscarMedicamentosParam(pesquisa);
     }
     
-      public static void alterar(Medicamento medicamento) {
+    public static void alterar(Medicamento medicamento) {
         medDAO.atualizarMedicamento(medicamento);
+    }
+    
+    public static Medicamento buscarMedicamentoPorNomeInserir(String nomeMedicamento) {
+        return medDAO.buscarMedicamentoNomeInsere(nomeMedicamento);
     }
 }

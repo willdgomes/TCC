@@ -15,9 +15,21 @@ import java.sql.Date;
 public class Receita implements Serializable {
     
     private Integer id;
+    private Paciente paciente;
     private String nomeMedico;
     private String crmMedico;
     private Date dataVencimentoReceita;
+    
+    public Receita(Paciente paciente, String nomeMedico, String crmMedico, Date dataVencimento){
+        this.paciente=paciente;
+        this.nomeMedico=nomeMedico;
+        this.crmMedico=crmMedico;
+        this.dataVencimentoReceita=dataVencimento;
+    }
+    
+    public Receita(){
+        
+    }
 
     public Integer getId() {
         return id;
@@ -25,6 +37,14 @@ public class Receita implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+    
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
 
     public String getNomeMedico() {
