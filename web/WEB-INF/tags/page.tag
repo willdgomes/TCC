@@ -128,6 +128,9 @@
                                 <li class="nav-sub-item">
                                     <a class="nav-link" href="gerenciarMedicamentos.jsp"><i class="material-icons">local_pharmacy</i> <span class="align-top">Medicamentos</span></a>
                                 </li>
+                                <li class="nav-sub-item">
+                                    <a class="nav-link" href="UsuarioController?action=carregarGerenciamento"><i class="material-icons">person</i> <span class="align-top">Usuários</span></a>
+                                </li>
                             </ul>
                         </div>
                     </li>

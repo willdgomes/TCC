@@ -43,17 +43,25 @@ public class RelatorioController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          List<Medicamento> medicamentos = MedicamentosFacade.listarMedicamentos();
+     
+        ServletContext medContext = request.getServletContext();
+        List<Medicamento> medicamentos = MedicamentosFacade.listarMedicamentos();
         List<String> quantidade = new ArrayList<String>();
         List<String> nomeMed = new ArrayList<String>();
+        List<String> grafico = new ArrayList<String>();
         for (Medicamento medicamento : medicamentos) {
             nomeMed.add(medicamento.getNome());
             Integer quant =LotesFacade.buscarQuantidade(medicamento.getId().toString()); 
             quantidade.add(quant.toString());
         }
-        ServletContext medContext = request.getServletContext();
+        List<String> periodo = new ArrayList<String>();
+        periodo.add("jan");
+        periodo.add("fev");
+        periodo.add("mar");
+        
         medContext.setAttribute("quantidadeJson",new Gson().toJson(quantidade.toArray()));
         medContext.setAttribute("nomeMedJson",new Gson().toJson(nomeMed.toArray()));
+        medContext.setAttribute("periodoJson",new Gson().toJson(periodo.toArray()));
            RequestDispatcher rd = getServletContext().getRequestDispatcher("/relatorioEstoque.jsp");
             rd.forward(request, response);
     }

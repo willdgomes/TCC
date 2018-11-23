@@ -14,47 +14,64 @@
         <div class="col">
             <canvas id="myChart"></canvas>
         </div>
-<script>
-    var labels = JSON.parse('${nomeMedJson}');
+        <script>
+    var labels = JSON.parse('${periodoJson}');
     var quantidade = JSON.parse('${quantidadeJson}');
-var ctx = document.getElementById("myChart").getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
+    var med = JSON.parse('${nomeMedJson}');
+    var lineChartData = {
         labels: labels,
         datasets: [{
-            label: 'medicamentos',
-            data: quantidade,
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
+                label: 'My First dataset',
+                borderColor: ['rgba(255,99,132,1)'],
+                backgroundColor: ['rgba(255,99,132,1)'],
+                fill: false,
+                data: quantidade,
+                yAxisID: 'y-axis-1',
+            }, {
+                label: 'My Second dataset',
+                borderColor: ['rgba(54, 162, 235, 1)'],
+                backgroundColor:['rgba(54, 162, 235, 1)'],
+                fill: false,
+                data: ['1','2','3'],
+                yAxisID: 'y-axis-1'
             }]
-        }
-    }
-});
-</script>
+    };
+
+    window.onload = function () {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        window.myLine = Chart.Line(ctx, {
+            data: lineChartData,
+            options: {
+                responsive: true,
+                hoverMode: 'index',
+                stacked: false,
+                title: {
+                    display: true,
+                    text: 'Chart.js Line Chart - Multi Axis'
+                },
+                scales: {
+                    yAxes: [{
+                            type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                            display: true,
+                            position: 'left',
+                            id: 'y-axis-1',
+                        }, {
+                            type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                            display: false,
+                            position: 'right',
+                            id: 'y-axis-2',
+
+                            // grid line settings
+                            gridLines: {
+                                drawOnChartArea: false, // only want the grid lines for one axis to show up
+                            },
+                        }],
+                }
+            }
+        });
+    };
+
+        </script>
     </jsp:body>
 </t:page>
 

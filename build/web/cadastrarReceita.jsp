@@ -94,15 +94,13 @@
                                                 </thead>
                                                 <tbody> 
                                                 <td colspan="2">${mensagem}</td>
-                                                <c:forEach items="${medicamentoList}" var="paciente">
-                                                    <form action="" method="POST">
+                                                    <form method="POST" name="tabela">
                                                         <tr>
                                                             <td scope="col"></td>
                                                             <td scope="col"></td>
                                                             <td scope="col"></td>
                                                         </tr>
                                                     </form>
-                                                </c:forEach>
                                                 </tbody>
                                             </table>                
                                         </div>
@@ -126,7 +124,7 @@
                     var row = table.insertRow(rowCount);
                     row.id = idLinha;
                     var cell1 = row.insertCell(0);
-                    var element1 = document.createElement("output");
+                    var element1 = document.createElement("input");
                     element1.type = "text";
                     element1.name = "nome";
                     element1.id = idLinha;
@@ -134,7 +132,7 @@
                     cell1.appendChild(element1);
 
                     var cell2 = row.insertCell(1);
-                    var element2 = document.createElement("output");
+                    var element2 = document.createElement("input");
                     element2.type = "number";
                     element2.name = "quantidade";
                     element2.value = quantidade.value;

@@ -46,6 +46,14 @@ public class UsuarioController extends HttpServlet {
             request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema!");
             rd.forward(request, response);
         } else {
+            if(action.equals("carregarGerenciamento")){
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/gerenciarUsuarios.jsp");
+                rd.forward(request, response);
+            }else
+                 if(action.equals("carregarCadastro")){
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarUsuarios.jsp");
+                rd.forward(request, response);
+            }else
             if (action.equals("cadastrarUsuario")) {
                 
                 Usuario usuario= criaUsuario(request);
