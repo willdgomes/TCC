@@ -28,10 +28,10 @@
                                                 <label for="paciente" class="text-dark ">Paciente:</label>
                                                 <div class="row">
                                                     <div class="dropdown col-md-12  ">
-                                                        <select id="cbPaciente" class="form-control" required name="nomePaci">
+                                                        <select id="cbPaciente" class="form-control" required name="idPaci">
                                                             <option></option>
                                                             <c:forEach items="${applicationScope.pacientes}" var="paciente">
-                                                                <option>${paciente.nome}</option>
+                                                                <option value="${paciente.id}">${paciente.nome}</option>
                                                             </c:forEach>
                                                         </select>
                                                     </div>                    

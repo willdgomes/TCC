@@ -5,6 +5,7 @@
  */
 package Facade;
 
+import Beans.Paciente;
 import Beans.Receita;
 import DAO.ReceitaDAO;
 
@@ -15,8 +16,8 @@ import DAO.ReceitaDAO;
 public class ReceitasFacade {
     
     private static final ReceitaDAO receitaDAO = new ReceitaDAO();
- 
-    public static void listarMedicamentos(Receita receita){
-        receitaDAO.inserirMedicamento(receita);
+    
+    public static void inserirReceita(Receita receita){
+        receitaDAO.inserirReceita(receita);
     }
 }
