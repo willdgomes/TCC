@@ -45,12 +45,11 @@ public class DispensaController extends HttpServlet {
             rd.forward(request, response);
         } else {
             if (action.equals("selecionaMedicamento")) {
-                String nomeMedicamento = request.getParameter("nomeMedicamento");
-                String quantidadeMedicamento = request.getParameter("quantidadeMedicamento");
-                String crmMedico = request.getParameter("medicoCrm");
-                String nomeMedico = request.getParameter("medicoNome");
-                String dataReceita = request.getParameter("dataReceita");
-                dispensa.setQuantidade(Integer.parseInt(quantidadeMedicamento));
+                String idPaciente = "";//request.getParameter("idPaci");
+                String nomeRetirante = "";//request.getParameter("nomeRetirante");
+                String nomeMedicamento = "";//request.getParameter("nomeMedicamento");
+                String quantidadeMedicamento = "";//request.getParameter("quantidadeMedicamento");
+                //String[] listaMedicamento = request.getParameterValues("nome");
             }else if(false){
                 
             }

@@ -23,10 +23,11 @@
                                     <div class="col form-row">
                                         <div class="form-group col-md-6">
                                             <label for="retirante" class="text-dark" >Paciente</label>
-                                            <select id="cbRemedios" class="form-control" required name="nomePaci">
-                                                <option>Fulano</option>
-                                                <option>Ciclano</option>
-                                                <option>Beltrano</option>
+                                            <select id="cbPaciente" class="form-control" required name="idPaci">
+                                                <option></option>
+                                                <c:forEach items="${applicationScope.pacientes}" var="paciente">
+                                                    <option value="${paciente.id}">${paciente.nome}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-4  offset-md-1">
@@ -58,10 +59,9 @@
                                         <div class="col-md-6 form-group">
                                             <label class="text-dark" for="Medicamento" >Medicamento:</label> 
                                             <select id="cbRemedios" class="form-control" required name="nomeMedicamento">
+                                                <option></option>
                                                 <c:forEach items="${applicationScope.medicamentos}" var="medicamento">
-
                                                     <option>${medicamento.nome}</option>
-
                                                 </c:forEach>
                                             </select>
                                         </div>
@@ -78,7 +78,7 @@
                                                     });
                                                 });
                                             </script>
-                                            <button class="btn btn-sm btn-info mt-2" id="add1"><i class="material-icons">add</i></button>
+                                            <button type="button" class="btn btn-sm btn-info mt-2" id="add1"><i class="material-icons">add</i></button>
                                         </div>
                                     </div>
                                     <div class="form-row mt-3">
