@@ -6,6 +6,7 @@
 package Servlets;
 
 import Beans.Medicamento;
+import Beans.Paciente;
 import Beans.Receita;
 import Facade.MedicamentosFacade;
 import Facade.PacientesFacade;
@@ -69,11 +70,22 @@ public class ReceitasController extends HttpServlet {
                 }
                 java.sql.Date dtVencimento = new java.sql.Date(dataVencimento.getTime());
                 String[] listaMedicamento = request.getParameterValues("nome");
-                Receita receita = new Receita(PacientesFacade.buscarId(idPaci), nomeMedico, crmMedico, (java.sql.Date) dtVencimento);
+                Paciente paciente = new Paciente();
+                paciente = PacientesFacade.buscarId(idPaci);
+                Receita receita = new Receita(paciente, nomeMedico, crmMedico, (java.sql.Date) dtVencimento);
+                
+
+
+                //validar receita para cadastrar
+                
+                
+                
                 ReceitasFacade.inserirReceita(receita);
+                receita = ReceitasFacade.buscarPorIdPaciente(paciente.getId());
                 List<Medicamento> listMed = new ArrayList<Medicamento>();
                 for(int i=0; i<listaMedicamento.length; i++){
                     listMed.add(MedicamentosFacade.buscarMedicamentoPorNomeInserir(listaMedicamento[i]));
+                    ReceitasFacade.inserirMedicamentosReceitas(listMed.get(i).getId(), receita.getId());
                 }
                 RequestDispatcher rd = null;
                 rd = getServletContext().getRequestDispatcher("/cadastrarReceita.jsp");
