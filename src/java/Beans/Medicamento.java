@@ -20,7 +20,7 @@ public class Medicamento {
     private String composicao;
     private Double dosagem;
     private String medida;
-
+    
     public Integer getId() {
         return id;
     }

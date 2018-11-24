@@ -15,29 +15,25 @@
             <canvas id="myChart"></canvas>
         </div>
         <script>
+    
+    var qntdMedTotal = JSON.parse('${totalMedJson}');
     var labels = JSON.parse('${periodoJson}');
     var quantidade = JSON.parse('${quantidadeJson}');
     var med = JSON.parse('${nomeMedJson}');
+    var i=0;
+    var myData = []; 
+    for(var i = 0; i < med.length; i++) {
+    if(med[i].length > 0) {
+        myData.push({type: "line", data: quantidade[i],label:med[i],borderColor: ['rgba(54, 162, 235, 1)'],
+                backgroundColor:['rgba(54, 162, 235, 1)'], yAxisID: "y-axis-1",fill: false})
+        }
+    }
     var lineChartData = {
         labels: labels,
-        datasets: [{
-                label: 'My First dataset',
-                borderColor: ['rgba(255,99,132,1)'],
-                backgroundColor: ['rgba(255,99,132,1)'],
-                fill: false,
-                data: quantidade,
-                yAxisID: 'y-axis-1',
-            }, {
-                label: 'My Second dataset',
-                borderColor: ['rgba(54, 162, 235, 1)'],
-                backgroundColor:['rgba(54, 162, 235, 1)'],
-                fill: false,
-                data: ['1','2','3'],
-                yAxisID: 'y-axis-1'
-            }]
+        datasets: myData
     };
 
-    window.onload = function () {
+        window.onload = function () {
         var ctx = document.getElementById('myChart').getContext('2d');
         window.myLine = Chart.Line(ctx, {
             data: lineChartData,
@@ -60,7 +56,6 @@
                             display: false,
                             position: 'right',
                             id: 'y-axis-2',
-
                             // grid line settings
                             gridLines: {
                                 drawOnChartArea: false, // only want the grid lines for one axis to show up
@@ -70,7 +65,6 @@
             }
         });
     };
-
         </script>
     </jsp:body>
 </t:page>

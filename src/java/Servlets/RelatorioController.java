@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -45,21 +46,32 @@ public class RelatorioController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
      
         ServletContext medContext = request.getServletContext();
+        LinkedList tdQuantidade = new LinkedList();
         List<Medicamento> medicamentos = MedicamentosFacade.listarMedicamentos();
         List<String> quantidade = new ArrayList<String>();
         List<String> nomeMed = new ArrayList<String>();
-        List<String> grafico = new ArrayList<String>();
         for (Medicamento medicamento : medicamentos) {
             nomeMed.add(medicamento.getNome());
             Integer quant =LotesFacade.buscarQuantidade(medicamento.getId().toString()); 
+            quantidade.add("1");
             quantidade.add(quant.toString());
+            quantidade.add("1");
+            quantidade.add(quant.toString());
+            tdQuantidade.add(quantidade);
+            quantidade = new ArrayList<String>();
         }
+        
+        Integer totalMed = medicamentos.size();
         List<String> periodo = new ArrayList<String>();
         periodo.add("jan");
         periodo.add("fev");
         periodo.add("mar");
+        periodo.add("abr");
+        periodo.add("maio");
+        periodo.add("Jun");
         
-        medContext.setAttribute("quantidadeJson",new Gson().toJson(quantidade.toArray()));
+        medContext.setAttribute("totalMedJson",new Gson().toJson(totalMed.toString()));
+        medContext.setAttribute("quantidadeJson",new Gson().toJson(tdQuantidade.toArray()));
         medContext.setAttribute("nomeMedJson",new Gson().toJson(nomeMed.toArray()));
         medContext.setAttribute("periodoJson",new Gson().toJson(periodo.toArray()));
            RequestDispatcher rd = getServletContext().getRequestDispatcher("/relatorioEstoque.jsp");
