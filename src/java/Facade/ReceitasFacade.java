@@ -20,4 +20,12 @@ public class ReceitasFacade {
     public static void inserirReceita(Receita receita){
         receitaDAO.inserirReceita(receita);
     }
+    
+    public static void inserirMedicamentosReceitas(Integer idMedicamento, Integer idReceita){
+        receitaDAO.inserirMedicamentoReceita(idMedicamento, idReceita);
+    }
+    
+    public static Receita buscarPorIdPaciente(Integer idPaciente){
+        return receitaDAO.buscarReceitaPorIdPaciente(idPaciente);
+    }
 }
