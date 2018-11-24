@@ -4,33 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Medicamento.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/DispensaController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Receita.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarPacientes.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/nbproject/private/private.xml</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/CadastroMedicamentoController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/dispensarMedicamento.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/index.html</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/LoteDAO.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/ConnectionFactory.java</file>
+            <file>file:/C:/Users/Eu/Documents/TCC/web/pesquisaPacienteDispensa.jsp</file>
+            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Facade/RetirantesFacade.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Dispensa.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarRetirante.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarUsuario.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Usuario.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarMedicamento.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/editarPacientes.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarReceita.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/InicialController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/home.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/UsuarioController.java</file>
+            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Facade/MedicamentosFacade.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Paciente.java</file>
+            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Facade/PacientesFacade.java</file>
+            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Facade/UsuariosFacade.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/relatorioEstoque.jsp</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/RelatorioController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Lote.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/MedicamentoController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/PacienteController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/WEB-INF/tags/page.tag</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/ReceitasController.java</file>
+            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Facade/LotesFacade.java</file>
         </group>
     </open-files>
 </project-private>
