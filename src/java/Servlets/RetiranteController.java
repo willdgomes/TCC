@@ -65,8 +65,13 @@ public class RetiranteController extends HttpServlet {
             rd.forward(request, response);
             }else
             if (action.equals("cadastrarRetirante")) {
+                Retirante r = new Retirante();
+                r = criaRetirante(request);
 
-                RetirantesFacade.cadastrarRetirante(criaRetirante(request));
+                RetirantesFacade.cadastrarRetirante(r);
+                r = RetirantesFacade.buscarRetirantePorCpf(r.getCpfRetirante());
+                String idPaciente = request.getParameter("paciente");
+                RetirantesFacade.inserirRetirantePaciente(idPaciente, r.getIdRetirante());
                 atualizarRetirantesLista(request);
                 request.setAttribute("successAlert",new Gson().toJson("true"));
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/cadastrarRetirante.jsp");
@@ -125,7 +130,6 @@ public class RetiranteController extends HttpServlet {
         String telefone = request.getParameter("telefone");
         telefone = telefone.replaceAll("\\W","");
         String email = request.getParameter("emailRetirante");
-        String paciente = request.getParameter("paciente");
         String parentesco = request.getParameter("parentesco");
         String cep = request.getParameter("cepRetirante");
         String cidade = request.getParameter("cidadeRetirante");

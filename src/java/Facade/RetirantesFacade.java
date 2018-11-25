@@ -30,11 +30,19 @@ public class RetirantesFacade {
     }
     
     public static Retirante buscarRetirantePorId(String idRetirante){
-        return retDAO.buscarMedicamentoId(idRetirante);
+        return retDAO.buscarRetiranteId(idRetirante);
+    }
+    
+    public static Retirante buscarRetirantePorCpf(String cpfRetirante){
+        return retDAO.buscarRetiranteCpf(cpfRetirante);
     }
     
     public static void cadastrarRetirante(Retirante retirante){
         retDAO.inserirRetirante(retirante);
+    }
+    
+    public static void inserirRetirantePaciente(String idPaciente, Integer idRetirante){
+        retDAO.inserirRetirantePaciente(idPaciente, idRetirante);
     }
     
      public static void alterarRetirante(Retirante retirante){
