@@ -37,7 +37,7 @@
                                 </div>
                             <div class="card border border-info text-secondary bg-light ml-2 col">
                                 <div class="card-body pt-2">
-                                   <a href="CadastroUsuarioController"><i class="material-icons">library_add</i> <span class="align-top pl-2">Usuário</span></a>
+                                   <a href="UsuarioController?action=carregarCadastro"><i class="material-icons">library_add</i> <span class="align-top pl-2">Usuário</span></a>
                                 </div>
                             </div>
                         </div>

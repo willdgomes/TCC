@@ -19,6 +19,10 @@ public class MedicamentosFacade {
     static List<Medicamento> listaMedicamentos = new ArrayList<Medicamento>();
     static Medicamento med = new Medicamento();
     
+    public static void cadastrar(Medicamento medicamento){
+        medDAO.inserirMedicamento(medicamento);
+    }
+    
     public static List<Medicamento> listarMedicamentos(){
         listaMedicamentos = medDAO.listarMedicamentos();
         return listaMedicamentos;

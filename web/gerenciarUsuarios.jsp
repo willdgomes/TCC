@@ -15,7 +15,7 @@
             <div class="panel panel-default col-sm pt-4">
                 <div class="panel-heading">
                     <h2 align="center">Gerenciamento de usuários</h2>
-                    <a class="nav-link" href="UsuarioController?action=carregarCadastro"><i class="material-icons">group_add</i> <span class="align-top">Retirantes</span></a>
+                    <a class="nav-link" href="UsuarioController?action=carregarCadastro"><i class="material-icons">group_add</i> <span class="align-top">Cadastrar usuário</span></a>
                 </div>
                 <div class="panel-body m-3">
                       <div class="col-sm-12">
@@ -45,11 +45,11 @@
                                                 <c:forEach items="${usuarios}" var="usuario">
                                                 <form action="UsuarioController?action=editar" method="POST">
                                                     <tr>
-                                                        <td scope="col">${retirante.nome}</td>
-                                                        <td scope="col">${retirante.email}</td>
-                                                        <td scope="col">${retirante.perfil}</td>
+                                                        <td scope="col">${usuario.nome}</td>
+                                                        <td scope="col">${usuario.email}</td>
+                                                        <td scope="col">${usuario.perfil}</td>
                                                         <td scope="col"><button type="submit" name="editar" class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
-                                                        <input type="hidden" value="${retirante.idUsuario}" name="idUsuario">
+                                                        <input type="hidden" value="${usuario.idUsuario}" name="idUsuario">
                                                     </tr>
                                                 </form>
                                                 </c:forEach>
@@ -63,6 +63,7 @@
                     </div>                  
                 </div>
             </div>
+        </div>
         </div>
     </jsp:body>
 </t:page>

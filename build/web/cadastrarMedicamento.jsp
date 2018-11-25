@@ -18,8 +18,14 @@
                     </div>
                     <div class="panel-body pt-3">
                         <div class="col-sm-12">
-                            <form action="MedicamentoController" method="POST" class="card border-info">
+                            <form action="MedicamentoController?action=cadastrarMedicamento" method="POST" class="card border-info">
                                 <div class="card-body p-5">
+                                    <div class="form-row" id="successAlert">
+                                        <div class="alert alert-success colalert-dismissible col">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            Medicamento cadastrado com sucesso!
+                                        </div>
+                                    </div>
                                     <div class="form-row">
                                         <div class="form-group col">
                                             <label for="nome" class="text-dark">Nome:</label>
@@ -68,6 +74,15 @@
                 </div>
             </div>
         </div>
+        <script>
+              $(document).ready(function () {
+              var successAlert = JSON.parse(${successAlert});
+        if(successAlert == true)
+            $("#successAlert").show();
+        else
+            $("#successAlert").hide();  
+    });
+        </script>
     </jsp:body>
 </t:page>
 

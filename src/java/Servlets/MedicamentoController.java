@@ -12,6 +12,7 @@ import DAO.MedicamentoDAO;
 import DAO.PacienteDAO;
 import Facade.LotesFacade;
 import Facade.MedicamentosFacade;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -63,9 +64,15 @@ public class MedicamentoController extends HttpServlet {
             rd.include(request, response);
         } else {
             if (action.equals("carregarCadastro")) {
+                request.setAttribute("successAlert",new Gson().toJson("false"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarMedicamento.jsp");
                 rd.forward(request, response);
-            } else if (action.equals("insereMedicamentoLote")) {
+            } else if(action.equals("cadastrarMedicamento")){
+                MedicamentosFacade.cadastrar(criarMedicamento(request));
+                  request.setAttribute("successAlert",new Gson().toJson("true"));
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarMedicamento.jsp");
+                rd.forward(request, response);
+            }else if (action.equals("insereMedicamentoLote")) {
 
                 //busca medicamento para inserir lote no estoque
                 MedicamentosFacade medFacade = new MedicamentosFacade();
@@ -124,25 +131,7 @@ public class MedicamentoController extends HttpServlet {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/editarMedicamento.jsp");
                 requestDispatcher.forward(request, response);
             } else if (action.equals("editarMedicamento")) {
-                String id = request.getParameter("idMedicamento");
-                String nome = request.getParameter("nome");
-                String fabricante = request.getParameter("nomeFabricante");
-                String composicao = request.getParameter("composicao");
-                String dosagem = request.getParameter("dosagem");
-                String medida = request.getParameter("medida");
-                String descricao = request.getParameter("descricao");
-
-                Medicamento medicamento = new Medicamento();
-                medicamento.setNome(nome);
-                medicamento.setNomeFabricante(fabricante);
-                medicamento.setComposicao(composicao);
-                medicamento.setDosagem(Double.parseDouble(dosagem));
-                medicamento.setMedida(medida);
-                medicamento.setDescricao(descricao);
-                medicamento.setId(Integer.parseInt(id));
-
-                MedicamentosFacade medicamentosFacade = new MedicamentosFacade();
-                medicamentosFacade.alterar(medicamento);
+                MedicamentosFacade.alterar(criarMedicamento(request));
                 atualizarMedicamentosLista(request);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarMedicamentos.jsp");
                 requestDispatcher.forward(request, response);
@@ -150,6 +139,27 @@ public class MedicamentoController extends HttpServlet {
         }
     }
 
+    private Medicamento criarMedicamento(HttpServletRequest request){
+    String nome = request.getParameter("nome");
+            String id = request.getParameter("idMedicamento");
+            String fabricante = request.getParameter("fabricante");
+            String composicao = request.getParameter("composicao");
+            String dosagem = request.getParameter("dosagem");
+            String medida = request.getParameter("medida");
+            String descricao = request.getParameter("descricao");
+
+            Medicamento medicamento = new Medicamento();
+            if(id!= null)
+                medicamento.setId(Integer.parseInt(id));
+            medicamento.setNome(nome);
+            medicamento.setNomeFabricante(fabricante);
+            medicamento.setComposicao(composicao);
+            medicamento.setDosagem(Double.parseDouble(dosagem));
+            medicamento.setMedida(medida);
+            medicamento.setDescricao(descricao);
+            return medicamento;
+    }
+    
     private void atualizarMedicamentosLista(HttpServletRequest request) {
         ServletContext pacContext = request.getServletContext();
         pacContext.setAttribute("medicamentos", MedicamentosFacade.listarMedicamentos());

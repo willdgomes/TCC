@@ -10,6 +10,7 @@ import Beans.Usuario;
 import DAO.PacienteDAO;
 import DAO.UsuarioDAO;
 import Facade.PacientesFacade;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -68,13 +69,14 @@ public class PacienteController extends HttpServlet {
             rd.include(request, response);
         } else {
             if(action.equals("carregarCadastro")){
+                request.setAttribute("successAlert",new Gson().toJson("false"));
                   RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");
                     rd.forward(request, response);
             }else
             if (action.equals("cadastrarPaciente")) {
                 String nome = request.getParameter("nome");
                 String cpf = request.getParameter("cpf");
-
+                cpf = cpf.replaceAll("\\W","");
                 SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
                 String stringData = request.getParameter("dataNascimento");
                 stringData = stringData.replaceAll("-", "/");
@@ -86,6 +88,7 @@ public class PacienteController extends HttpServlet {
                 }
 
                 String telefone = request.getParameter("telefone");
+                telefone = telefone.replaceAll("\\W","");
                 String email = request.getParameter("email");
                 String cep = request.getParameter("cep");
                 String cidade = request.getParameter("cidade");
@@ -113,6 +116,7 @@ public class PacienteController extends HttpServlet {
                 PacientesFacade.inserir(paciente);
                 atualizarPacientesLista(request);
                 RequestDispatcher rd = null;
+                request.setAttribute("successAlert",new Gson().toJson("true"));
                 rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");
                 rd.include(request, response);
             } else if (action.equals("pesquisaParam")) {

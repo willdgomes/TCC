@@ -19,6 +19,12 @@
                         <div class="col-sm-12">
                             <form action="UsuarioController?action=cadastrarUsuario" method="POST" class="card border-info">
                                 <div class="card-body p-5">
+                                    <div class="form-row" id="successAlert">
+                                        <div class="alert alert-success colalert-dismissible col">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            Usuário cadastrado com sucesso!
+                                        </div>
+                                    </div>
                                     <div class="form-row">
                                         <div class="form-group col">
                                             <label for="nome" class="text-dark">Nome:</label>
@@ -27,31 +33,27 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-4" >
-                                            <label for="usuario" class="text-dark">Usuário</label>
-                                            <input type="text" class="form-control" id="cpfUsuario" required name="usuario">
+                                            <label for="usuario" class="text-dark">Login</label>
+                                            <input type="text" class="form-control" id="loginUsuario" required name="login">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="dtnasc" class="text-dark">Data de nascimento:</label>
                                             <input type="date" class="form-control" id="dtnascUsuario" required name="dataNascimento">
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="telefone" class="text-dark">Telefone:</label>
-                                            <input type="number" class="form-control" id="telefoneUsuario" name="telefone">
-                                        </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-8">
                                             <label for="email" class="text-dark">E-mail:</label>
-                                            <input type="text" class="form-control" id="emailUsuario" name="email">
+                                            <input type="email" class="form-control" id="emailUsuario" name="email">
                                         </div>
                                     </div>                                    
                                     <div class="form-row">
                                         <div class="form-group col-md-5">
                                             <label for="perfil" class="text-dark">Perfil:</label>
-                                           <select id="cbPerfil" class="form-control" required name="perfilUsuario">
-                                                   <option></option>
-                                                        <option>Administrador</option>
-                                                        <option>Usuário padrão</option>                                                        
+                                            <select id="cbPerfil" class="form-control" required name="perfilUsuario">
+                                                <option></option>
+                                                <option>Administrador</option>
+                                                <option>Usuário padrão</option>                                                        
                                             </select>
                                         </div>
                                     </div>                                    
@@ -67,5 +69,14 @@
                 </div>
             </div>
         </div>
+         <script>
+              $(document).ready(function () {
+              var successAlert = JSON.parse(${successAlert});
+        if(successAlert == true)
+            $("#successAlert").show();
+        else
+            $("#successAlert").hide();  
+    });
+        </script>
     </jsp:body>
 </t:page>

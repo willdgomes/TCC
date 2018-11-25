@@ -150,12 +150,12 @@ public class UsuarioDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Usuario u = new Usuario();
-                u.setIdUsuario(Integer.parseInt(rs.getString("idPaciente")));
-                u.setNome(rs.getString("nome"));
-                u.setEmail(rs.getString("email"));
+                u.setIdUsuario(Integer.parseInt(rs.getString("idUsuario")));
+                u.setNome(rs.getString("nomeUsuario"));
+                u.setEmail(rs.getString("emailUsuario"));
                 u.setLogin(rs.getString("login"));
                 u.setPerfil(rs.getString("perfil"));
-                String stringData = rs.getString("dnUsuario");  
+                String stringData = rs.getString("dataNascimento");  
                 stringData = stringData.replaceAll("-", "/");
                 SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
                 java.util.Date dt = null;
@@ -200,12 +200,12 @@ public class UsuarioDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Usuario u = new Usuario();
-                u.setIdUsuario(Integer.parseInt(rs.getString("idPaciente")));
-                u.setNome(rs.getString("nome"));
-                u.setEmail(rs.getString("email"));
+                u.setIdUsuario(Integer.parseInt(rs.getString("idUsuario")));
+                u.setNome(rs.getString("nomeUsuario"));
+                u.setEmail(rs.getString("emailUsuario"));
                 u.setLogin(rs.getString("login"));
                 u.setPerfil(rs.getString("perfil"));
-                String stringData = rs.getString("dnUsuario");  
+                String stringData = rs.getString("dataNascimento");  
                 stringData = stringData.replaceAll("-", "/");
                 SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
                 java.util.Date dt = null;
@@ -238,7 +238,7 @@ public class UsuarioDAO {
         }
     }
     
-    public Usuario buscarUsuarioId (Integer id){
+    public Usuario buscarUsuarioId (String id){
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -246,15 +246,15 @@ public class UsuarioDAO {
         try {
             con = ConnectionFactory.getConnection();  
             stmt = con.prepareStatement(stmtBuscaUsuarioId); 
-            stmt.setString(1,id.toString());
+            stmt.setString(1,id);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                usuario.setIdUsuario(Integer.parseInt(rs.getString("idPaciente")));
-                usuario.setNome(rs.getString("nome"));
-                usuario.setEmail(rs.getString("email"));
+                usuario.setIdUsuario(Integer.parseInt(rs.getString("idUsuario")));
+                usuario.setNome(rs.getString("nomeUsuario"));
+                usuario.setEmail(rs.getString("emailusuario"));
                 usuario.setLogin(rs.getString("login"));
                 usuario.setPerfil(rs.getString("perfil"));
-                String stringData = rs.getString("dnUsuario");  
+                String stringData = rs.getString("dataNascimento");  
                 stringData = stringData.replaceAll("-", "/");
                 SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
                 java.util.Date dt = null;

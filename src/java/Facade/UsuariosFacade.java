@@ -24,7 +24,7 @@ public class UsuariosFacade {
         return listaUsuarios;
     }
      
-    public static Usuario buscarUsuarioPorId(Integer idUsuario){
+    public static Usuario buscarUsuarioPorId(String idUsuario){
         return usuDAO.buscarUsuarioId(idUsuario);
     }
     

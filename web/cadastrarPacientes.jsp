@@ -9,8 +9,8 @@
 <t:page>
     <jsp:attribute name="title">Farmácia APPP</jsp:attribute>
     <jsp:body>
-
         <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/jquery.mask.min.js"></script>
         <div class="main w-100">
             <div class="row">
                 <div class="panel panel-default col-sm pt-4">
@@ -21,6 +21,12 @@
                         <div class="col-sm-12">
                             <form action="PacienteController?action=cadastrarPaciente" method="POST" class="card border-info">
                                 <div class="card-body p-5">
+                                    <div class="form-row" id="successAlert">
+                                        <div class="alert alert-success colalert-dismissible col">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            Paciente cadastrado com sucesso!
+                                        </div>
+                                    </div>
                                     <div class="form-row">
                                         <div class="form-group col">
                                             <label for="nome" class="text-dark">Nome:</label>
@@ -30,7 +36,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-4" >
                                             <label for="cpf" class="text-dark">CPF:</label>
-                                            <input type="number" class="form-control" id="cpfpaciente" required name="cpf">
+                                            <input type="text" class="form-control" id="cpfpaciente" required name="cpf">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="dtnasc" class="text-dark">Data de nascimento:</label>
@@ -38,13 +44,13 @@
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="telefone" class="text-dark">Telefone:</label>
-                                            <input type="number" class="form-control" id="dtnascpaciente" name="telefone">
+                                            <input type="text" class="form-control" id="telefone" name="telefone">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-8">
                                             <label for="email" class="text-dark">E-mail:</label>
-                                            <input type="text" class="form-control" id="emailpaciente" name="email">
+                                            <input type="email" class="form-control" id="emailpaciente" name="email">
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -100,10 +106,16 @@
             </div>
         </div>
         <script type="text/javascript" >
-
+        
             $(document).ready(function () {
-
-                function limpa_formulário_cep() {
+        $("#cpfpaciente").mask('999.999.999-99');  
+        $("#telefone").mask('(99)0 0000-0000');  
+        var successAlert = JSON.parse(${successAlert});
+        if(successAlert == true)
+            $("#successAlert").show();
+        else
+            $("#successAlert").hide();    
+        function limpa_formulário_cep() {
                     // Limpa valores do formulário de cep.
                     $("#enderecopaciente").val("");
                     $("#bairropaciente").val("");

@@ -11,6 +11,7 @@ import Beans.Usuario;
 import DAO.RetiranteDAO;
 import Facade.PacientesFacade;
 import Facade.RetirantesFacade;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -59,6 +60,7 @@ public class RetiranteController extends HttpServlet {
             rd.include(request, response);
         } else {
             if(action.equals("carregarCadastro")){
+                request.setAttribute("successAlert",new Gson().toJson("false"));
              RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarRetirante.jsp");
             rd.forward(request, response);
             }else
@@ -66,13 +68,13 @@ public class RetiranteController extends HttpServlet {
 
                 RetirantesFacade.cadastrarRetirante(criaRetirante(request));
                 atualizarRetirantesLista(request);
+                request.setAttribute("successAlert",new Gson().toJson("true"));
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/cadastrarRetirante.jsp");
                 requestDispatcher.forward(request, response);
                 
             } else if (action.equals("pesquisarRetirante")) {
                 String pesquisa = request.getParameter("pesquisa");
                 List<Retirante> retiranteList = RetirantesFacade.buscarRetirantesNome(pesquisa);
-                RequestDispatcher rd = null;
                 if (retiranteList.size() > 0) {
                     request.setAttribute("retirantes", retiranteList);
                 } else {
@@ -83,8 +85,8 @@ public class RetiranteController extends HttpServlet {
 
             } else if (action.equals("editar")) {
                  String id = request.getParameter("idRetirante");                
-              //  Retirante retirante = RetirantesFacade.buscarRetirantePorId(id);
-                //request.setAttribute("retirante", retirante);
+                Retirante retirante = RetirantesFacade.buscarRetirantePorId(id);
+                request.setAttribute("retirante", retirante);
                 RequestDispatcher rd = null;
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/editarRetirante.jsp");
                 requestDispatcher.forward(request, response);
@@ -109,6 +111,7 @@ public class RetiranteController extends HttpServlet {
         String id = request.getParameter("idRetirante");
         String nome = request.getParameter("nomeRetirante");
         String cpf = request.getParameter("cpfRetirante");
+        cpf = cpf.replaceAll("\\W","");
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
         String stringData = request.getParameter("dtNascimento");
         stringData = stringData.replaceAll("-", "/");
@@ -120,6 +123,7 @@ public class RetiranteController extends HttpServlet {
         }
 
         String telefone = request.getParameter("telefone");
+        telefone = telefone.replaceAll("\\W","");
         String email = request.getParameter("emailRetirante");
         String paciente = request.getParameter("paciente");
         String parentesco = request.getParameter("parentesco");

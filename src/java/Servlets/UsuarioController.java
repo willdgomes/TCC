@@ -8,11 +8,14 @@ package Servlets;
 import Beans.Usuario;
 import DAO.UsuarioDAO;
 import Facade.UsuariosFacade;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +27,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author gomes
  */
-@WebServlet(name = "CadastroUsuarioController", urlPatterns = {"/CadastroUsuarioController"})
+@WebServlet(name = "UsuarioController", urlPatterns = {"/UsuarioController"})
 public class UsuarioController extends HttpServlet {
 
     /**
@@ -38,6 +41,7 @@ public class UsuarioController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(false);
         String action = request.getParameter("action");
         if (session == null) {
@@ -47,17 +51,57 @@ public class UsuarioController extends HttpServlet {
             rd.forward(request, response);
         } else {
             if(action.equals("carregarGerenciamento")){
+                List<Usuario> usuariosList = UsuariosFacade.listarUsuarios();
+                 ServletContext usuContext = request.getServletContext();
+                 usuContext.setAttribute("usuarios", usuariosList);
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/gerenciarUsuarios.jsp");
+                rd.forward(request, response);
+            }else if(action.equals("pesquisarUsuario")){
+                String pesquisa = request.getParameter("pesquisa");
+             List<Usuario> usuariosList = UsuariosFacade.buscarUsuario(pesquisa);
+             ServletContext usuContext = request.getServletContext();
+             usuContext.setAttribute("usuarios", usuariosList);
+             if (usuariosList.size() == 0) {
+                        usuContext.setAttribute("mensagem", "Usuario não cadastrado no sistema");
+                 }     
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/gerenciarUsuarios.jsp");
                 rd.forward(request, response);
             }else
+                if(action.equals("editar")){
+                String id = request.getParameter("idUsuario");                
+                Usuario usuario = UsuariosFacade.buscarUsuarioPorId(id);
+                request.setAttribute("usuario", usuario);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/editarUsuario.jsp");
+                requestDispatcher.forward(request, response);
+                }else
                  if(action.equals("carregarCadastro")){
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarUsuarios.jsp");
+                     request.setAttribute("successAlert",new Gson().toJson("false"));
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarUsuario.jsp");
                 rd.forward(request, response);
             }else
             if (action.equals("cadastrarUsuario")) {
                 
                 Usuario usuario= criaUsuario(request);
                 UsuariosFacade.cadastrar(usuario);
+                Usuario usuarioSession = new Usuario();
+                usuario = (Usuario)session.getAttribute("usuario");
+                if (usuarioSession != null) {
+                    session = request.getSession();
+                    session.setAttribute("usuario", usuarioSession);
+                    session.setMaxInactiveInterval(20 * 60);
+                    RequestDispatcher rd = null;
+                    request.setAttribute("successAlert",new Gson().toJson("true"));
+                    rd = getServletContext().getRequestDispatcher("/cadastrarUsuario.jsp");
+                    rd.include(request, response);
+                } else {
+                    request.setAttribute("msg", "Erro ao cadastrar o usuario!");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+                    rd.forward(request, response);
+                }
+            }else if(action.equals("editarUsuario")){
+            
+                Usuario usuario= criaUsuario(request);
+                UsuariosFacade.alterar(usuario);
                 Usuario usuarioSession = new Usuario();
                 usuario = (Usuario)session.getAttribute("usuario");
                 if (usuarioSession != null) {
@@ -81,7 +125,7 @@ public class UsuarioController extends HttpServlet {
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String login = request.getParameter("login");
-        String perfil = request.getParameter("perfil");
+        String perfil = request.getParameter("perfilUsuario");
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
         String stringData = request.getParameter("dataNascimento");
@@ -100,7 +144,7 @@ public class UsuarioController extends HttpServlet {
         usuario.setLogin(login);
         usuario.setSenha("1234");
         usuario.setPerfil(perfil);
-        usuario.setDataNascimento(dataNascimento);
+        usuario.setDataNascimento(dtNascimento);
         if (id != null) {
             usuario.setIdUsuario(Integer.parseInt(id));
         }
