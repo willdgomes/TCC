@@ -5,12 +5,14 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:page>
     <jsp:attribute name="title">Farmácia APPP</jsp:attribute>
     <jsp:body>
 
         <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/jquery.mask.min.js"></script>
         <div class="main w-100">
             <div class="row">
                 <div class="panel panel-default col-sm pt-4">
@@ -19,7 +21,6 @@
                     </div>
                     <div class="panel-body pt-3">
                         <div class="col-sm-12">
-                            <c:forEach items="${retirante}" var="retirante">
                             <form class="card border-info" action="RetiranteController?action=editarRetirante" method="POST">
                                 <input type="hidden" value="${retirante.idRetirante}" required name="idRetirante">
                                 <div class="card-body p-5">
@@ -32,7 +33,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-4" >
                                             <label for="cpf" class="text-dark">CPF:</label>
-                                            <input type="number" class="form-control" id="cpfpaciente" value="${retirante.cpfRetirante}" required name="cpfRetirante">
+                                            <input type="text" class="form-control" id="cpfretirante" value="${retirante.cpfRetirante}" required name="cpfRetirante">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="dtnasc" class="text-dark">Data de nascimento:</label>
@@ -40,13 +41,13 @@
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="dtnasc" class="text-dark">Telefone:</label>
-                                            <input type="number" class="form-control" id="telefone" value="${retirante.telefone}" name="telefone">
+                                            <input type="text" class="form-control" id="telefone" value="${retirante.telefone}" name="telefone">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-8">
                                             <label for="email" class="text-dark">E-mail:</label>
-                                            <input type="text" class="form-control" id="emailpaciente" value="${retirante.email}" name="emailRetirante">
+                                            <input type="email" class="form-control" id="emailpaciente" value="${retirante.email}" name="emailRetirante">
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -54,12 +55,11 @@
                                             <label for="parentesco" class="text-dark ">Paciente</label>
                                             <div class="col-md-12 row">
                                                 <div class="dropdown">
-                                                    <select id="cbPaciente" class="form-control" required name="paciente">
-                                                        <c:forEach items="${applicationScope.perfil}" var="paciente">
-
-                                                            <option>${paciente.nome}</option>
-
-                                                        </c:forEach>
+                                                     <select id="cdRetirante" class="form-control" required name="paciente">
+                                                        <option></option>
+                                                         <c:forEach items="${applicationScope.pacientes}" var="paciente">
+                                                                <option value="${paciente.id}">${paciente.nome}</option>
+                                                          </c:forEach>
                                                     </select>
                                                 </div>                    
                                             </div>
@@ -124,7 +124,7 @@
                                     </div>
                                 </div>
                             </form>
-                                                            </c:forEach>
+                          
                         </div>
                     </div>
                 </div>
@@ -135,6 +135,8 @@
 
         $(document).ready(function () {
 
+        $("#cpfretirante").mask('999.999.999-99');  
+        $("#telefone").mask('(99)0 0000-0000');    
             function limpa_formulário_cep() {
                 // Limpa valores do formulário de cep.
                 $("#enderecoretirante").val("");

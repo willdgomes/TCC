@@ -8,6 +8,7 @@ package Servlets;
 import Beans.Lote;
 import Beans.Medicamento;
 import Beans.Paciente;
+import Beans.Usuario;
 import DAO.MedicamentoDAO;
 import DAO.PacienteDAO;
 import Facade.LotesFacade;
@@ -63,17 +64,34 @@ public class MedicamentoController extends HttpServlet {
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
         } else {
+            Usuario usuarioSession = new Usuario();
+            session = request.getSession();
+            session.setAttribute("usuario", usuarioSession);
+            session.setMaxInactiveInterval(20 * 60);
+            
             if (action.equals("carregarCadastro")) {
-                request.setAttribute("successAlert",new Gson().toJson("false"));
+                request.setAttribute("successAlert", new Gson().toJson("false"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarMedicamento.jsp");
                 rd.forward(request, response);
-            } else if(action.equals("cadastrarMedicamento")){
+            } else 
+                if (action.equals("cadastrarMedicamento")) {
                 MedicamentosFacade.cadastrar(criarMedicamento(request));
-                  request.setAttribute("successAlert",new Gson().toJson("true"));
+                request.setAttribute("successAlert", new Gson().toJson("true"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarMedicamento.jsp");
                 rd.forward(request, response);
-            }else if (action.equals("insereMedicamentoLote")) {
-
+            } else
+                if (action.equals("carregarGerenciamento")) {
+                request.setAttribute("successAlert", new Gson().toJson("false"));
+                request.setAttribute("errorAlert", new Gson().toJson("false"));
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/gerenciarMedicamentos.jsp");
+                rd.forward(request, response);
+            } else
+                if(action.equals("inserirMedicamento")){
+                 request.setAttribute("successAlert", new Gson().toJson("false"));
+                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/inserirMedicamento.jsp");
+                 rd.forward(request, response);}
+                else
+                if (action.equals("insereMedicamentoLote")) {
                 //busca medicamento para inserir lote no estoque
                 MedicamentosFacade medFacade = new MedicamentosFacade();
                 Medicamento medicamento = new Medicamento();
@@ -100,66 +118,65 @@ public class MedicamentoController extends HttpServlet {
                     lote.setQtde(lote.getQtde() + Integer.parseInt(qtde));
                     LotesFacade.atualizarLote(lote);
                 }
+                request.setAttribute("successAlert", new Gson().toJson("true"));
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/inserirMedicamento.jsp");
                 requestDispatcher.forward(request, response);
-
-            } else if (action.equals("pesquisarMedicamento")) {
+            } else 
+                    if (action.equals("pesquisarMedicamento")) {
                 String pesquisa = request.getParameter("pesquisa");
-                MedicamentosFacade medicamentosFacade = new MedicamentosFacade();
-                List<Medicamento> medicamentoList = medicamentosFacade.buscarMedicamento(pesquisa);
-                if (session != null) {
-                    RequestDispatcher rd = null;
-                    request.setAttribute("medicamentos", medicamentoList);
-                    if (medicamentoList.size() == 0) {
-                        request.setAttribute("mensagem", "Medicamento não cadastrado no sistema");
-                    }
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarMedicamentos.jsp");
-                    requestDispatcher.forward(request, response);
-
-                } else {
-                    request.setAttribute("msg", "Usuário e/ou senha incorreto(s)!");
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
-                    rd.forward(request, response);
+                List<Medicamento> medicamentoList = MedicamentosFacade.buscarMedicamento(pesquisa);
+                request.setAttribute("medicamentos", medicamentoList);
+                if (medicamentoList.size() == 0) {
+                    request.setAttribute("errorAlert", new Gson().toJson("true"));
                 }
-            } else if (action.equals("editar")) {
-
+                else{
+                    request.setAttribute("errorAlert", new Gson().toJson("false"));
+                }
+                request.setAttribute("successAlert", new Gson().toJson("false"));
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarMedicamentos.jsp");
+                requestDispatcher.forward(request, response);
+            } else 
+                if (action.equals("editar")) {
                 String id = request.getParameter("idMedicamento");
                 MedicamentosFacade medicamentosFacade = new MedicamentosFacade();
                 Medicamento medicamento = medicamentosFacade.pegarMedicamentoPorId(Integer.parseInt(id));
                 request.setAttribute("medicamento", medicamento);
-                RequestDispatcher rd = null;
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/editarMedicamento.jsp");
                 requestDispatcher.forward(request, response);
-            } else if (action.equals("editarMedicamento")) {
+            } else 
+                if (action.equals("editarMedicamento")) {
                 MedicamentosFacade.alterar(criarMedicamento(request));
                 atualizarMedicamentosLista(request);
+                request.setAttribute("successAlert", new Gson().toJson("true"));
+                request.setAttribute("errorAlert", new Gson().toJson("false"));
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarMedicamentos.jsp");
                 requestDispatcher.forward(request, response);
             }
         }
     }
 
-    private Medicamento criarMedicamento(HttpServletRequest request){
-    String nome = request.getParameter("nome");
-            String id = request.getParameter("idMedicamento");
-            String fabricante = request.getParameter("fabricante");
-            String composicao = request.getParameter("composicao");
-            String dosagem = request.getParameter("dosagem");
-            String medida = request.getParameter("medida");
-            String descricao = request.getParameter("descricao");
+    private Medicamento criarMedicamento(HttpServletRequest request) {
+        String nome = request.getParameter("nome");
+        String id = request.getParameter("idMedicamento");
+        String fabricante = request.getParameter("fabricante");
+        String composicao = request.getParameter("composicao");
+        String dosagem = request.getParameter("dosagem");
+        String medida = request.getParameter("medida");
+        String descricao = request.getParameter("descricao");
 
-            Medicamento medicamento = new Medicamento();
-            if(id!= null)
-                medicamento.setId(Integer.parseInt(id));
-            medicamento.setNome(nome);
-            medicamento.setNomeFabricante(fabricante);
-            medicamento.setComposicao(composicao);
-            medicamento.setDosagem(Double.parseDouble(dosagem));
-            medicamento.setMedida(medida);
-            medicamento.setDescricao(descricao);
-            return medicamento;
+        Medicamento medicamento = new Medicamento();
+        if (id != null) {
+            medicamento.setId(Integer.parseInt(id));
+        }
+        medicamento.setNome(nome);
+        medicamento.setNomeFabricante(fabricante);
+        medicamento.setComposicao(composicao);
+        medicamento.setDosagem(Double.parseDouble(dosagem));
+        medicamento.setMedida(medida);
+        medicamento.setDescricao(descricao);
+        return medicamento;
     }
-    
+
     private void atualizarMedicamentosLista(HttpServletRequest request) {
         ServletContext pacContext = request.getServletContext();
         pacContext.setAttribute("medicamentos", MedicamentosFacade.listarMedicamentos());

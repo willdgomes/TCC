@@ -18,7 +18,6 @@
                     </div>
                     <div class="panel-body pt-3">
                         <div class="col-sm-12">
-                            <c:forEach items="${medicamento}" var="medicamento">
                             <form action="MedicamentoController?action=editarMedicamento" method="POST" class="card border-info">
                                 <div class="card-body p-5">
                                     <input type="hidden" value="${medicamento.id}" required name="idMedicamento">
@@ -27,9 +26,9 @@
                                             <label for="nome" class="text-dark">Nome:</label>
                                             <input type="text" class="form-control" id="nomemedicamento" required value="${medicamento.nome}" name="nome">
                                         </div>
-                                         <div class="form-group col" >
+                                        <div class="form-group col" >
                                             <label for="fabricante" class="text-dark">Fabricante:</label>
-                                            <input type="text" class="form-control" id="nomeFabricante" value="${medicamento.nomeFabricante}" required name="nomeFabricante">
+                                            <input type="text" class="form-control" id="nomeFabricante" value="${medicamento.nomeFabricante}" required name="fabricante">
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -37,13 +36,13 @@
                                             <label for="composicao" class="text-dark">Composição:</label>
                                             <input type="text" class="form-control" id="composicao" value="${medicamento.composicao}" required name="composicao">
                                         </div>
-                                         <div class="form-group col-md-2" >
+                                        <div class="form-group col-md-2" >
                                             <label for="dosagem" class="text-dark">Dosagem:</label>
                                             <input type="number" class="form-control" id="dosagem" value="${medicamento.dosagem}" required name="dosagem">
                                         </div>
                                         <div class="form-group col-md-4" >
                                             <label for="medida" class="text-dark">Un. Medida:</label>
-                                             <div class="dropdown">
+                                            <div class="dropdown">
                                                 <select id="cbRemedios" class="form-control" name="medida">
                                                     <option></option>
                                                     <option>Miligramas (mg)</option>
@@ -65,12 +64,11 @@
                                     </div>
                                 </div>
                             </form>
-                            </foreach>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </jsp:body>
-</t:page>
+        </jsp:body>
+    </t:page>
 

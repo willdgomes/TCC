@@ -22,6 +22,12 @@
                         <div class="col-sm-12">
                             <form action="MedicamentoController?action=insereMedicamentoLote" method="POST" class="card border-info">
                                 <div class="card-body p-5">
+                                    <div class="form-row" id="successAlert">
+                                        <div class="alert alert-success alert-dismissible col">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            Medicamento adicionado com sucesso!
+                                        </div>
+                                    </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-8">
                                             <label for="medicamento" class="text-dark" >Medicamento:</label>
@@ -56,5 +62,14 @@
                     </div>
                 </div>
             </div>
+            <script>
+            $(document).ready(function () {
+                var successAlert = JSON.parse(${successAlert});
+                if (successAlert == true)
+                    $("#successAlert").show();
+                else
+                    $("#successAlert").hide();
+            });
+        </script>
         </jsp:body>
     </t:page>

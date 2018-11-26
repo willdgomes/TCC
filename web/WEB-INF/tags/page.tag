@@ -32,53 +32,18 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-4 col-sm-3 text-center">
-                    <a class="navbar-brand" href="#"><div style="width:100px; height:40px;">Sistema Gerenciador de Medicamentos - APPP</div></a>
+                <div class="col-4 col-sm-3 offset-1">
+                    <a class="navbar-brand" href="InicialController"><div style="width:100px; height:40px;">Sistema Gerenciador de Medicamentos - APPP</div></a>
                 </div>
                 <div class="col">
                     <div class="d-block d-sm-block">
                         <ul class="nav justify-content-end">
-                            <li class="nav-item">
-                                <a class="nav-link btn" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<div class='popup-box'><div class='header'>notificações <span class='badge badge-secondary'>1</span></div><div class='body'>
-
-                                   <div class='list-group list-group-flush'>
-                                   <a href='#' class='list-group-item list-group-item-action active'>
-                                   <p class='mb-1'>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                   <small>Donec id elit non mi porta.</small>
-                                   </a>
-                                   <a href='#' class='list-group-item list-group-item-action'>
-                                   <p class='mb-1'>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                   <small>Donec id elit non mi porta.</small>
-                                   </a>
-                                   <a href='#' class='list-group-item list-group-item-action'>
-                                   <p class='mb-1'>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                   <small>Donec id elit non mi porta.</small>
-                                   </a>
-                                   <a href='#' class='list-group-item list-group-item-action'>
-                                   <p class='mb-1'>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                   <small>Donec id elit non mi porta.</small>
-                                   </a>
-                                   <a href='#' class='list-group-item list-group-item-action'>
-                                   <p class='mb-1'>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                   <small>Donec id elit non mi porta.</small>
-                                   </a>
-                                   <a href='#' class='list-group-item list-group-item-action'>
-                                   <p class='mb-1'>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                   <small>Donec id elit non mi porta.</small>
-                                   </a>
-                                   </div>
-
-                                   </div><div class='footer'><a class='btn btn-light btn-block' href='#' role='button'>ver todas as notificações</a></div></div>"><i class="material-icons red">notifications</i></a>
-                            </li>
                             <li class="nav-item">
                                 <a class="nav-link btn" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<div class='popup-box'><div class='header'>${usuario.nome}<br /><small>${usuario.perfil}</small></div><div class='body'>
 
                                    <ul class='nav flex-column'>
                                    <li class='nav-item'>
                                    <a class='nav-link' href='#'>minha conta</a>
-                                   </li>
-                                   <li class='nav-item'>
-                                   <a class='nav-link' href='#'>configurações</a>
                                    </li>
                                    </ul>
 
@@ -97,36 +62,20 @@
                 <ul class="nav flex-column">
 
                     <li class="nav-item">
-                        <a class="nav-link" tabindex="0" data-toggle="collapse" href="#menuCadastro" role="button" aria-expanded="false" aria-controls="menuDashboard"><strong><i class="material-icons">content_paste</i> <span class="align-top">Cadastrar</span><div class="float-right caret"><i class="material-icons">arrow_drop_down</i></div></strong></a>
-                        <div class="collapse show" id="menuCadastro">
-                            <ul class="nav flex-column">
-                                <li class="nav-sub-item">
-                                    <a class="nav-link" href="cadastrarReceita.jsp"><i class="material-icons">receipt</i> <span class="align-top">Receita Médica</span></a>
-                                </li>
-                                <li class="nav-sub-item">
-                                    
-                                </li>
-                                <li class="nav-sub-item">
-                                    
-                                </li>
-                                 <li class="nav-sub-item">
-                                    <a class="nav-link" href="cadastrarUsuario.jsp"><i class="material-icons">library_add</i> <span class="align-top">Usuario</span></a>
-                                </li>
-                            </ul>
-                        </div>
+                        <a class="nav-link" href="cadastrarReceita.jsp"><i class="material-icons">receipt</i> <span class="align-top">Cadastrar     Receita Médica</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" tabindex="0" data-toggle="collapse" href="#menuGerenciamento" role="button" aria-expanded="false" aria-controls="menuDashboard"><strong><i class="material-icons">content_paste</i><span class="align-top">Gerenciar</span> <div class="float-right caret"><i class="material-icons">arrow_drop_down</i></div></strong></a>
                         <div class="collapse show" id="menuGerenciamento">
                             <ul class="nav flex-column">
                                 <li class="nav-sub-item">
-                                    <a class="nav-link" href="gerenciarPacientes.jsp"><i class="material-icons">person</i> <span class="align-top">Pacientes</span></a>
+                                    <a class="nav-link" href="PacienteController?action=carregarGerenciamento"><i class="material-icons">person</i> <span class="align-top">Pacientes</span></a>
                                 </li>
                                 <li class="nav-sub-item">
-                                    <a class="nav-link" href="gerenciarRetirantes.jsp"><i class="material-icons">group</i> <span class="align-top">Retirantes</span></a>
+                                    <a class="nav-link" href="RetiranteController?action=carregarGerenciamento"><i class="material-icons">group</i> <span class="align-top">Retirantes</span></a>
                                 </li>
                                 <li class="nav-sub-item">
-                                    <a class="nav-link" href="gerenciarMedicamentos.jsp"><i class="material-icons">local_pharmacy</i> <span class="align-top">Medicamentos</span></a>
+                                    <a class="nav-link" href="MedicamentoController?action=carregarGerenciamento"><i class="material-icons">local_pharmacy</i> <span class="align-top">Medicamentos</span></a>
                                 </li>
                                 <li class="nav-sub-item">
                                     <a class="nav-link" href="UsuarioController?action=carregarGerenciamento"><i class="material-icons">person</i> <span class="align-top">Usuários</span></a>
@@ -142,7 +91,7 @@
                                     <a class="nav-link" href="dispensarMedicamento.jsp"><i class="material-icons">indeterminate_check_box</i> <span class="align-top">Dispensar Medicamento</span></a>
                                 </li>
                                 <li class="nav-sub-item">
-                                    <a class="nav-link" href="inserirMedicamento.jsp"><i class="material-icons">add_box</i> <span class="align-top">Inserir Medicamento</span></a>
+                                    <a class="nav-link" href="MedicamentoController?action=inserirMedicamento"><i class="material-icons">add_box</i> <span class="align-top">Inserir Medicamento</span></a>
                                 </li>
                             </ul>
                         </div>
