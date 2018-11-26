@@ -32,6 +32,7 @@ public class RetiranteDAO {
             + "cep = ?, cidade = ?, estado = ?, bairro = ?, endereco = ?, numEndereco = ?, complemento = ?, email = ?, vincolo = ? WHERE idRetirante LIKE ?";
     private final String stmtBuscarRetiranteCpf = "SELECT idRetirante, cpfRetirante, nomeRetirante, dnRetirante, telefone, cep, cidade, estado, bairro, endereco, numEndereco, complemento, email, vincolo FROM retirantes WHERE cpfRetirante = ?";
     private final String stmtInserirRetirantePaciente = "INSERT INTO retirantes_pacientes (idPaciente, idRetirante) VALUES(?, ?)";
+    private final String stmtBuscarRetirantePaciente = "SELECT idPaciente, idRetirante FROM retirantes_pacientes WHERE idPaciente = ? AND idRetirante = ?";
     
     public void inserirRetirante(Retirante retirante) {
         Connection con = null;
@@ -246,6 +247,43 @@ public class RetiranteDAO {
             return retirante;
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao listar os retirantes no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
+            };
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+    }
+    
+    public boolean buscarRetirantePaciente(String idPaciente, Integer idRetirante) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtBuscarRetirantePaciente);
+            stmt.setString(1, idPaciente);
+            stmt.setInt(2, idRetirante);
+            rs = stmt.executeQuery();
+            Retirante retirante = new Retirante();
+            if (rs.next()) {
+                return true;
+            }else{
+                return false;
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar retirante do paciente no banco de dados. Origem=" + ex.getMessage());
         } finally {
             try {
                 rs.close();

@@ -6,8 +6,17 @@
 package Servlets;
 
 import Beans.Dispensa;
+import Beans.Medicamento;
+import Beans.Paciente;
+import Beans.Retirante;
+import Facade.MedicamentosFacade;
+import Facade.PacientesFacade;
+import Facade.ReceitasFacade;
+import Facade.RetirantesFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,11 +56,21 @@ public class DispensaController extends HttpServlet {
             if (action.equals("selecionaMedicamento")) {
                 String idPaciente = request.getParameter("idPaci");
                 String cpfRetirante = request.getParameter("cpfRetirante");
-                String quantidadeMedicamento = request.getParameter("quantidadeMedicamento");
                 String[] listaMedicamento = request.getParameterValues("nome");
-                String nomeMedicamento = "";//request.getParameter("nomeMedicamento");
-            }else if(false){
+                String[] quantidadeMed = request.getParameterValues("quantidade");
                 
+                Paciente paciente = new Paciente();
+                paciente = PacientesFacade.buscarId(idPaciente);
+                Retirante retirante = new Retirante();
+                retirante = RetirantesFacade.buscarRetirantePorCpf(cpfRetirante);
+                if(!RetirantesFacade.buscarRetirantePaciente(idPaciente, retirante.getIdRetirante())){
+                    // retirante nao bate com paciente
+                }
+                List<Medicamento> listMed = new ArrayList<Medicamento>();
+                Medicamento med = new Medicamento();
+                for(int i=0; i<listaMedicamento.length; i++){
+                    listMed.add(MedicamentosFacade.pegarMedicamentoPorNome(listaMedicamento[i]));
+                }
             }
         }
     }

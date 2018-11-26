@@ -33,6 +33,10 @@ public class RetirantesFacade {
         return retDAO.buscarRetiranteId(idRetirante);
     }
     
+    public static boolean buscarRetirantePaciente(String idPaciente, Integer idRetirante){
+        return retDAO.buscarRetirantePaciente(idPaciente, idRetirante);
+    }
+    
     public static Retirante buscarRetirantePorCpf(String cpfRetirante){
         return retDAO.buscarRetiranteCpf(cpfRetirante);
     }
