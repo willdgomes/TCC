@@ -8,6 +8,7 @@ package Servlets;
 import Beans.Dispensa;
 import Beans.Medicamento;
 import Beans.Paciente;
+import Beans.Receita;
 import Beans.Retirante;
 import Facade.MedicamentosFacade;
 import Facade.PacientesFacade;
@@ -63,9 +64,10 @@ public class DispensaController extends HttpServlet {
                 paciente = PacientesFacade.buscarId(idPaciente);
                 Retirante retirante = new Retirante();
                 retirante = RetirantesFacade.buscarRetirantePorCpf(cpfRetirante);
+                Receita receita = new Receita();
                 if(!RetirantesFacade.buscarRetirantePaciente(idPaciente, retirante.getIdRetirante())){
                     // retirante nao bate com paciente
-                }
+                }//verificar receita. data de vencimento, medicamentos e retirante e paciente
                 List<Medicamento> listMed = new ArrayList<Medicamento>();
                 Medicamento med = new Medicamento();
                 for(int i=0; i<listaMedicamento.length; i++){
