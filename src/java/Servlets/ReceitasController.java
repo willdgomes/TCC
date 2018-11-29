@@ -84,7 +84,7 @@ public class ReceitasController extends HttpServlet {
                 receita = ReceitasFacade.buscarPorIdPaciente(paciente.getId());
                 List<Medicamento> listMed = new ArrayList<Medicamento>();
                 for(int i=0; i<listaMedicamento.length; i++){
-                    listMed.add(MedicamentosFacade.buscarMedicamentoPorNomeInserir(listaMedicamento[i]));
+                    listMed.add(MedicamentosFacade.pegarMedicamentoPorNome(listaMedicamento[i]));
                     ReceitasFacade.inserirMedicamentosReceitas(listMed.get(i).getId(), receita.getId());
                 }
                 RequestDispatcher rd = null;

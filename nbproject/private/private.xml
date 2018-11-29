@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">s
-        
-    
-    
-    
-    
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
     <group>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Medicamento.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/nbproject/private/private.properties</file>
@@ -58,6 +53,8 @@
             <file>file:/C:/Users/Eu/Documents/TCC/web/WEB-INF/tags/page.tag</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/LogDAO.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/nbproject/ant-deploy.xml</file>
+            <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Servlets/DispensaController.java</file>
+            <file>file:/home/gomes/NetBeansProjects/Farmacia/web/dispensarMedicamento.jsp</file>
         </group>
     </open-files>
 </project-private>

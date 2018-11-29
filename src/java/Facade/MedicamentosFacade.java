@@ -28,7 +28,7 @@ public class MedicamentosFacade {
         return listaMedicamentos;
     }
     
-    public Medicamento pegarMedicamentoPorNome(String nomeMedicamento){
+    public static Medicamento pegarMedicamentoPorNome(String nomeMedicamento){
         return medDAO.buscarMedicamentoNomeInsere(nomeMedicamento);
     }
     
@@ -42,9 +42,5 @@ public class MedicamentosFacade {
     
     public static void alterar(Medicamento medicamento) {
         medDAO.atualizarMedicamento(medicamento);
-    }
-    
-    public static Medicamento buscarMedicamentoPorNomeInserir(String nomeMedicamento) {
-        return medDAO.buscarMedicamentoNomeInsere(nomeMedicamento);
     }
 }

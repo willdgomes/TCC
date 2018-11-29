@@ -76,40 +76,51 @@ public class RetiranteController extends HttpServlet {
                 rd.forward(request, response);
             } else if (action.equals("cadastrarRetirante")) {
                 RetirantesFacade.cadastrarRetirante(criaRetirante(request));
-                atualizarRetirantesLista(request);
-                request.setAttribute("successAlert", new Gson().toJson("true"));
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/cadastrarRetirante.jsp");
-                requestDispatcher.forward(request, response);
+                if (action.equals("carregarCadastro")) {
+                    request.setAttribute("successAlert", new Gson().toJson("false"));
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarRetirante.jsp");
+                    rd.forward(request, response);
+                } else if (action.equals("cadastrarRetirante")) {
+                    Retirante r = new Retirante();
+                    r = criaRetirante(request);
+                    RetirantesFacade.cadastrarRetirante(r);
+                    r = RetirantesFacade.buscarRetirantePorCpf(r.getCpfRetirante());
+                    String idPaciente = request.getParameter("paciente");
+                    RetirantesFacade.inserirRetirantePaciente(idPaciente, r.getIdRetirante());
+                    atualizarRetirantesLista(request);
+                    request.setAttribute("successAlert", new Gson().toJson("true"));
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/cadastrarRetirante.jsp");
+                    requestDispatcher.forward(request, response);
 
-            } else if (action.equals("pesquisarRetirante")) {
-                String pesquisa = request.getParameter("pesquisa");
-                List<Retirante> retiranteList = RetirantesFacade.buscarRetirantesNome(pesquisa);
-                if (retiranteList.size() == 0) {
-                    request.setAttribute("errorAlert", new Gson().toJson("true"));
-                } else {
+                } else if (action.equals("pesquisarRetirante")) {
+                    String pesquisa = request.getParameter("pesquisa");
+                    List<Retirante> retiranteList = RetirantesFacade.buscarRetirantesNome(pesquisa);
+                    if (retiranteList.size() == 0) {
+                        request.setAttribute("errorAlert", new Gson().toJson("true"));
+                    } else {
+                        request.setAttribute("errorAlert", new Gson().toJson("false"));
+                    }
+                    request.setAttribute("retirantes", retiranteList);
+                    request.setAttribute("successAlert", new Gson().toJson("false"));
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarRetirantes.jsp");
+                    requestDispatcher.forward(request, response);
+
+                } else if (action.equals("editar")) {
+                    String id = request.getParameter("idRetirante");
+                    Retirante retirante = RetirantesFacade.buscarRetirantePorId(id);
+                    request.setAttribute("retirante", retirante);
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/editarRetirante.jsp");
+                    requestDispatcher.forward(request, response);
+                } else if (action.equals("editarRetirante")) {
+                    RetirantesFacade.alterarRetirante(criaRetirante(request));
+                    atualizarRetirantesLista(request);
+                    request.setAttribute("successAlert", new Gson().toJson("true"));
                     request.setAttribute("errorAlert", new Gson().toJson("false"));
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarRetirantes.jsp");
+                    requestDispatcher.forward(request, response);
                 }
-                request.setAttribute("retirantes", retiranteList);
-                request.setAttribute("successAlert", new Gson().toJson("false"));
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarRetirantes.jsp");
-                requestDispatcher.forward(request, response);
-
-            } else if (action.equals("editar")) {
-                String id = request.getParameter("idRetirante");
-                Retirante retirante = RetirantesFacade.buscarRetirantePorId(id);
-                request.setAttribute("retirante", retirante);
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/editarRetirante.jsp");
-                requestDispatcher.forward(request, response);
-            } else if (action.equals("editarRetirante")) {
-                RetirantesFacade.alterarRetirante(criaRetirante(request));
-                atualizarRetirantesLista(request);
-                request.setAttribute("successAlert", new Gson().toJson("true"));
-                request.setAttribute("errorAlert", new Gson().toJson("false"));
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarRetirantes.jsp");
-                requestDispatcher.forward(request, response);
             }
         }
-
     }
 
     private void atualizarRetirantesLista(HttpServletRequest request) {
@@ -135,7 +146,6 @@ public class RetiranteController extends HttpServlet {
         String telefone = request.getParameter("telefone");
         telefone = telefone.replaceAll("\\W", "");
         String email = request.getParameter("emailRetirante");
-        String paciente = request.getParameter("paciente");
         String parentesco = request.getParameter("parentesco");
         String cep = request.getParameter("cepRetirante");
         String cidade = request.getParameter("cidadeRetirante");
