@@ -76,6 +76,7 @@ public class MedicamentoController extends HttpServlet {
             } else 
                 if (action.equals("cadastrarMedicamento")) {
                 MedicamentosFacade.cadastrar(criarMedicamento(request));
+                atualizarMedicamentosLista(request);
                 request.setAttribute("successAlert", new Gson().toJson("true"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarMedicamento.jsp");
                 rd.forward(request, response);

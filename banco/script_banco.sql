@@ -118,3 +118,13 @@ CREATE TABLE `usuarios` (
   `perfil` varchar(100) NOT NULL,
   PRIMARY KEY (`idUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+CREATE TABLE `log` (
+  `idLog` int(11) NOT NULL,
+  `idUsuario` int(11) NULL,
+  `mensagem` varchar(45)NOT NULL,
+  `data` date NOT NULL,
+  PRIMARY KEY (`idLog`),
+  KEY `FK_Usuario` (`idUsuario`),
+  CONSTRAINT `log_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

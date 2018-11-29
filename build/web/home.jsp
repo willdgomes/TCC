@@ -17,32 +17,31 @@
                         <div class="row">
                             <div class="card border border-info text-secondary bg-light ml-2 col">
                                 <div class="card-body pt-2">
-                                   <a href="PacienteController?action=carregarCadastro" ><i class="material-icons">person_add</i> <span class="align-top pl-2">Pacientes</span></a>
+                                    <a href="PacienteController?action=carregarCadastro" ><i class="material-icons">person_add</i> <span class="align-top pl-2">Pacientes</span></a>
                                 </div>
                             </div>
-                                <div class="card border border-info text-secondary bg-light ml-2 col">
-                                <div class="card-body pt-2">
-                                   <a href="ReceitasController?action=carregarCadastro"><i class="material-icons">receipt</i> <span class="align-top pl-2">Receita Médica</span></a>
-                                </div>
-                            </div>
-                                <div class="card border border-info text-secondary bg-light ml-2 col">
-                                <div class="card-body pt-2">
-                                   <a href="RetiranteController?action=carregarCadastro"><i class="material-icons">group_add</i> <span class="align-top pl-2">Retirantes</span></a>
-                                </div>
-                            </div>
-                                <div class="card border border-info text-secondary bg-light ml-2 col">
-                                <div class="card-body pt-2">
-                                   <a href="MedicamentoController?action=carregarCadastro"><i class="material-icons">library_add</i> <span class="align-top pl-2">Medicamentos</span></a>
-                                </div>
-                                </div>
                             <div class="card border border-info text-secondary bg-light ml-2 col">
                                 <div class="card-body pt-2">
-                                   <a href="UsuarioController?action=carregarCadastro"><i class="material-icons">library_add</i> <span class="align-top pl-2">Usuário</span></a>
+                                    <a href="ReceitasController?action=carregarCadastro"><i class="material-icons">receipt</i> <span class="align-top pl-2">Receita Médica</span></a>
+                                </div>
+                            </div>
+                            <div class="card border border-info text-secondary bg-light ml-2 col">
+                                <div class="card-body pt-2">
+                                    <a href="RetiranteController?action=carregarCadastro"><i class="material-icons">group_add</i> <span class="align-top pl-2">Retirantes</span></a>
+                                </div>
+                            </div>
+                            <div class="card border border-info text-secondary bg-light ml-2 col">
+                                <div class="card-body pt-2">
+                                    <a href="MedicamentoController?action=carregarCadastro"><i class="material-icons">library_add</i> <span class="align-top pl-2">Medicamentos</span></a>
+                                </div>
+                            </div>
+                            <div class="card border border-info text-secondary bg-light ml-2 col">
+                                <div class="card-body pt-2">
+                                    <a href="UsuarioController?action=carregarCadastro"><i class="material-icons">library_add</i> <span class="align-top pl-2">Usuário</span></a>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col">
+                        <div class="col-md-10 offset-1">
                             <canvas id="myChart"></canvas>
                         </div>
                     </div>
@@ -58,7 +57,6 @@
                 data: {
                     labels: labels,
                     datasets: [{
-                            label: 'medicamentos',
                             data: quantidade,
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
@@ -80,6 +78,13 @@
                         }]
                 },
                 options: {
+                     legend: {
+        display: false
+    },
+                    title: {
+                        display: true,
+                        text: 'Medicamentos no estoque'
+                    },
                     scales: {
                         yAxes: [{
                                 ticks: {
@@ -89,6 +94,7 @@
                     }
                 }
             });
+            
         </script>
     </jsp:body>
 </t:page>
