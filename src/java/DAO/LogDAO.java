@@ -39,7 +39,9 @@ public class LogDAO {
             stmt = con.prepareStatement(insereLog);
             stmt.setString(1, l.getIdusuario().toString());
             stmt.setString(2, l.getMensagem().toString());
-            stmt.setDate(3, (Date) l.getData());
+            long dataAtual = System.currentTimeMillis();  
+            java.sql.Date data = new java.sql.Date(dataAtual);
+            stmt.setDate(3, data);
             stmt.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao inserir log" + ex.getMessage());
@@ -102,7 +104,7 @@ public class LogDAO {
         }
     }
 
-    public List<Log> buscarLogPeriodo(Date inicio, Date fim) {
+    public List<Log> buscarLogPeriodo(java.util.Date inicio, java.util.Date fim) {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;

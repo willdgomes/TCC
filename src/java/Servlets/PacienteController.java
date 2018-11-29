@@ -5,10 +5,12 @@
  */
 package Servlets;
 
+import Beans.Log;
 import Beans.Paciente;
 import Beans.Usuario;
 import DAO.PacienteDAO;
 import DAO.UsuarioDAO;
+import Facade.LogFacade;
 import Facade.PacientesFacade;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -70,6 +72,7 @@ public class PacienteController extends HttpServlet {
         } else {
             Usuario usuarioSession = new Usuario();
             session = request.getSession();
+            //Usuario usuario = (Usuario)session.getAttribute("usuario");
             session.setAttribute("usuario", usuarioSession);
             session.setMaxInactiveInterval(20 * 60);
             if (action.equals("carregarCadastro")) {
@@ -84,6 +87,7 @@ public class PacienteController extends HttpServlet {
             } else if (action.equals("cadastrarPaciente")) {
                 PacientesFacade.inserir(criarPaciente(request));
                 atualizarPacientesLista(request);
+              //  LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário cadastrou um paciente no sistema"));
                 RequestDispatcher rd = null;
                 request.setAttribute("successAlert", new Gson().toJson("true"));
                 rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");

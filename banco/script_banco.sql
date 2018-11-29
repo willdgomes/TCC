@@ -120,7 +120,7 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
 CREATE TABLE `log` (
-  `idLog` int(11) NOT NULL,
+  `idLog` int(11) NOT NULL  AUTO_INCREMENT,
   `idUsuario` int(11) NULL,
   `mensagem` varchar(45)NOT NULL,
   `data` date NOT NULL,

@@ -6,7 +6,9 @@
 package Servlets;
 
 import Beans.Usuario;
+import Beans.Log;
 import DAO.UsuarioDAO;
+import Facade.LogFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -18,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Instant;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -54,6 +58,7 @@ public class LoginController extends HttpServlet {
             session.setAttribute("usuario", usuario);
             session.setMaxInactiveInterval(20 * 60);
             RequestDispatcher rd = null;
+            LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário logou no sistema"));
             rd = getServletContext().getRequestDispatcher("/InicialController");
             rd.forward(request, response);
         } else {

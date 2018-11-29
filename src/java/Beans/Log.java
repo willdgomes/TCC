@@ -23,7 +23,7 @@ public class Log  {
         
     }
 
-    public Log(Integer id, Integer idusuario, String mensagem, Date data) {
+    public Log(Integer idusuario, String mensagem) {
         this.id = id;
         this.idusuario = idusuario;
         this.mensagem = mensagem;
