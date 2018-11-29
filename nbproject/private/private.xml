@@ -6,6 +6,10 @@
     
     
     
-    <group/>
+    
+    <group>
+            <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Servlets/DispensaController.java</file>
+            <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Servlets/PacienteController.java</file>
+        </group>
     </open-files>
 </project-private>
