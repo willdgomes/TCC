@@ -30,6 +30,7 @@ public class MedicamentoDAO {
     private final String stmtBuscarMedicamentosParam = "SELECT idMedicamento, nomeMedicamento, descricao, nomeFabricante, composicao, dosagem, medida FROM medicamentos WHERE nomeMedicamento LIKE ?";
     private final String stmtBuscarMedicamentoPorNome = "SELECT idMedicamento, nomeMedicamento, descricao, nomeFabricante, composicao, dosagem, medida FROM medicamentos WHERE nomeMedicamento=?";
     private final String stmtBuscarMedicamentoId = "SELECT idMedicamento, nomeMedicamento, descricao, nomeFabricante, composicao, dosagem, medida FROM medicamentos WHERE idMedicamento=?";
+    private final String stmtBuscarMedicamentoReceira = "SELECT idMedicamento, idReceita FROM medicamentos_receitas WHERE idMedicamento = ? AND idReceita = ?";
     
     public void inserirMedicamento(Medicamento med) {
         Connection con = null;
@@ -102,6 +103,42 @@ public class MedicamentoDAO {
             };
         }
 
+    }
+    
+    public boolean buscarMedicamentoReceita(Integer idMedicamento, Integer idReceita) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtBuscarMedicamentoReceira);
+            stmt.setInt(1, idMedicamento);
+            stmt.setInt(2, idReceita);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                return true;
+            }else{
+                return false;
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar retirante do paciente no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
+            };
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
     }
 
     public void removerMedicamento(Medicamento medicamento) {

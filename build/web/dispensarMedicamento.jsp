@@ -17,7 +17,7 @@
                         <h2 align="center">Dispensar Medicamentos</h2>
                     </div>
                     <div class="panel-body pt-3">
-                        <form class="card border-info" action="DispensaController?action=selecionaMedicamento" method="POST">
+                        <form class="card border-info" action="DispensaController?action=dispensarMedicamento" method="POST">
                             <div class="col-sm-12">
                                 <div class="card-body p-5">
                                     <div class="col form-row">

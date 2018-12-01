@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -23,6 +25,7 @@ public class ReceitaDAO {
             + "VALUES (?, ?, ?, ?)";
     private final String stmtBuscarReceitaPorPaciente = "SELECT idReceita, nomeMedico, crmMedico, validadeReceita, idPaciente FROM receitas WHERE idPaciente=?";
     private final String stmtInserirMedReceita = "INSERT INTO medicamentos_receitas (idMedicamento, idReceita) VALUES (?, ?)";
+    private final String stmtBuscarReceitaPorValidade = "SELECT idReceita, nomeMedico, crmMedico, validadeReceita, idPaciente FROM receitas WHERE idPaciente=? AND validadeReceita >= (SELECT CURDATE())";
     
     public void inserirReceita(Receita receita) {
         Connection con = null;
@@ -71,6 +74,51 @@ public class ReceitaDAO {
                 receita.setPaciente(paciente);
             }
             return receita;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar receita no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
+            };
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+
+    }
+    
+    public List<Receita> buscarReceitaValidaPorPaciente(Integer idPaciente) {
+        Connection con = null;
+        Paciente paciente = new Paciente();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Receita receita = new Receita();
+        List<Receita> listaReceitas = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtBuscarReceitaPorValidade);
+            stmt.setInt(1, idPaciente);
+            rs = stmt.executeQuery();
+            listaReceitas = new ArrayList<Receita>();
+            while (rs.next()) {
+                receita.setId(Integer.parseInt(rs.getString("idReceita")));
+                paciente = PacientesFacade.buscarId(rs.getString("idPaciente"));
+                receita.setNomeMedico(rs.getString("nomeMedico"));
+                receita.setCrmMedico(rs.getString("crmMedico"));
+                receita.setDataVencimentoReceita(rs.getDate("validadeReceita"));
+                receita.setPaciente(paciente);
+                listaReceitas.add(receita);
+            }
+            return listaReceitas;
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao buscar receita no banco de dados. Origem=" + ex.getMessage());
         } finally {

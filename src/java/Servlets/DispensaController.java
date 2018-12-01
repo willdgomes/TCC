@@ -54,7 +54,7 @@ public class DispensaController extends HttpServlet {
             request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema!");
             rd.forward(request, response);
         } else {
-            if (action.equals("selecionaMedicamento")) {
+            if (action.equals("dispensarMedicamento")) {
                 String idPaciente = request.getParameter("idPaci");
                 String cpfRetirante = request.getParameter("cpfRetirante");
                 String[] listaMedicamento = request.getParameterValues("nome");
@@ -64,15 +64,31 @@ public class DispensaController extends HttpServlet {
                 paciente = PacientesFacade.buscarId(idPaciente);
                 Retirante retirante = new Retirante();
                 retirante = RetirantesFacade.buscarRetirantePorCpf(cpfRetirante);
-                Receita receita = new Receita();
                 if(!RetirantesFacade.buscarRetirantePaciente(idPaciente, retirante.getIdRetirante())){
                     // retirante nao bate com paciente
-                }//verificar receita. data de vencimento, medicamentos e retirante e paciente
+                }
+                Receita receita = new Receita();
+                List<Receita> listaReceitas = new ArrayList<Receita>();
+                listaReceitas = ReceitasFacade.buscarReceitaValidaPorPaciente(paciente.getId());
                 List<Medicamento> listMed = new ArrayList<Medicamento>();
                 Medicamento med = new Medicamento();
                 for(int i=0; i<listaMedicamento.length; i++){
                     listMed.add(MedicamentosFacade.pegarMedicamentoPorNome(listaMedicamento[i]));
+                    //verificar quantidade e subtrair do lote
                 }
+                if(listaReceitas.size()<1){
+                    //nao ha receitas cadastradas ou validas
+                }else{
+                    for(int i = 0; i<listaReceitas.size(); i++){
+                        for(int j = 0; j<listMed.size();j++){
+                            MedicamentosFacade.buscarMedicamentoReceita(listMed.get(j).getId(), listaReceitas.get(i).getId());
+                        }
+                    }
+                    //verifica medicamentos_receitas
+                }
+
+//verificar receita. data de vencimento, medicamentos e retirante e paciente
+                
             }
         }
     }
