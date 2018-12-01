@@ -54,7 +54,7 @@ public class DispensaController extends HttpServlet {
             request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema!");
             rd.forward(request, response);
         } else {
-            if (action.equals("selecionaMedicamento")) {
+            if (action.equals("dispensarMedicamento")) {
                 String idPaciente = request.getParameter("idPaci");
                 String cpfRetirante = request.getParameter("cpfRetirante");
                 String[] listaMedicamento = request.getParameterValues("nome");
