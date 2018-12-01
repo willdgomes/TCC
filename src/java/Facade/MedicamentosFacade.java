@@ -43,4 +43,8 @@ public class MedicamentosFacade {
     public static void alterar(Medicamento medicamento) {
         medDAO.atualizarMedicamento(medicamento);
     }
+    
+    public static boolean buscarMedicamentoReceita(Integer idMedicamento, Integer idReceita) {
+        return medDAO.buscarMedicamentoReceita(idMedicamento, idReceita);
+    }
 }

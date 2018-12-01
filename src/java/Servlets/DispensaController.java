@@ -64,15 +64,29 @@ public class DispensaController extends HttpServlet {
                 paciente = PacientesFacade.buscarId(idPaciente);
                 Retirante retirante = new Retirante();
                 retirante = RetirantesFacade.buscarRetirantePorCpf(cpfRetirante);
-                Receita receita = new Receita();
                 if(!RetirantesFacade.buscarRetirantePaciente(idPaciente, retirante.getIdRetirante())){
                     // retirante nao bate com paciente
-                }//verificar receita. data de vencimento, medicamentos e retirante e paciente
+                }
+                Receita receita = new Receita();
+                List<Receita> listaReceitas = new ArrayList<Receita>();
+                listaReceitas = ReceitasFacade.buscarReceitaValidaPorPaciente(paciente.getId());
                 List<Medicamento> listMed = new ArrayList<Medicamento>();
                 Medicamento med = new Medicamento();
                 for(int i=0; i<listaMedicamento.length; i++){
                     listMed.add(MedicamentosFacade.pegarMedicamentoPorNome(listaMedicamento[i]));
                 }
+                if(listaReceitas.size()<1){
+                    //nao ha receitas cadastradas ou validas
+                }else{
+                    for(int i = 0; i<listaReceitas.size(); i++){
+                        
+                    }
+                    MedicamentosFacade.buscarMedicamentoReceita(2, 2);
+                    //verifica medicamentos_receitas
+                }
+
+//verificar receita. data de vencimento, medicamentos e retirante e paciente
+                
             }
         }
     }

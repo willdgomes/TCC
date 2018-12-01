@@ -8,6 +8,7 @@ package Facade;
 import Beans.Paciente;
 import Beans.Receita;
 import DAO.ReceitaDAO;
+import java.util.List;
 
 /**
  *
@@ -27,5 +28,9 @@ public class ReceitasFacade {
     
     public static Receita buscarPorIdPaciente(Integer idPaciente){
         return receitaDAO.buscarReceitaPorIdPaciente(idPaciente);
+    }
+    
+    public static List<Receita> buscarReceitaValidaPorPaciente(Integer idPaciente){
+        return receitaDAO.buscarReceitaValidaPorPaciente(idPaciente);
     }
 }
