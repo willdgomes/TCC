@@ -2,13 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-    <group>
+        <group>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Medicamento.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/nbproject/private/private.properties</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/gerenciarRetirantes.jsp</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarPacientes.jsp</file>
+            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/LoginController.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/nbproject/build-impl.xml</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/gerenciarUsuarios.jsp</file>
+            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Facade/LotesFacade.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/dispensarMedicamento.jsp</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/editarRetirante.jsp</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/gerenciarPacientes.jsp</file>
@@ -45,6 +47,7 @@
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Paciente.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/relatorioEstoque.jsp</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/RelatorioController.java</file>
+            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Facade/LogFacade.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/MedicamentoController.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/PacienteController.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Facade/PacientesFacade.java</file>
@@ -53,8 +56,6 @@
             <file>file:/C:/Users/Eu/Documents/TCC/web/WEB-INF/tags/page.tag</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/LogDAO.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/nbproject/ant-deploy.xml</file>
-            <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/Servlets/DispensaController.java</file>
-            <file>file:/home/gomes/NetBeansProjects/Farmacia/web/dispensarMedicamento.jsp</file>
         </group>
     </open-files>
 </project-private>
