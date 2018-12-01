@@ -74,14 +74,16 @@ public class DispensaController extends HttpServlet {
                 Medicamento med = new Medicamento();
                 for(int i=0; i<listaMedicamento.length; i++){
                     listMed.add(MedicamentosFacade.pegarMedicamentoPorNome(listaMedicamento[i]));
+                    //verificar quantidade e subtrair do lote
                 }
                 if(listaReceitas.size()<1){
                     //nao ha receitas cadastradas ou validas
                 }else{
                     for(int i = 0; i<listaReceitas.size(); i++){
-                        
+                        for(int j = 0; j<listMed.size();j++){
+                            MedicamentosFacade.buscarMedicamentoReceita(listMed.get(j).getId(), listaReceitas.get(i).getId());
+                        }
                     }
-                    MedicamentosFacade.buscarMedicamentoReceita(2, 2);
                     //verifica medicamentos_receitas
                 }
 
