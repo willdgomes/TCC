@@ -21,11 +21,11 @@ public class LogFacade {
         logDAO.inserirLog(log);
     }
     
-    public static List<Log> buscarLog(Log log) {
+    public static List<Log> buscarLog() {
        return logDAO.buscarLogs();
     }
     
-    public static List<Log> buscarLogPeriodo(Date inicio, Date fim){
+    public static List<Log> buscarLogPeriodo(String inicio, String fim){
         return logDAO.buscarLogPeriodo(inicio,fim);
     }
     

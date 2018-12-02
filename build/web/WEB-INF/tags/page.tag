@@ -101,10 +101,10 @@
                         <div class="collapse" id="menuApps">
                             <ul class="nav flex-column">
                                 <li class="nav-sub-item">
-                                    <a class="nav-link" href="RelatorioController"><i class="material-icons">add_box</i> <span class="align-top">Saída Medicamentos</span></a>
+                                    <a class="nav-link" href="RelatorioController?action=carregarSaidaMedicamentos"><i class="material-icons">add_box</i> <span class="align-top">Saída Medicamentos</span></a>
                                 </li>
                                 <li class="nav-sub-item">
-                                    <a class="nav-link" href="#"><i class="material-icons">line_style</i <span class="align-top">Log</span></a>
+                                    <a class="nav-link" href="RelatorioController?action=carregarListaAtividades"><i class="material-icons">line_style</i <span class="align-top">Atividades dos usuários</span></a>
                                 </li>
                             </ul>
                         </div>

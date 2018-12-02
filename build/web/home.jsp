@@ -5,7 +5,18 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set value="${applicationScope.perfil}" var="perfil"/>
+<c:choose>
+  <c:when test="${perfil == 'Administrador'}">
+    <%@ taglib prefix="t" tagdir="/WEB-INF/tagsAdmin" %>
+  </c:when>
+  <c:otherwise>
+    <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
+  </c:otherwise>
+</c:choose>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <t:page>
     <jsp:attribute name="title">Farmácia APPP</jsp:attribute>

@@ -5,8 +5,10 @@
  */
 package Servlets;
 
+import Beans.Log;
 import Beans.Usuario;
 import DAO.UsuarioDAO;
+import Facade.LogFacade;
 import Facade.UsuariosFacade;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -46,13 +48,14 @@ public class UsuarioController extends HttpServlet {
         String action = request.getParameter("action");
         if (session == null) {
             RequestDispatcher rd = request.
-                    getRequestDispatcher("/index.html");
+            getRequestDispatcher("/index.html");
+            LogFacade.inserir(new Log("Sessão do usuário expirada"));
             request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema!");
             rd.forward(request, response);
         } else {
-            Usuario usuarioSession = new Usuario();
             session = request.getSession();
-            session.setAttribute("usuario", usuarioSession);
+            Usuario usuario = (Usuario) session.getAttribute("usuario");
+            session.setAttribute("usuario", usuario);
             session.setMaxInactiveInterval(20 * 60);
             if(action.equals("minhaConta")){
                 
@@ -61,6 +64,7 @@ public class UsuarioController extends HttpServlet {
                 atualizarUsuariosLista(request);
                 request.setAttribute("successAlert", new Gson().toJson("false"));
                 request.setAttribute("errorAlert", new Gson().toJson("false"));
+            LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou a página de gerenciamento de usuários"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/gerenciarUsuarios.jsp");
                 rd.forward(request, response);
             } else if (action.equals("pesquisarUsuario")) {
@@ -68,6 +72,7 @@ public class UsuarioController extends HttpServlet {
                 List<Usuario> usuariosList = UsuariosFacade.buscarUsuario(pesquisa);
                 ServletContext usuContext = request.getServletContext();
                 usuContext.setAttribute("usuarios", usuariosList);
+                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário pesquisou pelo(a) usuário(a) "+ pesquisa));
                 if (usuariosList.size() == 0) {
                         request.setAttribute("errorAlert", new Gson().toJson("true"));
                 }
@@ -79,23 +84,28 @@ public class UsuarioController extends HttpServlet {
                 rd.forward(request, response);
             } else if (action.equals("editar")) {
                 String id = request.getParameter("idUsuario");
-                Usuario usuario = UsuariosFacade.buscarUsuarioPorId(id);
-                request.setAttribute("usuario", usuario);
+                Usuario usuarioEditar = UsuariosFacade.buscarUsuarioPorId(id);
+                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou a página de edição do usuário "+usuarioEditar.getNome()));
+                request.setAttribute("usuario", usuarioEditar);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/editarUsuario.jsp");
                 requestDispatcher.forward(request, response);
             } else if (action.equals("carregarCadastro")) {
+                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou a página de cadastro de usuários"));
                 request.setAttribute("successAlert", new Gson().toJson("false"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarUsuario.jsp");
                 rd.forward(request, response);
             } else if (action.equals("cadastrarUsuario")) {
                 UsuariosFacade.cadastrar(criaUsuario(request));
                 atualizarUsuariosLista(request);
+                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário cadastrou outro usuário"));
                 request.setAttribute("successAlert", new Gson().toJson("true"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarUsuario.jsp");
                 rd.include(request, response);
             } else if (action.equals("editarUsuario")) {
                 UsuariosFacade.alterar(criaUsuario(request));
                 atualizarUsuariosLista(request);
+                 String nome = request.getParameter("nome");
+                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário editou o(a) usuário(a) "+nome));
                 request.setAttribute("successAlert", new Gson().toJson("true"));
                 request.setAttribute("errorAlert", new Gson().toJson("false"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/gerenciarUsuarios.jsp");

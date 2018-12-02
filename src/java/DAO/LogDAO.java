@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +28,10 @@ public class LogDAO {
     PreparedStatement stmt2 = null;
     ResultSet rs = null;
     private String insereLog = "insert into log (idUsuario, mensagem, data) values (?, ?, ?)";
-    private String buscaLog = "select idLog,idUsuario, mensagem, datainto from log";
-    private String buscaLogPeriodo = "select idLog,idUsuario, mensagem, datainto from log where dnPaciente >= ? and dnPaciente <= ?";
+    private String buscaLog = "select log.idLog,log.idUsuario, log.mensagem, log.data, usuarios.nomeUsuario from log " +
+                                "LEFT JOIN usuarios ON log.idUsuario = usuarios.idUsuario;";
+    private String buscaLogPeriodo = "select log.idLog,log.idUsuario, log.mensagem, log.data, usuarios.nomeUsuario from log " +
+                                "LEFT JOIN usuarios ON log.idUsuario = usuarios.idUsuario where log.data >= ? and log.data <= ?";
 
     public void inserirLog(Log l) {
         Connection con = null;
@@ -71,7 +74,10 @@ public class LogDAO {
             while (rs.next()) {
                 Log l = new Log();
                 l.setId(Integer.parseInt(rs.getString("idLog")));
-                l.setIdusuario(Integer.parseInt(rs.getString("idUsuario")));
+                if(!rs.getString("idUsuario").isEmpty())
+                    l.setIdusuario(Integer.parseInt(rs.getString("idUsuario")));
+                if(!rs.getString("nomeUsuario").isEmpty())
+                    l.setNomeUsuario(rs.getString("nomeUsuario"));
                 l.setMensagem(rs.getString("mensagem"));
                 String stringData = rs.getString("data");
                 stringData = stringData.replaceAll("-", "/");
@@ -104,7 +110,7 @@ public class LogDAO {
         }
     }
 
-    public List<Log> buscarLogPeriodo(java.util.Date inicio, java.util.Date fim) {
+    public List<Log> buscarLogPeriodo(String inicio, String fim) {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -112,12 +118,23 @@ public class LogDAO {
         try {
             con = ConnectionFactory.getConnection();
             stmt = con.prepareStatement(buscaLogPeriodo);
+            
+            //try{
+            //inicio = formatter.parse(formatter.format(inicio));
+            //fim = formatter.parse(formatter.format(fim));
+            //}catch(Exception ex){
+              //  System.out.println("Erro na data");
+            //}
             stmt.setString(1, inicio.toString());
+            stmt.setString(2, fim.toString());
             rs = stmt.executeQuery();
             while (rs.next()) {
-                Log l = new Log();
+                   Log l = new Log();
                 l.setId(Integer.parseInt(rs.getString("idLog")));
-                l.setIdusuario(Integer.parseInt(rs.getString("idUsuario")));
+                if(!rs.getString("idUsuario").isEmpty())
+                    l.setIdusuario(Integer.parseInt(rs.getString("idUsuario")));
+                if(!rs.getString("nomeUsuario").isEmpty())
+                    l.setNomeUsuario(rs.getString("nomeUsuario"));
                 l.setMensagem(rs.getString("mensagem"));
                 String stringData = rs.getString("data");
                 stringData = stringData.replaceAll("-", "/");

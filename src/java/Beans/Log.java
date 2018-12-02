@@ -14,7 +14,8 @@ import java.util.Date;
 public class Log  {
     
     private Integer id;
-    private Integer idusuario;
+    private Integer idUsuario;
+    private String nomeUsuario;
     private String mensagem;
     private Date data;
     
@@ -23,21 +24,31 @@ public class Log  {
         
     }
 
-    public Log(Integer idusuario, String mensagem) {
-        this.id = id;
-        this.idusuario = idusuario;
+    public Log(Integer idUsuario, String mensagem) {
+        this.idUsuario = idUsuario;
         this.mensagem = mensagem;
-        this.data = data;
     }
-
+    
+    public Log( String mensagem) {
+        this.mensagem = mensagem;        
+    }
+    
     public Integer getIdusuario() {
-        return idusuario;
+        return idUsuario;
     }
 
-    public void setIdusuario(Integer idusuario) {
-        this.idusuario = idusuario;
+    public void setIdusuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
+     public String getNomeUsuario() {
+        return nomeUsuario;
+    }
+
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
+    }
+   
     public String getMensagem() {
         return mensagem;
     }
@@ -54,11 +65,11 @@ public class Log  {
         this.data = data;
     }    
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

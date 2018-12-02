@@ -66,20 +66,22 @@ public class PacienteController extends HttpServlet {
         String action = request.getParameter("action");
         HttpSession session = request.getSession(false);
         if (session.getAttribute("usuario") == null) {
-            session.invalidate();
+            session.invalidate();   
+            LogFacade.inserir(new Log("Sessão do usuário expirada"));
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
         } else {
-            Usuario usuarioSession = new Usuario();
             session = request.getSession();
-            //Usuario usuario = (Usuario)session.getAttribute("usuario");
-            session.setAttribute("usuario", usuarioSession);
+            Usuario usuario = (Usuario)session.getAttribute("usuario");
+            session.setAttribute("usuario", usuario);
             session.setMaxInactiveInterval(20 * 60);
             if (action.equals("carregarCadastro")) {
+                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou a página de cadastro de pacientes"));
                 request.setAttribute("successAlert", new Gson().toJson("false"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");
                 rd.forward(request, response);
             } else if (action.equals("carregarGerenciamento")) {
+                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou a página de gerenciamento de pacientes"));
                 request.setAttribute("successAlert", new Gson().toJson("false"));
                 request.setAttribute("errorAlert", new Gson().toJson("false"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/gerenciarPacientes.jsp");
@@ -87,7 +89,7 @@ public class PacienteController extends HttpServlet {
             } else if (action.equals("cadastrarPaciente")) {
                 PacientesFacade.inserir(criarPaciente(request));
                 atualizarPacientesLista(request);
-              //  LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário cadastrou um paciente no sistema"));
+                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário cadastrou um(a) paciente no sistema"));
                 RequestDispatcher rd = null;
                 request.setAttribute("successAlert", new Gson().toJson("true"));
                 rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");
@@ -96,6 +98,7 @@ public class PacienteController extends HttpServlet {
                 String pesquisa = request.getParameter("pesquisa");
                 PacientesFacade pacientesFacade = new PacientesFacade();
                 List<Paciente> pacienteList = pacientesFacade.buscaPacientesParam(pesquisa);
+                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário pesquisou pelo(a) paciente "+pesquisa));
                 request.setAttribute("pacientes", pacienteList);
                 if (pacienteList.size() == 0) {
                     request.setAttribute("errorAlert", new Gson().toJson("true"));
@@ -109,12 +112,15 @@ public class PacienteController extends HttpServlet {
             } else if (action.equals("editar")) {
                 String id = request.getParameter("idPaciente");
                 Paciente paciente = PacientesFacade.buscarId(id);
+                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou a página de edição do(a) paciente " + paciente.getNome()));
                 request.setAttribute("paciente", paciente);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/editarPacientes.jsp");
                 requestDispatcher.forward(request, response);
             } else if (action.equals("editarPaciente")) {
                 PacientesFacade.alterar(criarPaciente(request));
                 atualizarPacientesLista(request);
+                String nome = request.getParameter("nome");
+                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário editou o(a) paciente "+nome));
                 request.setAttribute("successAlert", new Gson().toJson("true"));
                 request.setAttribute("errorAlert", new Gson().toJson("false"));
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarPacientes.jsp");

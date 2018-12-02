@@ -5,7 +5,10 @@
  */
 package Servlets;
 
+import Beans.Log;
 import Beans.Medicamento;
+import Beans.Usuario;
+import Facade.LogFacade;
 import Facade.LotesFacade;
 import Facade.MedicamentosFacade;
 import com.google.gson.Gson;
@@ -20,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -40,20 +44,31 @@ public class InicialController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          List<Medicamento> medicamentos = MedicamentosFacade.listarMedicamentos();
-        List<String> quantidade = new ArrayList<String>();
-        List<String> nomeMed = new ArrayList<String>();
-        for (Medicamento medicamento : medicamentos) {
-            nomeMed.add(medicamento.getNome());
-            Integer quant =LotesFacade.buscarQuantidade(medicamento.getId().toString()); 
-            quantidade.add(quant.toString());
-        }
-        ServletContext medContext = request.getServletContext();
-        medContext.setAttribute("quantidadeJson",new Gson().toJson(quantidade.toArray()));
-        medContext.setAttribute("nomeMedJson",new Gson().toJson(nomeMed.toArray()));
-           RequestDispatcher rd = getServletContext().getRequestDispatcher("/home.jsp");
+        HttpSession session = request.getSession(false);
+        if (session.getAttribute("usuario") == null) {
+            session.invalidate();
+            LogFacade.inserir(new Log("Sessão do usuário expirada"));
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
+            rd.include(request, response);
+        } else {
+            session = request.getSession();
+            Usuario usuario = (Usuario) session.getAttribute("usuario");
+            request.setAttribute("perfil", usuario.getPerfil());
+            LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou a tela inicial"));
+            List<Medicamento> medicamentos = MedicamentosFacade.listarMedicamentos();
+            List<String> quantidade = new ArrayList<String>();
+            List<String> nomeMed = new ArrayList<String>();
+            for (Medicamento medicamento : medicamentos) {
+                nomeMed.add(medicamento.getNome());
+                Integer quant = LotesFacade.buscarQuantidade(medicamento.getId().toString());
+                quantidade.add(quant.toString());
+            }
+            ServletContext medContext = request.getServletContext();
+            medContext.setAttribute("quantidadeJson", new Gson().toJson(quantidade.toArray()));
+            medContext.setAttribute("nomeMedJson", new Gson().toJson(nomeMed.toArray()));
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/home.jsp");
             rd.forward(request, response);
-    
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

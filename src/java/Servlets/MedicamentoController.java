@@ -5,12 +5,14 @@
  */
 package Servlets;
 
+import Beans.Log;
 import Beans.Lote;
 import Beans.Medicamento;
 import Beans.Paciente;
 import Beans.Usuario;
 import DAO.MedicamentoDAO;
 import DAO.PacienteDAO;
+import Facade.LogFacade;
 import Facade.LotesFacade;
 import Facade.MedicamentosFacade;
 import com.google.gson.Gson;
@@ -61,6 +63,7 @@ public class MedicamentoController extends HttpServlet {
         String action = request.getParameter("action");
         if (session.getAttribute("usuario") == null) {
             session.invalidate();
+          LogFacade.inserir(new Log("Sessão do usuário expirada"));
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
         } else {

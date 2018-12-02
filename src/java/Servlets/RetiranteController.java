@@ -5,10 +5,12 @@
  */
 package Servlets;
 
+import Beans.Log;
 import Beans.Paciente;
 import Beans.Retirante;
 import Beans.Usuario;
 import DAO.RetiranteDAO;
+import Facade.LogFacade;
 import Facade.PacientesFacade;
 import Facade.RetirantesFacade;
 import com.google.gson.Gson;
@@ -57,19 +59,23 @@ public class RetiranteController extends HttpServlet {
         HttpSession session = request.getSession();
         String action = request.getParameter("action");
         if (session.getAttribute("usuario") == null) {
+            LogFacade.inserir(new Log("Sessão do usuário expirada"));
             session.invalidate();
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
         } else {
-            Usuario usuarioSession = new Usuario();
-            session = request.getSession();
-            session.setAttribute("usuario", usuarioSession);
+            
+            Usuario usuario = (Usuario)session.getAttribute("usuario");
+            session.setAttribute("usuario", usuario);
             session.setMaxInactiveInterval(20 * 60);
+            
             if (action.equals("carregarCadastro")) {
+                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou o cadastro de retirantes"));
                 request.setAttribute("successAlert", new Gson().toJson("false"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarRetirante.jsp");
                 rd.forward(request, response);
             } else if (action.equals("carregarGerenciamento")) {
+                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou o gerenciamento de retirantes"));
                 request.setAttribute("successAlert", new Gson().toJson("false"));
                 request.setAttribute("errorAlert", new Gson().toJson("false"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/gerenciarRetirantes.jsp");

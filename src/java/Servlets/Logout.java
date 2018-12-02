@@ -5,6 +5,8 @@
  */
 package Servlets;
 
+import Beans.Log;
+import Facade.LogFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -38,6 +40,7 @@ public class Logout extends HttpServlet {
         if (session != null) {
             session.invalidate();
         }
+        LogFacade.inserir(new Log("Usuário saiu do sistema"));
         RequestDispatcher rd = request.
                     getRequestDispatcher("/index.html");
             request.setAttribute("msg", "Usuário desconectado com sucesso!");
