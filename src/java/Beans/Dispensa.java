@@ -15,7 +15,6 @@ import java.util.Date;
 public class Dispensa implements Serializable {
     
     private Integer id;
-    private Integer quantidade;
     private Date dataDispensa;
     private Retirante retirante;
     private Paciente paciente;
@@ -27,14 +26,6 @@ public class Dispensa implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
     }
 
     public Date getDataDispensa() {

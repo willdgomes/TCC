@@ -2,7 +2,6 @@ CREATE DATABASE Farmacia;
 
 CREATE TABLE `dispensas` (
   `idDispensa` int(11) NOT NULL,
-  `quantidade` int(11) NOT NULL,
   `dataDispensa` date NOT NULL,
   `idRetirante` int(11) NOT NULL,
   `idPaciente` int(11) NOT NULL,
@@ -19,6 +18,7 @@ CREATE TABLE `dispensas` (
 CREATE TABLE `dispensas_medicamentos` (
   `idDispensa` int(11) NOT NULL,
   `idMedicamento` int(11) NOT NULL,
+  `quantidade` int(11) NOT NULL,
   KEY `FK_Dispensa` (`idDispensa`),
   KEY `FK_Medicamento_dis` (`idMedicamento`),
   CONSTRAINT `FK_Dispensa` FOREIGN KEY (`idDispensa`) REFERENCES `dispensas` (`idDispensa`),

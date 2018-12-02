@@ -27,6 +27,7 @@ public class LoteDAO {
     private final String stmQntdSaidaMedicamento = "SELECT SUM(d.quantidade)" +
             "FROM farmacia.dispensas as d INNER JOIN farmacia.dispensas_medicamentos as dm" +
             "ON d.idDispensa=dm.idDispensa where dm.idMedicamento = ?";
+    
     public void inserirLote(Lote lote) {
         Connection con = null;
         PreparedStatement stmt = null;
