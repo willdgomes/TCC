@@ -44,7 +44,7 @@ public class UsuarioController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
         String action = request.getParameter("action");
         if (session == null) {
             RequestDispatcher rd = request.
@@ -53,7 +53,6 @@ public class UsuarioController extends HttpServlet {
             request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema!");
             rd.forward(request, response);
         } else {
-            session = request.getSession();
             Usuario usuario = (Usuario) session.getAttribute("usuario");
             session.setAttribute("usuario", usuario);
             session.setMaxInactiveInterval(20 * 60);
@@ -62,9 +61,9 @@ public class UsuarioController extends HttpServlet {
             } else
             if (action.equals("carregarGerenciamento")) {
                 atualizarUsuariosLista(request);
+                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou o gerenciamento de usuários"));
                 request.setAttribute("successAlert", new Gson().toJson("false"));
                 request.setAttribute("errorAlert", new Gson().toJson("false"));
-            LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou a página de gerenciamento de usuários"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/gerenciarUsuarios.jsp");
                 rd.forward(request, response);
             } else if (action.equals("pesquisarUsuario")) {
@@ -90,7 +89,7 @@ public class UsuarioController extends HttpServlet {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/editarUsuario.jsp");
                 requestDispatcher.forward(request, response);
             } else if (action.equals("carregarCadastro")) {
-                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou a página de cadastro de usuários"));
+                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou o cadastro de usuários"));
                 request.setAttribute("successAlert", new Gson().toJson("false"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarUsuario.jsp");
                 rd.forward(request, response);

@@ -76,12 +76,12 @@ public class PacienteController extends HttpServlet {
             session.setAttribute("usuario", usuario);
             session.setMaxInactiveInterval(20 * 60);
             if (action.equals("carregarCadastro")) {
-                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou a página de cadastro de pacientes"));
+                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou o cadastro de usuarios"));
                 request.setAttribute("successAlert", new Gson().toJson("false"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarPacientes.jsp");
                 rd.forward(request, response);
             } else if (action.equals("carregarGerenciamento")) {
-                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou a página de gerenciamento de pacientes"));
+                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou o gerenciamento de usuarios"));
                 request.setAttribute("successAlert", new Gson().toJson("false"));
                 request.setAttribute("errorAlert", new Gson().toJson("false"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/gerenciarPacientes.jsp");
