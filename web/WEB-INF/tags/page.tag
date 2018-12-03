@@ -5,7 +5,7 @@
 --%>
 
 <%@tag description="Página Padrão" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- The list of normal or fragment attributes can be specified here: --%>
 <%@attribute name="title" required="false"%>
 
@@ -74,12 +74,14 @@
                                 <li class="nav-sub-item">
                                     <a class="nav-link" href="RetiranteController?action=carregarGerenciamento"><i class="material-icons">group</i> <span class="align-top">Retirantes</span></a>
                                 </li>
+                                <c:if test="${perfil}">
                                 <li class="nav-sub-item">
                                     <a class="nav-link" href="MedicamentoController?action=carregarGerenciamento"><i class="material-icons">local_pharmacy</i> <span class="align-top">Medicamentos</span></a>
                                 </li>
                                 <li class="nav-sub-item">
                                     <a class="nav-link" href="UsuarioController?action=carregarGerenciamento"><i class="material-icons">person</i> <span class="align-top">Usuários</span></a>
                                 </li>
+                                </c:if>
                             </ul>
                         </div>
                     </li>
@@ -103,9 +105,11 @@
                                 <li class="nav-sub-item">
                                     <a class="nav-link" href="RelatorioController?action=carregarSaidaMedicamentos"><i class="material-icons">add_box</i> <span class="align-top">Saída Medicamentos</span></a>
                                 </li>
+                                <c:if test="${perfil}">
                                 <li class="nav-sub-item">
                                     <a class="nav-link" href="RelatorioController?action=carregarListaAtividades"><i class="material-icons">line_style</i <span class="align-top">Atividades dos usuários</span></a>
                                 </li>
+                                </c:if>
                             </ul>
                         </div>
                     </li>

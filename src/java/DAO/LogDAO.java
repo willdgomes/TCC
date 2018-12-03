@@ -29,7 +29,7 @@ public class LogDAO {
     ResultSet rs = null;
     private String insereLog = "insert into log (idUsuario, mensagem, data) values (?, ?, ?)";
     private String buscaLog = "select log.idLog,log.idUsuario, log.mensagem, log.data, usuarios.nomeUsuario from log " +
-                                "LEFT JOIN usuarios ON log.idUsuario = usuarios.idUsuario;";
+                                "LEFT JOIN usuarios ON log.idUsuario = usuarios.idUsuario ORDER BY log.data DESC;";
     private String buscaLogPeriodo = "select log.idLog,log.idUsuario, log.mensagem, log.data, usuarios.nomeUsuario from log " +
                                 "LEFT JOIN usuarios ON log.idUsuario = usuarios.idUsuario where log.data >= ? and log.data <= ?";
 

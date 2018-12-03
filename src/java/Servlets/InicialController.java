@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.PageContext;
 
 /**
  *
@@ -53,7 +54,8 @@ public class InicialController extends HttpServlet {
         } else {
             session = request.getSession();
             Usuario usuario = (Usuario) session.getAttribute("usuario");
-            request.setAttribute("perfil", usuario.getPerfil());
+            if(usuario.getPerfil().equalsIgnoreCase("Administrador"))
+                request.setAttribute("perfil",true);
             LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou a tela inicial"));
             List<Medicamento> medicamentos = MedicamentosFacade.listarMedicamentos();
             List<String> quantidade = new ArrayList<String>();

@@ -6,16 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set value="${applicationScope.perfil}" var="perfil"/>
-<c:choose>
-  <c:when test="${perfil == 'Administrador'}">
-    <%@ taglib prefix="t" tagdir="/WEB-INF/tagsAdmin" %>
-  </c:when>
-  <c:otherwise>
-    <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
-  </c:otherwise>
-</c:choose>
-
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <t:page>
@@ -41,6 +32,7 @@
                                     <a href="RetiranteController?action=carregarCadastro"><i class="material-icons">group_add</i> <span class="align-top pl-2">Retirantes</span></a>
                                 </div>
                             </div>
+                            <c:if test="${perfil}">
                             <div class="card border border-info text-secondary bg-light ml-2 col">
                                 <div class="card-body pt-2">
                                     <a href="MedicamentoController?action=carregarCadastro"><i class="material-icons">library_add</i> <span class="align-top pl-2">Medicamentos</span></a>
@@ -49,6 +41,37 @@
                             <div class="card border border-info text-secondary bg-light ml-2 col">
                                 <div class="card-body pt-2">
                                     <a href="UsuarioController?action=carregarCadastro"><i class="material-icons">library_add</i> <span class="align-top pl-2">Usuário</span></a>
+                                </div>                                
+                            </div>
+                            </c:if>
+                        </div>
+                        <div class="row">
+                            <div class="card border border-danger text-secondary bg-light ml-2 col">
+                                <div class="card-body pt-2">
+                                    <h5 class="card-title">Medicamentos próximo ao vencimento</h5>
+                                    <table class="table table-responsive-sm">
+                                        <thead>
+                                            <tr>                                                    
+                                                <th scope="col">Medicamento</th>
+                                                <th scope="col">Data</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody> 
+                                            <c:forEach items="${vencimentos}" var="medicamento">
+                                            <form action="PacienteController?action=editar" method="POST">
+                                                <tr>
+                                                    <td scope="col">${medicamento.nome} ${medicamento.dosagem}</td>
+                                                    <td scope="col" id="cpfpaciente">${medicamento.dnVencimento}</td>
+                                                </tr>
+                                            </form>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card border border-info text-secondary bg-light ml-2 col">
+                                <div class="card-body pt-2">
+                                    <a href="ReceitasController?action=carregarCadastro"><i class="material-icons">receipt</i> <span class="align-top pl-2">Receita Médica</span></a>
                                 </div>
                             </div>
                         </div>
@@ -89,9 +112,9 @@
                         }]
                 },
                 options: {
-                     legend: {
-        display: false
-    },
+                    legend: {
+                        display: false
+                    },
                     title: {
                         display: true,
                         text: 'Medicamentos no estoque'
@@ -105,7 +128,7 @@
                     }
                 }
             });
-            
+
         </script>
     </jsp:body>
 </t:page>
