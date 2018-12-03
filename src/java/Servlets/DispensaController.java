@@ -18,6 +18,7 @@ import Facade.MedicamentosFacade;
 import Facade.PacientesFacade;
 import Facade.ReceitasFacade;
 import Facade.RetirantesFacade;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -63,6 +64,12 @@ public class DispensaController extends HttpServlet {
         } else {
             if(usuario.getPerfil().equalsIgnoreCase("Administrador"))
                 request.setAttribute("perfil",true);
+            if(action.equals("carregarDispensa")){
+            request.setAttribute("errorAlert", new Gson().toJson("false"));
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
+                requestDispatcher.forward(request, response);
+            }
+            else
             if (action.equals("dispensarMedicamento")) {
                 String idPaciente = request.getParameter("idPaci");
                 String cpfRetirante = request.getParameter("cpfRetirante");
@@ -73,6 +80,7 @@ public class DispensaController extends HttpServlet {
                 paciente = PacientesFacade.buscarId(idPaciente);
                 Retirante retirante = new Retirante();
                 retirante = RetirantesFacade.buscarRetirantePorCpf(cpfRetirante);
+                if(retirante.getIdRetirante() != null){
                 if(!RetirantesFacade.buscarRetirantePaciente(idPaciente, retirante.getIdRetirante())){
                     request.setAttribute("msg", "Este retirante não está autorizado.");
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
@@ -130,13 +138,17 @@ public class DispensaController extends HttpServlet {
                         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
                         requestDispatcher.forward(request, response);
                     }
+                    }                
+                request.setAttribute("errorAlert", new Gson().toJson("false"));
                 }
+                else
+                    request.setAttribute("errorAlert", new Gson().toJson("true"));
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
                 requestDispatcher.forward(request, response);
-
+                }
 //verificar receita. data de vencimento, medicamentos e retirante e paciente
-                
-            }
+
+            
         }
     }
 

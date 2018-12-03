@@ -60,7 +60,9 @@
             <div class="sidebar d-none d-lg-block bg-light">
 
                 <ul class="nav flex-column">
-
+<li class="nav-item">
+                        <a class="nav-link" href="InicialController"><i class="material-icons">home</i> <span class="align-top">Tela inicial</span></a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="cadastrarReceita.jsp"><i class="material-icons">receipt</i> <span class="align-top">Cadastrar     Receita Médica</span></a>
                     </li>
@@ -90,7 +92,7 @@
                         <div class="collapse show" id="menuEstoque">
                             <ul class="nav flex-column">
                                 <li class="nav-sub-item">
-                                    <a class="nav-link" href="dispensarMedicamento.jsp"><i class="material-icons">indeterminate_check_box</i> <span class="align-top">Dispensar Medicamento</span></a>
+                                    <a class="nav-link" href="DispensaController?action=carregarDispensa"><i class="material-icons">indeterminate_check_box</i> <span class="align-top">Dispensar Medicamento</span></a>
                                 </li>
                                 <li class="nav-sub-item">
                                     <a class="nav-link" href="MedicamentoController?action=inserirMedicamento"><i class="material-icons">add_box</i> <span class="align-top">Inserir Medicamento</span></a>

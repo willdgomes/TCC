@@ -319,7 +319,7 @@ public class RetiranteDAO {
             stmt.setString(1, cpfRetirante);
             rs = stmt.executeQuery();
             Retirante retirante = new Retirante();
-            while (rs.next()) {
+            if (rs.next()) {
             retirante.setIdRetirante(rs.getInt("idRetirante"));
             retirante.setNomeRetirante(rs.getString("nomeRetirante"));
             retirante.setCpfRetirante(rs.getString("cpfRetirante"));
