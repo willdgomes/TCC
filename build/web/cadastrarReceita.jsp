@@ -37,14 +37,6 @@
                                                     </div>                    
                                                 </div>
                                             </div>
-                                            <div class="form-group col-md-4">
-                                                <label for="cpfPaciente" class="text-dark ">CPF:</label>
-                                                <div class="col-md-5 row">
-                                                    <div class="dropdown">
-                                                        <label for="cpdPaciente" class="text-dark row" value="${paciente.cpf}" name="cpfPaciReceita"></label>
-                                                    </div>                    
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-8">

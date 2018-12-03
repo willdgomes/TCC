@@ -10,6 +10,8 @@
 <t:page>
     <jsp:attribute name="title">Farmácia APPP</jsp:attribute>
     <jsp:body>
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/jquery.mask.min.js"></script>
         <div class="main w-100">
             <div class="row">
                 <div class="panel panel-default col-sm pt-4">
@@ -17,8 +19,8 @@
                         <h2 align="center">Dispensar Medicamentos</h2>
                     </div>
                     <div class="panel-body pt-3">
-                        <form class="card border-info" action="DispensaController?action=dispensarMedicamento" method="POST">
-                            <div class="col-sm-12">
+                        <form action="DispensaController?action=dispensarMedicamento" method="POST">
+                            <div class="col-sm-12 card border-info">
                                 <div class="card-body p-5">
                                     <div class="col form-row">
                                         <div class="form-group col-md-6">
@@ -30,17 +32,20 @@
                                                 </c:forEach>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-4  offset-md-1">
-                                            <label for="cpf" class="text-dark row" >CPF:</label>
-                                            <label for="infoCpf" class="row text-left" required name="cpfPaciente">097.579.629-10</label>
-                                        </div>
                                     </div>
                                     <div class="col form-row">
                                         <div class="form-group col-md-6">
                                             <label for="cpf" class="text-dark">CPF Retirante:</label>
-                                            <input type="text" class="form-control" id="cpfpaciente" required name="cpfRetirante">
+                                            <input type="text" class="form-control" id="cpfRetirante" required name="cpfRetirante">
                                         </div>
                                     </div>  
+                                    <div colspan="5" id="errorAlert"><div class="form-row">
+                                                <div class="alert alert-danger alert-dismissible col">
+                                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                    Retirante não possui permissão para retirar medicamentos para este paciente!
+                                                </div>
+                                            </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card border-info p-5">
@@ -94,6 +99,15 @@
             </div>
         </div>
         <script type="text/javascript" >
+            $(document).ready(function () {
+               
+                    var errorAlert = JSON.parse(${errorAlert});
+                    if (errorAlert == true)
+                        $("#errorAlert").show();
+                    else
+                        $("#errorAlert").hide();
+                });
+                
             function addRow() {
                 var table = document.getElementById("tabelaReceita");
                 var medicamento = document.getElementById("cbRemedios");
