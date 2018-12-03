@@ -74,8 +74,8 @@ CREATE TABLE `pacientes` (
 
 CREATE TABLE `receitas` (
   `idReceita` int(11) NOT NULL AUTO_INCREMENT,
-  `nomeMedico` varchar(255) NOT NULL,
-  `CRM` varchar(45) NOT NULL,
+  `nomeMedico` varchar(255),
+  `crmMedico` varchar(45),
   `validadeReceita` date NOT NULL,
   `idPaciente` int(11) NOT NULL,
   PRIMARY KEY (`idReceita`),

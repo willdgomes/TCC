@@ -6,12 +6,14 @@
 package Servlets;
 
 import Beans.Dispensa;
+import Beans.Lote;
 import Beans.Medicamento;
 import Beans.Paciente;
 import Beans.Receita;
 import Beans.Retirante;
 import Beans.Usuario;
 import Facade.DispensasFacade;
+import Facade.LotesFacade;
 import Facade.MedicamentosFacade;
 import Facade.PacientesFacade;
 import Facade.ReceitasFacade;
@@ -110,11 +112,17 @@ public class DispensaController extends HttpServlet {
                     }
                     //verifica medicamentos_receitas
                 }
-               int idPac = DispensasFacade.inserir(dispensa);
+                int idPac = DispensasFacade.inserir(dispensa);
                 dispensa.setId(idPac);
                 
+                List<Lote> listLotes = new ArrayList<Lote>();
+                listLotes = LotesFacade.pegarLotePorVencimento();
                 for(int i=0; i<listaMedicamento.length; i++){
-                    DispensasFacade.inserirDispensaMedicamento(dispensa.getId(), listMed.get(i).getId(), Integer.parseInt(quantidadeMed[i]));
+                    int qtdeMed = Integer.parseInt(quantidadeMed[i]);
+                    DispensasFacade.inserirDispensaMedicamento(dispensa.getId(), listMed.get(i).getId(), qtdeMed);
+                    if(listMed.get(i).getId().equals(listLotes.get(i).getMedicamento().getId()) && listLotes.get(i).getQtde()<=qtdeMed){
+                        listLotes.get(i).setQtde(listLotes.get(i).getQtde()-qtdeMed);
+                    }
                     //inserir dispensas_medicamentos e subtrair lote
                 }
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");

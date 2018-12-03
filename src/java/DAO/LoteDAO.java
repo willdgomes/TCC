@@ -13,6 +13,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -27,6 +29,7 @@ public class LoteDAO {
     private final String stmQntdSaidaMedicamento = "SELECT SUM(d.quantidade)" +
             "FROM farmacia.dispensas as d INNER JOIN farmacia.dispensas_medicamentos as dm" +
             "ON d.idDispensa=dm.idDispensa where dm.idMedicamento = ?";
+    private final String stmtLoteVencendo = "SELECT lote, idMedicamento, quantidade, dataVencimento FROM lote ORDER BY dataVencimento ASC";
     
     public void inserirLote(Lote lote) {
         Connection con = null;
@@ -122,6 +125,50 @@ public class LoteDAO {
                 System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
             };
         }
+    }
+    
+    public List<Lote> listarLotesPorVencimento() {
+
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Lote> listaLotes = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtLoteVencendo);
+            rs = stmt.executeQuery();
+            listaLotes = new ArrayList<Lote>();
+            while (rs.next()) {
+                Lote lote = new Lote();
+                lote.setId(Integer.parseInt(rs.getString("lote")));
+                Medicamento medicamento = new Medicamento();
+                medicamento.setId(rs.getInt("idMedicamento"));
+                lote.setMedicamento(medicamento);
+                lote.setQtde(rs.getInt("quantidade"));
+                lote.setDataVencimento(rs.getDate("dataVencimento"));
+                listaLotes.add(lote);
+            }
+            return listaLotes;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao listar os lotes no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
+            };
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+
     }
     
     public Integer buscarQuantidadePorMedicamento(String idMed) {

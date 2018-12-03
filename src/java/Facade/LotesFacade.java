@@ -7,6 +7,7 @@ package Facade;
 
 import Beans.Lote;
 import DAO.LoteDAO;
+import java.util.List;
 
 /**
  *
@@ -25,6 +26,10 @@ public class LotesFacade {
     
     public static Lote pegarLotePorNumero(Integer numeroLote){
         return loteDAO.buscarLotePorNumero(numeroLote);
+    }
+    
+    public static List<Lote> pegarLotePorVencimento(){
+        return loteDAO.listarLotesPorVencimento();
     }
     
     public static Integer buscarQuantidade(String idMed){

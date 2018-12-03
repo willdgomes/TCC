@@ -64,7 +64,7 @@ public class RetiranteController extends HttpServlet {
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
         } else {
-
+            session = request.getSession();
             Usuario usuario = (Usuario)session.getAttribute("usuario");
             if(usuario.getPerfil().equalsIgnoreCase("Administrador"))
                 request.setAttribute("perfil",true);
