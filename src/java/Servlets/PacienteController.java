@@ -73,6 +73,8 @@ public class PacienteController extends HttpServlet {
         } else {
             session = request.getSession();
             Usuario usuario = (Usuario)session.getAttribute("usuario");
+            if(usuario.getPerfil().equalsIgnoreCase("Administrador"))
+                request.setAttribute("perfil",true);
             session.setAttribute("usuario", usuario);
             session.setMaxInactiveInterval(20 * 60);
             if (action.equals("carregarCadastro")) {

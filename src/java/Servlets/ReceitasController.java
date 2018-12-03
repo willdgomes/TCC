@@ -8,6 +8,7 @@ package Servlets;
 import Beans.Medicamento;
 import Beans.Paciente;
 import Beans.Receita;
+import Beans.Usuario;
 import Facade.MedicamentosFacade;
 import Facade.PacientesFacade;
 import Facade.ReceitasFacade;
@@ -55,6 +56,10 @@ public class ReceitasController extends HttpServlet {
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
         } else {
+           session = request.getSession();
+            Usuario usuario = (Usuario)session.getAttribute("usuario");
+            if(usuario.getPerfil().equalsIgnoreCase("Administrador"))
+                request.setAttribute("perfil",true);
             if (action.equals("cadastrarReceita")) {
                 String idPaci = request.getParameter("idPaci");
                 String nomeMedico = request.getParameter("medicoNomeReceita");
