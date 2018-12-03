@@ -10,6 +10,7 @@ import Beans.Usuario;
 import DAO.UsuarioDAO;
 import Facade.LogFacade;
 import Facade.UsuariosFacade;
+import JavaMail.JavaMail;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -147,6 +148,7 @@ public class UsuarioController extends HttpServlet {
         usuario.setSenha("1234");
         usuario.setPerfil(perfil);
         usuario.setDataNascimento(dtNascimento);
+        JavaMail.sendEmail(usuario.getEmail(), usuario.getSenha());
         if (id != null) {
             usuario.setIdUsuario(Integer.parseInt(id));
         }
