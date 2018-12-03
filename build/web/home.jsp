@@ -73,13 +73,35 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="card border border-info text-secondary bg-light ml-2 col">
+                            <div class="card border border-danger text-secondary bg-light ml-2 col">
                                 <div class="card-body pt-2">
-                                    <a href="ReceitasController?action=carregarCadastro"><i class="material-icons">receipt</i> <span class="align-top pl-2">Receita Médica</span></a>
+                                    <div class="text-center">
+                                    <h5 class="card-title">Últimas dispensas de medicamentos</h5>
+                                </div>
+                                    <table class="table table-responsive-sm">
+                                        <thead>
+                                            <tr>                                                    
+                                                <th scope="col">Medicamento</th>
+                                                <th scope="col">Lote</th>
+                                                <th scope="col">Data</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody> 
+                                            <c:forEach items="${medicamentosVenc}" var="item">
+                                            <form action="PacienteController?action=editar" method="POST">
+                                                <tr>
+                                                    <td scope="col">${item.medicamento.nome} ${item.medicamento.dosagem}</td>
+                                                    <td scope="col">${item.id}</td>
+                                                    <td scope="col">${item.dataVencimento}</td>
+                                                </tr>
+                                            </form>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-10 offset-1">
+                        <div class="col-md-12 pt-2">
                             <canvas id="myChart"></canvas>
                         </div>
                     </div>

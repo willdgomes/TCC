@@ -19,8 +19,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -81,16 +83,25 @@ public class RelatorioController extends HttpServlet {
                     tdQuantidade.add(quantidade);
                     quantidade = new ArrayList<String>();
                 }
-
+                List<String> meses = new ArrayList<String>();
+                meses.add("Jan");
+                meses.add("Fev");
+                meses.add("Mar");
+                meses.add("Abr");
+                meses.add("Maio");
+                meses.add("Jun");
+                meses.add("Jul");
+                meses.add("Ago");
+                meses.add("Set");
+                meses.add("Out");
+                meses.add("Nov");
+                meses.add("Dez");
+                Integer mes =  Calendar.getInstance().get(Calendar.MONTH) + 1;
                 Integer totalMed = medicamentos.size();
                 List<String> periodo = new ArrayList<String>();
-                periodo.add("jan");
-                periodo.add("fev");
-                periodo.add("mar");
-                periodo.add("abr");
-                periodo.add("maio");
-                periodo.add("Jun");
-
+                for (int i =mes-6; i < mes; i++){
+                    periodo.add(meses.get(i));
+                }
                 relContext.setAttribute("totalMedJson", new Gson().toJson(totalMed.toString()));
                 relContext.setAttribute("quantidadeJson", new Gson().toJson(tdQuantidade.toArray()));
                 relContext.setAttribute("nomeMedJson", new Gson().toJson(nomeMed.toArray()));
@@ -101,6 +112,7 @@ public class RelatorioController extends HttpServlet {
             } else if (action.equals("carregarListaAtividades")) {
                 List logs = LogFacade.buscarLog();
                 request.setAttribute("logs", logs);
+                request.setAttribute("losgJson", new Gson().toJson(logs.toArray()));
                 request.setAttribute("errorAlert", new Gson().toJson("false"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/log.jsp");
                 rd.forward(request, response);

@@ -97,9 +97,9 @@ public class LogDAO {
             while (rs.next()) {
                 Log l = new Log();
                 l.setId(Integer.parseInt(rs.getString("idLog")));
-                if(!rs.getString("idUsuario").isEmpty())
+                if(rs.getString("idUsuario") !=null)
                     l.setIdusuario(Integer.parseInt(rs.getString("idUsuario")));
-                if(!rs.getString("nomeUsuario").isEmpty())
+                if(rs.getString("nomeUsuario") != null)
                     l.setNomeUsuario(rs.getString("nomeUsuario"));
                 l.setMensagem(rs.getString("mensagem"));
                 String stringData = rs.getString("data");

@@ -11,6 +11,8 @@
     <jsp:attribute name="title">Farmácia APPP</jsp:attribute>
     <jsp:body>
         <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/pagination.js"></script>
+        <script src="js/pagination.min.js"></script>
         <div class="main w-100">
             <div class="row">
                 <div class="panel panel-default col-sm pt-4">
@@ -51,7 +53,7 @@
                     <div class="col-sm-12">
                         <div class="card border-info">
                             <div class="card-body p-5">
-                                <table class="table table-hover table-responsive-sm">
+                                <table class="table table-hover table-responsive-sm" id="tabelaLog">
                                     <thead>
                                         <tr>                                                    
                                             <th scope="col">Usuário</th>
@@ -92,7 +94,7 @@
                 else
                     $("#errorAlert").hide();
                 $("#errorDate").hide();
-                
+   
             });
         </script>                                     
     </jsp:body>
