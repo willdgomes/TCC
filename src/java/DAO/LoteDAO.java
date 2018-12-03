@@ -32,7 +32,7 @@ public class LoteDAO {
     private final String stmtBuscarLoteVenc = "SELECT lote, idMedicamento, quantidade, dataVencimento " +
             "FROM lote ORDER BY dataVencimento LIMIT 3";
 
-    private final String stmtLoteVencendo = "SELECT lote, idMedicamento, quantidade, dataVencimento FROM lote ORDER BY dataVencimento ASC";
+    private final String stmtLoteVencendoDispensa = "SELECT lote, idMedicamento, quantidade, dataVencimento FROM lote WHERE idMedicamento=? AND quantidade>? AND dataVencimento > (SELECT CURDATE()) ORDER BY dataVencimento ASC";
 
     
     public void inserirLote(Lote lote) {
@@ -131,30 +131,29 @@ public class LoteDAO {
         }
     }
     
-    public List<Lote> listarLotesPorVencimento() {
+    public Lote lotesPorVencimento(Integer idMedicamento, Integer qtde) {
 
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        List<Lote> listaLotes = null;
+        Lote lote = new Lote();
         try {
             con = ConnectionFactory.getConnection();
-            stmt = con.prepareStatement(stmtLoteVencendo);
+            stmt = con.prepareStatement(stmtLoteVencendoDispensa);
+            stmt.setInt(1, idMedicamento);
+            stmt.setInt(2, qtde);
             rs = stmt.executeQuery();
-            listaLotes = new ArrayList<Lote>();
-            while (rs.next()) {
-                Lote lote = new Lote();
+            if (rs.next()) {
                 lote.setId(Integer.parseInt(rs.getString("lote")));
                 Medicamento medicamento = new Medicamento();
                 medicamento.setId(rs.getInt("idMedicamento"));
                 lote.setMedicamento(medicamento);
                 lote.setQtde(rs.getInt("quantidade"));
                 lote.setDataVencimento(rs.getDate("dataVencimento"));
-                listaLotes.add(lote);
             }
-            return listaLotes;
+            return lote;
         } catch (SQLException ex) {
-            throw new RuntimeException("Erro ao listar os lotes no banco de dados. Origem=" + ex.getMessage());
+            throw new RuntimeException("Erro ao buscar lote no banco de dados. Origem=" + ex.getMessage());
         } finally {
             try {
                 rs.close();
