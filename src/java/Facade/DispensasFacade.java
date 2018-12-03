@@ -15,8 +15,8 @@ import DAO.DispensaDAO;
 public class DispensasFacade {
     private static final DispensaDAO dispDAO = new DispensaDAO();
     
-    public static void inserir(Dispensa dispensa) {
-        dispDAO.inserirDispensa(dispensa);
+    public static Integer inserir(Dispensa dispensa) {
+        return dispDAO.inserirDispensa(dispensa);
     }
     
     public static void inserirDispensaMedicamento(Integer idDispensa, Integer idMedicamento, Integer quantidade) {

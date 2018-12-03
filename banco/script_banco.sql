@@ -1,7 +1,7 @@
 CREATE DATABASE Farmacia;
 
 CREATE TABLE `dispensas` (
-  `idDispensa` int(11) NOT NULL,
+  `idDispensa` int(11) NOT NULL AUTO_INCREMENT,
   `dataDispensa` date NOT NULL,
   `idRetirante` int(11) NOT NULL,
   `idPaciente` int(11) NOT NULL,

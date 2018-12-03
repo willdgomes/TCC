@@ -9,6 +9,7 @@ import Beans.Dispensa;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -16,23 +17,34 @@ import java.sql.SQLException;
  * @author gomes
  */
 public class DispensaDAO {
-    private final String stmtInserir = "INSERT INTO dispensa (dataDispensa, idRetirante, idPaciente, idUsuario)"
+    private final String stmtInserir = "INSERT INTO dispensas (dataDispensa, idRetirante, idPaciente, idUsuario)"
             + "VALUES (?, ?, ?, ?)";
+    private final String stmtPegaUltimoRegistro = "SELECT LAST_INSERT_ID()";
     private final String stmtInserirDispMed = "INSERT INTO dispensas_medicamentos (idDispensa, idMedicamento, quantidade)"
             + "VALUES (?, ?, ?)";
     
     
-    public void inserirDispensa(Dispensa dispensa) {
+    public Integer inserirDispensa(Dispensa dispensa) {
         Connection con = null;
         PreparedStatement stmt = null;
+        PreparedStatement stmtUltRegistro = null;
+        ResultSet rs = null;
         try {
             con = ConnectionFactory.getConnection();
             stmt = con.prepareStatement(stmtInserir);
+            stmtUltRegistro = con.prepareStatement(stmtPegaUltimoRegistro);
             stmt.setDate(1, (Date) dispensa.getDataDispensa());
             stmt.setInt(2, dispensa.getRetirante().getIdRetirante());
             stmt.setInt(3, dispensa.getPaciente().getId());
             stmt.setInt(4, dispensa.getUsuario().getIdUsuario());
             stmt.executeUpdate();
+            rs = stmtUltRegistro.executeQuery();
+            if(rs.next()) {
+               Integer idDispensa = rs.getInt("LAST_INSERT_ID()");
+                return idDispensa;
+            }else{
+                return null;
+            }
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao registrar a dispensa de medicamento no banco de dados. Origem=" + ex.getMessage());
         } finally {
