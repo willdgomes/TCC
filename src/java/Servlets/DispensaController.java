@@ -115,13 +115,20 @@ public class DispensaController extends HttpServlet {
                 int idPac = DispensasFacade.inserir(dispensa);
                 dispensa.setId(idPac);
                 
-                List<Lote> listLotes = new ArrayList<Lote>();
-                listLotes = LotesFacade.pegarLotePorVencimento();
+                Lote lote = new  Lote();
                 for(int i=0; i<listaMedicamento.length; i++){
                     int qtdeMed = Integer.parseInt(quantidadeMed[i]);
                     DispensasFacade.inserirDispensaMedicamento(dispensa.getId(), listMed.get(i).getId(), qtdeMed);
-                    if(listMed.get(i).getId().equals(listLotes.get(i).getMedicamento().getId()) && listLotes.get(i).getQtde()<=qtdeMed){
-                        listLotes.get(i).setQtde(listLotes.get(i).getQtde()-qtdeMed);
+                    lote = LotesFacade.pegarLotePorVencimento(listMed.get(i).getId(), qtdeMed);
+                    
+                    
+                    if(lote!=null){
+                        lote.setQtde(lote.getQtde()-qtdeMed);
+                        LotesFacade.atualizarLote(lote);
+                    }else{
+                        //quantidade insuficiente em estoque
+                        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
+                        requestDispatcher.forward(request, response);
                     }
                     //inserir dispensas_medicamentos e subtrair lote
                 }
