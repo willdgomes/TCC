@@ -13,7 +13,7 @@ CREATE TABLE `dispensas` (
   CONSTRAINT `dispensas_ibfk_1` FOREIGN KEY (`idRetirante`) REFERENCES `retirantes` (`idRetirante`),
   CONSTRAINT `dispensas_ibfk_2` FOREIGN KEY (`idPaciente`) REFERENCES `pacientes` (`idPaciente`),
   CONSTRAINT `dispensas_ibfk_3` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 CREATE TABLE `dispensas_medicamentos` (
   `idDispensa` int(11) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE `dispensas_medicamentos` (
   KEY `FK_Medicamento_dis` (`idMedicamento`),
   CONSTRAINT `FK_Dispensa` FOREIGN KEY (`idDispensa`) REFERENCES `dispensas` (`idDispensa`),
   CONSTRAINT `FK_Medicamento_dis` FOREIGN KEY (`idMedicamento`) REFERENCES `medicamentos` (`idMedicamento`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 CREATE TABLE `lote` (
   `lote` varchar(45) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE `lote` (
   PRIMARY KEY (`lote`),
   KEY `idMedicamento` (`idMedicamento`),
   CONSTRAINT `lote_ibfk_1` FOREIGN KEY (`idMedicamento`) REFERENCES `medicamentos` (`idMedicamento`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 CREATE TABLE `medicamentos` (
   `idMedicamento` int(11) NOT NULL AUTO_INCREMENT,
@@ -44,7 +44,7 @@ CREATE TABLE `medicamentos` (
   `dosagem` double NOT NULL,
   `medida` varchar(45) NOT NULL,
   PRIMARY KEY (`idMedicamento`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 CREATE TABLE `medicamentos_receitas` (
   `idMedicamento` int(11) NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE `medicamentos_receitas` (
   KEY `FK_Receita` (`idReceita`),
   CONSTRAINT `FK_Medicamento` FOREIGN KEY (`idMedicamento`) REFERENCES `medicamentos` (`idMedicamento`),
   CONSTRAINT `FK_Receita` FOREIGN KEY (`idReceita`) REFERENCES `receitas` (`idReceita`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 CREATE TABLE `pacientes` (
   `idPaciente` int(11) NOT NULL AUTO_INCREMENT,
@@ -70,7 +70,7 @@ CREATE TABLE `pacientes` (
   `complemento` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idPaciente`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 CREATE TABLE `receitas` (
   `idReceita` int(11) NOT NULL AUTO_INCREMENT,
@@ -79,7 +79,7 @@ CREATE TABLE `receitas` (
   `validadeReceita` date NOT NULL,
   PRIMARY KEY (`idReceita`)
   CONSTRAINT `FK_Paciente` FOREIGN KEY (`idPaciente`) REFERENCES `paciente` (`idPaciente`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 CREATE TABLE `retirantes` (
   `idRetirante` int(11) NOT NULL AUTO_INCREMENT,
@@ -97,7 +97,7 @@ CREATE TABLE `retirantes` (
   `email` varchar(255) DEFAULT NULL,
   `vincolo` varchar(45) NOT NULL,
   PRIMARY KEY (`idRetirante`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 CREATE TABLE `retirantes_pacientes` (
   `idPaciente` int(11) NOT NULL,
@@ -106,7 +106,7 @@ CREATE TABLE `retirantes_pacientes` (
   KEY `FK_Retirante` (`idRetirante`),
   CONSTRAINT `FK_Paciente` FOREIGN KEY (`idPaciente`) REFERENCES `pacientes` (`idPaciente`),
   CONSTRAINT `FK_Retirante` FOREIGN KEY (`idRetirante`) REFERENCES `retirantes` (`idRetirante`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 CREATE TABLE `usuarios` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
@@ -117,7 +117,7 @@ CREATE TABLE `usuarios` (
   `senha` varchar(255) NOT NULL,
   `perfil` varchar(100) NOT NULL,
   PRIMARY KEY (`idUsuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 CREATE TABLE `log` (
   `idLog` int(11) NOT NULL  AUTO_INCREMENT,
