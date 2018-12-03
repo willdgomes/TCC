@@ -15,6 +15,7 @@
             <file>file:/C:/Users/Eu/Documents/TCC/web/dispensarMedicamento.jsp</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/editarRetirante.jsp</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/index.html</file>
+            <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/LoteDAO.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/gerenciarPacientes.jsp</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/ConnectionFactory.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/Logout.java</file>
@@ -28,7 +29,6 @@
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/InicialController.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/home.jsp</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/MedicamentoDAO.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/WEB-INF/tags/menuNaoAdmin/page.tag</file>
             <file>file:/C:/Users/Eu/Documents/TCC/nbproject/project.xml</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Retirante.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/editarMedicamento.jsp</file>
@@ -40,6 +40,7 @@
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/PacienteDAO.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Log.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/ReceitasController.java</file>
+            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/DispensaController.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/GerenciarPacientesController.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/nbproject/private/private.xml</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Facade/ReceitasFacade.java</file>
@@ -51,7 +52,6 @@
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/UsuarioDAO.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Paciente.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/relatorioEstoque.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/WEB-INF/tags/menuAdmin/page.tag</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/RelatorioController.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Facade/LogFacade.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/MedicamentoController.java</file>
@@ -59,6 +59,7 @@
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Facade/PacientesFacade.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/nbproject/genfiles.properties</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/inserirMedicamento.jsp</file>
+            <file>file:/C:/Users/Eu/Documents/TCC/web/WEB-INF/tags/page.tag</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/LogDAO.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/nbproject/ant-deploy.xml</file>
         </group>

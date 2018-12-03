@@ -53,7 +53,9 @@ public class UsuarioController extends HttpServlet {
             request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema!");
             rd.forward(request, response);
         } else {
-            Usuario usuario = (Usuario) session.getAttribute("usuario");
+            Usuario usuario = (Usuario)session.getAttribute("usuario");
+            if(usuario.getPerfil().equalsIgnoreCase("Administrador"))
+                request.setAttribute("perfil",true);
             session.setAttribute("usuario", usuario);
             session.setMaxInactiveInterval(20 * 60);
             if(action.equals("minhaConta")){

@@ -56,7 +56,11 @@ public class InicialController extends HttpServlet {
             Usuario usuario = (Usuario) session.getAttribute("usuario");
             if(usuario.getPerfil().equalsIgnoreCase("Administrador"))
                 request.setAttribute("perfil",true);
+            
             LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou a tela inicial"));
+            //CARREGA TABELA
+
+            //CARREGA GRAFICO
             List<Medicamento> medicamentos = MedicamentosFacade.listarMedicamentos();
             List<String> quantidade = new ArrayList<String>();
             List<String> nomeMed = new ArrayList<String>();
@@ -68,6 +72,7 @@ public class InicialController extends HttpServlet {
             ServletContext medContext = request.getServletContext();
             medContext.setAttribute("quantidadeJson", new Gson().toJson(quantidade.toArray()));
             medContext.setAttribute("nomeMedJson", new Gson().toJson(nomeMed.toArray()));
+            
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/home.jsp");
             rd.forward(request, response);
         }

@@ -51,6 +51,10 @@ public class GerenciarPacientesController extends HttpServlet {
             PacienteDAO pacienteDAO = new PacienteDAO();
             List<Paciente> pacienteList = pacienteDAO.buscarPacientesParam(pesquisa);
             if (session != null) {            
+                session = request.getSession();
+            Usuario usuario = (Usuario)session.getAttribute("usuario");
+            if(usuario.getPerfil().equalsIgnoreCase("Administrador"))
+                request.setAttribute("perfil",true);
                 RequestDispatcher rd = null;
                 if(pacienteList.size() > 0)
                     request.setAttribute("pacientes", pacienteList);

@@ -64,8 +64,10 @@ public class RetiranteController extends HttpServlet {
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
         } else {
-            
+
             Usuario usuario = (Usuario)session.getAttribute("usuario");
+            if(usuario.getPerfil().equalsIgnoreCase("Administrador"))
+                request.setAttribute("perfil",true);
             session.setAttribute("usuario", usuario);
             session.setMaxInactiveInterval(20 * 60);
             
