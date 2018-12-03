@@ -62,9 +62,9 @@
                                                 <div class="dropdown">
                                                     <select id="cbPaciente" class="form-control" required name="paciente">
                                                         <option></option>
-                                                         <c:forEach items="${applicationScope.pacientes}" var="paciente">
-                                                                <option value="${paciente.id}">${paciente.nome}</option>
-                                                            </c:forEach>
+                                                        <c:forEach items="${applicationScope.pacientes}" var="paciente">
+                                                            <option value="${paciente.id}">${paciente.nome}</option>
+                                                        </c:forEach>
                                                     </select>
                                                 </div>                    
                                             </div>
@@ -86,7 +86,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="cep" class="text-dark">CEP:</label>
-                                            <input type="number" class="form-control" id="ceppaciente" required name="cepRetirante">
+                                            <input type="number" class="form-control" id="cepretirante" required name="cepRetirante">
                                         </div>
                                         <div class="col-md-1">
                                             <button type="button" class="btn btn-sm mt-3" onclick="$(document).ready(function ()"><i class="material-icons">search</i></button>
@@ -95,7 +95,7 @@
                                     <div class="form-row">                                   
                                         <div class="form-group col-md-4">
                                             <label for="cidade" class="text-dark">Cidade:</label>
-                                            <input type="text" class="form-control" id="cidadepaciente" required name="cidadeRetirante">
+                                            <input type="text" class="form-control" id="cidaderetirante" required name="cidadeRetirante">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="estado" class="text-dark">Estado:</label>
@@ -136,73 +136,75 @@
         </div>
     </div>
     <script type="text/javascript" >
-
-        $(document).ready(function () {
-$("#cpfretirante").mask('999.999.999-99');  
+        
+            $(document).ready(function () {
+        $("#cpfretirante").mask('999.999.999-99');  
         $("#telefoneretirante").mask('(99)0 0000-0000');  
         var successAlert = JSON.parse(${successAlert});
         if(successAlert == true)
             $("#successAlert").show();
         else
-            $("#successAlert").hide();
-            function limpa_formulário_cep() {
-                // Limpa valores do formulário de cep.
-                $("#enderecoretirante").val("");
-                $("#bairroretirante").val("");
-                $("#cidaderetirante").val("");
-                $("#estadoretirante").val("");
-            }
+            $("#successAlert").hide();    
+        function limpa_formulário_cep() {
+                    // Limpa valores do formulário de cep.
+                    $("#enderecoretirante").val("");
+                    $("#bairroretirante").val("");
+                    $("#cidaderetirante").val("");
+                    $("#estadoretirante").val
+                }
 
-            //Quando o campo cep perde o foco.
-            $("#cepretirante").blur(function () {
+                //Quando o campo cep perde o foco.
+                $("#cepretirante").blur(function () {
 
-                //Nova variável "cep" somente com dígitos.
-                var cep = $(this).val().replace(/\D/g, '');
+                    //Nova variável "cep" somente com dígitos.
+                    var cep = $(this).val().replace(/\D/g, '');
 
-                //Verifica se campo cep possui valor informado.
-                if (cep != "") {
+                    //Verifica se campo cep possui valor informado.
+                    if (cep != "") {
 
-                    //Expressão regular para validar o CEP.
-                    var validacep = /^[0-9]{8}$/;
+                        //Expressão regular para validar o CEP.
+                        var validacep = /^[0-9]{8}$/;
 
-                    //Valida o formato do CEP.
-                    if (validacep.test(cep)) {
+                        //Valida o formato do CEP.
+                        if (validacep.test(cep)) {
 
-                        //Preenche os campos com "..." enquanto consulta webservice.
-                        $("#enderecoretirante").val("...");
-                        $("#bairroretirante").val("...");
-                        $("#cidaderetirante").val("...");
-                        $("#estadoretirante").val("...");
+                            //Preenche os campos com "..." enquanto consulta webservice.
+                            $("#enderecoretirante").val("...");
+                            $("#bairroretirante").val("...");
+                            $("#cidaderetirante").val("...");
+                            $("#estadoretirante").val("...");
 
-                        //Consulta o webservice viacep.com.br/
-                        $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+                            //Consulta o webservice viacep.com.br/
+                            $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
 
-                            if (!("erro" in dados)) {
-                                //Atualiza os campos com os valores da consulta.
-                                $("#enderecoretirante").val(dados.logradouro);
-                                $("#bairroretirante").val(dados.bairro);
-                                $("#cidaderetirante").val(dados.localidade);
-                                $("#estadoretirante").val(dados.uf);
-                            } //end if.
-                            else {
-                                //CEP pesquisado não foi encontrado.
-                                limpa_formulário_cep();
-                                alert("CEP não encontrado.");
-                            }
-                        });
+                                if (!("erro" in dados)) {
+                                    //Atualiza os campos com os valores da consulta.
+                                    $("#enderecoretirante").val(dados.logradouro);
+                                    $("#bairroretirante").val(dados.bairro);
+                                    $("#cidaderetirante").val(dados.localidade);
+                                    $("#estadoretirante").val(dados.uf);
+                                } //end if.
+                                else {
+                                    //CEP pesquisado não foi encontrado.
+                                    limpa_formulário_cep();
+                                    alert("CEP não encontrado.");
+                                }
+                            });
+                        } //end if.
+                        else {
+                            //cep é inválido.
+                            limpa_formulário_cep();
+                            alert("Formato de CEP inválido.");
+                        }
                     } //end if.
                     else {
-                        //cep é inválido.
+                        //cep sem valor, limpa formulário.
                         limpa_formulário_cep();
-                        alert("Formato de CEP inválido.");
                     }
-                } //end if.
-                else {
-                    //cep sem valor, limpa formulário.
-                    limpa_formulário_cep();
-                }
+                });
             });
-        });
+
+        </script>
 
     </script>
 </jsp:body>
