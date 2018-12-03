@@ -10,6 +10,8 @@ import Beans.Medicamento;
 import Beans.Paciente;
 import Beans.Receita;
 import Beans.Retirante;
+import Beans.Usuario;
+import Facade.DispensasFacade;
 import Facade.MedicamentosFacade;
 import Facade.PacientesFacade;
 import Facade.ReceitasFacade;
@@ -17,6 +19,7 @@ import Facade.RetirantesFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -47,6 +50,8 @@ public class DispensaController extends HttpServlet {
         
         Dispensa dispensa = new Dispensa();
         HttpSession session = request.getSession(false);
+        Usuario usuario = new Usuario();
+        usuario = (Usuario) session.getAttribute("usuario");
         String action = request.getParameter("action");
         if (session == null) {
             RequestDispatcher rd = request.
@@ -66,7 +71,17 @@ public class DispensaController extends HttpServlet {
                 retirante = RetirantesFacade.buscarRetirantePorCpf(cpfRetirante);
                 if(!RetirantesFacade.buscarRetirantePaciente(idPaciente, retirante.getIdRetirante())){
                     // retirante nao bate com paciente
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
+                    requestDispatcher.forward(request, response);
                 }
+                
+                dispensa.setPaciente(paciente);
+                dispensa.setRetirante(retirante);
+                dispensa.setUsuario(usuario);
+                Date dtAtual = new Date();
+                java.sql.Date dataAtual = new java.sql.Date(dtAtual.getTime());
+                dispensa.setDataDispensa(dataAtual);
+                
                 Receita receita = new Receita();
                 List<Receita> listaReceitas = new ArrayList<Receita>();
                 listaReceitas = ReceitasFacade.buscarReceitaValidaPorPaciente(paciente.getId());
@@ -74,18 +89,34 @@ public class DispensaController extends HttpServlet {
                 Medicamento med = new Medicamento();
                 for(int i=0; i<listaMedicamento.length; i++){
                     listMed.add(MedicamentosFacade.pegarMedicamentoPorNome(listaMedicamento[i]));
-                    //verificar quantidade e subtrair do lote
                 }
+                
                 if(listaReceitas.size()<1){
                     //nao ha receitas cadastradas ou validas
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
+                    requestDispatcher.forward(request, response);
                 }else{
                     for(int i = 0; i<listaReceitas.size(); i++){
                         for(int j = 0; j<listMed.size();j++){
-                            MedicamentosFacade.buscarMedicamentoReceita(listMed.get(j).getId(), listaReceitas.get(i).getId());
+                            boolean medRec = MedicamentosFacade.buscarMedicamentoReceita(listMed.get(j).getId(), listaReceitas.get(i).getId());
+                            if(!medRec){
+                                //medicamento nao consta na receita
+                                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
+                                requestDispatcher.forward(request, response);
+                            }
                         }
                     }
                     //verifica medicamentos_receitas
                 }
+               int idPac = DispensasFacade.inserir(dispensa);
+                dispensa.setId(idPac);
+                
+                for(int i=0; i<listaMedicamento.length; i++){
+                    DispensasFacade.inserirDispensaMedicamento(dispensa.getId(), listMed.get(i).getId(), Integer.parseInt(quantidadeMed[i]));
+                    //inserir dispensas_medicamentos e subtrair lote
+                }
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
+                requestDispatcher.forward(request, response);
 
 //verificar receita. data de vencimento, medicamentos e retirante e paciente
                 
