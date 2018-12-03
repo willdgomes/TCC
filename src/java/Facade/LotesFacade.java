@@ -28,6 +28,10 @@ public class LotesFacade {
         return loteDAO.buscarLotePorNumero(numeroLote);
     }
     
+    public static List<Lote> pegarLotePorVencimento(){
+        return loteDAO.listarLotesPorVencimento();
+    }
+    
     public static Integer buscarQuantidade(String idMed){
         return loteDAO.buscarQuantidadePorMedicamento(idMed);
     }
