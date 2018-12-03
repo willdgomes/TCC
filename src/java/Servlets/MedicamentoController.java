@@ -67,11 +67,12 @@ public class MedicamentoController extends HttpServlet {
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
         } else {
-            Usuario usuarioSession = new Usuario();
-            session = request.getSession();
-            session.setAttribute("usuario", usuarioSession);
+             Usuario usuario = (Usuario)session.getAttribute("usuario");
+             session = request.getSession();
+             session.setAttribute("usuario", usuario);
             session.setMaxInactiveInterval(20 * 60);
-            
+            if(usuario.getPerfil().equalsIgnoreCase("Administrador"))
+                request.setAttribute("perfil",true);
             if (action.equals("carregarCadastro")) {
                 request.setAttribute("successAlert", new Gson().toJson("false"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarMedicamento.jsp");
