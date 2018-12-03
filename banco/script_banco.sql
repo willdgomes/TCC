@@ -33,7 +33,7 @@ CREATE TABLE `lote` (
   PRIMARY KEY (`lote`),
   KEY `idMedicamento` (`idMedicamento`),
   CONSTRAINT `lote_ibfk_1` FOREIGN KEY (`idMedicamento`) REFERENCES `medicamentos` (`idMedicamento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
 CREATE TABLE `medicamentos` (
   `idMedicamento` int(11) NOT NULL AUTO_INCREMENT,
@@ -77,8 +77,9 @@ CREATE TABLE `receitas` (
   `nomeMedico` varchar(255) NOT NULL,
   `CRM` varchar(45) NOT NULL,
   `validadeReceita` date NOT NULL,
-  PRIMARY KEY (`idReceita`)
-  CONSTRAINT `FK_Paciente` FOREIGN KEY (`idPaciente`) REFERENCES `paciente` (`idPaciente`)
+  `idPaciente` int(11) NOT NULL,
+  PRIMARY KEY (`idReceita`),
+  FOREIGN KEY (`idPaciente`) REFERENCES `pacientes` (`idPaciente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
 CREATE TABLE `retirantes` (
