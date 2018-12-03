@@ -141,7 +141,7 @@ public class LoteDAO {
             con = ConnectionFactory.getConnection();
             stmt = con.prepareStatement(stmtLoteVencendoDispensa);
             stmt.setInt(1, idMedicamento);
-            stmt.setInt(1, qtde);
+            stmt.setInt(2, qtde);
             rs = stmt.executeQuery();
             if (rs.next()) {
                 lote.setId(Integer.parseInt(rs.getString("lote")));

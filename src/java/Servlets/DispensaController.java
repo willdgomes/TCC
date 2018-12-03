@@ -74,7 +74,7 @@ public class DispensaController extends HttpServlet {
                 Retirante retirante = new Retirante();
                 retirante = RetirantesFacade.buscarRetirantePorCpf(cpfRetirante);
                 if(!RetirantesFacade.buscarRetirantePaciente(idPaciente, retirante.getIdRetirante())){
-                    // retirante nao bate com paciente
+                    request.setAttribute("msg", "Este retirante não está autorizado.");
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
                     requestDispatcher.forward(request, response);
                 }
@@ -96,7 +96,7 @@ public class DispensaController extends HttpServlet {
                 }
                 
                 if(listaReceitas.size()<1){
-                    //nao ha receitas cadastradas ou validas
+                    request.setAttribute("msg", "Não há receitas cadastradas ou válidas.");
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
                     requestDispatcher.forward(request, response);
                 }else{
@@ -104,7 +104,7 @@ public class DispensaController extends HttpServlet {
                         for(int j = 0; j<listMed.size();j++){
                             boolean medRec = MedicamentosFacade.buscarMedicamentoReceita(listMed.get(j).getId(), listaReceitas.get(i).getId());
                             if(!medRec){
-                                //medicamento nao consta na receita
+                                request.setAttribute("msg", "Medicamento não consta na receita.");
                                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
                                 requestDispatcher.forward(request, response);
                             }
@@ -126,11 +126,10 @@ public class DispensaController extends HttpServlet {
                         lote.setQtde(lote.getQtde()-qtdeMed);
                         LotesFacade.atualizarLote(lote);
                     }else{
-                        //quantidade insuficiente em estoque
+                        request.setAttribute("msg", "Quantidade insuficiente no estoque.");
                         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
                         requestDispatcher.forward(request, response);
                     }
-                    //inserir dispensas_medicamentos e subtrair lote
                 }
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
                 requestDispatcher.forward(request, response);
