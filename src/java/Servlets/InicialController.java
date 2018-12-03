@@ -59,7 +59,8 @@ public class InicialController extends HttpServlet {
             
             LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou a tela inicial"));
             //CARREGA TABELA
-
+               List medicamentosVenc = LotesFacade.buscarLotesProxVencimento();
+                   request.setAttribute("medicamentosVenc",medicamentosVenc);
             //CARREGA GRAFICO
             List<Medicamento> medicamentos = MedicamentosFacade.listarMedicamentos();
             List<String> quantidade = new ArrayList<String>();

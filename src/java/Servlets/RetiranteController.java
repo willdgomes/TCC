@@ -64,69 +64,72 @@ public class RetiranteController extends HttpServlet {
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
         } else {
-
-            Usuario usuario = (Usuario)session.getAttribute("usuario");
-            if(usuario.getPerfil().equalsIgnoreCase("Administrador"))
-                request.setAttribute("perfil",true);
+            session = request.getSession();
+            Usuario usuario = (Usuario) session.getAttribute("usuario");
+            if (usuario.getPerfil().equalsIgnoreCase("Administrador")) {
+                request.setAttribute("perfil", true);
+            }
             session.setAttribute("usuario", usuario);
             session.setMaxInactiveInterval(20 * 60);
-            
+
             if (action.equals("carregarCadastro")) {
-                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou o cadastro de retirantes"));
+                LogFacade.inserir(new Log(usuario.getIdUsuario(), "Usuário acessou o cadastro de retirantes"));
                 request.setAttribute("successAlert", new Gson().toJson("false"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarRetirante.jsp");
                 rd.forward(request, response);
             } else if (action.equals("carregarGerenciamento")) {
-                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou o gerenciamento de retirantes"));
+                LogFacade.inserir(new Log(usuario.getIdUsuario(), "Usuário acessou o gerenciamento de retirantes"));
                 request.setAttribute("successAlert", new Gson().toJson("false"));
                 request.setAttribute("errorAlert", new Gson().toJson("false"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/gerenciarRetirantes.jsp");
                 rd.forward(request, response);
+            } else if (action.equals("carregarCadastro")) {
+                request.setAttribute("successAlert", new Gson().toJson("false"));
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarRetirante.jsp");
+                rd.forward(request, response);
             } else if (action.equals("cadastrarRetirante")) {
-                RetirantesFacade.cadastrarRetirante(criaRetirante(request));
-                if (action.equals("carregarCadastro")) {
-                    request.setAttribute("successAlert", new Gson().toJson("false"));
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarRetirante.jsp");
-                    rd.forward(request, response);
-                } else if (action.equals("cadastrarRetirante")) {
-                    Retirante r = new Retirante();
-                    r = criaRetirante(request);
-                    RetirantesFacade.cadastrarRetirante(r);
-                    r = RetirantesFacade.buscarRetirantePorCpf(r.getCpfRetirante());
-                    String idPaciente = request.getParameter("paciente");
-                    RetirantesFacade.inserirRetirantePaciente(idPaciente, r.getIdRetirante());
-                    atualizarRetirantesLista(request);
-                    request.setAttribute("successAlert", new Gson().toJson("true"));
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/cadastrarRetirante.jsp");
-                    requestDispatcher.forward(request, response);
+                Retirante r = new Retirante();
+                r = criaRetirante(request);
+                RetirantesFacade.cadastrarRetirante(r);
+                r = RetirantesFacade.buscarRetirantePorCpf(r.getCpfRetirante());
+                String idPaciente = request.getParameter("paciente");
+                RetirantesFacade.inserirRetirantePaciente(idPaciente, r.getIdRetirante());
+                atualizarRetirantesLista(request);
+                request.setAttribute("successAlert", new Gson().toJson("true"));
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/cadastrarRetirante.jsp");
+                requestDispatcher.forward(request, response);
 
-                } else if (action.equals("pesquisarRetirante")) {
-                    String pesquisa = request.getParameter("pesquisa");
-                    List<Retirante> retiranteList = RetirantesFacade.buscarRetirantesNome(pesquisa);
-                    if (retiranteList.size() == 0) {
-                        request.setAttribute("errorAlert", new Gson().toJson("true"));
-                    } else {
-                        request.setAttribute("errorAlert", new Gson().toJson("false"));
-                    }
-                    request.setAttribute("retirantes", retiranteList);
-                    request.setAttribute("successAlert", new Gson().toJson("false"));
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarRetirantes.jsp");
-                    requestDispatcher.forward(request, response);
-
-                } else if (action.equals("editar")) {
-                    String id = request.getParameter("idRetirante");
-                    Retirante retirante = RetirantesFacade.buscarRetirantePorId(id);
-                    request.setAttribute("retirante", retirante);
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/editarRetirante.jsp");
-                    requestDispatcher.forward(request, response);
-                } else if (action.equals("editarRetirante")) {
-                    RetirantesFacade.alterarRetirante(criaRetirante(request));
-                    atualizarRetirantesLista(request);
-                    request.setAttribute("successAlert", new Gson().toJson("true"));
+            } else if (action.equals("pesquisarRetirante")) {
+                String pesquisa = request.getParameter("pesquisa");
+                List<Retirante> retiranteList = RetirantesFacade.buscarRetirantesNome(pesquisa);
+                if (retiranteList.size() == 0) {
+                    request.setAttribute("errorAlert", new Gson().toJson("true"));
+                } else {
                     request.setAttribute("errorAlert", new Gson().toJson("false"));
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarRetirantes.jsp");
-                    requestDispatcher.forward(request, response);
                 }
+                request.setAttribute("retirantes", retiranteList);
+                request.setAttribute("successAlert", new Gson().toJson("false"));
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarRetirantes.jsp");
+                requestDispatcher.forward(request, response);
+
+            } else if (action.equals("editar")) {
+                String id = request.getParameter("idRetirante");
+                Retirante retirante = RetirantesFacade.buscarRetirantePorId(id);
+              //  request.setAttribute("retiranteJson", new Gson().toJson(retirante.getPaciente().getId().toString()));
+                request.setAttribute("retiranteJson", new Gson().toJson(retirante.getVincolo()));
+                request.setAttribute("retirante", retirante);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/editarRetirante.jsp");
+                requestDispatcher.forward(request, response);
+            } else if (action.equals("editarRetirante")) {
+                Retirante retirante = criaRetirante(request);
+                String idPaciente = request.getParameter("paciente");
+                RetirantesFacade.inserirRetirantePaciente(idPaciente, retirante.getIdRetirante());
+                RetirantesFacade.alterarRetirante(retirante);
+                atualizarRetirantesLista(request);
+                request.setAttribute("successAlert", new Gson().toJson("true"));
+                request.setAttribute("errorAlert", new Gson().toJson("false"));
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gerenciarRetirantes.jsp");
+                requestDispatcher.forward(request, response);
             }
         }
     }

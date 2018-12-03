@@ -54,8 +54,8 @@ public class RelatorioController extends HttpServlet {
         String action = request.getParameter("action");
         HttpSession session = request.getSession(false);
         if (session.getAttribute("usuario") == null) {
-            session.invalidate();
             LogFacade.inserir(new Log("Sessão do usuário expirada"));
+            session.invalidate();
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
         } else {
@@ -95,7 +95,7 @@ public class RelatorioController extends HttpServlet {
                 relContext.setAttribute("quantidadeJson", new Gson().toJson(tdQuantidade.toArray()));
                 relContext.setAttribute("nomeMedJson", new Gson().toJson(nomeMed.toArray()));
                 relContext.setAttribute("periodoJson", new Gson().toJson(periodo.toArray()));
-                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário consultou relatório de saída de medicamentos"));
+                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou relatório de saída de medicamentos"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/relatorioEstoque.jsp");
                 rd.forward(request, response);
             } else if (action.equals("carregarListaAtividades")) {

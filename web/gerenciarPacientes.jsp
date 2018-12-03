@@ -17,7 +17,9 @@
                 <div class="panel panel-default col-sm pt-4">
                     <div class="panel-heading">
                         <h2 align="center">Gerenciamento de pacientes</h2>
+                        <div class="col-sm-12 m-3">
                         <a href="PacienteController?action=carregarCadastro" class="align-right"><i class="material-icons">person_add</i> <span class="align-top pl-2">Pacientes</span></a>
+                        </div>
                     </div>
                     <div class="panel-body m-3">
                         <div class="col-sm-12">
@@ -60,8 +62,8 @@
                                             <form action="PacienteController?action=editar" method="POST">
                                                 <tr>
                                                     <td scope="col">${paciente.nome}</td>
-                                                    <td scope="col" id="cpfpaciente">${paciente.cpf}</td>
-                                                    <td scope="col">${paciente.dataNascimento}</td>
+                                                    <td scope="col" id="cpfpaciente" onloadeddata="mascara()" >${paciente.cpf}</td>
+                                                    <td scope="col">${paciente.dn}</td>
                                                     <td scope="col"><button type="submit" name="editar" class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
                                                 <input type="hidden" value="${paciente.id}" required name="idPaciente">
                                                 </tr>
@@ -75,7 +77,7 @@
                     </div>
                 </div>
             </div>
-            <script>
+            <script>              
                 $(document).ready(function () {
                     var successAlert = JSON.parse(${successAlert});
                     var errorAlert = JSON.parse(${errorAlert});

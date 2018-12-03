@@ -68,7 +68,7 @@
                                             <label for="parentesco" class="text-dark ">Parentesco:</label>
                                             <div class="col-md-5 row">
                                                 <div class="dropdown">
-                                                    <select id="cbRemedios" class="form-control" name="parentesco">
+                                                    <select id="cbParentesco" class="form-control" name="parentesco">
                                                         <option></option>
                                                         <option>Pai</option>
                                                         <option>Mãe</option>
@@ -134,7 +134,6 @@
     <script type="text/javascript" >
 
         $(document).ready(function () {
-
         $("#cpfretirante").mask('999.999.999-99');  
         $("#telefone").mask('(99)0 0000-0000');    
             function limpa_formulário_cep() {

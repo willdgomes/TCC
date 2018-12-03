@@ -66,8 +66,8 @@ public class PacienteController extends HttpServlet {
         String action = request.getParameter("action");
         HttpSession session = request.getSession(false);
         if (session.getAttribute("usuario") == null) {
-            session.invalidate();   
             LogFacade.inserir(new Log("Sessão do usuário expirada"));
+            session.invalidate();   
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
         } else {

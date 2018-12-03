@@ -27,9 +27,10 @@ public class LogDAO {
     PreparedStatement stmt = null;
     PreparedStatement stmt2 = null;
     ResultSet rs = null;
-    private String insereLog = "insert into log (idUsuario, mensagem, data) values (?, ?, ?)";
+    private String insereLog = "insert into log (idUsuario, mensagem, data) values (?, ?, current_date())";
+    private String insereLogSemUsuario  = "insert into log (mensagem, data) values ( ?, current_date())";
     private String buscaLog = "select log.idLog,log.idUsuario, log.mensagem, log.data, usuarios.nomeUsuario from log " +
-                                "LEFT JOIN usuarios ON log.idUsuario = usuarios.idUsuario ORDER BY log.data DESC;";
+                                "LEFT JOIN usuarios ON log.idUsuario = usuarios.idUsuario ORDER BY log.idLog DESC;";
     private String buscaLogPeriodo = "select log.idLog,log.idUsuario, log.mensagem, log.data, usuarios.nomeUsuario from log " +
                                 "LEFT JOIN usuarios ON log.idUsuario = usuarios.idUsuario where log.data >= ? and log.data <= ?";
 
@@ -42,9 +43,6 @@ public class LogDAO {
             stmt = con.prepareStatement(insereLog);
             stmt.setString(1, l.getIdusuario().toString());
             stmt.setString(2, l.getMensagem().toString());
-            long dataAtual = System.currentTimeMillis();  
-            java.sql.Date data = new java.sql.Date(dataAtual);
-            stmt.setDate(3, data);
             stmt.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao inserir log" + ex.getMessage());
@@ -62,6 +60,31 @@ public class LogDAO {
         }
     }
 
+    public void inserirLogSemUsuario(Log l) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(insereLogSemUsuario);
+            stmt.setString(1, l.getMensagem());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao inserir log" + ex.getMessage());
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+    }
+    
     public List<Log> buscarLogs() {
         Connection con = null;
         PreparedStatement stmt = null;

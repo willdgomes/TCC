@@ -48,20 +48,24 @@
                         <div class="row">
                             <div class="card border border-danger text-secondary bg-light ml-2 col">
                                 <div class="card-body pt-2">
-                                    <h5 class="card-title">Medicamentos próximo ao vencimento</h5>
+                                    <div class="text-center">
+                                    <h5 class="card-title">Próximos medicamentos a vencer</h5>
+                                </div>
                                     <table class="table table-responsive-sm">
                                         <thead>
                                             <tr>                                                    
                                                 <th scope="col">Medicamento</th>
+                                                <th scope="col">Lote</th>
                                                 <th scope="col">Data</th>
                                             </tr>
                                         </thead>
                                         <tbody> 
-                                            <c:forEach items="${vencimentos}" var="medicamento">
+                                            <c:forEach items="${medicamentosVenc}" var="item">
                                             <form action="PacienteController?action=editar" method="POST">
                                                 <tr>
-                                                    <td scope="col">${medicamento.nome} ${medicamento.dosagem}</td>
-                                                    <td scope="col" id="cpfpaciente">${medicamento.dnVencimento}</td>
+                                                    <td scope="col">${item.medicamento.nome} ${item.medicamento.dosagem}</td>
+                                                    <td scope="col">${item.id}</td>
+                                                    <td scope="col">${item.dataVencimento}</td>
                                                 </tr>
                                             </form>
                                         </c:forEach>

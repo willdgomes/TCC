@@ -7,6 +7,7 @@ package DAO;
 
 import Beans.Paciente;
 import Beans.Retirante;
+import Facade.PacientesFacade;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,6 +34,7 @@ public class RetiranteDAO {
     private final String stmtBuscarRetiranteCpf = "SELECT idRetirante, cpfRetirante, nomeRetirante, dnRetirante, telefone, cep, cidade, estado, bairro, endereco, numEndereco, complemento, email, vincolo FROM retirantes WHERE cpfRetirante = ?";
     private final String stmtInserirRetirantePaciente = "INSERT INTO retirantes_pacientes (idPaciente, idRetirante) VALUES(?, ?)";
     private final String stmtBuscarRetirantePaciente = "SELECT idPaciente, idRetirante FROM retirantes_pacientes WHERE idPaciente = ? AND idRetirante = ?";
+    private final String stmtBuscarPacienteId ="SELECT idPaciente FROM retirantes_pacientes WHERE idRetirante = ?";
     
     public void inserirRetirante(Retirante retirante) {
         Connection con = null;
@@ -181,6 +183,8 @@ public class RetiranteDAO {
                 retirante.setCep(rs.getString("cep"));
                 retirante.setCidade(rs.getString("cidade"));
                 retirante.setEmail(rs.getString("estado"));
+                Integer idPaciente = getPacientePorIdRetirante(retirante.getIdRetirante());
+                retirante.setPaciente(PacientesFacade.buscarId(idPaciente.toString()));
                 listaRetirantes.add(retirante);
             }
             return listaRetirantes;
@@ -244,6 +248,8 @@ public class RetiranteDAO {
             }
             retirante.setDnRetirante(dt2);
             }
+            Integer idPaciente = getPacientePorIdRetirante(retirante.getIdRetirante());
+            retirante.setPaciente(PacientesFacade.buscarId(idPaciente.toString()));
             return retirante;
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao listar os retirantes no banco de dados. Origem=" + ex.getMessage());
@@ -398,5 +404,41 @@ public class RetiranteDAO {
                 System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
             };
         }
+    }
+    
+    public Integer getPacientePorIdRetirante(Integer id){
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtBuscarPacienteId);
+            stmt.setString(1, id.toString());
+            rs = stmt.executeQuery();
+            Integer idPaciente = 0;
+            if (rs.next()) {
+                idPaciente = Integer.parseInt(rs.getString("idPaciente"));
+            }
+            return idPaciente;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar retirante no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
+            };
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+        
     }
 }

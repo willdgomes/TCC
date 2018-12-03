@@ -32,7 +32,7 @@ public class MedicamentosFacade {
         return medDAO.buscarMedicamentoNomeInsere(nomeMedicamento);
     }
     
-    public Medicamento pegarMedicamentoPorId(int idMedicamento){
+    public static Medicamento pegarMedicamentoPorId(int idMedicamento){
         return medDAO.buscarMedicamentoId(idMedicamento);
     }
     

@@ -128,6 +128,8 @@ public class PacienteDAO {
                try{
                  dt = format.parse(stringData);
                  dt2 = new java.sql.Date(dt.getTime());
+                format = new SimpleDateFormat("dd/MM/yyyy");
+                  p.setDn(format.format(dt2));                 
                }
                catch(Exception ex){
                  System.out.println("Erro na data");

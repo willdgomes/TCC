@@ -43,7 +43,7 @@
 
                                    <ul class='nav flex-column'>
                                    <li class='nav-item'>
-                                   <a class='nav-link' href='#'>minha conta</a>
+                                   <a class='nav-link' href='UsuarioController?action=editar'>minha conta</a>
                                    </li>
                                    </ul>
 

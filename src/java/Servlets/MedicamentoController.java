@@ -62,8 +62,8 @@ public class MedicamentoController extends HttpServlet {
         HttpSession session = request.getSession();
         String action = request.getParameter("action");
         if (session.getAttribute("usuario") == null) {
+            LogFacade.inserir(new Log("Sessão do usuário expirada"));
             session.invalidate();
-          LogFacade.inserir(new Log("Sessão do usuário expirada"));
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
         } else {

@@ -13,6 +13,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -27,6 +29,8 @@ public class LoteDAO {
     private final String stmQntdSaidaMedicamento = "SELECT SUM(d.quantidade)" +
             "FROM farmacia.dispensas as d INNER JOIN farmacia.dispensas_medicamentos as dm" +
             "ON d.idDispensa=dm.idDispensa where dm.idMedicamento = ?";
+    private final String stmtBuscarLoteVenc = "SELECT lote, idMedicamento, quantidade, dataVencimento " +
+            "FROM lote ORDER BY dataVencimento LIMIT 3";
     
     public void inserirLote(Lote lote) {
         Connection con = null;
@@ -158,5 +162,46 @@ public class LoteDAO {
                 System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
             };
         }
+    }
+    
+    public List<Lote> lotesProxVenc(){
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtBuscarLoteVenc);
+            rs = stmt.executeQuery();
+            List<Lote> loteLista = new ArrayList<Lote>();
+            while (rs.next()) {
+                Lote lote = new Lote();
+                Medicamento medicamento = new Medicamento();
+                medicamento = MedicamentosFacade.pegarMedicamentoPorId(rs.getInt("idMedicamento"));
+                lote.setId(Integer.parseInt(rs.getString("lote")));
+                lote.setMedicamento(medicamento);
+                lote.setQtde(rs.getInt("quantidade"));
+                lote.setDataVencimento(rs.getDate("dataVencimento"));
+                loteLista.add(lote);
+            }
+            return loteLista;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar lote no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
+            };
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }   
     }
 }

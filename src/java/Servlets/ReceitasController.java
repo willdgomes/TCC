@@ -5,10 +5,12 @@
  */
 package Servlets;
 
+import Beans.Log;
 import Beans.Medicamento;
 import Beans.Paciente;
 import Beans.Receita;
 import Beans.Usuario;
+import Facade.LogFacade;
 import Facade.MedicamentosFacade;
 import Facade.PacientesFacade;
 import Facade.ReceitasFacade;
@@ -52,11 +54,14 @@ public class ReceitasController extends HttpServlet {
         HttpSession session = request.getSession();
         String action = request.getParameter("action");
         if (session.getAttribute("usuario") == null) {
+            LogFacade.inserir(new Log("Sessão do usuário expirada"));
             session.invalidate();
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
         } else {
            session = request.getSession();
+           session.setMaxInactiveInterval(20 * 60);
+           LogFacade.inserir(new Log("Sessão do usuário expirada"));
             Usuario usuario = (Usuario)session.getAttribute("usuario");
             if(usuario.getPerfil().equalsIgnoreCase("Administrador"))
                 request.setAttribute("perfil",true);

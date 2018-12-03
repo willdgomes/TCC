@@ -2,9 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Medicamento.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/nbproject/private/private.properties</file>
@@ -32,6 +29,7 @@
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/InicialController.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/home.jsp</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/MedicamentoDAO.java</file>
+            <file>file:/C:/Users/Eu/Documents/TCC/web/pesquisaPacienteDispensa.jsp</file>
             <file>file:/C:/Users/Eu/Documents/TCC/nbproject/project.xml</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Retirante.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/editarMedicamento.jsp</file>
@@ -53,6 +51,7 @@
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Facade/MedicamentosFacade.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Facade/UsuariosFacade.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/UsuarioDAO.java</file>
+            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/UsuarioController.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Paciente.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/web/relatorioEstoque.jsp</file>
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/RelatorioController.java</file>
@@ -66,6 +65,5 @@
             <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/LogDAO.java</file>
             <file>file:/C:/Users/Eu/Documents/TCC/nbproject/ant-deploy.xml</file>
         </group>
->>>>>>> 96d95a4107be6d4d3ac77a2e0ae23726053db5a3
     </open-files>
 </project-private>

@@ -18,50 +18,52 @@
                     <div class="panel-body pt-3">
                         <div class="col-sm-12">
                             <c:forEach items="${usuario}" var="usuario">
-                            <form action="UsuarioController?action=editarUsuario" method="POST" class="card border-info">
-                                <input type="hidden" value="${usuario.idUsuario}" required name="idUsuario">
-                                <div class="card-body p-5">
-                                    <div class="form-row">
-                                        <div class="form-group col">
-                                            <label for="nome" class="text-dark">Nome:</label>
-                                            <input type="text" class="form-control" value="${usuario.nome}" id="nomeusuario" required name="nome">
+                                <form action="UsuarioController?action=editarUsuario" method="POST" class="card border-info">
+                                    <input type="hidden" value="${usuario.idUsuario}" required name="idUsuario">
+                                    <div class="card-body p-5">
+                                        <div class="form-row">
+                                            <div class="form-group col">
+                                                <label for="nome" class="text-dark">Nome:</label>
+                                                <input type="text" class="form-control" value="${usuario.nome}" id="nomeusuario" required name="nome">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-4" >
-                                            <label for="usuario" class="text-dark">Login</label>
-                                            <input type="text" class="form-control" id="loginUsuario" value="${usuario.login}" required name="login">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-4" >
+                                                <label for="usuario" class="text-dark">Login</label>
+                                                <input type="text" class="form-control" id="loginUsuario" value="${usuario.login}" required name="login">
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="dtnasc" class="text-dark">Data de nascimento:</label>
+                                                <input type="date" class="form-control" id="dtnascUsuario" value="${usuario.dataNascimento}" required name="dataNascimento">
+                                            </div>
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="dtnasc" class="text-dark">Data de nascimento:</label>
-                                            <input type="date" class="form-control" id="dtnascUsuario" value="${usuario.dataNascimento}" required name="dataNascimento">
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-8">
-                                            <label for="email" class="text-dark">E-mail:</label>
-                                            <input type="text" class="form-control" id="emailUsuario" value="${usuario.email}" name="email">
-                                        </div>
-                                    </div>                                    
-                                    <div class="form-row">
-                                        <div class="form-group col-md-5">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-8">
+                                                <label for="email" class="text-dark">E-mail:</label>
+                                                <input type="text" class="form-control" id="emailUsuario" value="${usuario.email}" name="email">
+                                            </div>
+                                        </div>                                    
+                                        
+                                            <div class="form-row">
+                                                <div class="form-group col-md-5">
                                             <label for="perfil" class="text-dark">Perfil:</label>
-                                           <select id="cbPerfil" class="form-control" required name="perfilUsuario">
-                                                   <option></option>
+                                                    <select id="cbPerfil" class="form-control" required name="perfilUsuario">
+                                                        <option></option>
                                                         <option>Administrador</option>
                                                         <option>Usuário padrão</option>                                                        
-                                            </select>
-                                        </div>
-                                    </div>                                    
-                                    <div class="form-row">
-                                        <div class="col-md-1 offset-md-11" >
-                                            <button type="submit" class="btn btn-primary">Salvar</button
+                                                    </select>
+                                                </div>
+                                            </div>                                    
+                                        
+                                        <div class="form-row">
+                                            <div class="col-md-1 offset-md-11" >
+                                                <button type="submit" class="btn btn-primary">Salvar</button
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
                         </div>
-                            </c:forEach>
+                        </c:forEach>
                     </div>
                 </div>
             </div>

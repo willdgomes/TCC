@@ -18,7 +18,10 @@ public class LogFacade {
     private static final LogDAO logDAO = new LogDAO();
     
     public static void inserir(Log log) {
-        logDAO.inserirLog(log);
+        if(log.getIdusuario()== null)
+            logDAO.inserirLogSemUsuario(log);
+        else
+            logDAO.inserirLog(log);
     }
     
     public static List<Log> buscarLog() {

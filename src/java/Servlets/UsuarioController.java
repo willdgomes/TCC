@@ -47,9 +47,9 @@ public class UsuarioController extends HttpServlet {
         HttpSession session = request.getSession();
         String action = request.getParameter("action");
         if (session == null) {
+            LogFacade.inserir(new Log("Sessão do usuário expirada"));
             RequestDispatcher rd = request.
             getRequestDispatcher("/index.html");
-            LogFacade.inserir(new Log("Sessão do usuário expirada"));
             request.setAttribute("msg", "Usuário deve se autenticar para acessar o sistema!");
             rd.forward(request, response);
         } else {
@@ -85,6 +85,8 @@ public class UsuarioController extends HttpServlet {
                 rd.forward(request, response);
             } else if (action.equals("editar")) {
                 String id = request.getParameter("idUsuario");
+                if(id == null)
+                    id = usuario.getIdUsuario().toString();
                 Usuario usuarioEditar = UsuariosFacade.buscarUsuarioPorId(id);
                 LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou a página de edição do usuário "+usuarioEditar.getNome()));
                 request.setAttribute("usuario", usuarioEditar);

@@ -25,7 +25,16 @@ public class Paciente {
     private String numEndereco;
     private String complemento;
     private String email;
+    private String dn;
     private Integer id;
+
+    public String getDn() {
+        return dn;
+    }
+
+    public void setDn(String dn) {
+        this.dn = dn;
+    }
     
 //    public Paciente(String nome, String cpf, String dataNascimento, String cep, String cidade, String estado, String bairro, String endereco, String numEndereco) {
 //        this.nome = nome;

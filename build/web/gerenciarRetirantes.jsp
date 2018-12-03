@@ -15,7 +15,9 @@
                 <div class="panel panel-default col-sm pt-4">
                     <div class="panel-heading">
                         <h2 align="center">Gerenciamento de retirantes</h2>
+                        <div class="col-sm-12 m-3">
                         <a class="nav-link" href="RetiranteController?action=carregarCadastro"><i class="material-icons">group_add</i> <span class="align-top">Retirantes</span></a>
+                        </div>
                     </div>
                     <div class="panel-body m-3">
                         <div class="col-sm-12">
@@ -59,7 +61,7 @@
                                                 <tr>
                                                     <td scope="col">${retirante.nomeRetirante}</td>
                                                     <td scope="col">${retirante.cpfRetirante}</td>
-                                                    <td scope="col">${retirante.paciente}</td>
+                                                    <td scope="col">${retirante.paciente.nome}</td>
                                                     <td scope="col"><button type="submit" name="editar" class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
                                                 <input type="hidden" value="${retirante.idRetirante}" name="idRetirante">
                                                 </tr>
