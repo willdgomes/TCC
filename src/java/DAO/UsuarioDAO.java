@@ -32,7 +32,7 @@ public class UsuarioDAO {
     private String stmtBuscaTodosUsuario = "select idUsuario, nomeUsuario, emailUsuario, login,"
             + "perfil, dataNascimento from usuarios"; 
     private String insereUsuario = "insert into usuarios (nomeUsuario, emailUsuario, login, senha, perfil, dataNascimento) values (?, ?, ?, ?, ?, ?)";
-    private String atualizarUsuario = "UPDATE usuarios SET nomeUsuario = ?, emailUsuario = ?, login = ?, perfil = ?, dataNascimento = ? WHERE idUsuario = ?";
+    private String atualizarUsuario = "UPDATE usuarios SET nomeUsuario = ?, emailUsuario = ?, login = ?, perfil = ?, dataNascimento = ?, senha = ? WHERE idUsuario = ?";
     private String deletarUsuario = "delete from usuario where idUsuario = ?";
     private String stmtBuscaUsuarioId = "select idUsuario, nomeUsuario, emailUsuario, login,"
             + "perfil, dataNascimento from usuarios where idUsuario = ?";
@@ -120,7 +120,8 @@ public class UsuarioDAO {
             stmt.setString(3, u.getLogin());
             stmt.setString(4, u.getPerfil());
             stmt.setDate(5, (Date) u.getDataNascimento());
-            stmt.setString(6, u.getIdUsuario().toString());
+            stmt.setString(6, u.getSenha());
+            stmt.setString(7, u.getIdUsuario().toString());
             stmt.executeUpdate();   
         }
         catch (SQLException ex) {
