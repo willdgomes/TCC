@@ -94,7 +94,22 @@ public class UsuarioController extends HttpServlet {
                 request.setAttribute("usuario", usuarioEditar);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/editarUsuario.jsp");
                 requestDispatcher.forward(request, response);
-            } else if (action.equals("carregarCadastro")) {
+            } else if (action.equals("alterarSenha")) {
+                String senha = request.getParameter("novaSenha");
+                String confirmaSenha = request.getParameter("confirmaNovaSenha");
+                if(!senha.equals(confirmaSenha)){
+                    //senha nao confere
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/alteraSenhaUsuario.jsp");
+                    rd.forward(request, response);
+                }else{
+                    usuario.setSenha(senha);
+                    UsuariosFacade.alterar(usuario);
+                    LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário alterou a própria senha"));
+                    request.setAttribute("successAlert", new Gson().toJson("false"));
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/alteraSenhaUsuario.jsp");
+                    rd.forward(request, response);
+                }
+            }else if (action.equals("carregarCadastro")) {
                 LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou o cadastro de usuários"));
                 request.setAttribute("successAlert", new Gson().toJson("false"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/cadastrarUsuario.jsp");
