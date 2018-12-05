@@ -8,6 +8,9 @@
     import Beans.Log;
     import Beans.Medicamento;
     import Beans.Usuario;
+    import Beans.Dispensa;
+    import Beans.Lote;
+    import Facade.DispensasFacade;
     import Facade.LogFacade;
     import Facade.LotesFacade;
     import Facade.MedicamentosFacade;
@@ -61,6 +64,17 @@
                 //CARREGA TABELA
                    List medicamentosVenc = LotesFacade.buscarLotesProxVencimento();
                        request.setAttribute("medicamentosVenc",medicamentosVenc);
+                //CARREGAA ULTIMAS SAIDAS
+                
+                List<Dispensa> dispensa = DispensasFacade.buscaDispensa();
+                
+                for (Dispensa dis : dispensa) {
+                    Medicamento med = MedicamentosFacade.pegarMedicamentoPorId(DispensasFacade.medicamentoPorDispensa(dis.getId()));
+                    dis.setMedicameto(med);
+                    Lote l = LotesFacade.pegarLotePorVencimento(med.getId(),0);
+                    dis.setLote(l);
+                }
+                      request.setAttribute("saidas",dispensa);
                 //CARREGA GRAFICO
                 List<Medicamento> medicamentos = MedicamentosFacade.listarMedicamentos();
                 List<String> quantidade = new ArrayList<String>();

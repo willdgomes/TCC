@@ -14,6 +14,7 @@ import Facade.LogFacade;
 import Facade.MedicamentosFacade;
 import Facade.PacientesFacade;
 import Facade.ReceitasFacade;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -98,6 +99,13 @@ public class ReceitasController extends HttpServlet {
                     listMed.add(MedicamentosFacade.pegarMedicamentoPorNome(listaMedicamento[i]));
                     ReceitasFacade.inserirMedicamentosReceitas(listMed.get(i).getId(), receita.getId());
                 }
+                request.setAttribute("successAlert", new Gson().toJson("true"));
+                RequestDispatcher rd = null;
+                rd = getServletContext().getRequestDispatcher("/cadastrarReceita.jsp");
+                rd.include(request, response);
+            }
+            else if(action.equals("carregarCadastrarReceita")){
+                request.setAttribute("successAlert", new Gson().toJson("false"));
                 RequestDispatcher rd = null;
                 rd = getServletContext().getRequestDispatcher("/cadastrarReceita.jsp");
                 rd.include(request, response);

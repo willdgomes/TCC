@@ -22,6 +22,12 @@
                         <form action="DispensaController?action=dispensarMedicamento" method="POST">
                             <div class="col-sm-12 card border-info">
                                 <div class="card-body p-5">
+                                     <div class="form-row" id="successAlert">
+                                                <div class="alert alert-success colalert-dismissible col">
+                                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                    Dispensa realizada com sucesso!
+                                                </div>
+                                            </div>
                                     <div class="col form-row">
                                         <div class="form-group col-md-6">
                                             <label for="retirante" class="text-dark" >Paciente</label>
@@ -42,7 +48,7 @@
                                     <div colspan="5" id="errorAlert"><div class="form-row">
                                                 <div class="alert alert-danger alert-dismissible col">
                                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                                    Retirante não possui permissão para retirar medicamentos para este paciente!
+                                                    ${textoMensagem}
                                                 </div>
                                             </div>
                                     </div>
@@ -100,7 +106,7 @@
         </div>
         <script type="text/javascript" >
             $(document).ready(function () {
-               
+               var successAlert = JSON.parse(${successAlert});
                     var errorAlert = JSON.parse(${errorAlert});
                     if (errorAlert == true)
                         $("#errorAlert").show();
@@ -108,6 +114,11 @@
                         $("#errorAlert").hide();
                 });
                 
+                if (successAlert == true)
+                    $("#successAlert").show();
+                else
+                    $("#successAlert").hide();
+
             function addRow() {
                 var table = document.getElementById("tabelaReceita");
                 var medicamento = document.getElementById("cbRemedios");

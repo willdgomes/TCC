@@ -22,7 +22,8 @@ import javax.mail.internet.MimeMessage;
 public class JavaMail {
     public static void sendEmail(String emailDestinatario, String senhaDestinatario){
         Properties props = new Properties();
-            /** Parâmetros de conexão com servidor Gmail */
+ try {
+        /** Parâmetros de conexão com servidor Gmail */
             props.put("mail.smtp.host", "smtp.gmail.com");
             props.put("mail.smtp.socketFactory.port", "465");
             props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
@@ -40,7 +41,7 @@ public class JavaMail {
             /** Ativa Debug para sessão */
             session.setDebug(true);
  
-            try {
+            
  
                   Message message = new MimeMessage(session);
                   message.setFrom(new InternetAddress("naorespondaappp@gmail.com")); //Remetente

@@ -26,6 +26,14 @@ public class ReceitaDAO {
     private final String stmtBuscarReceitaPorPaciente = "SELECT idReceita, nomeMedico, crmMedico, validadeReceita, idPaciente FROM receitas WHERE idPaciente=?";
     private final String stmtInserirMedReceita = "INSERT INTO medicamentos_receitas (idMedicamento, idReceita) VALUES (?, ?)";
     private final String stmtBuscarReceitaPorValidade = "SELECT idReceita, nomeMedico, crmMedico, validadeReceita, idPaciente FROM receitas WHERE idPaciente=? AND validadeReceita >= (SELECT CURDATE())";
+    private final String stmtTotalReceitas = "select count(idReceita) from receitas";
+    private final String stmtMaioresNumReceitas = "select count(idReceita), idPaciente from receitas group by idPaciente order by count(idReceita) desc limit 5";
+      private final String stmtBuscaQuantidadeMes = "SELECT SUM(dispensas_medicamentos.quantidade) " +
+"FROM dispensas_medicamentos " +
+"INNER JOIN dispensas " +
+"ON dispensas.idDispensa = dispensas_medicamentos.idDispensa " +
+"WHERE MONTH(dispensas.dataDispensa) = ? " ;
+  
     
     public void inserirReceita(Receita receita) {
         Connection con = null;
@@ -164,5 +172,82 @@ public class ReceitaDAO {
                 System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
             };
         }
+    }
+    
+    public Integer buscaTotalReceita (){
+        
+                Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Integer totalReceitas = 0;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtTotalReceitas);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                totalReceitas = Integer.parseInt(rs.getString("count(idReceita)"));
+                
+            }
+            return totalReceitas;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar total receita no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
+            };
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+    }
+    
+    public List<Receita> buscarMaiorNumReceitas() {
+        Connection con = null;
+        Paciente paciente = new Paciente();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Receita receita = new Receita();
+        List<Receita> listaReceitas = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtMaioresNumReceitas);
+            rs = stmt.executeQuery();
+            listaReceitas = new ArrayList<Receita>();
+            while (rs.next()) {
+                receita.setId(Integer.parseInt(rs.getString("count(idReceita)")));
+                paciente = PacientesFacade.buscarId(rs.getString("idPaciente"));
+                receita.setPaciente(paciente);
+                listaReceitas.add(receita);
+            }
+            return listaReceitas;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar maior número de receita no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
+            };
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+
     }
 }

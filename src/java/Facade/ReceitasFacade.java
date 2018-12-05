@@ -33,4 +33,13 @@ public class ReceitasFacade {
     public static List<Receita> buscarReceitaValidaPorPaciente(Integer idPaciente){
         return receitaDAO.buscarReceitaValidaPorPaciente(idPaciente);
     }
+    
+    public static Integer buscaTotalReceita(){
+        return receitaDAO.buscaTotalReceita();
+    }
+    
+    public static List<Receita> buscarMaiorNumReceitas(){
+        return receitaDAO.buscarMaiorNumReceitas();
+    }
+    
 }

@@ -11,6 +11,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -22,7 +25,18 @@ public class DispensaDAO {
     private final String stmtPegaUltimoRegistro = "SELECT LAST_INSERT_ID()";
     private final String stmtInserirDispMed = "INSERT INTO dispensas_medicamentos (idDispensa, idMedicamento, quantidade)"
             + "VALUES (?, ?, ?)";
-    
+    private final String stmtBuscaQntdMedMes = "SELECT SUM(dispensas_medicamentos.quantidade) " +
+"FROM dispensas_medicamentos " +
+"INNER JOIN dispensas " +
+"ON dispensas.idDispensa = dispensas_medicamentos.idDispensa " +
+"WHERE MONTH(dispensas.dataDispensa) = ? " +
+"AND dispensas_medicamentos.idMedicamento = ?";
+  
+    private final String stmtBuscaTotalSaida = "SELECT SUM(dispensas_medicamentos.quantidade) " +
+"FROM dispensas_medicamentos " +
+"WHERE dispensas_medicamentos.idMedicamento = ? ";
+    private final String stmtBuscaDispensa="SELECT * FROM farmacia.dispensas order by dataDispensa asc";
+    private final String stmtBuscaMedPorDispensa="select idMedicamento from farmacia.dispensas_medicamentos where idDispensa = ? ";
     
     public Integer inserirDispensa(Dispensa dispensa) {
         Connection con = null;
@@ -86,4 +100,163 @@ public class DispensaDAO {
             };
         }
     }
+    
+    public Integer buscaQntdMedMes(Integer idMedicamento, Integer mes){
+        Connection con = null;
+        PreparedStatement stmt = null;
+            ResultSet rs = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtBuscaQntdMedMes);
+            stmt.setInt(1, mes);
+            stmt.setInt(2, idMedicamento);
+            rs = stmt.executeQuery();
+            Integer qntd =0;
+            if (rs.next()) {
+                String n = rs.toString();
+                qntd = rs.getInt("SUM(dispensas_medicamentos.quantidade)");
+            }
+            return qntd;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar quantidade medicamentos por mês no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
+            };
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+     }
+    
+    public List<Dispensa> buscaDispensa(){
+        Connection con = null;
+        PreparedStatement stmt = null;
+            ResultSet rs = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtBuscaDispensa);
+            rs = stmt.executeQuery();
+            List<Dispensa> dis =  new ArrayList<Dispensa>();
+            while (rs.next()) {
+                Dispensa d = new Dispensa();
+                d.setId(rs.getInt("idDispensa"));
+                d.setId(rs.getInt("idRetirante"));
+                d.setId(rs.getInt("idPaciente"));
+                d.setId(rs.getInt("idUsuario"));
+                String stringData = rs.getString("dataDispensa");  
+                stringData = stringData.replaceAll("-", "/");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                java.util.Date dt = null;
+                java.sql.Date dt2 = null;
+               try{
+                 dt = format.parse(stringData);
+                 dt2 = new java.sql.Date(dt.getTime());                 
+               }
+               catch(Exception ex){
+                 System.out.println("Erro na data");
+               }
+                d.setDataDispensa(dt2);
+                dis.add(d);
+            }
+            return dis;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar quantidade medicamentos por mês no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
+            };
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+     }
+    public Integer buscaMedPorDispensa(Integer id){
+        Connection con = null;
+        PreparedStatement stmt = null;
+            ResultSet rs = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtBuscaMedPorDispensa);
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            Integer idMed =  0;
+            while (rs.next()) {
+               return rs.getInt("idMedicamento");  
+            }
+            return idMed;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar quantidade medicamentos por mês no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
+            };
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+     }
+    
+    public Integer buscaTotalSaidaPorMed(Integer id){
+        Connection con = null;
+        PreparedStatement stmt = null;
+            ResultSet rs = null;
+        try {
+            con = ConnectionFactory.getConnection();
+            stmt = con.prepareStatement(stmtBuscaTotalSaida);
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            Integer total =  0;
+            if (rs.next()) {
+               total = rs.getInt("SUM(dispensas_medicamentos.quantidade)");  
+            }
+            return total;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar quantidade medicamentos por mês no banco de dados. Origem=" + ex.getMessage());
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar rs. Ex=" + ex.getMessage());
+            };
+            try {
+                stmt.close();
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar stmt. Ex=" + ex.getMessage());
+            };
+            try {
+                con.close();;
+            } catch (Exception ex) {
+                System.out.println("Erro ao fechar conexão. Ex=" + ex.getMessage());
+            };
+        }
+     }
+    
 }

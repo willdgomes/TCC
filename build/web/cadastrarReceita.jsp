@@ -23,6 +23,12 @@
                             <div class="col-sm-12">
                                 <form  action="ReceitasController?action=cadastrarReceita" method="POST">
                                     <div class="card border-info p-5">
+                                        <div class="form-row" id="successAlert">
+                                                <div class="alert alert-success colalert-dismissible col">
+                                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                    Receita cadastrado com sucesso!
+                                                </div>
+                                            </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-8">
                                                 <label for="paciente" class="text-dark ">Paciente:</label>
@@ -86,13 +92,13 @@
                                                 </thead>
                                                 <tbody> 
                                                 <td colspan="2">${mensagem}</td>
-                                                    <form method="POST" name="tabela">
-                                                        <tr>
-                                                            <td scope="col"></td>
-                                                            <td scope="col"></td>
-                                                            <td scope="col"></td>
-                                                        </tr>
-                                                    </form>
+                                                <form method="POST" name="tabela">
+                                                    <tr>
+                                                        <td scope="col"></td>
+                                                        <td scope="col"></td>
+                                                        <td scope="col"></td>
+                                                    </tr>
+                                                </form>
                                                 </tbody>
                                             </table>                
                                         </div>
@@ -107,6 +113,12 @@
                 </div>
             </div>
             <script type="text/javascript" >
+                var successAlert = JSON.parse(${successAlert});
+                if (successAlert == true)
+                    $("#successAlert").show();
+                else
+                    $("#successAlert").hide();
+
                 function addRow() {
                     var table = document.getElementById("tabelaReceita");
                     var medicamento = document.getElementById("cbRemedios");
@@ -130,13 +142,13 @@
                     element2.value = quantidade.value;
                     element2.id = idLinha;
                     cell2.appendChild(element2);
-                    
-                     var cell3 = row.insertCell(2);
+
+                    var cell3 = row.insertCell(2);
                     var element3 = document.createElement("button");
                     element3.type = "delete";
                     element3.name = "excluir";
                     element3.setAttribute("class", "btn btn-sm btn-link");
-                    element3.setAttribute("onClick","deleteRow("+idLinha+")");
+                    element3.setAttribute("onClick", "deleteRow(" + idLinha + ")");
                     var i = document.createElement("i");
                     var texto = document.createTextNode("delete");
                     i.appendChild(texto);

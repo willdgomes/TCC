@@ -26,9 +26,6 @@ public class LoteDAO {
     private final String stmtBuscarLotePorNumero = "SELECT lote, idMedicamento, quantidade, dataVencimento FROM lote WHERE lote = ?";
     private final String stmtAtualizarLote = "UPDATE lote SET quantidade = ? WHERE lote = ?";
     private final String stmtBuscarQntdMedicamento="SELECT SUM(quantidade) FROM lote where idMedicamento = ?";
-    private final String stmQntdSaidaMedicamento = "SELECT SUM(d.quantidade)" +
-            "FROM farmacia.dispensas as d INNER JOIN farmacia.dispensas_medicamentos as dm" +
-            "ON d.idDispensa=dm.idDispensa where dm.idMedicamento = ?";
     private final String stmtBuscarLoteVenc = "SELECT lote, idMedicamento, quantidade, dataVencimento " +
             "FROM lote ORDER BY dataVencimento LIMIT 3";
 

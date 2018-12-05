@@ -87,12 +87,12 @@
                                             </tr>
                                         </thead>
                                         <tbody> 
-                                            <c:forEach items="${medicamentosVenc}" var="item">
+                                            <c:forEach items="${saidas}" var="item">
                                             <form action="PacienteController?action=editar" method="POST">
                                                 <tr>
                                                     <td scope="col">${item.medicamento.nome} ${item.medicamento.dosagem}</td>
-                                                    <td scope="col">${item.id}</td>
-                                                    <td scope="col">${item.dataVencimento}</td>
+                                                    <td scope="col">${item.lote.id}</td>
+                                                    <td scope="col">${item.dataDispensa}</td>
                                                 </tr>
                                             </form>
                                         </c:forEach>

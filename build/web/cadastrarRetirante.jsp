@@ -77,6 +77,7 @@
                                                         <option></option>
                                                         <option>Pai</option>
                                                         <option>Mãe</option>
+                                                        <option>Filho(a)</option>
                                                         <option>Outro</option>
                                                     </select>
                                                 </div>                    

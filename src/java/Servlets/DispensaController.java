@@ -65,7 +65,8 @@ public class DispensaController extends HttpServlet {
             if(usuario.getPerfil().equalsIgnoreCase("Administrador"))
                 request.setAttribute("perfil",true);
             if(action.equals("carregarDispensa")){
-            request.setAttribute("errorAlert", new Gson().toJson("false"));
+                request.setAttribute("successAlert", new Gson().toJson("false"));
+                request.setAttribute("errorAlert", new Gson().toJson("false"));
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
                 requestDispatcher.forward(request, response);
             }
@@ -75,14 +76,15 @@ public class DispensaController extends HttpServlet {
                 String cpfRetirante = request.getParameter("cpfRetirante");
                 String[] listaMedicamento = request.getParameterValues("nome");
                 String[] quantidadeMed = request.getParameterValues("quantidade");
-                
+                String mensagem = null;
                 Paciente paciente = new Paciente();
                 paciente = PacientesFacade.buscarId(idPaciente);
                 Retirante retirante = new Retirante();
                 retirante = RetirantesFacade.buscarRetirantePorCpf(cpfRetirante);
                 if(retirante.getIdRetirante() != null){
                 if(!RetirantesFacade.buscarRetirantePaciente(idPaciente, retirante.getIdRetirante())){
-                    request.setAttribute("msg", "Este retirante não está autorizado.");
+                    request.setAttribute("errorAlert", new Gson().toJson("true"));
+                                request.setAttribute("textoMensagem","Este retirante não está autorizado");
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
                     requestDispatcher.forward(request, response);
                 }
@@ -104,7 +106,8 @@ public class DispensaController extends HttpServlet {
                 }
                 
                 if(listaReceitas.size()<1){
-                    request.setAttribute("msg", "Não há receitas cadastradas ou válidas.");
+                                request.setAttribute("errorAlert", new Gson().toJson("true"));
+                                request.setAttribute("textoMensagem","Não há receitas cadastradas ou válidas");    
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
                     requestDispatcher.forward(request, response);
                 }else{
@@ -112,7 +115,8 @@ public class DispensaController extends HttpServlet {
                         for(int j = 0; j<listMed.size();j++){
                             boolean medRec = MedicamentosFacade.buscarMedicamentoReceita(listMed.get(j).getId(), listaReceitas.get(i).getId());
                             if(!medRec){
-                                request.setAttribute("msg", "Medicamento não consta na receita.");
+                                request.setAttribute("errorAlert", new Gson().toJson("true"));
+                                request.setAttribute("textoMensagem","Medicamento não consta na receita");    
                                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
                                 requestDispatcher.forward(request, response);
                             }
@@ -134,15 +138,19 @@ public class DispensaController extends HttpServlet {
                         lote.setQtde(lote.getQtde()-qtdeMed);
                         LotesFacade.atualizarLote(lote);
                     }else{
-                        request.setAttribute("msg", "Quantidade insuficiente no estoque.");
+                         request.setAttribute("errorAlert", new Gson().toJson("true"));
+                    request.setAttribute("textoMensagem","Quantidade insuficiente no estoque");    
                         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
                         requestDispatcher.forward(request, response);
                     }
                     }                
                 request.setAttribute("errorAlert", new Gson().toJson("false"));
+                request.setAttribute("successAlert", new Gson().toJson("true"));
                 }
-                else
+                else{
                     request.setAttribute("errorAlert", new Gson().toJson("true"));
+                    request.setAttribute("textoMensagem","Retirante não cadastrado no sistema");    
+                }
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dispensarMedicamento.jsp");
                 requestDispatcher.forward(request, response);
                 }

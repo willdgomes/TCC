@@ -63,7 +63,7 @@
                                                 <tr>
                                                     <td scope="col">${paciente.nome}</td>
                                                     <td scope="col" id="cpfpaciente" onloadeddata="mascara()" >${paciente.cpf}</td>
-                                                    <td scope="col">${paciente.dn}</td>
+                                                    <td scope="col">${paciente.dataNascimento}</td>
                                                     <td scope="col"><button type="submit" name="editar" class="btn btn-sm btn-link"><i class="material-icons">edit</i></button> </td>
                                                 <input type="hidden" value="${paciente.id}" required name="idPaciente">
                                                 </tr>

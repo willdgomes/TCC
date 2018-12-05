@@ -52,6 +52,7 @@
                                                     <option></option>
                                                     <option>Miligramas (mg)</option>
                                                     <option>Mililitros (ml)</option>
+                                                     <option>Comprimidos</option>
                                                 </select>
                                             </div>
                                         </div>

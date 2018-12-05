@@ -19,7 +19,8 @@ public class Dispensa implements Serializable {
     private Retirante retirante;
     private Paciente paciente;
     private Usuario usuario;
-
+    private Lote lote;
+    private Medicamento medicamento;
     public Integer getId() {
         return id;
     }
@@ -59,4 +60,22 @@ public class Dispensa implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+        public Lote getLote() {
+        return lote;
+    }
+
+    public void setLote(Lote lote) {
+        this.lote = lote;
+    }
+
+    public Medicamento getMedicamento() {
+        return medicamento;
+    }
+
+    public void setMedicameto(Medicamento medicamento) {
+        this.medicamento = medicamento;
+    }
+
+    
 }

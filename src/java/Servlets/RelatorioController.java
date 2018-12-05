@@ -9,9 +9,12 @@ import Beans.Log;
 import Beans.Lote;
 import Beans.Medicamento;
 import Beans.Usuario;
+import Beans.Receita;
+import Facade.DispensasFacade;
 import Facade.LogFacade;
 import Facade.LotesFacade;
 import Facade.MedicamentosFacade;
+import Facade.ReceitasFacade;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -62,29 +65,17 @@ public class RelatorioController extends HttpServlet {
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.html");
             rd.include(request, response);
         } else {
-           session = request.getSession();
-           Usuario usuario = (Usuario)session.getAttribute("usuario");
-            if(usuario.getPerfil().equalsIgnoreCase("Administrador"))
-                request.setAttribute("perfil",true);
+            session = request.getSession();
+            Usuario usuario = (Usuario) session.getAttribute("usuario");
+            if (usuario.getPerfil().equalsIgnoreCase("Administrador")) {
+                request.setAttribute("perfil", true);
+            }
             session.setAttribute("usuario", usuario);
             session.setMaxInactiveInterval(20 * 60);
             ServletContext relContext = request.getServletContext();
-            if (action.equals("carregarSaidaMedicamentos")) {
-                LinkedList tdQuantidade = new LinkedList();
-                List<Medicamento> medicamentos = MedicamentosFacade.listarMedicamentos();
-                List<String> quantidade = new ArrayList<String>();
-                List<String> nomeMed = new ArrayList<String>();
-                for (Medicamento medicamento : medicamentos) {
-                    nomeMed.add(medicamento.getNome());
-                    Integer quant = LotesFacade.buscarQuantidade(medicamento.getId().toString());
-                    quantidade.add("1");
-                    quantidade.add(quant.toString());
-                    quantidade.add("1");
-                    quantidade.add(quant.toString());
-                    tdQuantidade.add(quantidade);
-                    quantidade = new ArrayList<String>();
-                }
-                List<String> meses = new ArrayList<String>();
+            
+            //Carrega ultimos 6 meses
+            List<String> meses = new ArrayList<String>();
                 meses.add("Jan");
                 meses.add("Fev");
                 meses.add("Mar");
@@ -97,17 +88,51 @@ public class RelatorioController extends HttpServlet {
                 meses.add("Out");
                 meses.add("Nov");
                 meses.add("Dez");
-                Integer mes =  Calendar.getInstance().get(Calendar.MONTH) + 1;
-                Integer totalMed = medicamentos.size();
+                Integer mes = Calendar.getInstance().get(Calendar.MONTH) + 1;
+                
                 List<String> periodo = new ArrayList<String>();
-                for (int i =mes-6; i < mes; i++){
-                    periodo.add(meses.get(i));
+                int maxMes = mes;
+
+                for (int i = mes - 6; i <= mes; i++) {
+                    maxMes = i;
+                    if (i == 12) {
+                        maxMes = 0;
+                    }
+                    periodo.add(meses.get(maxMes));
                 }
+            
+            if (action.equals("carregarSaidaMedicamentos")) {
+                //CARREGA TABELA SAIDA POR MES
+                LinkedList tdQuantidade = new LinkedList();
+                List<Medicamento> medicamentos = MedicamentosFacade.listarMedicamentos();
+                List<String> quantidade = new ArrayList<String>();
+                List<String> nomeMed = new ArrayList<String>();
+
+                Integer totalMed = medicamentos.size();
+
+                for (Medicamento medicamento : medicamentos) {
+                    nomeMed.add(medicamento.getNome());
+                    for (int i = mes - 6; i <= mes; i++) {
+                        Integer quant = DispensasFacade.buscaQntdMedMes(medicamento.getId(), i);
+                        quantidade.add(quant.toString());
+                    }
+                    tdQuantidade.add(quantidade);
+                    quantidade = new ArrayList<String>();
+                }
+
+                //CARREGA TABELA SAIDA TOTAL
+                List<String> totalSaida = new ArrayList<String>();
+                for (Medicamento medicamento : medicamentos) {
+                    Integer total = DispensasFacade.buscaTotalSaidaPorMed(medicamento.getId());
+                    totalSaida.add(total.toString());
+                }
+
                 relContext.setAttribute("totalMedJson", new Gson().toJson(totalMed.toString()));
                 relContext.setAttribute("quantidadeJson", new Gson().toJson(tdQuantidade.toArray()));
                 relContext.setAttribute("nomeMedJson", new Gson().toJson(nomeMed.toArray()));
+                relContext.setAttribute("totalSaidaJson", new Gson().toJson(totalSaida.toArray()));
                 relContext.setAttribute("periodoJson", new Gson().toJson(periodo.toArray()));
-                LogFacade.inserir(new Log(usuario.getIdUsuario(),"Usuário acessou relatório de saída de medicamentos"));
+                LogFacade.inserir(new Log(usuario.getIdUsuario(), "Usuário acessou relatório de saída de medicamentos"));
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/relatorioEstoque.jsp");
                 rd.forward(request, response);
             } else if (action.equals("carregarListaAtividades")) {
@@ -118,7 +143,7 @@ public class RelatorioController extends HttpServlet {
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/log.jsp");
                 rd.forward(request, response);
             } else if (action.equals("pesquisarLogPeriodo")) {
-                
+
                 String dtInicio = request.getParameter("dataInicio");
                 String dtFim = request.getParameter("dataFim");
                 List logs = LogFacade.buscarLogPeriodo(dtInicio, dtFim);
@@ -130,6 +155,30 @@ public class RelatorioController extends HttpServlet {
                 }
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/log.jsp");
                 rd.forward(request, response);
+                
+            } else if (action.equals("carregarRelatoriosGerais")) {
+
+                List<String> nomeMaisRetirou = new ArrayList<String>();
+                List<String> totalMaisRetirou = new ArrayList<String>();
+                List<String> totalCadastroReceita = new ArrayList<String>();
+                List<String> nomeReceitaPorPaciente = new ArrayList<String>();
+                List<String> totalReceitaPorPaciente = new ArrayList<String>();
+
+                List<Receita> listaReceitas = ReceitasFacade.buscarMaiorNumReceitas();
+                for (Receita receita : listaReceitas){
+                    nomeReceitaPorPaciente.add(receita.getPaciente().getNome());
+                    totalReceitaPorPaciente.add(receita.getId().toString());
+                }
+                Integer totalR = ReceitasFacade.buscaTotalReceita();
+               request.setAttribute("totalReceitas", totalR);
+                relContext.setAttribute("nomeMaisRetirouJson", new Gson().toJson(nomeMaisRetirou.toArray()));
+                relContext.setAttribute("totalMaisRetirouJson", new Gson().toJson(totalMaisRetirou.toArray()));
+                relContext.setAttribute("nomeReceitaPorPacienteJson", new Gson().toJson(nomeReceitaPorPaciente.toArray()));
+                relContext.setAttribute("totalReceitaPorPacienteJson", new Gson().toJson(totalReceitaPorPaciente.toArray()));
+                LogFacade.inserir(new Log(usuario.getIdUsuario(), "Usuário acessou relatórios gerais de receitas"));
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/relatorioGeral.jsp");
+                rd.forward(request, response);
+
             }
         }
     }

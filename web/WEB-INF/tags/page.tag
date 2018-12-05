@@ -60,11 +60,11 @@
             <div class="sidebar d-none d-lg-block bg-light">
 
                 <ul class="nav flex-column">
-<li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="InicialController"><i class="material-icons">home</i> <span class="align-top">Tela inicial</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="cadastrarReceita.jsp"><i class="material-icons">receipt</i> <span class="align-top">Cadastrar     Receita Médica</span></a>
+                        <a class="nav-link" href="ReceitasController?action=carregarCadastrarReceita"><i class="material-icons">receipt</i> <span class="align-top">Cadastrar     Receita Médica</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" tabindex="0" data-toggle="collapse" href="#menuGerenciamento" role="button" aria-expanded="false" aria-controls="menuDashboard"><strong><i class="material-icons">content_paste</i><span class="align-top">Gerenciar</span> <div class="float-right caret"><i class="material-icons">arrow_drop_down</i></div></strong></a>
@@ -106,6 +106,9 @@
                             <ul class="nav flex-column">
                                 <li class="nav-sub-item">
                                     <a class="nav-link" href="RelatorioController?action=carregarSaidaMedicamentos"><i class="material-icons">add_box</i> <span class="align-top">Saída Medicamentos</span></a>
+                                </li>
+                                <li class="nav-sub-item">
+                                    <a class="nav-link" href="RelatorioController?action=carregarRelatoriosGerais"><i class="material-icons">equalizer</i> <span class="align-top">Relatório Geral</span></a>
                                 </li>
                                 <c:if test="${perfil}">
                                 <li class="nav-sub-item">
