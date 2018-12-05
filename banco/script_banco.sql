@@ -123,7 +123,7 @@ CREATE TABLE `usuarios` (
 CREATE TABLE `log` (
   `idLog` int(11) NOT NULL  AUTO_INCREMENT,
   `idUsuario` int(11) NULL,
-  `mensagem` varchar(45)NOT NULL,
+  `mensagem` varchar(100)NOT NULL,
   `data` date NOT NULL,
   PRIMARY KEY (`idLog`),
   KEY `FK_Usuario` (`idUsuario`),

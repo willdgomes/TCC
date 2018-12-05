@@ -3,42 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Medicamento.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/DispensaController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/GerenciarPacientesController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Receita.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Facade/ReceitasFacade.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Facade/LotesFacade.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/relatorioGeral.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/dispensarMedicamento.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/LoteDAO.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/gerenciarPacientes.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Dispensa.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarRetirante.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Facade/MedicamentosFacade.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/banco/script_banco.sql</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/gerenciarMedicamentos.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarMedicamento.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/InicialController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/cadastrarReceita.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/UsuarioDAO.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/MedicamentoDAO.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/home.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/DispensaDAO.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Retirante.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Paciente.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/relatorioEstoque.jsp</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/ReceitaDAO.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/RelatorioController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/RetiranteController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Beans/Lote.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/MedicamentoController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/PacienteController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/PacienteDAO.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Facade/DispensasFacade.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/web/WEB-INF/tags/page.tag</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/Servlets/ReceitasController.java</file>
-            <file>file:/C:/Users/Eu/Documents/TCC/src/java/DAO/LogDAO.java</file>
+            <file>file:/home/gomes/NetBeansProjects/Farmacia/src/java/JavaMail/JavaMail.java</file>
         </group>
     </open-files>
 </project-private>
