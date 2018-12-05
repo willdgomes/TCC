@@ -68,11 +68,14 @@
                 
                 List<Dispensa> dispensa = DispensasFacade.buscaDispensa();
                 
-                for (Dispensa dis : dispensa) {
-                    Medicamento med = MedicamentosFacade.pegarMedicamentoPorId(DispensasFacade.medicamentoPorDispensa(dis.getId()));
+                for (int i=0; i< dispensa.size(); i++) {
+                    Dispensa dis = dispensa.get(i);
+                    Integer id = DispensasFacade.medicamentoPorDispensa(dis.getId());
+                    Medicamento med = MedicamentosFacade.pegarMedicamentoPorId(id);
                     dis.setMedicameto(med);
                     Lote l = LotesFacade.pegarLotePorVencimento(med.getId(),0);
                     dis.setLote(l);
+                    dispensa.set(i, dis);
                 }
                       request.setAttribute("saidas",dispensa);
                 //CARREGA GRAFICO
