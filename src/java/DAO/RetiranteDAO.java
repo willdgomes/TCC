@@ -177,12 +177,21 @@ public class RetiranteDAO {
             while (rs.next()) {
                 Retirante retirante = new Retirante();
                 retirante.setIdRetirante(rs.getInt("idRetirante"));
+                retirante.setCpfRetirante(rs.getString("cpfRetirante"));
                 retirante.setNomeRetirante(rs.getString("nomeRetirante"));
-                retirante.setCpfRetirante("cpfRetirante");
-                retirante.setEmail(rs.getString("email"));
+                retirante.setTelefone(rs.getString("telefone"));
                 retirante.setCep(rs.getString("cep"));
                 retirante.setCidade(rs.getString("cidade"));
                 retirante.setEmail(rs.getString("estado"));
+                retirante.setBairro(rs.getString("bairro"));
+                retirante.setEndereco(rs.getString("endereco"));
+                retirante.setNumEndereco(rs.getString("numEndereco"));
+                retirante.setComplemento(rs.getString("complemento"));
+                retirante.setEmail(rs.getString("email"));
+                retirante.setVincolo(rs.getString("vincolo"));
+                
+                
+                
                 Integer idPaciente = getPacientePorIdRetirante(retirante.getIdRetirante());
                 retirante.setPaciente(PacientesFacade.buscarId(idPaciente.toString()));
                 listaRetirantes.add(retirante);
