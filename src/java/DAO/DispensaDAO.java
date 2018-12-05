@@ -35,8 +35,8 @@ public class DispensaDAO {
     private final String stmtBuscaTotalSaida = "SELECT SUM(dispensas_medicamentos.quantidade) " +
 "FROM dispensas_medicamentos " +
 "WHERE dispensas_medicamentos.idMedicamento = ? ";
-    private final String stmtBuscaDispensa="SELECT * FROM farmacia.dispensas order by dataDispensa asc";
-    private final String stmtBuscaMedPorDispensa="select idMedicamento from farmacia.dispensas_medicamentos where idDispensa = ? ";
+    private final String stmtBuscaDispensa="SELECT * FROM dispensas order by dataDispensa asc";
+    private final String stmtBuscaMedPorDispensa="select idMedicamento from dispensas_medicamentos where idDispensa = ? ";
     
     public Integer inserirDispensa(Dispensa dispensa) {
         Connection con = null;
