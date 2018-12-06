@@ -120,21 +120,21 @@ public class PacienteDAO {
                 p.setId(Integer.parseInt(rs.getString("idPaciente")));
                 p.setNome(rs.getString("nomePaciente"));
                 p.setCpf(rs.getString("cpfPaciente"));
-                String stringData = rs.getString("dnPaciente");  
-                stringData = stringData.replaceAll("-", "/");
-                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-                java.util.Date dt = null;
-                java.sql.Date dt2 = null;
-               try{
-                 dt = format.parse(stringData);
-                 dt2 = new java.sql.Date(dt.getTime());
-                format = new SimpleDateFormat("dd/MM/yyyy");
-                  p.setDn(format.format(dt2));                 
-               }
-               catch(Exception ex){
-                 System.out.println("Erro na data");
-               }
-                p.setDataNascimento(dt2);
+//                String stringData = rs.getString("dnPaciente");  
+//                stringData = stringData.replaceAll("-", "/");
+//                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+//                java.util.Date dt = null;
+//                java.sql.Date dt2 = null;
+//               try{
+//                 dt = format.parse(stringData);
+//                 dt2 = new java.sql.Date(dt.getTime());
+//                format = new SimpleDateFormat("dd/MM/yyyy");
+//                  p.setDn(format.format(dt2));                 
+//               }
+//               catch(Exception ex){
+//                 System.out.println("Erro na data");
+//               }
+//                p.setDataNascimento(dt2);
                 listaPacientes.add(p);
             }  
         return listaPacientes;

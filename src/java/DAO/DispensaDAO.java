@@ -149,8 +149,21 @@ public class DispensaDAO {
             List<Dispensa> dis =  new ArrayList<Dispensa>();
             while (rs.next()) {
                 Dispensa d = new Dispensa();
-                d.setId(rs.getInt("idDispensa"));              
-              
+                d.setId(rs.getInt("idDispensa"));
+                
+                    String stringData = rs.getString("dataDispensa");  
+                stringData = stringData.replaceAll("-", "/");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                java.util.Date dt = null;
+                java.sql.Date dt2 = null;
+               try{
+                 dt = format.parse(stringData);
+                 dt2 = new java.sql.Date(dt.getTime());                 
+               }
+               catch(Exception ex){
+                 System.out.println("Erro na data");
+               }
+                d.setDataDispensa(dt2);              
                 dis.add(d);
             }
             return dis;
