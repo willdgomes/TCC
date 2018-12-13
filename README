@@ -1,0 +1,8 @@
+INSTALAÇÃO DO SISTEMA
+
+Ambiente:
+* Para a instalação do sistema no servidor, é necessário antes instalar um banco de dados MySQL.
+* Executar o script do banco de dados localizado no diretório /Farmacia/banco
+* Instalar o servidor Glashfish ou Apache TomCath.
+* Fazer o deploy do arquivo .war no servidor. Arquivo .war localizado no diretório Farmacia/dist.
+* Acessar o sistema pelo endereco "ipdoservidor:8080/Farmacia" através do navegador (preferencialmente Google Chrome e Mozilla Firefox).
